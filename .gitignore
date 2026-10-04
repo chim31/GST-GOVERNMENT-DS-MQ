@@ -1,0 +1,14 @@
+# Archives zip : doublons des dossiers déjà présents (gardées en local)
+archives/
+
+# Copie locale du site Longbow Motors (contenu tiers protégé) — référence d'inspiration, ne pas publier
+references/ds-affiches-groupe-scout-tonnerre/uploads/Longbow*
+
+# Fichiers système / éditeur
+*:Zone.Identifier
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+__pycache__/
+node_modules/

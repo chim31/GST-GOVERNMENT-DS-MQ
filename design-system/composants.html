@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Composants — GST Government</title>
+<meta name="description" content="Bibliothèque de 52 composants GST Government : variantes, tailles, états, motion, accessibilité et exemples d'usage.">
+<script>try{var t=localStorage.getItem("gst-theme");if(t&&t!=="jour")document.documentElement.setAttribute("data-theme",t);if(localStorage.getItem("gst-motion")==="reduce")document.documentElement.setAttribute("data-motion","reduce")}catch(e){}</script>
+<link rel="stylesheet" href="tokens/gst-tokens.css">
+<link rel="stylesheet" href="assets/css/gst.css">
+<link rel="stylesheet" href="assets/css/doc.css">
+<style>
+.lib{display:grid;gap:var(--gst-space-7)}
+@media (min-width:1180px){.lib{grid-template-columns:220px minmax(0,1fr)}}
+.toc{display:none}
+@media (min-width:1180px){.toc{display:block;position:sticky;top:96px;align-self:start;max-height:calc(100vh - 120px);overflow:auto;scrollbar-width:thin;padding-right:8px}}
+.toc h4{margin:var(--gst-space-5) 0 6px;font-family:var(--gst-font-mono);font-size:var(--gst-fs-tag);letter-spacing:var(--gst-ls-tag);text-transform:uppercase;color:var(--gst-accent-text);font-weight:500}
+.toc h4:first-child{margin-top:0}
+.toc a{display:flex;gap:8px;padding:3px 0;font-family:var(--gst-font-mono);font-size:12px;text-decoration:none;color:var(--gst-text-secondary)}
+.toc a span{opacity:.55;min-width:2em}
+.toc a:hover,.toc a.is-on{color:var(--gst-text-primary)}
+.toc a.is-on span{opacity:1;color:var(--gst-accent-text)}
+.fam{display:flex;flex-direction:column;gap:var(--gst-space-7)}
+.fam__head{padding:var(--gst-space-6) 0 0;border-top:var(--gst-border) solid var(--gst-text-primary);display:flex;justify-content:space-between;align-items:baseline;gap:var(--gst-space-4);flex-wrap:wrap}
+.fam__head h2{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-lg);line-height:.9}
+.cmp{display:grid;gap:var(--gst-space-4);scroll-margin-top:90px}
+.cmp__head{display:flex;align-items:baseline;gap:var(--gst-space-3);flex-wrap:wrap}
+.cmp__head h3{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:.9}
+.cmp__head p{margin:0;flex:0 0 100%;color:var(--gst-text-secondary);padding-right:min(28%,320px)}
+.cmp__demo{display:flex;flex-direction:column;gap:var(--gst-space-5)}
+.cmp__row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--gst-space-4)}
+.cmp__cap{font-family:var(--gst-font-mono);font-size:var(--gst-fs-tag);letter-spacing:var(--gst-ls-tag);text-transform:uppercase;color:var(--gst-text-secondary);margin-bottom:-8px}
+.cmp__grid{display:grid;gap:var(--gst-space-4);grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.cmp__body{display:grid;gap:var(--gst-space-4)}
+@media (min-width:900px){.cmp__body{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.cmp__spec{grid-template-columns:96px 1fr!important}
+.cmp__spec dd{font-size:var(--gst-fs-label)!important;line-height:1.5;font-weight:400!important}
+.cmp .doc-code{font-size:12px}
+.mini-frame{position:relative;height:150px;border:var(--gst-frame-poster) solid var(--gst-bg-frame);background:var(--gst-bg-panel);display:grid;place-items:center}
+.app-shell-mini{display:flex;height:260px;border:var(--gst-hairline) solid var(--gst-line-strong);overflow:hidden;background:var(--gst-bg-canvas)}
+.app-shell-mini .gst-rail{width:200px}
+.phone-mini{width:320px;max-width:100%;border:var(--gst-hairline) solid var(--gst-line-strong);background:var(--gst-bg-canvas);position:relative;overflow:hidden}
+</style>
+</head>
+<body>
+<main id="main" class="doc-main">
+
+<header class="doc-head">
+  <span class="gst-tag gst-tag--accent" data-decode>.03 / COMPOSANTS · BIBLIOTHÈQUE</span>
+  <h1 class="doc-head__title" data-rise>Composants</h1>
+  <p class="doc-head__lead">52 composants, du réticule au tiroir. Chacun avec ses variantes, ses états — y compris hors ligne — sa motion, son accessibilité et un exemple.</p>
+  <dl class="doc-head__meta">
+    <div><dt class="gst-label">Familles</dt><dd>7</dd></div>
+    <div><dt class="gst-label">Composants</dt><dd>52</dd></div>
+    <div><dt class="gst-label">Hérités du DS d'affiches</dt><dd>Frame · GridOverlay · Divider · DataTag · SpecSheet · Countdown · Fleur</dd></div>
+    <div><dt class="gst-label">Nommage</dt><dd>.gst-x · --variante · __partie · .is-état</dd></div>
+  </dl>
+</header>
+
+<div class="lib">
+<nav class="toc" id="toc" aria-label="Index des composants"></nav>
+<div class="fams" id="fams">
+
+<!-- ════════ .01 FONDATIONS ════════ -->
+<section class="fam" data-fam=".01" data-name="Fondations">
+  <div class="fam__head"><h2>Fondations</h2><span class="gst-tag">.01 / 6 COMPOSANTS</span></div>
+
+  <article class="cmp" data-c="Frame">
+    <div class="cmp__head"><h3>Frame</h3><span class="gst-tag">PosterFrame → Frame</span><p>Le cadre teal des affiches, porté au web : 34 px autour d'une affiche, épaisseur fluide autour du viewport (registre Ciel), 2 px autour d'un panneau. Il porte aussi la transition M7.</p></div>
+    <div class="cmp__body">
+      <div class="doc-plate cmp__demo"><span class="gst-tag">VARIANTES · POSTER · VIEWPORT · CARTOUCHE</span>
+        <div class="cmp__grid"><div class="mini-frame"><span class="gst-tag">34 PX</span></div><div class="mini-frame" style="border-width:var(--gst-frame-viewport)"><span class="gst-tag">VIEWPORT</span></div><div class="gst-cartouche" style="display:grid;place-items:center;height:150px"><span class="gst-tag">2 PX</span></div></div></div>
+      <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Variantes</dt><dd>poster (34 px) · thin (cadre viewport) · cartouche (2 px teal)</dd><dt>États</dt><dd>repos · transition (M7 : 34 → plein écran → 34)</dd><dt>Motion</dt><dd>M7, 420 ms, ease-trace puis ease-tonnerre</dd><dt>A11y</dt><dd>Décoratif : aucun rôle ; jamais porteur d'information seul</dd></dl>
+      <script type="text/x-snippet"><div class="gst-frame">…</div>
+<div class="gst-frame gst-frame--thin">…</div>
+<div class="gst-cartouche">…</div></script></div>
+    </div>
+  </article>
+
+  <article class="cmp" data-c="GridOverlay">
+    <div class="cmp__head"><h3>GridOverlay</h3><span class="gst-tag">Animable · M1</span><p>Grille hairline et réticules aux nœuds, posée sous le contenu. Se trace (M1) au chargement d'un écran ou d'une section.</p></div>
+    <div class="cmp__body">
+      <div class="doc-plate cmp__demo"><span class="gst-tag">4 × 3 · NŒUDS ACTIFS</span><div id="demo-grid" style="position:relative;height:170px;background:var(--gst-bg-canvas)"><div data-m1-content style="position:absolute;left:12px;bottom:10px"><span class="gst-display-md">.01 / PLANCHE</span></div></div><button class="gst-btn gst-btn--ghost gst-btn--sm" data-act="grid">Retracer</button></div>
+      <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Props</dt><dd>cols · rows · nodes (bool) · trace (bool)</dd><dt>Motion</dt><dd>M1 : 600 ms par trait, cascade 30 ms, nœuds spring-seat</dd><dt>A11y</dt><dd>aria-hidden="true" ; ne gêne jamais la lecture</dd><dt>Règle</dt><dd>Toujours discrète : ne concurrence jamais la typographie</dd></dl>
+      <script type="text/x-snippet">GST.traceGrid(section, { cols: 4, rows: 3 });
+<div data-m1-grid="4,3">… <p data-m1-content>…</p></div></script></div>
+    </div>
+  </article>
+
+  <article class="cmp" data-c="Reticle">
+    <div class="cmp__head"><h3>Reticle</h3><span class="gst-tag">7 px</span><p>Le carré de 7 px aux nœuds. Il sert de point d'origine à toute animation (loi .02), de point de courbe, de marqueur de focus et de survol de ligne.</p></div>
+    <div class="cmp__body">
+      <div class="doc-plate cmp__demo"><span class="gst-tag">NEUTRE · MARQUE · ACCENT · GRAND</span><div class="cmp__row"><i class="gst-reticle"></i><i class="gst-reticle gst-reticle--brand"></i><i class="gst-reticle gst-reticle--accent"></i><i class="gst-reticle gst-reticle--lg gst-reticle--brand"></i></div></div>
+      <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Variantes</dt><dd>neutre · brand · accent (plein) · lg (11 px)</dd><dt>Motion</dt><dd>Pop d'échelle 0 → 1 en spring-seat</dd><dt>A11y</dt><dd>Décoratif (aria-hidden)</dd></dl>
+      <script type="text/x-snippet"><i class="gst-reticle gst-reticle--brand" aria-hidden="true"></i></script></div>
+    </div>
+  </article>
+
+  <article class="cmp" data-c="DataTag">
+    <div class="cmp__head"><h3>DataTag</h3><span class="gst-tag">Animable · M2</span><p>Le marqueur mono <code class="doc-code-i">.01 / LABEL</code> en bord de bloc. Métadonnée, jamais titre. Se décode à l'apparition.</p></div>
+    <div class="cmp__body">
+      <div class="doc-plate cmp__demo"><span class="gst-tag">NEUTRE · ACCENT · MARQUE</span><div class="doc-stack"><span class="gst-tag" data-dtag>.01 / LOGISTIQUE</span><span class="gst-tag gst-tag--accent" data-dtag>N° / INFOS PRATIQUES</span><span class="gst-tag gst-tag--brand" data-dtag>J.05 / AUJOURD'HUI</span></div><button class="gst-btn gst-btn--ghost gst-btn--sm" data-act="dtag">Décoder</button></div>
+      <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Props</dt><dd>index · label · tone (neutre, accent, brand, on-invert)</dd><dt>Motion</dt><dd>M2 : 24 ms par caractère</dd><dt>A11y</dt><dd>Texte réel (pas d'image) ; le brouillage n'est pas annoncé</dd></dl>
+      <script type="text/x-snippet"><span class="gst-tag" data-decode>.01 / LOGISTIQUE</span></script></div>
+    </div>
+  </article>
+
+  <article class="cmp" data-c="Divider">
+    <div class="cmp__head"><h3>Divider</h3><span class="gst-tag">Filet rouge 4 px</span><p>Le filet éditorial des affiches, annoté d'un tag mono. Sépare deux idées, jamais deux lignes de tableau.</p></div>
+    <div class="cmp__body">
+      <div class="doc-plate cmp__demo"><div class="gst-divider"><div class="gst-divider__rule"></div><span class="gst-tag">.03 / 3ᵉ ÉDITION</span></div><div class="gst-divider gst-divider--center"><div class="gst-divider__rule" style="width:120px"></div></div></div>
+      <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Variantes</dt><dd>gauche · centré · pleine largeur</dd><dt>Motion</dt><dd>Se trace de gauche à droite (scaleX, ease-trace)</dd><dt>A11y</dt><dd>role="separator" si sémantique, sinon décoratif</dd></dl>
+      <script type="text/x-snippet"><div class="gst-divider"><div class="gst-divider__rule"></div><span class="gst-tag">.03 / 3ᵉ ÉDITION</span></div></script></div>
+    </div>
+  </article>
+
+  <article class="cmp" data-c="Fleur">
+    <div class="cmp__head"><h3>Fleur</h3><span class="gst-tag">U+269C</span><p>La fleur de lys, uniquement en glyphe ⚜, à plat. Signe les validations (tampon), les places garanties, les états vides.</p></div>
+    <div class="cmp__body">
+      <div class="doc-plate cmp__demo"><div class="cmp__row"><span class="gst-fleur" style="font-size:3rem">⚜</span><span class="gst-fleur" style="font-size:2rem;color:var(--gst-accent-text)">⚜</span><span class="gst-fleur" style="font-size:1.4rem;color:var(--gst-text-primary)">⚜</span></div></div>
+      <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Couleurs</dt><dd>teal · rouge · encre · écru sur teal</dd><dt>Interdits</dt><dd>Logo dessiné, emoji, effet, rotation</dd><dt>A11y</dt><dd>aria-hidden="true" quand décoratif</dd></dl>
+      <script type="text/x-snippet"><span class="gst-fleur" aria-hidden="true">⚜</span></script></div>
+    </div>
+  </article>
+</section>
+
+<!-- ════════ .02 ACTIONS ════════ -->
+<section class="fam" data-fam=".02" data-name="Actions">
+  <div class="fam__head"><h2>Actions</h2><span class="gst-tag">.02 / 4 COMPOSANTS</span></div>
+
+  <article class="cmp" data-c="Button">
+    <div class="cmp__head"><h3>Button</h3><span class="gst-tag">5 variantes · 3 tailles</span><p>Primaire rouge, secondaire contour teal, fantôme, danger — et Éclair, réservé à la validation définitive d'un budget (un par écran). Survol : le contour se referme ; appui : translation 1 px.</p></div>
+    <div class="doc-plate cmp__demo">
+      <span class="cmp__cap">Variantes</span>
+      <div class="cmp__row"><button class="gst-btn gst-btn--primary"><svg class="gst-icon" aria-hidden="true"><use href="#i-plus"/></svg>Saisir une dépense</button><button class="gst-btn gst-btn--secondary">Voir le détail</button><button class="gst-btn gst-btn--brand">Valider le recensement</button><button class="gst-btn gst-btn--ghost">Annuler</button><button class="gst-btn gst-btn--danger"><svg class="gst-icon" aria-hidden="true"><use href="#i-trash-2"/></svg>Supprimer</button><button class="gst-btn gst-btn--eclair"><svg class="gst-icon" aria-hidden="true"><use href="#i-zap"/></svg>Geler le budget</button></div>
+      <span class="cmp__cap">Tailles · sm 36 (zone 44) · md 44 · lg 56 terrain</span>
+      <div class="cmp__row"><button class="gst-btn gst-btn--primary gst-btn--sm">Petit</button><button class="gst-btn gst-btn--primary">Moyen</button><button class="gst-btn gst-btn--primary gst-btn--lg">Action terrain</button></div>
+      <span class="cmp__cap">États</span>
+      <div class="cmp__row"><button class="gst-btn gst-btn--secondary">Repos</button><button class="gst-btn gst-btn--secondary" style="outline:var(--gst-focus-ring);outline-offset:4px">Focus</button><button class="gst-btn gst-btn--primary" disabled>Désactivé</button><button class="gst-btn gst-btn--primary is-loading" aria-busy="true">Envoi<span class="gst-btn__trace"></span></button><button class="gst-btn gst-btn--secondary is-offline">Enregistrer <span class="gst-btn__badge">EN FILE</span></button><button class="gst-btn gst-btn--primary" data-act="load">Cliquer → chargement</button></div>
+    </div>
+    <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Variantes</dt><dd>primary · secondary · brand · ghost · danger · eclair (réservé)</dd><dt>États</dt><dd>repos · survol (contour qui se ferme) · focus (anneau rouge + réticule) · actif (−1 px) · désactivé · chargement (trait qui se trace) · hors ligne (tirets + EN FILE)</dd><dt>Motion</dt><dd>ease-snap · 80 ms appui · 160 ms survol</dd><dt>A11y</dt><dd>&lt;button&gt; natif · aria-busy en chargement · libellé verbe + objet</dd></dl>
+    <script type="text/x-snippet"><button class="gst-btn gst-btn--primary gst-btn--lg">
+  <svg class="gst-icon"><use href="#i-plus"/></svg>Saisir une dépense
+</button>
+<button class="gst-btn gst-btn--primary is-loading" aria-busy="true">
+  Envoi<span class="gst-btn__trace"></span></button></script></div>
+  </article>
+
+  <article class="cmp" data-c="IconButton">
+    <div class="cmp__head"><h3>IconButton</h3><span class="gst-tag">44 × 44</span><p>Action d'une seule icône, toujours libellée pour les lecteurs d'écran. Peut basculer (aria-pressed).</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><div class="cmp__row"><button class="gst-icon-btn" aria-label="Rechercher"><svg class="gst-icon"><use href="#i-search"/></svg></button><button class="gst-icon-btn" aria-label="Filtrer"><svg class="gst-icon"><use href="#i-filter"/></svg></button><button class="gst-icon-btn" aria-pressed="true" aria-label="Mode hors ligne"><svg class="gst-icon"><use href="#i-wifi-off"/></svg></button><button class="gst-icon-btn gst-icon-btn--ghost" aria-label="Imprimer"><svg class="gst-icon"><use href="#i-printer"/></svg></button><button class="gst-icon-btn" disabled aria-label="Exporter" style="opacity:.45"><svg class="gst-icon"><use href="#i-download"/></svg></button></div></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Variantes</dt><dd>contour · ghost · bascule (pressed)</dd><dt>A11y</dt><dd>aria-label obligatoire · infobulle au survol</dd></dl>
+    <script type="text/x-snippet"><button class="gst-icon-btn" aria-label="Rechercher">
+  <svg class="gst-icon"><use href="#i-search"/></svg></button></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="SegmentedControl">
+    <div class="cmp__head"><h3>SegmentedControl</h3><span class="gst-tag">Indicateur glissant</span><p>Choix exclusif parmi 2 à 4 options : scénarios d'effectif, vues A | B, gabarits.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><div class="gst-seg" role="group" aria-label="Scénario"><button aria-pressed="false">60</button><button aria-pressed="true">80</button><button aria-pressed="false">100</button></div><div class="gst-seg gst-seg--sm" role="group" aria-label="Version"><button aria-pressed="true">A · Test supervisé</button><button aria-pressed="false">B · Live supervisé</button></div></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Tailles</dt><dd>sm 32 · md 40</dd><dt>Motion</dt><dd>Indicateur : 240 ms ease-tonnerre</dd><dt>A11y</dt><dd>role="group" + aria-pressed, ou radiogroup</dd></dl>
+    <script type="text/x-snippet"><div class="gst-seg" role="group" aria-label="Scénario">
+  <button aria-pressed="true">80</button>…</div></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="Toggle">
+    <div class="cmp__head"><h3>Toggle</h3><span class="gst-tag">Angles vifs</span><p>Interrupteur pour un réglage immédiat (mode hors ligne, notifications). Pas pour valider un formulaire.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><label class="gst-toggle"><input type="checkbox" checked><span class="gst-toggle__track"></span><span class="gst-ui">Plein soleil</span></label><label class="gst-toggle"><input type="checkbox"><span class="gst-toggle__track"></span><span class="gst-ui">Alertes de seuil</span></label><label class="gst-toggle"><input type="checkbox" disabled><span class="gst-toggle__track"></span><span class="gst-ui" style="color:var(--gst-text-secondary)">Désactivé</span></label></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Motion</dt><dd>160 ms ease-tonnerre</dd><dt>A11y</dt><dd>input checkbox natif · role="switch" possible</dd></dl>
+    <script type="text/x-snippet"><label class="gst-toggle"><input type="checkbox">
+  <span class="gst-toggle__track"></span><span class="gst-ui">Plein soleil</span></label></script></div></div>
+  </article>
+</section>
+
+<!-- ════════ .03 SAISIE ════════ -->
+<section class="fam" data-fam=".03" data-name="Saisie">
+  <div class="fam__head"><h2>Saisie</h2><span class="gst-tag">.03 / 8 COMPOSANTS · 4 CHAMPS MAX PAR ÉCRAN TERRAIN</span></div>
+
+  <article class="cmp" data-c="Field">
+    <div class="cmp__head"><h3>Field</h3><span class="gst-tag">Label mono au-dessus</span><p>Label mono en capitales au-dessus, valeur mono, unité en suffixe. Hauteur 52 px. Le focus pose un réticule rouge dans l'angle.</p></div>
+    <div class="doc-plate cmp__demo"><div class="cmp__grid">
+      <div class="gst-field"><label class="gst-field__label" for="f1"><span>Article</span><span class="gst-field__req">requis</span></label><div class="gst-control"><input id="f1" value="Riz local 50 kg"></div><span class="gst-field__help">Recherche dans la base de prix</span></div>
+      <div class="gst-field"><label class="gst-field__label" for="f2"><span>Quantité</span></label><div class="gst-control"><input id="f2" value="6" inputmode="numeric"><span class="gst-control__affix">sacs</span></div><span class="gst-field__help">Par personne : ×0,075</span></div>
+      <div class="gst-field is-error"><label class="gst-field__label" for="f3"><span>Activité</span></label><div class="gst-control"><input id="f3" placeholder="Rattacher à une activité" aria-invalid="true" aria-describedby="f3h"></div><span class="gst-field__help" id="f3h">Aucune dépense sans activité.</span></div>
+      <div class="gst-field is-disabled"><label class="gst-field__label" for="f4"><span>Prix validé</span></label><div class="gst-control"><input id="f4" value="32 000" disabled><span class="gst-control__affix">F CFA</span></div><span class="gst-field__help">Verrouillé · version gelée</span></div>
+      <div class="gst-field is-offline"><label class="gst-field__label" for="f5"><span>Bénéficiaire</span><span class="gst-badge">En file</span></label><div class="gst-control"><input id="f5" value="Marché d'Adakpamé"></div><span class="gst-field__help">Enregistré sur l'appareil · sera synchronisé</span></div>
+      <div class="gst-field is-suggest"><label class="gst-field__label" for="f6"><span>Prix unitaire</span><span class="gst-badge gst-badge--info">Suggestion</span></label><div class="gst-control gst-control--money"><input id="f6" value="34 560"><span class="gst-control__affix">F CFA</span></div><span class="gst-field__help">Hook · à confirmer par un responsable</span></div>
+    </div></div>
+    <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>États</dt><dd>repos · focus (contour 2 px + réticule) · erreur · désactivé (tirets) · hors ligne (tirets + EN FILE) · suggestion (info)</dd><dt>A11y</dt><dd>&lt;label for&gt; · aria-invalid · aria-describedby vers l'aide</dd><dt>Règle</dt><dd>Jamais de placeholder à la place du label</dd></dl>
+    <script type="text/x-snippet"><div class="gst-field is-error">
+  <label class="gst-field__label" for="act"><span>Activité</span></label>
+  <div class="gst-control"><input id="act" aria-invalid="true" aria-describedby="act-h"></div>
+  <span class="gst-field__help" id="act-h">Aucune dépense sans activité.</span>
+</div></script></div>
+  </article>
+
+  <article class="cmp" data-c="NumberStepper">
+    <div class="cmp__head"><h3>NumberStepper</h3><span class="gst-tag">56 px · mains sales</span><p>Gros boutons pour les quantités et l'effectif. La valeur roule (M4).</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><div class="gst-stepper" role="group" aria-label="Sacs de riz" data-stepper><button type="button" aria-label="Retirer"><svg class="gst-icon gst-icon--lg"><use href="#i-minus"/></svg></button><span class="gst-stepper__val" aria-live="polite">6</span><button type="button" aria-label="Ajouter"><svg class="gst-icon gst-icon--lg"><use href="#i-plus"/></svg></button></div></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Props</dt><dd>value · min · max · step · unit</dd><dt>A11y</dt><dd>Boutons libellés · valeur aria-live · flèches ↑/↓</dd></dl>
+    <script type="text/x-snippet"><div class="gst-stepper" role="group" aria-label="Sacs de riz">…</div></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="MoneyInput">
+    <div class="cmp__head"><h3>MoneyInput</h3><span class="gst-tag">F CFA · multi-devises</span><p>Montant aligné à droite, espaces fines insécables, suffixe devise. Jamboree international : devise et taux saisis manuellement.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><div class="gst-field"><label class="gst-field__label" for="m1"><span>Montant</span></label><div class="gst-control gst-control--money"><input id="m1" value="86 500" inputmode="numeric" data-money><span class="gst-control__affix">F CFA</span></div></div>
+      <div class="gst-field"><label class="gst-field__label" for="m2"><span>Montant · devise</span><span class="gst-field__help">1 € = 655,957 F CFA</span></label><div class="gst-control gst-control--money"><span class="gst-control__affix gst-control__affix--start">EUR</span><input id="m2" value="120,00"><span class="gst-control__affix">= 78 715 F CFA</span></div></div></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Format</dt><dd>25 000 F CFA — U+202F entre milliers</dd><dt>A11y</dt><dd>inputmode="numeric" · devise dans le libellé accessible</dd></dl>
+    <script type="text/x-snippet"><div class="gst-control gst-control--money">
+  <input inputmode="numeric" value="86 500"><span class="gst-control__affix">F CFA</span></div></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="Select">
+    <div class="cmp__head"><h3>Select</h3><span class="gst-tag">Natif</span><p>Liste native (meilleure sur téléphone d'entrée de gamme), chevron du set d'icônes.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><div class="gst-field"><label class="gst-field__label" for="s1"><span>Poste</span></label><div class="gst-control"><select id="s1"><option>Alimentaire</option><option>Transport</option><option>Matériel</option><option>Santé</option></select><svg class="gst-icon gst-control__chev"><use href="#i-chevron-down"/></svg></div></div></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>A11y</dt><dd>&lt;select&gt; natif : clavier et lecteurs d'écran gratuits</dd></dl>
+    <script type="text/x-snippet"><div class="gst-control"><select>…</select>
+  <svg class="gst-icon gst-control__chev"><use href="#i-chevron-down"/></svg></div></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="Search">
+    <div class="cmp__head"><h3>Search</h3><span class="gst-tag">&lt; 1 s</span><p>Recherche d'article, de personne ou de plat ; résultat en moins d'une seconde (critère M0.2).</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><div class="gst-control"><span class="gst-control__affix gst-control__affix--start"><svg class="gst-icon"><use href="#i-search"/></svg></span><input type="search" placeholder="Rechercher un article…" aria-label="Rechercher un article"><span class="gst-control__affix">⌘K</span></div></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>A11y</dt><dd>role="search" sur le conteneur · résultats annoncés</dd></dl>
+    <script type="text/x-snippet"><div role="search" class="gst-control">…<input type="search" aria-label="Rechercher"></div></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="PhotoCapture">
+    <div class="cmp__head"><h3>PhotoCapture</h3><span class="gst-tag">Reçu</span><p>Photographier le justificatif et l'attacher à la ligne de dépense. Ouvre la caméra arrière.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><button class="gst-photo" type="button" data-photo style="width:100%;text-align:left"><span class="gst-photo__thumb"><svg class="gst-icon gst-icon--lg"><use href="#i-camera"/></svg></span><span><span class="gst-ui" style="display:block">Photographier le reçu</span><span class="gst-field__help">JPEG compressé · stocké hors ligne</span></span></button></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>États</dt><dd>vide · capturé (vignette, contour succès) · erreur · en file</dd><dt>A11y</dt><dd>&lt;input type="file" accept="image/*" capture="environment"&gt; caché, bouton libellé</dd></dl>
+    <script type="text/x-snippet"><label class="gst-photo"><input type="file" accept="image/*" capture="environment" hidden>…</label></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="Checkbox">
+    <div class="cmp__head"><h3>Checkbox</h3><span class="gst-tag">Coche tracée</span><p>Pointage (chargement, retour, documents). La coche se trace en 240 ms.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><label class="gst-check"><input type="checkbox" checked><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Autorisation parentale</label><label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Fiche sanitaire</label><label class="gst-check"><input type="checkbox" disabled><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span><span style="color:var(--gst-text-secondary)">Assurance (non requise)</span></label></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>A11y</dt><dd>input natif · cible 44 px via le label</dd></dl>
+    <script type="text/x-snippet"><label class="gst-check"><input type="checkbox">
+  <span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>
+  Fiche sanitaire</label></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="Radio">
+    <div class="cmp__head"><h3>Radio</h3><span class="gst-tag">Carré plein</span><p>Choix exclusif visible d'un coup d'œil : état de retour du matériel, mode de règlement.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo" role="radiogroup" aria-label="État au retour"><label class="gst-radio"><input type="radio" name="r1" checked><span class="gst-radio__box"></span>Intact</label><label class="gst-radio"><input type="radio" name="r1"><span class="gst-radio__box"></span>Usé</label><label class="gst-radio"><input type="radio" name="r1"><span class="gst-radio__box"></span>Endommagé</label><label class="gst-radio"><input type="radio" name="r1"><span class="gst-radio__box"></span>Perdu</label></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>A11y</dt><dd>role="radiogroup" + libellé · flèches pour naviguer</dd></dl>
+    <script type="text/x-snippet"><label class="gst-radio"><input type="radio" name="etat">
+  <span class="gst-radio__box"></span>Intact</label></script></div></div>
+  </article>
+</section>
+
+<!-- ════════ .04 DONNÉES ════════ -->
+<section class="fam" data-fam=".04" data-name="Données">
+  <div class="fam__head"><h2>Données</h2><span class="gst-tag">.04 / 7 COMPOSANTS · CHIFFRES TABULAIRES</span></div>
+
+  <article class="cmp" data-c="StatOdometer">
+    <div class="cmp__head"><h3>StatOdometer</h3><span class="gst-tag">Animable · M4</span><p>Le KPI : label, grand chiffre Bebas qui roule, unité, variation. Flash forêt si favorable, rouge si dépassement.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><div class="cmp__row" style="gap:var(--gst-space-7)"><div class="gst-stat gst-stat--lg"><span class="gst-label">Budget consolidé</span><span class="gst-stat__value"><span data-odo-demo>4 850 000</span><span class="gst-stat__unit">F CFA</span></span><span class="gst-stat__delta is-down">▲ +2,4 % vs camp 2025</span></div><div class="gst-stat"><span class="gst-label">Places restantes</span><span class="gst-stat__value"><span data-odo-demo2>23</span></span><span class="gst-stat__delta is-up">57 / 80 inscrits</span></div></div><div class="cmp__row"><button class="gst-btn gst-btn--secondary gst-btn--sm" data-act="odo+">+ 120 000</button><button class="gst-btn gst-btn--secondary gst-btn--sm" data-act="odo-">− 75 000</button></div></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Tailles</dt><dd>md (display-md) · lg · xl</dd><dt>Motion</dt><dd>M4 : 760 ms · colonnes 42 ms · unités en dernier</dd><dt>A11y</dt><dd>aria-label = valeur finale ; colonnes aria-hidden</dd></dl>
+    <script type="text/x-snippet">GST.odometer(el, 4970000, { tone: "bad" }); // dépassement
+GST.odometer(el, 4775000, { tone: "good" }); // économie</script></div></div>
+  </article>
+
+  <article class="cmp" data-c="BudgetGauge">
+    <div class="cmp__head"><h3>BudgetGauge</h3><span class="gst-tag">Enveloppe · consommé · reste</span><p>Une enveloppe de poste : remplissage teal, rouge au-delà de 100 %, repère de la version gelée.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo">
+      <div class="gst-gauge"><div class="gst-gauge__row"><span class="gst-label">Alimentaire</span><span>1 688 400 / 1 940 000</span></div><div class="gst-gauge__bar"><i class="gst-gauge__fill" style="width:87%"></i><i class="gst-gauge__mark" style="left:100%"></i></div><div class="gst-gauge__row"><span class="gst-state-success-text" style="color:var(--gst-state-success-text)">Reste 251 600</span><span>87 %</span></div></div>
+      <div class="gst-gauge"><div class="gst-gauge__row"><span class="gst-label">Transport</span><span>1 236 000 / 1 120 000</span></div><div class="gst-gauge__bar" style="border-color:var(--gst-state-danger)"><i class="gst-gauge__fill is-over" style="width:100%"></i></div><div class="gst-gauge__row"><span style="color:var(--gst-state-danger-text)">Dépassement 116 000</span><span>110 %</span></div></div>
+    </div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>États</dt><dd>sous budget · à 90 % (avertissement) · dépassé (rouge)</dd><dt>A11y</dt><dd>role="meter" aria-valuenow / max · texte toujours affiché</dd></dl>
+    <script type="text/x-snippet"><div class="gst-gauge" role="meter" aria-valuenow="1688400" aria-valuemax="1940000">…</div></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="NeedBar">
+    <div class="cmp__head"><h3>NeedBar</h3><span class="gst-tag">Besoin · disponible · manquant · seuil</span><p>Le cœur du recensement : ce dont on a besoin, ce dont on dispose (stock du GST), ce qui manque — et le seuil critique en dessous duquel on ne part pas.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo">
+      <div class="gst-need"><div class="gst-need__bar"><i class="gst-need__have" style="width:77%"></i><i class="gst-need__miss" style="left:77%;width:23%"></i></div><div class="gst-need__legend"><span><i style="background:var(--gst-brand);border-color:var(--gst-brand)"></i>Disponible 318</span><span><i></i>Manquant 94</span><span>Besoin 412</span></div></div>
+      <div class="gst-need is-critical"><div class="gst-need__bar"><i class="gst-need__have" style="width:73%"></i><i class="gst-need__miss" style="left:73%;width:27%"></i><i class="gst-need__seuil" style="left:86%"></i></div><div class="gst-need__legend"><span style="color:var(--gst-state-danger-text)">Pharmacie 102 / 140 · sous le seuil 120</span></div></div>
+    </div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Règle</dt><dd>Le coût ne compte que le manquant</dd><dt>A11y</dt><dd>Hachures + texte : jamais la couleur seule (ENF-04)</dd></dl>
+    <script type="text/x-snippet"><div class="gst-need is-critical">
+  <div class="gst-need__bar"><i class="gst-need__have" style="width:73%"></i>
+  <i class="gst-need__miss" style="left:73%;width:27%"></i><i class="gst-need__seuil" style="left:86%"></i></div>…</div></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="DataTable">
+    <div class="cmp__head"><h3>DataTable</h3><span class="gst-tag">Dense · en-têtes collants</span><p>200 lignes sans ralentir (critère M1.1). Montants alignés à droite, chiffres tabulaires, réticule au survol, ligne nouvelle surlignée une fois.</p></div>
+    <div class="gst-table-wrap" style="max-height:300px"><table class="gst-table"><thead><tr><th>Article</th><th class="n">Qté</th><th>Unité</th><th class="n">Coût unit.</th><th class="n">Dispo.</th><th class="n">Manquant</th><th class="n">Total</th></tr></thead>
+      <tbody><tr><td>Bâches 6 × 4 m</td><td class="n">8</td><td>pièce</td><td class="n">7 500</td><td class="n">5</td><td class="n">3</td><td class="n">22 500</td></tr><tr><td>Cordes 8 mm</td><td class="n">240</td><td>m</td><td class="n">350</td><td class="n">120</td><td class="n">120</td><td class="n">42 000</td></tr><tr class="is-critical"><td>Trousse de secours</td><td class="n">4</td><td>kit</td><td class="n">18 000</td><td class="n">2</td><td class="n">2</td><td class="n">36 000</td></tr><tr><td>Djembés</td><td class="n">6</td><td>pièce</td><td class="n">—</td><td class="n">6</td><td class="n">0</td><td class="n">0</td></tr><tr class="is-new"><td>Seaux 20 L <span class="gst-badge gst-badge--warning">Ajout terrain</span></td><td class="n">12</td><td>pièce</td><td class="n">2 500</td><td class="n">7</td><td class="n">5</td><td class="n">12 500</td></tr></tbody>
+      <tfoot><tr><td>Total groupe A</td><td></td><td></td><td></td><td></td><td></td><td class="n">113 000</td></tr></tfoot></table></div>
+    <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Variantes</dt><dd>standard · compact · avec pied de total</dd><dt>États</dt><dd>survol (réticule) · actif · critique · nouvelle ligne · hors ligne (tirets)</dd><dt>A11y</dt><dd>&lt;table&gt; sémantique · &lt;th scope&gt; · légende masquée</dd></dl>
+    <script type="text/x-snippet"><div class="gst-table-wrap"><table class="gst-table">
+  <thead><tr><th>Article</th><th class="n">Total</th></tr></thead>…</table></div></script></div>
+  </article>
+
+  <article class="cmp" data-c="SpecSheet">
+    <div class="cmp__head"><h3>SpecSheet</h3><span class="gst-tag">Hérité · stack · inline · cards</span><p>La fiche technique des affiches : label court + valeur. Pour toute info pratique.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><dl class="gst-spec gst-spec--rules"><dt>Départ</dt><dd>07:30</dd><dt>Lieu</dt><dd>Attikoumé</dd><dt>Responsable</dt><dd>Codjo Agossou</dd></dl><dl class="gst-spec gst-spec--inline"><div><dt class="gst-label">Inscription</dt><dd>25 000 F CFA</dd></div><div><dt class="gst-label">Places</dt><dd>80</dd></div></dl><dl class="gst-spec gst-spec--cards"><div><dt class="gst-label">Inscription</dt><dd>5 000 F CFA</dd></div><div><dt class="gst-label">Participation</dt><dd>25 000 F CFA</dd></div></dl></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>A11y</dt><dd>&lt;dl&gt; / &lt;dt&gt; / &lt;dd&gt;</dd></dl>
+    <script type="text/x-snippet"><dl class="gst-spec gst-spec--rules"><dt>Départ</dt><dd>07:30</dd>…</dl></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="Chart">
+    <div class="cmp__head"><h3>Chart</h3><span class="gst-tag">Ligne · barres jumelles · M9</span><p>Axes hairline, graduations mono, aucune grille pleine. Prévu teal pointillé, réel rouge plein ; points-réticules cliquables ouvrant une mini fiche technique. Jamais de camembert, jamais de dégradé.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><div class="gst-legend"><span><i class="l-planned"></i>Prévu</span><span><i class="l-actual"></i>Réel</span></div><div id="chart-line"></div></div>
+      <div class="doc-plate cmp__demo"><div class="gst-legend"><span><i class="l-bar-a"></i>Proposition</span><span><i class="l-bar-b"></i>Sélection</span></div><div id="chart-bars" class="doc-stack" style="gap:12px"></div></div></div>
+    <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>A11y</dt><dd>role="img" + aria-label ; points focusables (←/→, Entrée) ; tableau de données équivalent disponible</dd><dt>Lisibilité</dt><dd>Lisible à 360 px ; dérive &gt; 15 % évidente (M2.4)</dd></dl>
+    <script type="text/x-snippet">GST.chartLine(host, { labels, planned, actual, unit: "k F CFA",
+  onPoint: i => ouvrirMouvements(i) });</script></div>
+  </article>
+
+  <article class="cmp" data-c="Timeline">
+    <div class="cmp__head"><h3>Timeline</h3><span class="gst-tag">Rétroplanning J-60 → J+10</span><p>Les jalons du type de camp sur une frise hairline : faits (teal), en cours (rouge), en retard (contour rouge).</p></div>
+    <div class="doc-plate"><div class="gst-timeline">
+      <div class="gst-timeline__step is-done"><i class="gst-timeline__node"></i><span class="gst-timeline__j">J-60</span><span class="gst-timeline__txt">Ouverture du camp</span></div>
+      <div class="gst-timeline__step is-done"><i class="gst-timeline__node"></i><span class="gst-timeline__j">J-45</span><span class="gst-timeline__txt">Menu proposé, inscriptions</span></div>
+      <div class="gst-timeline__step is-done"><i class="gst-timeline__node"></i><span class="gst-timeline__j">J-30</span><span class="gst-timeline__txt">Recensement terminé</span></div>
+      <div class="gst-timeline__step is-now"><i class="gst-timeline__node"></i><span class="gst-timeline__j">J-21</span><span class="gst-timeline__txt">Budget consolidé, itinéraires</span></div>
+      <div class="gst-timeline__step is-late"><i class="gst-timeline__node"></i><span class="gst-timeline__j">J-14</span><span class="gst-timeline__txt">Achats, devis, chargement</span></div>
+      <div class="gst-timeline__step"><i class="gst-timeline__node"></i><span class="gst-timeline__j">J-7</span><span class="gst-timeline__txt">Seuils critiques</span></div>
+      <div class="gst-timeline__step"><i class="gst-timeline__node"></i><span class="gst-timeline__j">J-1</span><span class="gst-timeline__txt">Pointage départ</span></div>
+      <div class="gst-timeline__step"><i class="gst-timeline__node"></i><span class="gst-timeline__j">J+3</span><span class="gst-timeline__txt">Inventaire de retour</span></div>
+      <div class="gst-timeline__step"><i class="gst-timeline__node"></i><span class="gst-timeline__j">J+10</span><span class="gst-timeline__txt">Bilan publié</span></div>
+    </div></div>
+    <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>A11y</dt><dd>&lt;ol&gt; ordonnée · état dans le texte (« en retard »)</dd></dl>
+    <script type="text/x-snippet"><div class="gst-timeline"><div class="gst-timeline__step is-now">
+  <i class="gst-timeline__node"></i><span class="gst-timeline__j">J-21</span>…</div></div></script></div>
+  </article>
+</section>
+
+<!-- ════════ .05 MÉTIER ════════ -->
+<section class="fam" data-fam=".05" data-name="Métier">
+  <div class="fam__head"><h2>Métier</h2><span class="gst-tag">.05 / 13 COMPOSANTS</span></div>
+
+  <article class="cmp" data-c="CampCard">
+    <div class="cmp__head"><h3>CampCard</h3><span class="gst-tag">Tout part d'un camp</span><p>Le camp : type, nom, dates, compte à rebours, avancement des groupes logistiques (A → J).</p></div>
+    <div class="cmp__grid">
+      <div class="gst-camp"><div class="gst-camp__top"><div><span class="gst-camp-type"><b>R</b><span>Réjouissance</span></span><h4 class="gst-camp__name" style="margin-top:12px">Réjouissance 2026</h4></div><div class="gst-camp__count">J-21<small>05.08 → 18.08</small></div></div><dl class="gst-spec gst-spec--inline"><div><dt class="gst-label">Lieu</dt><dd>Attikoumé</dd></div><div><dt class="gst-label">Effectif</dt><dd>80</dd></div></dl><div class="gst-camp__groups" aria-label="Groupes : 6 validés, 1 en cours sur 10"><i class="is-done"></i><i class="is-done"></i><i class="is-done"></i><i class="is-current"></i><i class="is-done"></i><i class="is-done"></i><i class="is-done"></i><i></i><i></i><i></i></div></div>
+      <div class="gst-camp gst-camp--draft"><div class="gst-camp__top"><div><span class="gst-camp-type"><b>S</b><span>Survie</span></span><h4 class="gst-camp__name" style="margin-top:12px">Survie Agou</h4></div><div class="gst-camp__count" style="color:var(--gst-text-secondary)">J-58<small>Brouillon</small></div></div><dl class="gst-spec gst-spec--inline"><div><dt class="gst-label">Durée</dt><dd>3 j</dd></div><div><dt class="gst-label">Préparation</dt><dd>J-14</dd></div></dl><div class="gst-camp__groups"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+    </div>
+    <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Variantes</dt><dd>actif · brouillon (tirets) · clos (bilan publié)</dd><dt>A11y</dt><dd>Lien unique sur le nom ; avancement en texte accessible</dd></dl>
+    <script type="text/x-snippet"><article class="gst-camp">…<div class="gst-camp__count">J-21</div>…</article></script></div>
+  </article>
+
+  <article class="cmp" data-c="CampTypeBadge">
+    <div class="cmp__head"><h3>CampTypeBadge</h3><span class="gst-tag">6 types</span><p>Le type détermine les groupes ouverts et le rétroplanning.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><div class="cmp__row"><span class="gst-camp-type"><b>R</b><span>Réjouissance · J-60</span></span><span class="gst-camp-type"><b>S</b><span>Survie · J-14</span></span><span class="gst-camp-type"><b>F</b><span>Formation · J-21</span></span><span class="gst-camp-type"><b>JN</b><span>Jamboree national · J-90</span></span><span class="gst-camp-type"><b>JI</b><span>Jamboree international · J-180</span></span><span class="gst-camp-type"><b>M</b><span>Mission · J-7</span></span></div></div>
+    <div><script type="text/x-snippet"><span class="gst-camp-type"><b>R</b><span>Réjouissance</span></span></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="LogisticsGroupCard">
+    <div class="cmp__head"><h3>LogisticsGroupCard</h3><span class="gst-tag">A → J · RENFORCÉ</span><p>Un groupe de gestion : lettre, nom, responsable, besoin / disponible / manquant, coût. B, F et G portent le badge RENFORCÉ — l'Éclair n'y est qu'un marqueur de 6 px, pour respecter la règle « un Éclair par écran ».</p></div>
+    <div class="cmp__grid">
+      <article class="gst-card gst-lgc"><div class="gst-lgc__head"><span class="gst-lgc__letter">B</span><span class="gst-badge gst-badge--renforce">Renforcé</span></div><h4 class="gst-lgc__name">Besoin alimentaire</h4><span class="gst-tag">ABLA DOSSOU · 48 LIGNES</span><div class="gst-need"><div class="gst-need__bar"><i class="gst-need__have" style="width:13%"></i><i class="gst-need__miss" style="left:13%;width:87%"></i></div></div><div class="gst-lgc__cost"><span class="gst-badge gst-badge--info">Soumis</span><span>1 940 000</span></div></article>
+      <article class="gst-card gst-lgc is-critical"><div class="gst-lgc__head"><span class="gst-lgc__letter">D</span><span class="gst-badge gst-badge--danger">Seuil</span></div><h4 class="gst-lgc__name">Besoin santé</h4><span class="gst-tag">DR ENYONAM ATAYI · 38 LIGNES</span><div class="gst-need is-critical"><div class="gst-need__bar"><i class="gst-need__have" style="width:73%"></i><i class="gst-need__miss" style="left:73%;width:27%"></i><i class="gst-need__seuil" style="left:86%"></i></div></div><div class="gst-lgc__cost"><span class="gst-badge gst-badge--warning">En cours</span><span>240 000</span></div></article>
+      <article class="gst-card gst-lgc"><div class="gst-lgc__head"><span class="gst-lgc__letter">A</span><span class="gst-badge gst-badge--success">Validé</span></div><h4 class="gst-lgc__name">Besoin en matériel</h4><span class="gst-tag">KOMI AYITÉ · 64 LIGNES</span><div class="gst-need"><div class="gst-need__bar"><i class="gst-need__have" style="width:77%"></i><i class="gst-need__miss" style="left:77%;width:23%"></i></div></div><div class="gst-lgc__cost"><span></span><span>520 000</span></div></article>
+    </div>
+    <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>États</dt><dd>à venir · en cours · soumis · validé · critique (contour rouge 2 px, M6)</dd><dt>A11y</dt><dd>Carte = lien vers la fiche groupe ; état en texte</dd></dl>
+    <script type="text/x-snippet"><article class="gst-card gst-lgc is-critical">…<span class="gst-lgc__letter">D</span>…</article></script></div>
+  </article>
+
+  <article class="cmp" data-c="ExpenseRow">
+    <div class="cmp__head"><h3>ExpenseRow</h3><span class="gst-tag">Mouvement</span><p>Une dépense : objet, poste, activité, heure, auteur, montant. En file si hors ligne.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo" style="gap:0"><div class="gst-expense"><span class="gst-expense__ico"><svg class="gst-icon"><use href="#i-truck"/></svg></span><div><div class="gst-expense__title">Carburant convoi</div><div class="gst-expense__meta">TRANSPORT · J.04 SORTIE TOGOVILLE · 06:41 · YAWO T.</div></div><div class="gst-expense__amt">86 500<small>F CFA</small></div></div><div class="gst-expense is-pending"><span class="gst-expense__ico"><svg class="gst-icon"><use href="#i-droplet"/></svg></span><div><div class="gst-expense__title">Sachets d'eau × 480</div><div class="gst-expense__meta">ALIMENTAIRE · J.04 · EN FILE</div></div><div class="gst-expense__amt">12 000<small>EN FILE</small></div></div></div>
+    <div><script type="text/x-snippet"><div class="gst-expense">…<div class="gst-expense__amt">86 500<small>F CFA</small></div></div></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="DishCard">
+    <div class="cmp__head"><h3>DishCard</h3><span class="gst-tag">Vote en un tap</span><p>Un plat : nom, ingrédients, vote. Un plat non réalisable (stock épuisé, allergène déclaré) est barré — ou masqué pour un jeune allergique.</p></div>
+    <div class="cmp__grid">
+      <article class="gst-dish is-chosen"><div class="gst-dish__plate"><span class="gst-fleur">⚜</span><span class="gst-dish__check"><svg class="gst-icon"><use href="#i-check"/></svg></span></div><div class="gst-dish__body"><span class="gst-tag">MIDI · J.06</span><h4 class="gst-dish__name">Riz sauce arachide</h4><span class="gst-dish__ing">riz · pâte d'arachide · poulet · tomate</span><button class="gst-btn gst-btn--brand gst-btn--sm gst-dish__vote" aria-pressed="true">Choisi</button></div></article>
+      <article class="gst-dish"><div class="gst-dish__plate"><span class="gst-fleur">⚜</span><span class="gst-dish__check"><svg class="gst-icon"><use href="#i-check"/></svg></span></div><div class="gst-dish__body"><span class="gst-tag">MIDI · J.06</span><h4 class="gst-dish__name">Ayimolou</h4><span class="gst-dish__ing">riz · haricots · huile rouge · gari</span><button class="gst-btn gst-btn--secondary gst-btn--sm gst-dish__vote" aria-pressed="false" data-vote>Choisir</button></div></article>
+      <article class="gst-dish is-unavailable"><div class="gst-dish__plate"><span class="gst-fleur">⚜</span></div><div class="gst-dish__body"><span class="gst-tag">MIDI · J.06</span><h4 class="gst-dish__name">Atiéké poisson</h4><span class="gst-dish__ing">Stock épuisé : poisson braisé</span><button class="gst-btn gst-btn--sm gst-dish__vote" disabled>Indisponible</button></div></article>
+    </div>
+    <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Motion</dt><dd>Coche en spring · contour qui se trace</dd><dt>A11y</dt><dd>Bouton aria-pressed ; raison d'indisponibilité en texte</dd></dl>
+    <script type="text/x-snippet"><article class="gst-dish is-chosen">…<button aria-pressed="true">Choisi</button></article></script></div>
+  </article>
+
+  <article class="cmp" data-c="RateBar">
+    <div class="cmp__head"><h3>RateBar</h3><span class="gst-tag">Proposition · sélection</span><p>Les deux taux du module Cuisine, en barres jumelles : ce que les jeunes proposent (teal) contre ce qu'ils choisissent (rouge).</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo" id="rate-demo"></div><div><script type="text/x-snippet">GST.rateBars(host, [{ nom: "Ayimolou", a: 41, b: 58 }, …]);</script></div></div>
+  </article>
+
+  <article class="cmp" data-c="StationCard">
+    <div class="cmp__head"><h3>StationCard</h3><span class="gst-tag">Roadmap</span><p>Une journée du camp : passée (pleine), en cours (rouge), à venir (contour fantôme). Même vocabulaire en 3D et en 2D.</p></div>
+    <div class="cmp__grid"><div class="gst-station"><span class="gst-station__j">J.04</span><div><span class="gst-tag">PASSÉE</span><div class="gst-ui">Sortie Togoville</div></div></div><div class="gst-station is-now"><span class="gst-station__j">J.05</span><div><span class="gst-tag gst-tag--accent">AUJOURD'HUI</span><div class="gst-ui">Service communautaire</div></div></div><div class="gst-station is-future"><span class="gst-station__j">J.06</span><div><span class="gst-tag">À VENIR</span><div class="gst-ui">Hike — départ</div></div></div></div>
+    <div><script type="text/x-snippet"><div class="gst-station is-now"><span class="gst-station__j">J.05</span>…</div></script></div>
+  </article>
+
+  <article class="cmp" data-c="SeatToken">
+    <div class="cmp__head"><h3>SeatToken</h3><span class="gst-tag">4 états privés · 2 publics</span><p>Un siège du Bus volant. La vue publique ne montre que libre / occupé : <b>aucun statut de paiement public</b> (contrainte de dignité).</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><span class="cmp__cap">Vue personnelle & responsables</span><div class="cmp__row"><span class="gst-seat"><span>23</span></span><span class="gst-seat gst-seat--reserved"><span>24</span></span><span class="gst-seat gst-seat--partial"><i class="gst-seat__fill"></i><span>25</span></span><span class="gst-seat gst-seat--guaranteed"><i class="gst-seat__fill"></i><span>26</span></span><span class="gst-field__help">libre · réservé · partiel · garanti</span></div><span class="cmp__cap">Vue publique</span><div class="cmp__row"><span class="gst-seat"><span>23</span></span><span class="gst-seat gst-seat--occupied"><i class="gst-seat__fill"></i><span>24</span></span><span class="gst-seat gst-seat--occupied"><i class="gst-seat__fill"></i><span>25</span></span><span class="gst-seat gst-seat--occupied"><i class="gst-seat__fill"></i><span>26</span></span><span class="gst-field__help">libre · occupé</span></div></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Motion</dt><dd>Pin qui tombe (spring), remplissage de bas en haut, nom décodé (M2)</dd><dt>A11y</dt><dd>« Siège 25, occupé par Koffi A. » — jamais l'état de paiement en public</dd></dl>
+    <script type="text/x-snippet"><span class="gst-seat gst-seat--partial" aria-label="Siège 25, acompte versé">
+  <i class="gst-seat__fill"></i><span>25</span></span></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="RoleBadge">
+    <div class="cmp__head"><h3>RoleBadge</h3><span class="gst-tag">9 rôles</span><p>Qui voit quoi. Un rôle est attribué par camp.</p></div>
+    <div class="doc-plate cmp__demo"><div class="cmp__row"><span class="gst-role"><span class="gst-avatar">CA</span>Chef de groupe</span><span class="gst-role"><span class="gst-avatar">KA</span>Commissaire logistique</span><span class="gst-role"><span class="gst-avatar">AD</span>Resp. de groupe · B</span><span class="gst-role"><span class="gst-avatar">FH</span>Trésorière</span><span class="gst-role"><span class="gst-avatar">EF</span>Resp. cuisine</span><span class="gst-role"><span class="gst-avatar">YK</span>Chef d'unité</span><span class="gst-role"><span class="gst-avatar">SA</span>Scout</span><span class="gst-role"><span class="gst-avatar">MA</span>Parent</span><span class="gst-role"><span class="gst-avatar" style="background:var(--gst-bg-sunken);color:var(--gst-text-secondary);border:1px solid var(--gst-line-strong)">—</span>Public</span></div></div>
+  </article>
+
+  <article class="cmp" data-c="PriceSuggestion">
+    <div class="cmp__head"><h3>PriceSuggestion</h3><span class="gst-tag">Hook · un humain valide</span><p>Un prix trouvé automatiquement entre au statut « suggestion » et n'entre dans aucun calcul avant validation. Source et date toujours visibles.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><div class="gst-hook" id="hook"><svg class="gst-icon gst-icon--lg gst-hook__ico"><use href="#i-lightbulb"/></svg><div class="gst-hook__body"><span class="gst-hook__src">Riz local 50 kg · marché d'Adakpamé · 02.10.26</span><span class="gst-hook__vals"><s>32 000</s> → <b>34 560 F CFA</b> · +8 %</span></div><div class="gst-hook__actions"><button class="gst-btn gst-btn--brand gst-btn--sm" data-act="hook-ok">Valider</button><button class="gst-btn gst-btn--ghost gst-btn--sm">Rejeter</button></div></div>
+      <div class="gst-alert gst-alert--warning"><svg class="gst-icon gst-alert__ico"><use href="#i-history"/></svg><div><div class="gst-alert__title">Prix périmé · &gt; 6 mois</div><div class="gst-alert__text">Huile rouge 20 L — relevé du 14.02.26. À revérifier avant usage.</div></div><span></span></div></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Alertes</dt><dd>périmé · écart anormal · écart prévu/réel · saisonnalité</dd><dt>A11y</dt><dd>Actions explicites, jamais d'application automatique</dd></dl>
+    <script type="text/x-snippet"><div class="gst-hook">…<button>Valider</button><button>Rejeter</button></div></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="Card">
+    <div class="cmp__head"><h3>Card</h3><span class="gst-tag">Hairline + coins</span><p>Conteneur de base : hairline, réticules optionnels aux angles, contour 2 px quand sélectionné ou critique. Jamais d'ombre.</p></div>
+    <div class="cmp__grid"><div class="gst-card" style="min-height:110px"><i class="gst-card__corner tl"></i><i class="gst-card__corner br"></i><span class="gst-tag">REPOS</span></div><div class="gst-card gst-card--interactive is-selected" style="min-height:110px"><span class="gst-tag gst-tag--brand">SÉLECTIONNÉE</span></div><div class="gst-card is-critical" style="min-height:110px"><span class="gst-tag gst-tag--accent">CRITIQUE</span></div></div>
+  </article>
+
+  <article class="cmp" data-c="Badge">
+    <div class="cmp__head"><h3>Badge</h3><span class="gst-tag">Radius 3 px</span><p>Statut court, en capitales mono. Toujours un mot, jamais une phrase.</p></div>
+    <div class="doc-plate cmp__demo"><div class="cmp__row"><span class="gst-badge">Brouillon</span><span class="gst-badge gst-badge--brand">Soumis</span><span class="gst-badge gst-badge--solid">Consolidé</span><span class="gst-badge gst-badge--success">Payé</span><span class="gst-badge gst-badge--warning">À vérifier</span><span class="gst-badge gst-badge--danger">Seuil</span><span class="gst-badge gst-badge--info">Suggestion</span><span class="gst-badge gst-badge--ink">Gelé</span><span class="gst-badge gst-badge--renforce">Renforcé</span></div></div>
+  </article>
+
+  <article class="cmp" data-c="Avatar">
+    <div class="cmp__head"><h3>Avatar</h3><span class="gst-tag">Radius 999</span><p>Initiales sur teal. L'une des deux seules formes rondes du système, avec l'indicateur de synchronisation.</p></div>
+    <div class="doc-plate cmp__demo"><div class="cmp__row"><span class="gst-avatar">KA</span><span class="gst-avatar" style="width:44px;height:44px;font-size:13px">AD</span><span class="gst-avatar" style="width:56px;height:56px;font-size:15px">CA</span></div></div>
+  </article>
+</section>
+
+<!-- ════════ .06 RETOURS ════════ -->
+<section class="fam" data-fam=".06" data-name="Retours">
+  <div class="fam__head"><h2>Retours</h2><span class="gst-tag">.06 / 6 COMPOSANTS</span></div>
+
+  <article class="cmp" data-c="Alert">
+    <div class="cmp__head"><h3>Alert</h3><span class="gst-tag">Info · succès · avertissement · critique</span><p>Bandeau d'état avec filet de 4 px. L'alerte critique déclenche M6 — une seule par écran.</p></div>
+    <div class="doc-plate cmp__demo">
+      <div class="gst-alert"><svg class="gst-icon gst-alert__ico"><use href="#i-info"/></svg><div><div class="gst-alert__title">Suggestion du hook</div><div class="gst-alert__text">3 prix proposés attendent votre validation.</div></div><button class="gst-btn gst-btn--ghost gst-btn--sm">Voir</button></div>
+      <div class="gst-alert gst-alert--success"><svg class="gst-icon gst-alert__ico"><use href="#i-circle-check"/></svg><div><div class="gst-alert__title">Budget validé</div><div class="gst-alert__text">Version A gelée le 03.10.26 par Codjo Agossou.</div></div><span></span></div>
+      <div class="gst-alert gst-alert--warning"><svg class="gst-icon gst-alert__ico"><use href="#i-triangle-alert"/></svg><div><div class="gst-alert__title">À vérifier</div><div class="gst-alert__text">Capacité des véhicules : 78 places pour 80 participants.</div></div><span></span></div>
+      <div class="gst-alert gst-alert--critical" id="alert-crit"><svg class="gst-icon gst-alert__ico"><use href="#i-triangle-alert"/></svg><div><div class="gst-alert__title">Seuil critique · départ bloqué</div><div class="gst-alert__text">Aucun responsable santé désigné pour ce camp.</div></div><button class="gst-btn gst-btn--danger gst-btn--sm" data-act="crit">Rejouer M6</button></div>
+    </div>
+    <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>A11y</dt><dd>role="status" (info/succès) · role="alert" (critique) · jamais la couleur seule : icône + titre</dd></dl>
+    <script type="text/x-snippet"><div class="gst-alert gst-alert--critical" role="alert">…</div></script></div>
+  </article>
+
+  <article class="cmp" data-c="Toast">
+    <div class="cmp__head"><h3>Toast</h3><span class="gst-tag">Bas d'écran · tag décodé</span><p>Confirmation éphémère, 3,8 s, fermable. Ne porte jamais une information unique.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><div class="cmp__row"><button class="gst-btn gst-btn--secondary" data-toast="success">Dépense enregistrée</button><button class="gst-btn gst-btn--secondary" data-toast="">Enregistré hors ligne</button><button class="gst-btn gst-btn--secondary" data-toast="danger">Conflit de saisie</button></div></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>A11y</dt><dd>aria-live="polite" · pas de focus volé</dd></dl>
+    <script type="text/x-snippet">GST.toast("Dépense enregistrée · 18 500 F CFA", { tag: ".02 / COMPTABILITÉ", tone: "success" });</script></div></div>
+  </article>
+
+  <article class="cmp" data-c="Stamp">
+    <div class="cmp__head"><h3>Stamp</h3><span class="gst-tag">M8</span><p>Le tampon de validation : arrêt de journée, budget gelé, bus complet.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo" id="stamp-host" style="min-height:170px"><span class="gst-tag">COMPTES DU JOUR / J.05</span><button class="gst-btn gst-btn--brand gst-btn--sm" data-act="stamp" style="align-self:flex-start">Arrêter la journée</button></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Tons</dt><dd>succès (VALIDÉ) · marque (CLOS) · danger (REFUSÉ)</dd><dt>A11y</dt><dd>role="status" : « Journée validée le 03.10.26 »</dd></dl>
+    <script type="text/x-snippet">GST.stamp(card, { big: "VALIDÉ", small: "03.10.26" });</script></div></div>
+  </article>
+
+  <article class="cmp" data-c="SyncIndicator">
+    <div class="cmp__head"><h3>SyncIndicator</h3><span class="gst-tag">M11 · pilule</span><p>Toujours visible dans la barre supérieure terrain. Synchronisé, en attente (respire), hors ligne, conflit.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><div class="cmp__row"><span class="gst-sync"><span class="gst-sync__dot"></span>Synchronisé</span><span class="gst-sync is-pending"><span class="gst-sync__dot"></span>3 en file</span><span class="gst-sync is-offline"><span class="gst-sync__dot"></span>Hors ligne</span><span class="gst-sync is-conflict"><span class="gst-sync__dot"></span>1 conflit</span></div></div>
+    <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>A11y</dt><dd>role="status" · texte explicite, jamais la pastille seule</dd></dl>
+    <script type="text/x-snippet"><span class="gst-sync is-pending" role="status"><span class="gst-sync__dot"></span>3 en file</span></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="EmptyState">
+    <div class="cmp__head"><h3>EmptyState</h3><span class="gst-tag">Typographie + ⚜</span><p>Jamais vide de sens : dit ce qui manque et propose l'action suivante. Illustré uniquement par la typographie et la fleur.</p></div>
+    <div class="cmp__body"><div class="gst-empty"><span class="gst-fleur">⚜</span><h4 class="gst-empty__title">Aucune dépense aujourd'hui</h4><p class="gst-empty__text">La journée J.05 n'a encore aucun mouvement. Saisissez la première dépense pour démarrer les comptes du jour.</p><button class="gst-btn gst-btn--primary">Saisir une dépense</button></div>
+    <div><script type="text/x-snippet"><div class="gst-empty"><span class="gst-fleur">⚜</span><h4 class="gst-empty__title">…</h4>…</div></script></div></div>
+  </article>
+
+  <article class="cmp" data-c="Skeleton">
+    <div class="cmp__head"><h3>Skeleton</h3><span class="gst-tag">Hairlines qui se tracent</span><p>Pas de shimmer : des hairlines qui se tracent, comme un plan qu'on dessine.</p></div>
+    <div class="cmp__body"><div class="doc-plate cmp__demo"><div class="gst-skel" aria-busy="true" aria-label="Chargement"><i></i><i></i><i></i><i></i></div></div>
+    <div><script type="text/x-snippet"><div class="gst-skel" aria-busy="true"><i></i><i></i><i></i></div></script></div></div>
+  </article>
+</section>
+
+<!-- ════════ .07 NAVIGATION ════════ -->
+<section class="fam" data-fam=".07" data-name="Navigation">
+  <div class="fam__head"><h2>Navigation</h2><span class="gst-tag">.07 / 8 COMPOSANTS</span></div>
+
+  <article class="cmp" data-c="TopBar">
+    <div class="cmp__head"><h3>TopBar</h3><span class="gst-tag">Terrain</span><p>Sélecteur de camp et compte à rebours, synchronisation, bascule Plein soleil / Nuit, avatar et rôle.</p></div>
+    <div class="gst-topbar" style="border:var(--gst-hairline) solid var(--gst-line-hairline)"><div class="gst-topbar__camp"><span class="gst-topbar__count">J-21</span><div class="gst-topbar__name"><b>Réjouissance 2026</b><span class="gst-tag">Attikoumé · 80</span></div><svg class="gst-icon gst-icon--sm"><use href="#i-chevron-down"/></svg></div><span class="gst-topbar__sp"></span><span class="gst-sync is-pending"><span class="gst-sync__dot"></span>3 en file</span><button class="gst-icon-btn gst-icon-btn--ghost" aria-label="Plein soleil"><svg class="gst-icon"><use href="#i-sun-medium"/></svg></button><span class="gst-avatar">CA</span></div>
+    <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>A11y</dt><dd>&lt;header&gt; landmark · ordre de tabulation logique</dd></dl><script type="text/x-snippet"><header class="gst-topbar">…</header></script></div>
+  </article>
+
+  <article class="cmp" data-c="ModuleRail">
+    <div class="cmp__head"><h3>ModuleRail</h3><span class="gst-tag">Desktop</span><p>Rail vertical des modules, tags mono, filet rouge sur le module actif.</p></div>
+    <div class="app-shell-mini"><nav class="gst-rail" aria-label="Modules"><a href="#" aria-current="page"><span class="gst-rail__idx">.01</span>Logistique</a><a href="#"><span class="gst-rail__idx">.02</span>Comptabilité</a><a href="#"><span class="gst-rail__idx">.03</span>Cuisine</a><a href="#"><span class="gst-rail__idx">.04</span>Roadmap</a><a href="#"><span class="gst-rail__idx">.05</span>Vitrine</a></nav><div style="padding:24px"><span class="gst-tag">CAMP RÉJOUISSANCE 2026 / .01 LOGISTIQUE</span></div></div>
+    <div><script type="text/x-snippet"><nav class="gst-rail"><a aria-current="page">…</a></nav></script></div>
+  </article>
+
+  <article class="cmp" data-c="BottomTabs">
+    <div class="cmp__head"><h3>BottomTabs</h3><span class="gst-tag">Mobile · 5 max</span><p>Icône + tag, 60 px de haut, filet rouge au-dessus de l'entrée active.</p></div>
+    <div class="phone-mini"><nav class="gst-tabbar" aria-label="Modules"><a href="#" aria-current="page"><svg class="gst-icon"><use href="#i-package"/></svg>Logist.</a><a href="#"><svg class="gst-icon"><use href="#i-calculator"/></svg>Compta</a><a href="#"><svg class="gst-icon"><use href="#i-chef-hat"/></svg>Cuisine</a><a href="#"><svg class="gst-icon"><use href="#i-route"/></svg>Roadmap</a><a href="#"><svg class="gst-icon"><use href="#i-bus"/></svg>Bus</a></nav></div>
+  </article>
+
+  <article class="cmp" data-c="Breadcrumb">
+    <div class="cmp__head"><h3>Breadcrumb</h3><span class="gst-tag">Fil technique</span><p>Le chemin, en tags mono.</p></div>
+    <div class="doc-plate"><ol class="gst-crumb"><li><a href="#">Camp Réjouissance 2026</a></li><li><a href="#">.01 Logistique</a></li><li aria-current="page">B · Alimentaire</li></ol></div>
+  </article>
+
+  <article class="cmp" data-c="Tabs">
+    <div class="cmp__head"><h3>Tabs</h3><span class="gst-tag">Filet rouge glissant</span><p>Sections d'un même écran.</p></div>
+    <div class="doc-plate"><div class="gst-tabs" role="tablist"><button aria-selected="true">Recensement</button><button aria-selected="false">Stock</button><button aria-selected="false">Affectation</button><button aria-selected="false">Retours</button></div></div>
+  </article>
+
+  <article class="cmp" data-c="Drawer">
+    <div class="cmp__head"><h3>Drawer</h3><span class="gst-tag">Droite desktop · bas mobile</span><p>Le panneau de détail (fiche journée, mouvements d'un point de courbe). Bordé du cadre teal ; ombre <code class="doc-code-i">lift</code> uniquement au-dessus d'une scène 3D.</p></div>
+    <div class="doc-plate cmp__demo"><div class="cmp__row"><button class="gst-btn gst-btn--secondary" data-open="drawer-r">Ouvrir à droite</button><button class="gst-btn gst-btn--secondary" data-open="drawer-b">Ouvrir en bas</button></div></div>
+  </article>
+
+  <article class="cmp" data-c="Modal">
+    <div class="cmp__head"><h3>Modal</h3><span class="gst-tag">Double validation</span><p>Interruption volontaire : seconde signature au-delà du seuil, suppression.</p></div>
+    <div class="doc-plate cmp__demo"><button class="gst-btn gst-btn--secondary" data-open="modal" style="align-self:flex-start">Ouvrir</button></div>
+  </article>
+
+  <article class="cmp" data-c="Stepper">
+    <div class="cmp__head"><h3>Stepper</h3><span class="gst-tag">Assistant d'ouverture</span><p>Étapes numérotées, de .01 Identité à .06 Modules.</p></div>
+    <div class="doc-plate"><ol class="gst-stepper-nav" style="padding:0;margin:0"><li class="is-done"><b>.01</b>Identité</li><li class="is-done"><b>.02</b>Unités</li><li class="is-current"><b>.03</b>Groupes</li><li><b>.04</b>Responsables</li><li><b>.05</b>Budget</li><li><b>.06</b>Modules</li></ol></div>
+  </article>
+</section>
+</div></div>
+</main>
+
+<!-- Tiroirs & modale de démonstration -->
+<div class="gst-scrim" data-scrim></div>
+<aside class="gst-drawer gst-drawer--right" id="drawer-r" aria-label="Détail du point" aria-hidden="true"><div class="gst-drawer__head"><span class="gst-tag">J.04 / MOUVEMENTS</span><button class="gst-icon-btn gst-icon-btn--ghost" data-close aria-label="Fermer"><svg class="gst-icon"><use href="#i-x"/></svg></button></div><div class="gst-drawer__body"><div class="gst-expense"><span class="gst-expense__ico"><svg class="gst-icon"><use href="#i-truck"/></svg></span><div><div class="gst-expense__title">Carburant convoi</div><div class="gst-expense__meta">TRANSPORT · 06:41</div></div><div class="gst-expense__amt">86 500</div></div><div class="gst-expense"><span class="gst-expense__ico"><svg class="gst-icon"><use href="#i-map-pin"/></svg></span><div><div class="gst-expense__title">Location pirogues</div><div class="gst-expense__meta">ACTIVITÉS · 09:20</div></div><div class="gst-expense__amt">60 000</div></div></div></aside>
+<aside class="gst-drawer gst-drawer--bottom" id="drawer-b" aria-label="Fiche journée" aria-hidden="true"><div class="gst-drawer__head"><span class="gst-tag">J.05 / AUJOURD'HUI</span><button class="gst-icon-btn gst-icon-btn--ghost" data-close aria-label="Fermer"><svg class="gst-icon"><use href="#i-x"/></svg></button></div><div class="gst-drawer__body"><h4 class="gst-display-md" style="margin:0 0 12px">Service communautaire</h4><dl class="gst-spec gst-spec--rules"><dt>Lieu</dt><dd>École primaire d'Attikoumé</dd><dt>Départ</dt><dd>07:30</dd><dt>Unités</dt><dd>Pionniers · Routiers</dd></dl></div></aside>
+<div class="gst-modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-t" aria-hidden="true"><div class="gst-modal__box"><span class="gst-tag gst-tag--accent">DOUBLE VALIDATION · &gt; 100 000 F CFA</span><h4 id="modal-t" class="gst-display-md" style="margin:12px 0">Seconde signature requise</h4><p style="margin:0 0 20px;color:var(--gst-text-secondary)">Achat groupé de vivres — 412 000 F CFA. Codjo Agossou a signé. Il faut la signature de la trésorière.</p><div class="doc-row"><button class="gst-btn gst-btn--primary" data-close>Signer</button><button class="gst-btn gst-btn--ghost" data-close>Plus tard</button></div></div></div>
+
+<script src="assets/js/gst-icons.js"></script>
+<script src="assets/js/gst-motion.js"></script>
+<script src="assets/js/gst-data.js"></script>
+<script src="assets/js/gst-components.js"></script>
+<script src="assets/js/gst-shell.js"></script>
+<script>
+(function () {
+  var GST = window.GST, D = window.GST_DATA;
+  /* Extraits de code : <script type="text/x-snippet"> → <pre class="doc-code"> */
+  document.querySelectorAll('script[type="text/x-snippet"]').forEach(function (s) {
+    var pre = document.createElement("pre"); pre.className = "doc-code"; pre.textContent = s.textContent.replace(/^\n+|\s+$/g, "");
+    s.parentNode.replaceChild(pre, s);
+  });
+  /* Index numéroté */
+  var toc = document.getElementById("toc"), n = 0, html = "";
+  document.querySelectorAll(".fam").forEach(function (f) {
+    html += "<h4>" + f.dataset.fam + " / " + f.dataset.name + "</h4>";
+    f.querySelectorAll(".cmp").forEach(function (c) {
+      n++; var id = "c-" + c.dataset.c.toLowerCase(); c.id = id;
+      var tag = c.querySelector(".cmp__head > .gst-tag");
+      html += '<a href="#' + id + '"><span>' + String(n).padStart(2, "0") + "</span>" + c.dataset.c + "</a>";
+      var num = document.createElement("span"); num.className = "gst-tag gst-tag--accent"; num.textContent = "." + String(n).padStart(2, "0");
+      c.querySelector(".cmp__head").insertBefore(num, c.querySelector(".cmp__head h3"));
+    });
+  });
+  toc.innerHTML = html;
+  var links = toc.querySelectorAll("a");
+  var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) links.forEach(function (a) { a.classList.toggle("is-on", a.getAttribute("href") === "#" + e.target.id); }); }); }, { rootMargin: "-30% 0px -60% 0px" });
+  document.querySelectorAll(".cmp").forEach(function (c) { io.observe(c); });
+
+  /* Démos */
+  var odo = document.querySelector("[data-odo-demo]"), odo2 = document.querySelector("[data-odo-demo2]"), v = 4850000;
+  GST.odometer(odo, v, { instant: true }); GST.odometer(odo2, 23, { instant: true });
+  var act = {
+    grid: function () { GST.traceGrid(document.getElementById("demo-grid"), { cols: 4, rows: 3 }); },
+    dtag: function () { document.querySelectorAll("[data-dtag]").forEach(function (t, i) { GST.decode(t, null, { delay: i * 140 }); }); },
+    load: function (b) { b.classList.add("is-loading"); b.setAttribute("aria-busy", "true"); if (!b.querySelector(".gst-btn__trace")) b.insertAdjacentHTML("beforeend", '<span class="gst-btn__trace"></span>'); setTimeout(function () { b.classList.remove("is-loading"); b.removeAttribute("aria-busy"); GST.toast("Enregistré", { tag: ".00 / OK", tone: "success" }); }, 1800); },
+    "odo+": function () { v += 120000; GST.odometer(odo, v, { tone: "bad" }); },
+    "odo-": function () { v -= 75000; GST.odometer(odo, v, { tone: "good" }); },
+    crit: function () { var a = document.getElementById("alert-crit"); GST.strike(a, { origin: a.querySelector(".gst-alert__ico") }); },
+    stamp: function () { var h = document.getElementById("stamp-host"); h.querySelectorAll(".gst-stamp").forEach(function (s) { s.remove(); }); GST.stamp(h, { big: "VALIDÉ", left: "62%", top: "60%" }); },
+    "hook-ok": function (b) { var h = document.getElementById("hook"); h.querySelector(".gst-hook__actions").innerHTML = '<span class="gst-badge gst-badge--success">Validé · entre dans les calculs</span>'; GST.toast("Prix validé · Riz local 50 kg", { tag: ".00 / BASE DE PRIX", tone: "success" }); }
+  };
+  document.querySelectorAll("[data-act]").forEach(function (b) { b.addEventListener("click", function () { act[b.dataset.act](b); }); });
+  act.grid();
+  document.querySelectorAll("[data-toast]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var t = b.dataset.toast;
+      GST.toast(t === "success" ? "Dépense enregistrée · 18 500 F CFA" : t === "danger" ? "Conflit : la ligne a changé sur un autre appareil" : "Enregistré sur l'appareil · sera synchronisé", { tag: t === "danger" ? ".00 / CONFLIT" : t ? ".02 / COMPTABILITÉ" : ".00 / HORS LIGNE", tone: t });
+    });
+  });
+  document.querySelectorAll("[data-stepper]").forEach(function (s) {
+    var val = s.querySelector(".gst-stepper__val"), x = +val.textContent; GST.odometer(val, x, { instant: true });
+    var bs = s.querySelectorAll("button");
+    bs[0].onclick = function () { if (x > 0) { x--; GST.odometer(val, x, { duration: 360 }); } };
+    bs[1].onclick = function () { x++; GST.odometer(val, x, { duration: 360 }); };
+  });
+  document.querySelector("[data-photo]").addEventListener("click", function (e) {
+    var p = e.currentTarget; p.classList.add("is-done");
+    p.querySelector(".gst-photo__thumb").innerHTML = '<svg class="gst-icon gst-icon--lg" style="color:var(--gst-state-success)"><use href="#i-receipt"/></svg>';
+    p.querySelector(".gst-ui").textContent = "Reçu attaché · 412 Ko";
+  });
+  document.querySelectorAll("[data-vote]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var d = b.closest(".gst-dish"), on = !d.classList.contains("is-chosen");
+      d.classList.toggle("is-chosen", on); b.setAttribute("aria-pressed", on); b.textContent = on ? "Choisi" : "Choisir";
+      b.classList.toggle("gst-btn--brand", on); b.classList.toggle("gst-btn--secondary", !on);
+      if (on) GST.pop(d.querySelector(".gst-dish__check"), 0);
+    });
+  });
+  /* Ouverture tiroirs / modale */
+  var scrim = document.querySelector("[data-scrim]"), open = null, last = null;
+  function show(el) { last = document.activeElement; open = el; el.classList.add("is-open"); el.setAttribute("aria-hidden", "false"); scrim.classList.add("is-open"); var f = el.querySelector("button"); f && f.focus(); }
+  function hide() { if (!open) return; open.classList.remove("is-open"); open.setAttribute("aria-hidden", "true"); scrim.classList.remove("is-open"); open = null; last && last.focus(); }
+  document.querySelectorAll("[data-open]").forEach(function (b) { b.addEventListener("click", function () { show(document.getElementById(b.dataset.open)); }); });
+  document.querySelectorAll("[data-close]").forEach(function (b) { b.addEventListener("click", hide); });
+  scrim.addEventListener("click", hide);
+  document.getElementById("modal").addEventListener("click", function (e) { if (e.target.id === "modal") hide(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") hide(); });
+
+  /* Graphiques */
+  GST.chartLine(document.getElementById("chart-line"), { labels: D.COURBE.prevu.map(function (_, i) { return "J." + String(i + 1).padStart(2, "0"); }), planned: D.COURBE.prevu, actual: D.COURBE.reel, unit: "k F CFA · cumul", every: 2 });
+  GST.rateBars(document.getElementById("chart-bars"), D.PLATS.slice(0, 5).map(function (p) { return { nom: p.nom, a: p.prop, b: p.sel }; }));
+  GST.rateBars(document.getElementById("rate-demo"), D.PLATS.slice(5).map(function (p) { return { nom: p.nom, a: p.prop, b: p.sel }; }));
+})();
+</script>
+</body>
+</html>

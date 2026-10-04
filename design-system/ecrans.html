@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Écrans — GST Government</title>
+<meta name="description" content="Écrans haute fidélité GST Government, mobile 390 et desktop 1440 : tableau de bord, logistique, économique, comptabilité, cuisine, base de prix, saisie terrain.">
+<script>try{var t=localStorage.getItem("gst-theme");if(t&&t!=="jour")document.documentElement.setAttribute("data-theme",t);if(localStorage.getItem("gst-motion")==="reduce")document.documentElement.setAttribute("data-motion","reduce")}catch(e){}</script>
+<link rel="stylesheet" href="tokens/gst-tokens.css">
+<link rel="stylesheet" href="assets/css/gst.css">
+<link rel="stylesheet" href="assets/css/doc.css">
+<style>
+.scr{padding:var(--gst-space-7) 0;border-top:var(--gst-hairline) solid var(--gst-line-hairline);scroll-margin-top:80px}
+.scr__head{display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--gst-space-3) var(--gst-space-5);margin-bottom:var(--gst-space-5)}
+.scr__head b{font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:.9;color:var(--gst-accent-text)}
+.scr__head h3{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:.9}
+.scr__head p{margin:0;flex-basis:100%;color:var(--gst-text-secondary);max-width:none;padding-right:min(30%,360px)}
+.phones{display:grid;gap:var(--gst-space-7) var(--gst-space-6);grid-template-columns:repeat(auto-fill,minmax(420px,1fr));justify-items:center}
+@media (max-width:520px){.phones{grid-template-columns:1fr}.dev{padding:30px 0 0 24px}.dev--phone .dev__screen{max-width:calc(100vw - 80px)}}
+.phone-cap{width:390px;max-width:100%;margin-top:14px;display:flex;flex-direction:column;gap:4px}
+.phone-cap b{font-family:var(--gst-font-display);font-weight:400;font-size:1.6rem;line-height:1}
+.phone-cap p{margin:0;font-size:.95rem;color:var(--gst-text-secondary)}
+
+/* ── App · mobile ───────────────────────────────────────────────────── */
+.m-top{display:flex;align-items:center;gap:10px;height:56px;padding:0 12px;background:var(--gst-bg-panel);border-bottom:var(--gst-hairline) solid var(--gst-line-hairline)}
+.m-top .gst-topbar__count{font-size:1.7rem}
+.m-top .gst-topbar__name b{font-size:12.5px}
+.m-top .gst-sync{height:26px;padding:0 9px 0 8px;font-size:9px}
+.m-body{position:absolute;top:56px;left:0;right:0;bottom:60px;overflow:hidden;padding:16px;display:flex;flex-direction:column;gap:14px}
+.m-body--full{bottom:0}
+.m-tabs{position:absolute;left:0;right:0;bottom:0}
+.m-title{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:2.4rem;line-height:.9}
+.m-card{background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline);padding:14px;display:flex;flex-direction:column;gap:10px;position:relative}
+.m-row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.m-list{display:flex;flex-direction:column;border-top:var(--gst-hairline) solid var(--gst-line-hairline)}
+.m-list>div{display:flex;flex-direction:column;gap:6px;padding:10px 0;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline)}
+
+/* ── App · desktop ──────────────────────────────────────────────────── */
+.d-app{display:flex;height:900px;background:var(--gst-bg-canvas);font-size:16px}
+.d-rail{display:flex;flex-direction:column;width:232px;flex:none;background:var(--gst-bg-panel);border-right:var(--gst-hairline) solid var(--gst-line-hairline)}
+.d-rail .gst-rail{width:auto;border:0;padding-top:8px}
+.d-brand{display:flex;align-items:center;gap:10px;height:64px;padding:0 20px;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);color:var(--gst-text-brand)}
+.d-brand b{font-family:var(--gst-font-display);font-weight:400;font-size:1.35rem;letter-spacing:.05em;color:var(--gst-text-primary)}
+.d-rail__sep{margin:12px 20px;border-top:var(--gst-hairline) solid var(--gst-line-hairline)}
+.d-main{flex:1;display:flex;flex-direction:column;min-width:0}
+.d-body{flex:1;padding:28px 40px;display:flex;flex-direction:column;gap:22px;overflow:hidden;position:relative}
+.d-h{display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.d-h h2{margin:6px 0 0;font-family:var(--gst-font-display);font-weight:400;font-size:4rem;line-height:.85}
+.d-h p{margin:8px 0 0;font-style:italic;color:var(--gst-text-secondary);font-size:1.1rem}
+.d-kpis{display:grid;grid-template-columns:repeat(4,1fr);border:var(--gst-hairline) solid var(--gst-line-hairline);background:var(--gst-bg-panel)}
+.d-kpis>div{padding:18px 20px;border-right:var(--gst-hairline) solid var(--gst-line-hairline)}
+.d-kpis>div:last-child{border-right:0}
+.d-grid{display:grid;gap:20px;min-height:0;min-width:0}
+.d-grid>*{min-width:0}
+.d-panel{background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline);padding:18px 20px;display:flex;flex-direction:column;gap:14px;min-height:0;position:relative}
+.d-panel__h{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.d-panel__h h4{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:1.7rem;line-height:1}
+.mini-grp{display:grid;grid-template-columns:28px 1fr 150px 110px 90px;gap:12px;align-items:center;padding:8px 0;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);font-family:var(--gst-font-mono);font-size:13px}
+.mini-grp b{font-family:var(--gst-font-display);font-weight:400;font-size:1.5rem;color:var(--gst-text-brand);line-height:1}
+.scen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.scen__col{background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline);padding:18px;display:flex;flex-direction:column;gap:14px}
+.scen__col.is-on{border:var(--gst-border) solid var(--gst-line-brand)}
+.scen__col .big{font-family:var(--gst-font-display);font-size:2.7rem;line-height:1}
+.scen__col .gst-spec{grid-template-columns:auto 1fr}.scen__col .gst-spec dd{text-align:right}
+.gst-topbar__count{white-space:nowrap;flex:none}
+.gst-topbar .gst-role{white-space:nowrap}
+.ab{display:grid;grid-template-columns:1fr 300px 1fr;gap:20px;align-items:stretch}
+.ab__mid{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:6px;border:var(--gst-border) solid var(--gst-text-primary);background:var(--gst-bg-panel);padding:16px}
+.ab__mid .big{font-family:var(--gst-font-display);font-size:5.4rem;line-height:.9;color:var(--gst-state-success-text)}
+.post{display:grid;grid-template-columns:1fr 110px;gap:10px;align-items:center;padding:7px 0;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);font-family:var(--gst-font-mono);font-size:13px}
+.post .n{text-align:right;font-variant-numeric:tabular-nums}
+.menu-grid{display:grid;grid-template-columns:60px repeat(14,1fr);gap:3px;font-family:var(--gst-font-mono);font-size:9.5px}
+.menu-grid span{padding:6px 4px;background:var(--gst-bg-sunken);border:1px solid var(--gst-line-hairline);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
+.menu-grid .h{background:none;border:0;color:var(--gst-text-secondary);letter-spacing:.08em}
+.menu-grid .off{background:none;border-style:dashed;color:var(--gst-text-secondary)}
+.menu-grid .sp{background:var(--gst-state-info-bg);border-color:var(--gst-state-info)}
+.d-drawer{position:absolute;top:0;right:0;bottom:0;width:380px;background:var(--gst-bg-panel);border-left:var(--gst-frame-viewport) solid var(--gst-bg-frame);transform:translateX(105%);transition:transform var(--gst-dur-base) var(--gst-ease-tonnerre);display:flex;flex-direction:column;z-index:5}
+.d-drawer.is-open{transform:none}
+.splash-m{position:absolute;inset:0;background:var(--gst-bg-invert);color:var(--gst-text-on-invert);display:flex;flex-direction:column}
+.splash-m__top{flex:1;display:grid;place-items:center;text-align:center}
+.splash-m svg{width:150px;height:auto;overflow:visible}
+.splash-m svg path{fill:none;stroke:currentColor;stroke-width:2;vector-effect:non-scaling-stroke}
+.splash-m svg [data-bolt]{stroke:var(--gst-eclair);stroke-width:3.5}
+.splash-m__w{font-family:var(--gst-font-display);font-size:4rem;letter-spacing:.06em;line-height:.9;margin-top:12px}
+.splash-m .gst-tag{color:var(--gst-text-on-invert);opacity:.8}
+.splash-m__form{background:var(--gst-bg-panel);color:var(--gst-text-primary);padding:22px 18px 26px;display:flex;flex-direction:column;gap:14px;border-top:var(--gst-frame-viewport) solid var(--gst-bg-frame)}
+.blocked{font-family:var(--gst-font-display);font-size:3.4rem;line-height:.85;color:var(--gst-state-danger-text);margin:0}
+.wiz-types{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.wiz-types label{display:flex;flex-direction:column;gap:4px;padding:10px;border:var(--gst-hairline) solid var(--gst-line-strong);cursor:pointer;background:var(--gst-bg-panel)}
+.wiz-types input{position:absolute;opacity:0}
+.wiz-types label:has(input:checked){border:var(--gst-border) solid var(--gst-line-brand);padding:9px}
+.wiz-types b{font-family:var(--gst-font-display);font-weight:400;font-size:1.3rem;line-height:1}
+.wiz-groups{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.wiz-groups div{position:relative;height:58px;border:var(--gst-hairline) solid var(--gst-line-hairline);display:flex;flex-direction:column;justify-content:space-between;padding:5px 6px;background:var(--gst-bg-panel)}
+.wiz-groups div b{font-family:var(--gst-font-display);font-weight:400;font-size:1.5rem;line-height:1;color:var(--gst-text-brand)}
+.wiz-groups div span{font-family:var(--gst-font-mono);font-size:8px;letter-spacing:.06em;text-transform:uppercase;color:var(--gst-text-secondary)}
+.wiz-groups div.is-off{opacity:.35;border-style:dashed}
+.ret-item{display:flex;flex-direction:column;gap:8px;padding:12px 0;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline)}
+.ret-item .gst-seg button{padding:0 9px;font-size:9.5px;letter-spacing:.1em}
+</style>
+</head>
+<body>
+<main id="main" class="doc-main">
+
+<header class="doc-head">
+  <span class="gst-tag gst-tag--accent" data-decode>.04 / ÉCRANS · HAUTE FIDÉLITÉ</span>
+  <h1 class="doc-head__title" data-rise>Écrans</h1>
+  <p class="doc-head__lead">Le système en situation, avec les données du Camp de Réjouissance 2026. Les écrans sont vivants : touchez, saisissez, validez.</p>
+  <dl class="doc-head__meta">
+    <div><dt class="gst-label">Desktop</dt><dd>1 440 × 900 · 6 écrans</dd></div>
+    <div><dt class="gst-label">Mobile</dt><dd>390 × 844 · 9 écrans</dd></div>
+    <div><dt class="gst-label">3D & vitrine</dt><dd><a href="roadmap.html">Roadmap</a> · <a href="bus.html">Bus volant</a> · <a href="index.html">Accueil</a></dd></div>
+    <div><dt class="gst-label">Critère</dt><dd>Programme de demain en &lt; 3 taps</dd></div>
+  </dl>
+</header>
+
+<div class="gst-tabs" role="tablist" id="filter" style="margin-bottom:var(--gst-space-5)"><button aria-selected="true" data-value="all">Tous</button><button aria-selected="false" data-value="socle">Socle</button><button aria-selected="false" data-value="log">.01 Logistique</button><button aria-selected="false" data-value="cpt">.02 Comptabilité</button><button aria-selected="false" data-value="cui">.03 Cuisine</button></div>
+
+<div id="screens"></div>
+</main>
+
+<script src="assets/js/gst-icons.js"></script>
+<script src="assets/js/gst-motion.js"></script>
+<script src="assets/js/gst-data.js"></script>
+<script src="assets/js/gst-components.js"></script>
+<script src="assets/js/gst-shell.js"></script>
+<script>
+(function () {
+  var GST = window.GST, D = window.GST_DATA;
+  var I = function (id, c) { return '<svg class="gst-icon ' + (c || "") + '" aria-hidden="true"><use href="#i-' + id + '"/></svg>'; };
+  var F = GST.fmt;
+  var CHECK = '<svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg>';
+
+  /* ── Chrome commun ─────────────────────────────────────────────────── */
+  function mTop(sync) {
+    sync = sync || ["", "Synchronisé"];
+    return '<div class="m-top"><span class="gst-topbar__count">J-21</span><div class="gst-topbar__name" style="flex:1;min-width:0"><b>Réjouissance 2026</b><span class="gst-tag" style="font-size:8.5px">ATTIKOUMÉ · 80</span></div><span class="gst-sync ' + sync[0] + '"><span class="gst-sync__dot"></span>' + sync[1] + '</span><button class="gst-icon-btn gst-icon-btn--ghost" aria-label="Plein soleil" style="width:40px;height:40px">' + I("sun-medium") + "</button></div>";
+  }
+  function mTabs(active, set) {
+    set = set || [["package", "Logist."], ["calculator", "Compta"], ["chef-hat", "Cuisine"], ["route", "Roadmap"], ["bus", "Bus"]];
+    return '<nav class="gst-tabbar m-tabs" aria-label="Modules">' + set.map(function (t, i) { return '<a href="#"' + (i === active ? ' aria-current="page"' : "") + ">" + I(t[0]) + t[1] + "</a>"; }).join("") + "</nav>";
+  }
+  function dRail(active) {
+    var items = [["layout-dashboard", ".00", "Tableau de bord"], ["package", ".01", "Logistique"], ["calculator", ".02", "Comptabilité"], ["chef-hat", ".03", "Cuisine"], ["route", ".04", "Roadmap"], ["bus", ".05", "Vitrine"]];
+    return '<aside class="d-rail"><div class="d-brand">' + GST.lockup(34) + "<b>GST GOVERNMENT</b></div><nav class=\"gst-rail\" aria-label=\"Modules\">" + items.map(function (it, i) {
+      return '<a href="#"' + (i === active ? ' aria-current="page"' : "") + '><span class="gst-rail__idx">' + it[1] + "</span>" + it[2] + "</a>";
+    }).join("") + '<div class="d-rail__sep"></div><a href="#"' + (active === 9 ? ' aria-current="page"' : "") + '><span class="gst-rail__idx">' + I("coins", "gst-icon--sm") + "</span>Base de prix</a><a href=\"#\"><span class=\"gst-rail__idx\">" + I("users", "gst-icon--sm") + "</span>Annuaire</a><a href=\"#\"><span class=\"gst-rail__idx\">" + I("history", "gst-icon--sm") + "</span>Journal</a></nav></aside>";
+  }
+  function dTop(crumbs, who) {
+    who = who || ["CA", "Codjo Agossou", "Chef de groupe"];
+    return '<header class="gst-topbar" style="height:64px;padding:0 24px"><div class="gst-topbar__camp"><span class="gst-topbar__count">J-21</span><div class="gst-topbar__name"><b>Réjouissance 2026</b><span class="gst-tag">05.08 → 18.08 · 80 PART.</span></div>' + I("chevron-down", "gst-icon--sm") + '</div><ol class="gst-crumb" style="margin-left:28px">' + crumbs.map(function (c, i) { return i === crumbs.length - 1 ? '<li aria-current="page">' + c + "</li>" : '<li><a href="#">' + c + "</a></li>"; }).join("") +
+      '</ol><span class="gst-topbar__sp"></span><span class="gst-sync"><span class="gst-sync__dot"></span>Synchronisé</span><button class="gst-icon-btn gst-icon-btn--ghost" aria-label="Plein soleil">' + I("sun-medium") + '</button><button class="gst-icon-btn gst-icon-btn--ghost" aria-label="Notifications">' + I("bell") + '</button><span class="gst-role"><span class="gst-avatar">' + who[0] + '</span><span style="display:flex;flex-direction:column;line-height:1.3"><b style="font-family:var(--gst-font-mono);font-size:12px;letter-spacing:.02em;color:var(--gst-text-primary)">' + who[1] + "</b>" + who[2] + "</span></span></header>";
+  }
+  function phone(id, html, cap, desc, mod) {
+    return '<div data-mod="' + mod + '"><div class="dev dev--phone"><span class="dev__dim dev__dim--w">390</span><span class="dev__dim dev__dim--h">844</span><div class="dev__screen" id="' + id + '">' + html + '</div></div><div class="phone-cap"><span class="gst-tag gst-tag--accent">' + cap[0] + "</span><b>" + cap[1] + "</b><p>" + desc + "</p></div></div>";
+  }
+  function desk(id, num, title, desc, mod, html) {
+    return '<section class="scr" data-mod="' + mod + '" id="s-' + id + '"><div class="scr__head"><b>' + num + "</b><h3>" + title + '</h3><span class="gst-tag">DESKTOP · 1440 × 900</span><p>' + desc + '</p></div><div class="fit fit-shell" data-fit="1440"><div class="d-app" id="' + id + '">' + html + "</div></div></section>";
+  }
+
+  /* ══ DESKTOP ═══════════════════════════════════════════════════════ */
+  var G = D.GROUPES;
+  var dash = dRail(0) + '<div class="d-main">' + dTop(["Tableau de bord"]) + '<div class="d-body">' +
+    '<div class="d-h"><div><span class="gst-tag gst-tag--accent">.00 / TABLEAU DE BORD · CHEF DE GROUPE</span><h2>Réjouissance 2026</h2><p>Départ dans 21 jours. Six groupes sur dix ont validé leur recensement.</p></div><div class="doc-row"><button class="gst-btn gst-btn--secondary">' + I("printer") + 'Export papier</button><button class="gst-btn gst-btn--primary">' + I("plus") + "Ouvrir un camp</button></div></div>" +
+    '<div class="d-kpis"><div class="gst-stat"><span class="gst-label">Budget consolidé</span><span class="gst-stat__value"><span data-k1>4 850 000</span><span class="gst-stat__unit">F CFA</span></span><span class="gst-stat__delta">Version A · non gelée</span></div><div class="gst-stat"><span class="gst-label">Encaissé</span><span class="gst-stat__value"><span data-k2>1 425 000</span></span><span class="gst-stat__delta">sur 3 650 000 attendus</span></div><div class="gst-stat"><span class="gst-label">Inscrits</span><span class="gst-stat__value"><span data-k3>57</span><span class="gst-stat__unit">/ 80</span></span><span class="gst-stat__delta is-up">+4 cette semaine</span></div><div class="gst-stat"><span class="gst-label">Recensement</span><span class="gst-stat__value"><span data-k4>6</span><span class="gst-stat__unit">/ 10 groupes</span></span><span class="gst-stat__delta">J-30 dépassé pour D</span></div></div>' +
+    '<div class="d-grid" style="grid-template-columns:2fr 1fr;flex:1">' +
+    '<div class="d-grid" style="grid-template-rows:auto 1fr">' +
+    '<div class="d-panel"><div class="d-panel__h"><h4>Rétroplanning</h4><span class="gst-tag">TYPE RÉJOUISSANCE · J-60 → J+10</span></div><div class="gst-timeline">' + [["J-60", "Ouverture", "done"], ["J-45", "Menu, inscriptions", "done"], ["J-30", "Recensement", "late"], ["J-21", "Budget consolidé", "now"], ["J-14", "Achats, devis", ""], ["J-7", "Seuils critiques", ""], ["J-1", "Pointage", ""], ["J+3", "Retour", ""], ["J+10", "Bilan", ""]].map(function (t) { return '<div class="gst-timeline__step is-' + t[2] + '"><i class="gst-timeline__node"></i><span class="gst-timeline__j">' + t[0] + '</span><span class="gst-timeline__txt">' + t[1] + "</span></div>"; }).join("") + "</div></div>" +
+    '<div class="d-panel"><div class="d-panel__h"><h4>Groupes logistiques</h4><a class="gst-btn gst-btn--ghost gst-btn--sm" href="#s-d2">Tout voir</a></div><div>' + G.filter(function (g) { return !g.pivot && !g.inverse; }).slice(0, 7).map(function (g) {
+      var pct = g.need ? Math.round(g.have / g.need * 100) : 0;
+      var st = g.statut === "validé" ? "success" : g.critique ? "danger" : g.statut === "soumis" ? "info" : "warning";
+      return '<div class="mini-grp"><b>' + g.l + "</b><span>" + g.nom + (g.renforce ? ' <span class="gst-badge gst-badge--renforce">Renforcé</span>' : "") + '</span><div class="gst-need' + (g.critique ? " is-critical" : "") + '"><div class="gst-need__bar"><i class="gst-need__have" style="width:' + pct + '%"></i><i class="gst-need__miss" style="left:' + pct + "%;width:" + (100 - pct) + '%"></i>' + (g.seuil ? '<i class="gst-need__seuil" style="left:' + Math.round(g.seuil / g.need * 100) + '%"></i>' : "") + '</div></div><span class="gst-badge gst-badge--' + st + '">' + g.statut + '</span><span class="gst-num">' + F(g.cost) + "</span></div>";
+    }).join("") + "</div></div></div>" +
+    '<div class="d-grid" style="grid-template-rows:auto auto 1fr">' +
+    '<div class="gst-alert gst-alert--critical" data-crit-dash><svg class="gst-icon gst-alert__ico"><use href="#i-heart-pulse"/></svg><div><div class="gst-alert__title">D · Santé — seuil critique</div><div class="gst-alert__text">Pharmacie de camp : 102 / 120. Le départ sera bloqué à J-7.</div></div><span></span></div>' +
+    '<div class="gst-alert gst-alert--warning"><svg class="gst-icon gst-alert__ico"><use href="#i-truck"/></svg><div><div class="gst-alert__title">G · Transport</div><div class="gst-alert__text">Capacité des véhicules : 78 places pour 80 participants.</div></div><span></span></div>' +
+    '<div class="d-panel"><div class="d-panel__h"><h4>À valider</h4><span class="gst-badge gst-badge--brand">4</span></div>' +
+    [["coins", "3 prix proposés par le hook", "Base de prix"], ["package", "Ajout terrain : seaux 20 L", "A · Matériel"], ["receipt", "Dépense 412 000 · 2ᵉ signature", "Comptabilité"], ["chef-hat", "Plat proposé : Djenkoumé", "Cuisine"]].map(function (v) {
+      return '<div class="gst-expense" style="grid-template-columns:40px 1fr auto"><span class="gst-expense__ico">' + I(v[0]) + '</span><div><div class="gst-expense__title" style="font-size:.98rem">' + v[1] + '</div><div class="gst-expense__meta">' + v[2] + '</div></div><button class="gst-icon-btn gst-icon-btn--ghost" aria-label="Ouvrir">' + I("chevron-right") + "</button></div>";
+    }).join("") + "</div></div></div></div></div>";
+
+  var lgcCard = function (g) {
+    var pct = g.need ? Math.round(g.have / g.need * 100) : 0;
+    var st = g.statut === "validé" ? "success" : g.critique ? "danger" : g.statut === "soumis" || g.statut === "consolidé" ? "info" : g.statut === "à venir" ? "" : "warning";
+    var badge = g.renforce ? '<span class="gst-badge gst-badge--renforce">Renforcé</span>' : g.critique ? '<span class="gst-badge gst-badge--danger">Seuil</span>' : g.inverse ? '<span class="gst-badge">Publié</span>' : "";
+    var body = g.pivot ? '<div class="gst-label">Consolide 8 groupes</div><div class="gst-gauge__bar"><i class="gst-gauge__fill" style="width:100%"></i></div>' :
+      g.inverse ? '<div class="gst-label">Ouvre au retour · J+3</div><div class="gst-need"><div class="gst-need__bar" style="border-style:dashed"></div></div>' :
+      '<div class="gst-need' + (g.critique ? " is-critical" : "") + '"><div class="gst-need__bar"><i class="gst-need__have" style="width:' + pct + '%"></i><i class="gst-need__miss" style="left:' + pct + "%;width:" + (100 - pct) + '%"></i>' + (g.seuil ? '<i class="gst-need__seuil" style="left:' + Math.round(g.seuil / g.need * 100) + '%"></i>' : "") + '</div><div class="gst-need__legend"><span>' + g.have + " / " + g.need + "</span><span>" + g.lignes + " lignes</span></div></div>";
+    return '<article class="gst-card gst-lgc gst-card--interactive' + (g.critique ? " is-critical" : "") + '" data-trace-box style="min-height:230px"><div class="gst-lgc__head"><span class="gst-lgc__letter">' + g.l + "</span>" + badge + '</div><h4 class="gst-lgc__name">' + g.nom + '</h4><span class="gst-tag">' + g.resp.toUpperCase() + "</span>" + body + '<div class="gst-lgc__cost"><span class="gst-badge gst-badge--' + st + '">' + g.statut + "</span><span>" + (g.cost ? F(g.cost) : "—") + "</span></div></article>";
+  };
+  var logi = dRail(1) + '<div class="d-main">' + dTop(["Réjouissance 2026", ".01 Logistique"], ["KA", "Komi Ayité", "Commissaire logistique"]) + '<div class="d-body">' +
+    '<div class="d-h"><div><span class="gst-tag gst-tag--accent">.01 / LOGISTIQUE · 10 GROUPES DE GESTION</span><h2>Logistique</h2></div><dl class="gst-spec gst-spec--inline" style="margin-bottom:6px"><div><dt class="gst-label">Lignes</dt><dd>279</dd></div><div><dt class="gst-label">Coût du manquant</dt><dd>4 850 000 F CFA</dd></div><div><dt class="gst-label">Ajouts terrain</dt><dd>2 à valider</dd></div></dl></div>' +
+    '<div class="gst-tabs" role="tablist"><button aria-selected="true">Tous · 10</button><button aria-selected="false">Renforcés · 3</button><button aria-selected="false">Critiques · 1</button><button aria-selected="false">À valider · 2</button></div>' +
+    '<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px">' + G.map(lgcCard).join("") + "</div></div></div>";
+
+  var eco = dRail(1) + '<div class="d-main">' + dTop(["Réjouissance 2026", ".01 Logistique", "F · Économique"], ["CA", "Codjo Agossou", "Resp. groupe F"]) + '<div class="d-body">' +
+    '<div class="d-h"><div><span class="gst-tag gst-tag--accent">.01 / F · ÉCONOMIQUE · <span class="gst-badge gst-badge--renforce">Renforcé</span></span><h2>Consolidation</h2><p>Le groupe pivot ne recense rien : il agrège les huit autres et simule l\'effectif.</p></div>' +
+    '<div class="doc-stack" style="align-items:flex-end;gap:10px"><span class="gst-label">Effectif simulé</span><div class="doc-row"><div class="gst-stepper" role="group" aria-label="Effectif" data-eco-step><button type="button" aria-label="−5">' + I("minus", "gst-icon--lg") + '</button><span class="gst-stepper__val">80</span><button type="button" aria-label="+5">' + I("plus", "gst-icon--lg") + "</button></div></div></div></div>" +
+    '<div class="d-grid" style="grid-template-columns:420px 1fr;flex:1">' +
+    '<div class="d-panel" data-eco-src><div class="d-panel__h"><h4>Par groupe</h4><span class="gst-tag">VALEUR · PART</span></div>' + D.POSTES.map(function (p) {
+      return '<div class="post"><span>' + p.nom + '</span><span class="n" data-eco-p="' + p.id + '">' + F(p.prevu) + "</span></div>";
+    }).join("") + '<div class="post" style="border-top:var(--gst-border) solid var(--gst-text-primary);font-weight:600"><span>Total consolidé</span><span class="n" data-eco-total>4 850 000</span></div><button class="gst-btn gst-btn--eclair" style="margin-top:auto">' + I("zap") + "Transmettre à la Comptabilité</button></div>" +
+    '<div class="scen">' + [60, 80, 100].map(function (n) {
+      return '<div class="scen__col' + (n === 80 ? " is-on" : "") + '" data-scen="' + n + '"><span class="gst-tag">SCÉNARIO / ' + n + ' PARTICIPANTS</span><div><span class="gst-label">Budget</span><div class="big" data-s="budget">0</div></div><dl class="gst-spec gst-spec--rules"><dt>Par personne</dt><dd data-s="pp">0</dd><dt>Reste à financer</dt><dd data-s="reste">0</dd><dt>Sachets d\'eau</dt><dd data-s="eau">0</dd><dt>Portions</dt><dd data-s="portions">0</dd></dl><div class="gst-gauge"><div class="gst-gauge__bar"><i class="gst-gauge__fill" data-s="gauge"></i></div><div class="gst-gauge__row"><span>Capacité bus 82</span><span data-s="bus"></span></div></div></div>';
+    }).join("") + "</div></div></div></div>";
+
+  var compta = dRail(2) + '<div class="d-main">' + dTop(["Réjouissance 2026", ".02 Comptabilité"], ["FH", "Fifamè Hounkpatin", "Trésorière"]) + '<div class="d-body" id="cpt-body">' +
+    '<div class="d-h"><div><span class="gst-tag gst-tag--accent">.02 / COMPTABILITÉ · J.14 CLÔTURE</span><h2>Version A | B</h2></div><div class="doc-row"><button class="gst-btn gst-btn--secondary">' + I("download") + 'Bilan de clôture</button><button class="gst-btn gst-btn--primary">' + I("plus") + "Saisir</button></div></div>" +
+    '<div class="ab"><div class="d-panel"><div class="d-panel__h"><h4>A · Test supervisé</h4><span class="gst-badge gst-badge--ink">Gelée 21.07</span></div>' + D.POSTES.map(function (p) { return '<div class="post"><span>' + p.nom + '</span><span class="n">' + F(p.prevu) + "</span></div>"; }).join("") + '<div class="post" style="font-weight:600;border-top:var(--gst-border) solid var(--gst-text-primary)"><span>Total prévu</span><span class="n">4 850 000</span></div></div>' +
+    '<div class="ab__mid"><span class="gst-tag">ÉCART PRÉVU / RÉEL</span><span class="big"><span data-ecart>−4,8</span>%</span><span class="gst-data" data-ecart2>−230 600 F CFA</span><span class="gst-badge gst-badge--success">Objectif &lt; 10 % atteint</span><p class="gst-field__help" style="margin:8px 0 0">2 postes en dérive : Transport +10,4 %, Social +15,0 %</p></div>' +
+    '<div class="d-panel"><div class="d-panel__h"><h4>B · Live supervisé</h4><span class="gst-badge gst-badge--brand">J.14</span></div>' + D.POSTES.map(function (p) {
+      var pct = p.reel / p.prevu, over = pct > 1;
+      return '<div class="post" style="grid-template-columns:1fr 80px 110px"><span>' + p.nom + '</span><div class="gst-gauge__bar" style="height:8px' + (over ? ";border-color:var(--gst-state-danger)" : "") + '"><i class="gst-gauge__fill' + (over ? " is-over" : "") + '" style="width:' + Math.min(100, pct * 100) + '%"></i></div><span class="n"' + (pct > 1.1 ? ' style="color:var(--gst-state-danger-text)"' : "") + ">" + F(p.reel) + "</span></div>";
+    }).join("") + '<div class="post" style="font-weight:600;border-top:var(--gst-border) solid var(--gst-text-primary);grid-template-columns:1fr 110px"><span>Total réel</span><span class="n">4 619 400</span></div></div></div>' +
+    '<div class="d-panel" style="flex:1"><div class="d-panel__h"><h4>Dépense cumulée</h4><div class="gst-legend"><span><i class="l-planned"></i>Prévu</span><span><i class="l-actual"></i>Réel</span><span>Cliquez un point → mouvements</span></div></div><div id="cpt-chart" style="max-width:860px"></div></div>' +
+    '<aside class="d-drawer" id="cpt-drawer" aria-label="Mouvements du jour"><div class="gst-drawer__head"><span class="gst-tag" data-dr-tag>J.04 / MOUVEMENTS</span><button class="gst-icon-btn gst-icon-btn--ghost" data-dr-close aria-label="Fermer">' + I("x") + '</button></div><div class="gst-drawer__body" data-dr-body></div></aside>' +
+    "</div></div>";
+
+  var cuisine = dRail(3) + '<div class="d-main">' + dTop(["Réjouissance 2026", ".03 Cuisine", "Intendance"], ["EF", "Elom Fiagbé", "Responsable cuisine"]) + '<div class="d-body">' +
+    '<div class="d-h"><div><span class="gst-tag gst-tag--accent">.03 / CUISINE · ESPACE INTENDANCE</span><h2>Arbitrage du menu</h2><p>Les choix sont clos depuis J-30 : 74 jeunes ont voté, 23 plats proposés.</p></div><button class="gst-btn gst-btn--primary">' + I("arrow-right") + "Envoyer au groupe Alimentaire</button></div>" +
+    '<div class="d-grid" style="grid-template-columns:1fr 1.25fr;flex:1"><div class="d-panel"><div class="d-panel__h"><h4>Proposition · sélection</h4><div class="gst-legend"><span><i class="l-bar-a"></i>Proposé</span><span><i class="l-bar-b"></i>Choisi</span></div></div><div class="doc-stack" style="gap:10px" id="cui-rates"></div></div>' +
+    '<div class="d-grid" style="grid-template-rows:auto 1fr"><div class="d-panel"><div class="d-panel__h"><h4>Menu · 14 jours</h4><span class="gst-tag">J.08 QUARTIER LIBRE · J.10 SPÉCIALITÉS</span></div><div class="menu-grid"><span class="h"></span>' +
+    D.PROGRAMME.map(function (p) { return '<span class="h">J.' + String(p.j).padStart(2, "0") + "</span>"; }).join("") +
+    ["MATIN", "MIDI", "SOIR"].map(function (sv, k) { return '<span class="h" style="text-align:left">' + sv + "</span>" + D.PROGRAMME.map(function (p) { var cls = p.sansCuisine ? "off" : p.specialite && k === 1 ? "sp" : ""; return '<span class="' + cls + '" title="' + p.menu[k] + '">' + (p.sansCuisine ? "—" : p.menu[k].split(" ")[0]) + "</span>"; }).join(""); }).join("") +
+    '</div></div><div class="d-panel"><div class="d-panel__h"><h4>Liste de courses chiffrée</h4><span class="gst-tag">80 PERS. · MARGE 5 %</span></div><div class="gst-table-wrap" style="border:0"><table class="gst-table gst-table--compact"><thead><tr><th>Article</th><th class="n">Qté</th><th>Unité</th><th class="n">Prix</th><th class="n">Total</th></tr></thead><tbody>' +
+    [["Riz local", 39, "sac 50 kg", 32000], ["Farine de maïs", 24, "sac 25 kg", 14500], ["Huile rouge", 9, "bidon 20 L", 26000], ["Pâte d'arachide", 60, "kg", 1800], ["Poisson fumé", 45, "kg", 3500], ["Sachets d'eau", 6720, "sachet", 25], ["Tomate", 84, "kg", 900]].map(function (r) { return "<tr><td>" + r[0] + '</td><td class="n">' + F(r[1]) + "</td><td>" + r[2] + '</td><td class="n">' + F(r[3]) + '</td><td class="n">' + F(r[1] * r[3]) + "</td></tr>"; }).join("") +
+    '</tbody><tfoot><tr><td>Total transmis</td><td></td><td></td><td></td><td class="n">1 940 000</td></tr></tfoot></table></div></div></div></div></div></div>';
+
+  var PRIX = [["Riz local 50 kg", "Céréales", "sac", 32000, "Adakpamé", "12.09.26", "ok"], ["Riz local 50 kg", "Céréales", "sac", 34560, "Adakpamé · hook", "02.10.26", "sug"], ["Huile rouge 20 L", "Huiles", "bidon", 26000, "Hédzranawoé", "14.02.26", "old"], ["Farine de maïs 25 kg", "Céréales", "sac", 14500, "Assigamé", "04.09.26", "ok"], ["Sachets d'eau (lot 30)", "Eau", "lot", 750, "Grossiste Bè", "28.09.26", "ok"], ["Gasoil", "Carburant", "litre", 680, "Station Agoè", "01.10.26", "ok"], ["Gasoil", "Carburant", "litre", 710, "Hook · presse locale", "03.10.26", "sug"], ["Location bus 70 places", "Transport", "jour", 185000, "Transp. Kpodar", "11.03.26", "old"], ["Bâche 6 × 4 m", "Matériel", "pièce", 7500, "Grand marché", "20.08.26", "ok"], ["Paracétamol 500 mg", "Santé", "boîte", 600, "Pharmacie Bè", "15.09.26", "ok"], ["Poisson fumé", "Protéines", "kg", 3500, "Adakpamé", "10.09.26", "ok"], ["Pâte d'arachide", "Condiments", "kg", 1800, "Assigamé", "22.03.26", "old"]];
+  var prix = dRail(9) + '<div class="d-main">' + dTop(["Socle", "Base de prix"], ["KA", "Komi Ayité", "Commissaire logistique"]) + '<div class="d-body">' +
+    '<div class="d-h"><div><span class="gst-tag gst-tag--accent">SOCLE / BASE DE PRIX DE RÉFÉRENCE</span><h2>Base de prix</h2><p>412 articles · 3 suggestions du hook en attente · 27 prix de plus de six mois.</p></div><div class="doc-row"><div class="gst-control" style="width:320px"><span class="gst-control__affix gst-control__affix--start">' + I("search") + '</span><input placeholder="Rechercher un article…" aria-label="Rechercher"></div><button class="gst-btn gst-btn--primary">' + I("plus") + "Relevé de prix</button></div></div>" +
+    '<div class="d-grid" style="grid-template-columns:1fr 380px;flex:1"><div class="gst-table-wrap"><table class="gst-table"><thead><tr><th>Article</th><th>Catégorie</th><th>Unité</th><th class="n">Prix</th><th>Marché / source</th><th>Relevé</th><th>Statut</th></tr></thead><tbody>' +
+    PRIX.map(function (r) { var b = r[6] === "ok" ? '<span class="gst-badge gst-badge--success">Validé</span>' : r[6] === "sug" ? '<span class="gst-badge gst-badge--info">Suggestion</span>' : '<span class="gst-badge gst-badge--warning">Périmé &gt; 6 mois</span>'; return "<tr" + (r[6] === "sug" ? ' style="background:var(--gst-state-info-bg)"' : "") + "><td>" + r[0] + "</td><td>" + r[1] + "</td><td>" + r[2] + '</td><td class="n">' + F(r[3]) + "</td><td>" + r[4] + "</td><td>" + r[5] + "</td><td>" + b + "</td></tr>"; }).join("") +
+    '</tbody></table></div><div class="doc-stack"><div class="gst-hook"><svg class="gst-icon gst-icon--lg gst-hook__ico"><use href="#i-lightbulb"/></svg><div class="gst-hook__body"><span class="gst-hook__src">Riz local 50 kg · Adakpamé · 02.10</span><span class="gst-hook__vals"><s>32 000</s> → <b>34 560</b> · +8 %</span></div><div class="gst-hook__actions" style="grid-column:1/-1"><button class="gst-btn gst-btn--brand gst-btn--sm">Valider</button><button class="gst-btn gst-btn--ghost gst-btn--sm">Corriger</button><button class="gst-btn gst-btn--ghost gst-btn--sm">Rejeter</button></div></div>' +
+    '<div class="gst-alert"><svg class="gst-icon gst-alert__ico"><use href="#i-shield-check"/></svg><div><div class="gst-alert__title">Le hook propose, un humain valide</div><div class="gst-alert__text">Une suggestion n\'entre dans aucun calcul avant validation.</div></div><span></span></div>' +
+    '<div class="d-panel"><div class="d-panel__h"><h4>Riz local · historique</h4><span class="gst-tag">F CFA / SAC</span></div><svg viewBox="0 0 340 120" class="gst-chart" data-draw><line class="axis" x1="20" y1="100" x2="330" y2="100"/><line class="axis" x1="20" y1="10" x2="20" y2="100"/><path class="actual" d="M20 80 L70 76 L120 70 L170 72 L220 60 L270 58 L320 40"/><text class="tick-label" x="20" y="116">2024</text><text class="tick-label" x="280" y="116">2026</text></svg></div></div></div></div></div>';
+
+  /* ══ MOBILE ════════════════════════════════════════════════════════ */
+  var p1 = '<div class="splash-m"><div class="splash-m__top"><div><svg viewBox="0 -18 120 78" aria-hidden="true"><path data-crest d="' + GST.CREST_D + '"/><path data-bolt d="' + GST.BOLT_D + '"/></svg><div class="splash-m__w" data-w>TONNERRE</div><span class="gst-tag" data-s>GST GOVERNMENT · DISTRICT GOLFE</span></div></div>' +
+    '<form class="splash-m__form" onsubmit="return false"><span class="gst-tag">.00 / CONNEXION</span><div class="gst-field"><label class="gst-field__label" for="lg1"><span>Identifiant</span></label><div class="gst-control"><input id="lg1" value="selom.akakpo" autocomplete="username"></div></div><div class="gst-field"><label class="gst-field__label" for="lg2"><span>Mot de passe</span><a href="#" class="gst-field__help">Oublié ?</a></label><div class="gst-control"><input id="lg2" type="password" value="motdepasse" autocomplete="current-password"></div></div><button class="gst-btn gst-btn--primary gst-btn--lg gst-btn--block">Se connecter</button><span class="gst-field__help" style="text-align:center">Fonctionne hors ligne après la première connexion.</span></form></div>';
+
+  var p2 = mTop() + '<div class="m-body"><div><span class="gst-tag">ESPACE JEUNE · TROUPE DES ÉCLAIREURS</span><h4 class="m-title" style="margin-top:6px">Salut Sélom</h4></div>' +
+    '<div class="m-card"><div class="m-row"><span class="gst-tag gst-tag--accent">REPAS À CHOISIR</span><span class="gst-badge gst-badge--warning">Clôture 18:00</span></div><div class="m-row"><span style="font-family:var(--gst-font-display);font-size:1.7rem;line-height:1">3 services · J.06</span><button class="gst-btn gst-btn--primary gst-btn--sm">Choisir</button></div></div>' +
+    '<div class="m-card"><span class="gst-tag">MA ROADMAP</span><div class="gst-station is-now" style="padding:10px"><span class="gst-station__j">J.05</span><div><span class="gst-tag gst-tag--accent">AUJOURD\'HUI</span><div class="gst-ui">Service communautaire</div></div></div><div class="gst-station is-future" style="padding:10px"><span class="gst-station__j">J.06</span><div><span class="gst-tag">DEMAIN · 06:00</span><div class="gst-ui">Hike — départ</div></div></div></div>' +
+    '<div class="m-card"><div class="m-row"><span class="gst-tag">MON INSCRIPTION</span><span class="gst-badge gst-badge--success">Place garantie</span></div><div class="m-row"><div style="display:flex;gap:12px;align-items:center"><span class="gst-seat gst-seat--guaranteed"><i class="gst-seat__fill"></i><span>23</span></span><div><div class="gst-ui">Siège 23</div><div class="gst-field__help">25 000 / 25 000 F CFA</div></div></div><a class="gst-btn gst-btn--ghost gst-btn--sm" href="bus.html">Le bus</a></div></div></div>' +
+    mTabs(0, [["layout-dashboard", "Accueil"], ["utensils", "Repas"], ["route", "Roadmap"], ["bus", "Bus"], ["user", "Profil"]]);
+
+  var p3 = mTop(["is-offline", "Hors ligne"]) + '<div class="m-body"><ol class="gst-crumb"><li><a href="#">.02 Compta</a></li><li aria-current="page">Nouvelle dépense</li></ol><h4 class="m-title">Nouvelle dépense</h4>' +
+    '<div class="gst-field"><label class="gst-field__label" for="dp1"><span>Montant</span><span class="gst-field__req">requis</span></label><div class="gst-control gst-control--money" style="min-height:64px"><input id="dp1" value="18 500" inputmode="numeric" style="font-size:1.6rem;min-height:62px" data-dp-amt><span class="gst-control__affix">F CFA</span></div></div>' +
+    '<div class="gst-field"><label class="gst-field__label" for="dp2"><span>Poste</span></label><div class="gst-control"><select id="dp2"><option>Alimentaire</option><option>Transport</option><option>Activités</option><option>Santé</option></select>' + I("chevron-down", "gst-control__chev") + '</div></div>' +
+    '<div class="gst-field"><label class="gst-field__label" for="dp3"><span>Activité</span></label><div class="gst-control"><select id="dp3"><option>J.05 — Service communautaire</option><option>J.05 — Intendance</option></select>' + I("chevron-down", "gst-control__chev") + '</div></div>' +
+    '<button type="button" class="gst-photo" data-dp-photo><span class="gst-photo__thumb">' + I("camera", "gst-icon--lg") + '</span><span style="text-align:left"><span class="gst-ui" style="display:block">Photographier le reçu</span><span class="gst-field__help">Obligatoire au-delà de 5 000 F CFA</span></span></button>' +
+    '<button class="gst-btn gst-btn--primary gst-btn--lg gst-btn--block" data-dp-save style="margin-top:auto">Enregistrer la dépense<span class="gst-btn__trace"></span></button><span class="gst-field__help" style="text-align:center" data-dp-note>Hors ligne : enregistrée sur l\'appareil, synchronisée au retour du réseau.</span></div>' + mTabs(1);
+
+  var p4 = mTop(["is-pending", "2 en file"]) + '<div class="m-body"><span class="gst-tag gst-tag--accent">J-7 / CONTRÔLE DES SEUILS CRITIQUES</span><h4 class="blocked">Départ<br>bloqué</h4><p style="margin:0;color:var(--gst-text-secondary)">Deux conditions empêchent le départ du convoi. Elles doivent être levées avant J-1.</p>' +
+    '<div class="gst-card is-critical" data-p4-card style="display:flex;flex-direction:column;gap:10px"><div class="m-row"><span class="gst-tag">D · SANTÉ / PHARMACIE</span><i class="gst-reticle gst-reticle--brand gst-reticle--lg" data-p4-o></i></div><div class="m-row"><span style="font-family:var(--gst-font-display);font-size:2.4rem;line-height:1;color:var(--gst-state-danger-text)">102 / 120</span><span class="gst-badge gst-badge--danger">−18 kits</span></div><div class="gst-need is-critical"><div class="gst-need__bar"><i class="gst-need__have" style="width:73%"></i><i class="gst-need__miss" style="left:73%;width:27%"></i><i class="gst-need__seuil" style="left:86%"></i></div></div></div>' +
+    '<div class="m-list"><div><div class="m-row"><span class="gst-ui">Autorisations parentales</span><span class="gst-badge gst-badge--danger">76 / 80</span></div></div><div><div class="m-row"><span class="gst-ui">Responsable santé désigné</span><span class="gst-badge gst-badge--success">Dr Atayi</span></div></div><div><div class="m-row"><span class="gst-ui">Eau potable chargée</span><span class="gst-badge gst-badge--success">6 720</span></div></div></div>' +
+    '<button class="gst-btn gst-btn--primary gst-btn--lg gst-btn--block" style="margin-top:auto">Ouvrir le groupe Santé</button></div>' + mTabs(0);
+
+  var p5 = mTop() + '<div class="m-body"><span class="gst-tag">.02 / COMPTES DU JOUR</span><h4 class="m-title">J.04 · 08.08</h4><div class="m-card" data-p5-card style="min-height:150px"><dl class="gst-spec gst-spec--rules" style="grid-template-columns:auto 1fr"><dt>Dépensé</dt><dd class="gst-num">173 000 F CFA</dd><dt>Entrées</dt><dd class="gst-num">50 000 F CFA</dd><dt>Solde théorique</dt><dd class="gst-num">412 500 F CFA</dd><dt>Caisse comptée</dt><dd class="gst-num">412 500 F CFA</dd><dt>Écart</dt><dd class="gst-num" style="color:var(--gst-state-success-text)">0</dd></dl></div>' +
+    '<div class="m-card"><span class="gst-tag">PAR ACTIVITÉ</span><div class="doc-stack" style="gap:8px">' + [["Sortie Togoville", 146500], ["Intendance", 12000], ["Santé", 14500]].map(function (a) { return '<div class="gst-gauge"><div class="gst-gauge__row"><span>' + a[0] + "</span><span>" + F(a[1]) + '</span></div><div class="gst-gauge__bar" style="height:8px"><i class="gst-gauge__fill" style="width:' + (a[1] / 173000 * 100) + '%"></i></div></div>'; }).join("") + "</div></div>" +
+    '<button class="gst-btn gst-btn--brand gst-btn--lg gst-btn--block" data-p5-stop style="margin-top:auto">Arrêter la journée</button><span class="gst-field__help" style="text-align:center">La journée close ne se modifie plus sans trace.</span></div>' + mTabs(1);
+
+  var dishes = D.PLATS.filter(function (p) { return p.service === "midi"; }).slice(0, 3);
+  var p6 = mTop() + '<div class="m-body"><span class="gst-tag">.03 / MES REPAS · J.06</span><h4 class="m-title">Choisis ton midi</h4><div class="gst-tabs" role="tablist" style="margin:0 -16px;padding:0 16px"><button aria-selected="false">Matin ✓</button><button aria-selected="true">Midi</button><button aria-selected="false">Soir</button></div>' +
+    '<div class="gst-alert" style="padding:10px 12px"><svg class="gst-icon gst-alert__ico">' + '<use href="#i-shield-check"/></svg><div><div class="gst-alert__text" style="margin:0;font-size:.9rem">Allergie arachide déclarée : 1 plat est masqué pour toi.</div></div><span></span></div>' +
+    '<div class="doc-stack" style="gap:10px">' + dishes.map(function (d, i) {
+      return '<article class="gst-dish' + (i === 0 ? " is-chosen" : "") + '" style="flex-direction:row" data-p6-dish><div class="gst-dish__plate" style="aspect-ratio:auto;width:92px;border-bottom:0;border-right:var(--gst-hairline) solid var(--gst-line-hairline)"><span class="gst-fleur">⚜</span><span class="gst-dish__check" style="width:26px;height:26px;top:6px;right:6px">' + I("check", "gst-icon--sm") + '</span></div><div class="gst-dish__body" style="padding:10px 12px;flex:1"><h4 class="gst-dish__name" style="font-size:1.35rem">' + d.nom + '</h4><span class="gst-dish__ing">' + d.ing.join(" · ") + "</span></div></article>";
+    }).join("") + '</div><button class="gst-btn gst-btn--ghost gst-btn--sm" style="align-self:flex-start">' + I("plus", "gst-icon--sm") + "Proposer un plat</button></div>" + mTabs(1, [["layout-dashboard", "Accueil"], ["utensils", "Repas"], ["route", "Roadmap"], ["bus", "Bus"], ["user", "Profil"]]);
+
+  var p7 = mTop(["is-pending", "1 en file"]) + '<div class="m-body"><ol class="gst-crumb"><li><a href="#">.01 Logistique</a></li><li aria-current="page">A · Matériel</li></ol><div class="m-row"><h4 class="m-title">A · Matériel</h4><span class="gst-badge gst-badge--success">Validé</span></div>' +
+    '<div class="m-list">' + [["Bâches 6 × 4 m", 8, 5, ""], ["Cordes 8 mm", 240, 120, "m"], ["Tentes 6 places", 14, 14, ""], ["Djembés", 6, 6, ""], ["Seaux 20 L", 12, 7, "", 1]].map(function (r) {
+      var pct = Math.round(r[2] / r[1] * 100);
+      return '<div' + (r[4] ? ' class="is-new"' : "") + '><div class="m-row"><span class="gst-ui">' + r[0] + (r[4] ? ' <span class="gst-badge gst-badge--warning">Ajout terrain</span>' : "") + '</span><span class="gst-data">' + r[2] + " / " + r[1] + " " + r[3] + '</span></div><div class="gst-need"><div class="gst-need__bar" style="height:9px"><i class="gst-need__have" style="width:' + pct + '%"></i><i class="gst-need__miss" style="left:' + pct + "%;width:" + (100 - pct) + '%"></i></div></div></div>';
+    }).join("") + '</div><button class="gst-btn gst-btn--secondary gst-btn--block">' + I("plus") + 'Ajouter un article</button><div class="m-row" style="margin-top:auto;border-top:var(--gst-border) solid var(--gst-text-primary);padding-top:10px"><span class="gst-label">Coût du manquant</span><span style="font-family:var(--gst-font-display);font-size:2rem;line-height:1">520 000</span></div></div>' + mTabs(0);
+
+  var p8 = mTop(["", "Synchronisé"]) + '<div class="m-body"><span class="gst-tag gst-tag--accent">OUVERTURE DE CAMP · ÉTAPE 3 / 6</span><ol class="gst-stepper-nav" style="padding:0;margin:0"><li class="is-done" style="min-width:0"><b>.01</b></li><li class="is-done" style="min-width:0"><b>.02</b></li><li class="is-current" style="min-width:0"><b>.03</b></li><li style="min-width:0"><b>.04</b></li><li style="min-width:0"><b>.05</b></li><li style="min-width:0"><b>.06</b></li></ol><h4 class="m-title">Type & groupes</h4>' +
+    '<div class="wiz-types" role="radiogroup" aria-label="Type de camp">' + [["rej", "Réjouissance", "2 sem. · J-60", 1], ["sur", "Survie", "3 j · J-14"], ["for", "Formation", "3 j · J-21"], ["mis", "Mission", "1 j · J-7"]].map(function (t) { return '<label><input type="radio" name="wt" value="' + t[0] + '"' + (t[3] ? " checked" : "") + "><b>" + t[1] + '</b><span class="gst-field__help">' + t[2] + "</span></label>"; }).join("") + "</div>" +
+    '<span class="gst-label">Groupes ouverts automatiquement</span><div class="wiz-groups" data-wiz-groups>' + G.map(function (g) { return '<div data-g="' + g.l + '"><b>' + g.l + "</b><span>" + g.nom + "</span></div>"; }).join("") + '</div><span class="gst-field__help" data-wiz-note>Réjouissance : les huit groupes de recensement, plus F (consolidation) et H (retours).</span>' +
+    '<div class="m-row" style="margin-top:auto"><button class="gst-btn gst-btn--ghost">Retour</button><button class="gst-btn gst-btn--primary gst-btn--lg">Continuer</button></div></div>';
+
+  var p9 = mTop(["is-offline", "Hors ligne"]) + '<div class="m-body"><span class="gst-tag">H · RETOURS / J+3 · LOGISTIQUE INVERSÉE</span><h4 class="m-title">Inventaire de retour</h4><div class="m-row"><span class="gst-label">Pointé 38 / 64</span><span class="gst-badge gst-badge--danger">Écart · 3</span></div><div class="gst-gauge__bar" style="height:8px"><i class="gst-gauge__fill" style="width:59%"></i></div>' +
+    [["Tentes 6 places", "14 parties · 14 revenues", 0], ["Bâches 6 × 4 m", "8 parties · 8 revenues", 1], ["Djembés", "6 partis · 5 revenus", 3], ["Lampes frontales", "24 parties · 22 revenues", 2]].map(function (r, i) {
+      return '<div class="ret-item"><div class="m-row"><span class="gst-ui">' + r[0] + '</span><span class="gst-field__help">' + r[1] + '</span></div><div class="gst-seg gst-seg--sm" role="group" aria-label="État · ' + r[0] + '">' + ["Intact", "Usé", "Endom.", "Perdu"].map(function (s, k) { return '<button type="button" aria-pressed="' + (k === r[2]) + '">' + s + "</button>"; }).join("") + "</div></div>";
+    }).join("") + '<button class="gst-btn gst-btn--primary gst-btn--lg gst-btn--block" style="margin-top:auto">Valider le pointage</button></div>' + mTabs(0);
+
+  /* ── Assemblage ─────────────────────────────────────────────────────── */
+  var html = "";
+  html += desk("d1", "01", "Tableau de bord · chef de groupe", "KPI en odomètres, alertes (un seul Éclair : le seuil santé), jalons du rétroplanning sur une frise hairline, validations en attente.", "socle", dash);
+  html += desk("d2", "02", "Logistique · les 10 groupes", "Grille A → J. RENFORCÉ pour B, F, G en marqueur Éclair de 6 px ; D en contour critique ; besoin / disponible / manquant par groupe. Les cartes se tracent à l'apparition (M1).", "log", logi);
+  html += desk("d3", "03", "Groupe Économique · simulation", "Consolidation des huit groupes, scénarios 60 / 80 / 100 côte à côte. Changez l'effectif : l'onde M5 traverse les colonnes.", "log", eco);
+  html += desk("d4", "04", "Comptabilité · vue double A | B", "Prévisionnel gelé contre réel, écart en grand odomètre, courbe M9 : cliquez un point pour ouvrir les mouvements du jour.", "cpt", compta);
+  html += desk("d5", "05", "Cuisine · espace intendance", "Taux de proposition contre taux de sélection en barres jumelles, arbitrage du menu sur 14 jours, liste de courses chiffrée transmise au groupe Alimentaire.", "cui", cuisine);
+  html += desk("d6", "06", "Base de prix · hook intelligent", "Table dense, suggestions du hook en état info, badges « périmé > 6 mois ». Le hook propose, un humain valide.", "socle", prix);
+  html += '<section class="scr" id="s-mobile"><div class="scr__head"><b>07–15</b><h3>Terrain · mobile</h3><span class="gst-tag">MOBILE · 390 × 844</span><p>Plein soleil, réseau faible, mains sales : cibles de 56 px, quatre champs au plus, état de synchronisation toujours visible.</p></div><div class="phones">' +
+    phone("p1", p1, ["07 / SOCLE", "Splash & connexion"], "M10 en version courte, puis connexion. Fonctionne hors ligne ensuite.", "socle") +
+    phone("p2", p2, ["08 / SOCLE", "Tableau de bord · scout"], "Mes repas à choisir, ma roadmap, mon inscription. Demain en un tap.", "socle") +
+    phone("p3", p3, ["09 / COMPTABILITÉ", "Saisie de dépense terrain"], "Quatre champs, reçu photographié, rattachement obligatoire. Moins de 60 secondes.", "cpt") +
+    phone("p4", p4, ["10 / LOGISTIQUE", "Seuil critique · départ bloqué"], "M6 : la frappe de l'Éclair, puis l'écran de blocage avec ses conditions.", "log") +
+    phone("p5", p5, ["11 / COMPTABILITÉ", "Comptes du jour"], "Rapprochement de caisse et arrêt de journée : tampon VALIDÉ (M8).", "cpt") +
+    phone("p6", p6, ["12 / CUISINE", "Espace jeune · choix des plats"], "Vote en un tap, plats incompatibles masqués, proposition libre.", "cui") +
+    phone("p7", p7, ["13 / LOGISTIQUE", "Recensement d'un groupe"], "Besoin, disponible, manquant par article ; ajout terrain en attente de validation.", "log") +
+    phone("p8", p8, ["14 / SOCLE", "Assistant d'ouverture de camp"], "Le type de camp ouvre les groupes : changez-le, les cartes se retracent.", "socle") +
+    phone("p9", p9, ["15 / LOGISTIQUE", "Inventaire de retour"], "Logistique inversée, hors ligne : intact, usé, endommagé, perdu.", "log") +
+    "</div></section>";
+  document.getElementById("screens").innerHTML = html;
+  GST.fitScreens(); GST.wireTabs(document.getElementById("screens"));
+
+  /* ── Comportements ──────────────────────────────────────────────────── */
+  // D1 · KPI
+  [["[data-k1]", 4850000], ["[data-k2]", 1425000], ["[data-k3]", 57], ["[data-k4]", 6]].forEach(function (k) { var e = document.querySelector(k[0]); GST.odometer(e, 0, { instant: true }); });
+  var onView = function (el, fn, th) { new IntersectionObserver(function (es, io) { if (es[0].isIntersecting) { io.disconnect(); fn(); } }, { threshold: th || .35 }).observe(el); };
+  onView(document.getElementById("d1"), function () {
+    [["[data-k1]", 4850000], ["[data-k2]", 1425000], ["[data-k3]", 57], ["[data-k4]", 6]].forEach(function (k, i) { setTimeout(function () { GST.odometer(document.querySelector(k[0]), k[1], { duration: 1000 }); }, i * 110); });
+    setTimeout(function () { var a = document.querySelector("[data-crit-dash]"); GST.strike(a, { origin: a.querySelector(".gst-alert__ico") }); }, 1300);
+  });
+  // D2 · cartes tracées
+  GST.reveal(document.getElementById("d2"));
+  // D3 · simulation
+  var FIXE = 2630000, PP = 27750;
+  var calc = function (n) { var b = FIXE + n * PP; return { budget: b, pp: Math.round(b / n), reste: b - n * 25000 - 1650000, eau: n * 84, portions: n * 39, gauge: Math.min(100, n / 82 * 100), bus: n > 82 ? "Dépassée" : (82 - n) + " libres" }; };
+  var effectif = 80;
+  function fillScen(instant, origin) {
+    var cols = document.querySelectorAll("[data-scen]");
+    var nVals = [effectif - 20, effectif, effectif + 20];
+    var apply = function (i) {
+      var c = cols[i], n = nVals[i], v = calc(n);
+      c.querySelector(".gst-tag").textContent = "SCÉNARIO / " + n + " PARTICIPANTS";
+      ["budget", "pp", "reste", "eau", "portions"].forEach(function (k) { GST.odometer(c.querySelector('[data-s="' + k + '"]'), v[k], { instant: instant, tone: instant ? null : "auto" }); });
+      c.querySelector('[data-s="gauge"]').style.width = v.gauge + "%";
+      c.querySelector('[data-s="gauge"]').classList.toggle("is-over", n > 82);
+      c.querySelector('[data-s="bus"]').textContent = v.bus;
+    };
+    if (instant) { [0, 1, 2].forEach(apply); return; }
+    GST.wave(origin, Array.prototype.slice.call(cols), { onArrive: function (i) { apply(i); } });
+  }
+  fillScen(true);
+  var est = document.querySelector("[data-eco-step]"), eval_ = est.querySelector(".gst-stepper__val");
+  GST.odometer(eval_, effectif, { instant: true });
+  est.querySelectorAll("button").forEach(function (b, i) {
+    b.addEventListener("click", function () { var d = i ? 5 : -5; if (effectif + d < 40 || effectif + d > 100) return; effectif += d; GST.odometer(eval_, effectif, { duration: 360 }); fillScen(false, b); });
+  });
+  // D4 · comptabilité
+  var cptDrawer = document.getElementById("cpt-drawer");
+  var MOV = [[["Sacs de riz 50 kg × 6", "ALIMENTAIRE", 192000], ["Carburant convoi", "TRANSPORT", 86500]], [["Bois de chauffe", "INTENDANCE", 18000]], [["Boussoles × 12", "ACTIVITÉS", 42000], ["Pharmacie", "SANTÉ", 14500]], [["Carburant convoi", "TRANSPORT", 86500], ["Location pirogues", "ACTIVITÉS", 60000], ["Sachets d'eau × 480", "ALIMENTAIRE", 12000], ["Antiseptiques", "SANTÉ", 14500]]];
+  GST.chartLine(document.getElementById("cpt-chart"), {
+    labels: D.COURBE.prevu.map(function (_, i) { return "J." + String(i + 1).padStart(2, "0"); }), planned: D.COURBE.prevu, actual: D.COURBE.reel, unit: "k F CFA · cumul", every: 1,
+    onPoint: function (i) {
+      var mv = MOV[i % MOV.length];
+      cptDrawer.querySelector("[data-dr-tag]").textContent = "J." + String(i + 1).padStart(2, "0") + " / MOUVEMENTS";
+      cptDrawer.querySelector("[data-dr-body]").innerHTML = mv.map(function (m) { return '<div class="gst-expense"><span class="gst-expense__ico">' + I("receipt") + '</span><div><div class="gst-expense__title">' + m[0] + '</div><div class="gst-expense__meta">' + m[1] + '</div></div><div class="gst-expense__amt">' + F(m[2]) + "<small>F CFA</small></div></div>"; }).join("") +
+        '<div class="post" style="font-weight:600;border-top:var(--gst-border) solid var(--gst-text-primary);margin-top:8px"><span>Total du jour</span><span class="n">' + F(mv.reduce(function (s, m) { return s + m[2]; }, 0)) + "</span></div>";
+      cptDrawer.classList.add("is-open");
+      GST.decode(cptDrawer.querySelector("[data-dr-tag]"));
+    }
+  });
+  cptDrawer.querySelector("[data-dr-close]").addEventListener("click", function () { cptDrawer.classList.remove("is-open"); });
+  // D5 · barres jumelles
+  onView(document.getElementById("d5"), function () { GST.rateBars(document.getElementById("cui-rates"), D.PLATS.map(function (p) { return { nom: p.nom, a: p.prop, b: p.sel }; })); });
+  // P1 · splash
+  onView(document.getElementById("p1"), function () { var h = document.getElementById("p1"); GST.crest({ svg: h.querySelector("svg"), word: h.querySelector("[data-w]"), sub: h.querySelector("[data-s]"), long: false }); }, .6);
+  // P3 · saisie
+  document.querySelector("[data-dp-photo]").addEventListener("click", function (e) { var p = e.currentTarget; p.classList.add("is-done"); p.querySelector(".gst-photo__thumb").innerHTML = I("receipt", "gst-icon--lg"); p.querySelector(".gst-ui").textContent = "Reçu attaché · 386 Ko"; });
+  document.querySelector("[data-dp-save]").addEventListener("click", function (e) {
+    var b = e.currentTarget; b.classList.add("is-loading");
+    setTimeout(function () {
+      b.classList.remove("is-loading"); b.classList.add("is-offline"); b.innerHTML = 'Enregistrée <span class="gst-btn__badge">EN FILE</span><span class="gst-btn__trace"></span>';
+      var s = document.querySelector("#p3 .gst-sync"); s.className = "gst-sync is-pending"; s.lastChild.textContent = "1 en file";
+      GST.toast("Dépense enregistrée hors ligne · 18 500 F CFA", { tag: ".02 / EN FILE" });
+    }, 900);
+  });
+  // P4 · seuil
+  onView(document.getElementById("p4"), function () { var c = document.querySelector("[data-p4-card]"); c.classList.remove("is-critical"); setTimeout(function () { GST.strike(c, { origin: c.querySelector("[data-p4-o]") }); }, 500); }, .6);
+  // P5 · arrêt de journée
+  document.querySelector("[data-p5-stop]").addEventListener("click", function (e) {
+    var card = document.querySelector("[data-p5-card]"); card.querySelectorAll(".gst-stamp").forEach(function (s) { s.remove(); });
+    GST.stamp(card, { big: "VALIDÉ", small: "08.08.26", left: "68%", top: "56%" });
+    e.currentTarget.disabled = true; e.currentTarget.textContent = "Journée close";
+  });
+  // P6 · vote
+  document.querySelectorAll("[data-p6-dish]").forEach(function (d) { d.style.cursor = "pointer"; d.addEventListener("click", function () { document.querySelectorAll("[data-p6-dish]").forEach(function (x) { x.classList.toggle("is-chosen", x === d); }); GST.pop(d.querySelector(".gst-dish__check"), 0); }); });
+  // P8 · assistant
+  var TYPES = { rej: ["ABCDEFGHIJ", "Réjouissance : les huit groupes de recensement, plus F (consolidation) et H (retours)."], sur: ["ABDFGH", "Survie : logistique légère — matériel, vivres, santé, transport."], for: ["ABCDFHI", "Formation : matériel pédagogique, restauration simple."], mis: ["ADFG", "Mission : le minimum — matériel, santé, transport."] };
+  function wiz(t, anim) {
+    var on = TYPES[t][0];
+    document.querySelectorAll("[data-wiz-groups] > div").forEach(function (g, i) {
+      var active = on.indexOf(g.dataset.g) > -1;
+      g.classList.toggle("is-off", !active);
+      if (anim && active) setTimeout(function () { GST.traceBox(g, { duration: 360 }); }, i * 56);
+    });
+    document.querySelector("[data-wiz-note]").textContent = TYPES[t][1];
+  }
+  wiz("rej");
+  document.querySelectorAll('[name="wt"]').forEach(function (r) { r.addEventListener("change", function () { wiz(r.value, true); }); });
+  onView(document.getElementById("p8"), function () { wiz("rej", true); }, .6);
+
+  // Filtre par module
+  document.getElementById("filter").addEventListener("gst-change", function (e) {
+    var v = e.detail.value;
+    document.querySelectorAll("[data-mod]").forEach(function (el) { el.style.display = v === "all" || el.dataset.mod === v ? "" : "none"; });
+    GST.fitScreens();
+  });
+  GST.wireTabs(document);
+})();
+</script>
+</body>
+</html>

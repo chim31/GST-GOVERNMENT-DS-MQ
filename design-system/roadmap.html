@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Roadmap 3D — GST Government</title>
+<meta name="description" content="Le Circuit du Camp : roadmap 3D du Camp de Réjouissance 2026, train scout, 14 stations, version 2D sans perte d'information et agenda imprimable.">
+<script>try{var t=localStorage.getItem("gst-theme");if(t&&t!=="jour")document.documentElement.setAttribute("data-theme",t);if(localStorage.getItem("gst-motion")==="reduce")document.documentElement.setAttribute("data-motion","reduce")}catch(e){}</script>
+<link rel="stylesheet" href="tokens/gst-tokens.css">
+<link rel="stylesheet" href="assets/css/gst.css">
+<link rel="stylesheet" href="assets/css/doc.css">
+<style>
+.rm{position:relative;height:calc(100vh - 60px - 2 * var(--gst-frame-viewport));min-height:620px;overflow:hidden;background:var(--gst-sky-day-1);
+  --rm-ink:var(--gst-ink);--rm-sub:var(--gst-ink-70)}
+.rm[data-sky="nuit"]{--rm-ink:var(--gst-cream);--rm-sub:var(--gst-teal-100);background:var(--gst-sky-night-1)}
+.rm canvas{position:absolute;inset:0;width:100%;height:100%;outline:none;touch-action:none}
+.rm__ui{position:absolute;inset:0;pointer-events:none;z-index:3;padding:var(--gst-space-4);display:flex;flex-direction:column;justify-content:space-between}
+@media (min-width:1024px){.rm__ui{padding:var(--gst-space-5) var(--gst-space-6)}}
+.rm__ui button,.rm__ui a,.rm__ui [role="group"]{pointer-events:auto}
+.rm__top{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--gst-space-4);flex-wrap:wrap}
+.rm__title .gst-tag{color:var(--rm-sub)}
+.rm__title h1{margin:6px 0 0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-lg);line-height:.85;color:var(--rm-ink)}
+.rm__title p{margin:6px 0 0;font-family:var(--gst-font-mono);font-size:var(--gst-fs-label);letter-spacing:.12em;text-transform:uppercase;color:var(--rm-sub)}
+.rm__ctl{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.rm__ctl .doc-row{gap:8px;justify-content:flex-end}
+.rm__ctl .gst-seg{background:var(--gst-bg-panel)}
+.rm__bottom{display:flex;flex-direction:column;gap:10px}
+.rm__strip{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding:4px 2px;pointer-events:auto}
+.rm__st{flex:none;display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-width:62px;min-height:48px;padding:6px 8px;border:var(--gst-hairline) solid var(--gst-line-strong);background:var(--gst-bg-panel);cursor:pointer;
+  font-family:var(--gst-font-mono);color:var(--gst-text-primary);transition:border-color var(--gst-dur-fast) var(--gst-ease-snap),transform var(--gst-dur-instant) var(--gst-ease-snap)}
+.rm__st b{font-family:var(--gst-font-display);font-weight:400;font-size:1.25rem;line-height:1}
+.rm__st span{font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gst-text-secondary)}
+.rm__st.is-past{background:var(--gst-brand);border-color:var(--gst-brand);color:var(--gst-on-brand)}
+.rm__st.is-past span{color:var(--gst-on-brand);opacity:.8}
+.rm__st.is-now{border:var(--gst-border) solid var(--gst-accent);padding:5px 7px}
+.rm__st.is-now b{color:var(--gst-accent-text)}
+.rm__st.is-future{border-style:dashed}
+.rm__st[aria-pressed="true"]{outline:var(--gst-focus-ring);outline-offset:2px}
+.rm__hint{font-family:var(--gst-font-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--rm-sub)}
+.rm-tags{position:absolute;inset:0;pointer-events:none;z-index:2}
+.rm-tag{position:absolute;left:0;top:0;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;gap:0;pointer-events:none;transition:opacity var(--gst-dur-fast) var(--gst-ease-snap)}
+.rm-tag span{font-family:var(--gst-font-mono);font-size:10px;letter-spacing:.14em;font-weight:500;padding:2px 5px;background:var(--gst-bg-panel);color:var(--gst-text-primary);border:1px solid var(--gst-line-strong);white-space:nowrap}
+.rm-tag i{width:1px;height:14px;background:var(--rm-ink)}
+.rm-tag.is-now span{border:var(--gst-border) solid var(--gst-accent);color:var(--gst-accent-text);font-size:11px;padding:3px 7px}
+.rm-tag.is-hover span,.rm-tag.is-sel span{border-color:var(--gst-line-brand);color:var(--gst-text-brand)}
+.rm-tag.is-small span{font-size:9px;padding:1px 4px}
+.rm-tag.is-hidden{opacity:0}
+
+.rm-panel{position:absolute;z-index:5;background:var(--gst-bg-panel);color:var(--gst-text-primary);box-shadow:var(--gst-shadow-lift);display:flex;flex-direction:column;
+  transition:transform var(--gst-dur-base) var(--gst-ease-tonnerre)}
+@media (min-width:900px){.rm-panel{top:12px;right:12px;bottom:12px;width:410px;border-left:var(--gst-frame-viewport) solid var(--gst-bg-frame);transform:translateX(calc(100% + 24px))}}
+@media (max-width:899px){.rm-panel{left:0;right:0;bottom:0;max-height:72%;border-top:var(--gst-frame-viewport) solid var(--gst-bg-frame);transform:translateY(105%)}}
+.rm-panel.is-open{transform:none}
+.rm-panel__head{display:flex;justify-content:space-between;align-items:center;padding:12px 12px 12px 20px;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline)}
+.rm-panel__body{padding:18px 20px 24px;overflow:auto;display:flex;flex-direction:column;gap:18px}
+.rm-panel h2{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:2.6rem;line-height:.88}
+.rm-hours{list-style:none;margin:0;padding:0;border-top:var(--gst-hairline) solid var(--gst-line-hairline)}
+.rm-hours li{display:grid;grid-template-columns:58px 1fr;gap:10px;padding:8px 0;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);font-size:1rem}
+.rm-hours b{font-family:var(--gst-font-mono);font-size:var(--gst-fs-data);font-weight:500;font-variant-numeric:tabular-nums}
+.rm-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.rm-photos i{aspect-ratio:1;display:grid;place-items:center;background:var(--gst-bg-sunken);border:var(--gst-hairline) solid var(--gst-line-hairline);font-style:normal;font-family:var(--gst-font-mono);font-size:9px;letter-spacing:.1em;color:var(--gst-text-secondary)}
+.rm-src{font-family:var(--gst-font-mono);font-size:var(--gst-fs-tag);letter-spacing:.1em;text-transform:uppercase;color:var(--gst-text-secondary)}
+
+/* 2D */
+.rm-2d{position:absolute;inset:0;z-index:1;display:none;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin}
+.rm.is-2d .rm-2d{display:block}
+.rm.is-2d canvas,.rm.is-2d .rm-tags{display:none}
+.rm-2d svg{height:100%;display:block}
+.rm-2d .trk{fill:none;stroke:var(--rm-ink);stroke-width:1.5}
+.rm-2d .trk2{fill:none;stroke:var(--rm-ink);stroke-width:1;stroke-dasharray:2 8;opacity:.6}
+.rm-2d .st rect.plat{stroke-width:1.5}
+.rm-2d .st.past rect.plat{fill:var(--gst-teal-500);stroke:var(--gst-teal-700)}
+.rm-2d .st.now rect.plat{fill:var(--gst-red-500);stroke:var(--gst-red-700)}
+.rm-2d .st.future rect.plat{fill:none;stroke:var(--rm-ink);stroke-dasharray:3 3}
+.rm-2d .st text{font-family:var(--gst-font-mono);font-size:11px;letter-spacing:.12em;fill:var(--rm-ink)}
+.rm-2d .st text.j{font-family:var(--gst-font-display);font-size:30px;letter-spacing:0}
+.rm-2d .st{cursor:pointer}
+.rm-2d .st:hover rect.plat,.rm-2d .st:focus rect.plat{stroke:var(--gst-accent);stroke-width:3}
+.rm-2d .st:focus{outline:none}
+
+/* Agenda */
+.ag-days{display:flex;flex-direction:column;border-top:var(--gst-border) solid var(--gst-text-primary)}
+.ag-day{display:grid;gap:8px 24px;padding:16px 0;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline)}
+@media (min-width:900px){.ag-day{grid-template-columns:110px 1.2fr 1.6fr 1fr}}
+.ag-day b.j{font-family:var(--gst-font-display);font-weight:400;font-size:2.2rem;line-height:.9}
+.ag-day h4{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:1.6rem;line-height:1}
+.ag-day ul{list-style:none;margin:0;padding:0;font-size:.98rem}
+.ag-day ul li{display:grid;grid-template-columns:52px 1fr;gap:8px}
+.ag-day ul b{font-family:var(--gst-font-mono);font-weight:500;font-size:.9rem}
+.ag-day.is-now{background:var(--gst-state-danger-bg);padding-left:10px;border-left:var(--gst-rule) solid var(--gst-accent)}
+.ag-week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-top:var(--gst-border) solid var(--gst-text-primary);border-left:var(--gst-hairline) solid var(--gst-line-hairline)}
+.ag-week>div{min-height:130px;padding:10px;border-right:var(--gst-hairline) solid var(--gst-line-hairline);border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);background:var(--gst-bg-panel);display:flex;flex-direction:column;gap:6px}
+.ag-week b{font-family:var(--gst-font-display);font-weight:400;font-size:1.4rem;line-height:1}
+.ag-week p{margin:0;font-size:.92rem;line-height:1.25}
+.ag-week .is-now{outline:var(--gst-border) solid var(--gst-accent);outline-offset:-2px}
+@media (max-width:899px){.ag-week{grid-template-columns:repeat(2,1fr)}}
+@media print{
+  body.doc>*:not(main){display:none!important}
+  .rm,.doc-head,.no-print{display:none!important}
+  #agenda{padding:0;border:0}
+  .ag-day{break-inside:avoid;grid-template-columns:90px 1.2fr 1.6fr 1fr}
+  .ag-day.is-now{background:none;border-left:3px solid #000}
+  *{color:#000!important;background:none!important;border-color:#000!important}
+  @page{size:A4;margin:14mm}
+}
+</style>
+</head>
+<body>
+<section class="rm" id="rm" aria-label="Roadmap 3D du Camp de Réjouissance 2026">
+  <canvas tabindex="0" aria-label="Circuit 3D : 14 stations. Utilisez les flèches gauche et droite pour changer de journée, Entrée pour ouvrir la fiche."></canvas>
+  <div class="rm-tags" aria-hidden="true"></div>
+  <div class="rm-2d" aria-label="Frise 2D du programme"></div>
+  <div class="rm__ui">
+    <div class="rm__top">
+      <div class="rm__title"><span class="gst-tag" data-rm-tag>.05 / ROADMAP 3D · LE CIRCUIT DU CAMP</span><h1>Réjouissance 2026</h1><p data-rm-sub>14 stations · 05 → 18 août · Attikoumé</p></div>
+      <div class="rm__ctl">
+        <div class="doc-row">
+          <div class="gst-seg gst-seg--sm" role="group" aria-label="Rendu" data-view><button type="button" data-value="3d" aria-pressed="true">3D</button><button type="button" data-value="2d" aria-pressed="false">2D</button></div>
+          <div class="gst-seg gst-seg--sm" role="group" aria-label="Ciel" data-sky><button type="button" data-value="auto" aria-pressed="true">Auto</button><button type="button" data-value="jour" aria-pressed="false">Jour</button><button type="button" data-value="aube" aria-pressed="false">Aube</button><button type="button" data-value="nuit" aria-pressed="false">Nuit</button></div>
+        </div>
+        <div class="doc-row">
+          <button class="gst-btn gst-btn--secondary gst-btn--sm" data-today style="background:var(--gst-bg-panel)"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-map-pin"/></svg>Aujourd'hui</button>
+          <button class="gst-btn gst-btn--primary gst-btn--sm" data-next>Journée suivante<svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <div class="rm__bottom">
+      <span class="rm__hint" data-hint>Glisser pour tourner · double-tap : aujourd'hui · ← → : journées · journée en cours simulée</span>
+      <div class="rm__strip" role="listbox" aria-label="Journées du camp" data-strip></div>
+    </div>
+  </div>
+  <aside class="rm-panel" aria-label="Fiche de la journée" aria-hidden="true" data-panel>
+    <div class="rm-panel__head"><span class="gst-tag" data-p-tag>J.05 / AUJOURD'HUI</span><button class="gst-icon-btn gst-icon-btn--ghost" data-p-close aria-label="Fermer la fiche"><svg class="gst-icon"><use href="#i-x"/></svg></button></div>
+    <div class="rm-panel__body" data-p-body></div>
+  </aside>
+</section>
+
+<main id="main" class="doc-main">
+<header class="doc-head">
+  <span class="gst-tag gst-tag--accent" data-decode>.05 / 3D-1 · SPÉCIFICATION</span>
+  <h2 class="doc-head__title" data-rise>Le Circuit du Camp</h2>
+  <p class="doc-head__lead">Un diorama topographique en courbes de niveau, traversé par une voie ferrée. Une station par journée. Le train avance d'une station chaque jour ; on suit le camp en direct.</p>
+  <dl class="doc-head__meta">
+    <div><dt class="gst-label">Scène</dt><dd>&lt; 12 000 triangles · 1 lumière + ambiante</dd></div>
+    <div><dt class="gst-label">DPR</dt><dd>≤ 1,5 · pause hors écran</dd></div>
+    <div><dt class="gst-label">Bascule 2D</dt><dd>auto (WebGL, mémoire, FPS &lt; 30 / 2 s) + manuelle</dd></div>
+    <div><dt class="gst-label">Critère M4.2</dt><dd>chargement &lt; 5 s, entrée de gamme</dd></div>
+  </dl>
+</header>
+
+<section class="doc-sec">
+  <div class="doc-sec__head"><div><span class="gst-tag" data-decode>.01 / ÉTATS DES STATIONS</span><h2 class="doc-sec__title">Passée, en cours, à venir</h2></div>
+    <p class="doc-sec__intro">Le même vocabulaire en 3D, en 2D et dans la bande de navigation. <em>À venir</em> est un fantôme en fil de fer qui se matérialise face par face à l'approche du train.</p></div>
+  <div class="doc-cols doc-cols--3">
+    <div class="doc-plate doc-stack"><span class="gst-tag">PASSÉE</span><div class="gst-station"><span class="gst-station__j">J.04</span><div><span class="gst-tag">COMPTE-RENDU PUBLIÉ</span><div class="gst-ui">Sortie Togoville</div></div></div><p class="gst-field__help">Station pleine teal, drapeau abaissé, vignette photo au survol.</p></div>
+    <div class="doc-plate doc-stack"><span class="gst-tag gst-tag--accent">EN COURS</span><div class="gst-station is-now"><span class="gst-station__j">J.05</span><div><span class="gst-tag gst-tag--accent">AUJOURD'HUI</span><div class="gst-ui">Service communautaire</div></div></div><p class="gst-field__help">Station rouge, balise réticule pulsante, train à quai, drapeau hissé.</p></div>
+    <div class="doc-plate doc-stack"><span class="gst-tag">À VENIR</span><div class="gst-station is-future"><span class="gst-station__j">J.06</span><div><span class="gst-tag">DEMAIN</span><div class="gst-ui">Hike — départ</div></div></div><p class="gst-field__help">Géométrie fantôme hairline ; se matérialise face par face.</p></div>
+  </div>
+  <div class="doc-table-wrap" style="margin-top:var(--gst-space-7)"><table class="doc-table">
+    <thead><tr><th>Animation</th><th>Durée</th><th>Courbe</th><th>Détail</th></tr></thead>
+    <tbody>
+      <tr><td>Intro</td><td class="m">1 600 ms</td><td class="m">trace</td><td>La caméra descend du ciel, les courbes de niveau s'empilent, la voie se trace, les stations surgissent (cascade 110 ms), le train glisse jusqu'à aujourd'hui.</td></tr>
+      <tr><td>Arrivée sur une étape</td><td class="m">1 400 + 700 ms</td><td class="m">tonnerre</td><td>Le train décélère, la station se matérialise, <b>la levée des couleurs</b>, le tag J.xx / AUJOURD'HUI se décode.</td></tr>
+      <tr><td>Clic sur une station</td><td class="m">800 ms</td><td class="m">trace</td><td>Travelling qui cadre la station, le reste se désature vers l'écru, la fiche glisse depuis la droite (ou monte en tiroir).</td></tr>
+      <tr><td>Jour / nuit</td><td class="m">800 ms</td><td class="m">trace</td><td>Bascule des bandes du ciel selon l'heure réelle ; fenêtres des tentes allumées la nuit.</td></tr>
+      <tr><td>Réduit</td><td class="m">0 ms</td><td class="m">—</td><td>Scène figée sur son état final ; informations identiques.</td></tr>
+    </tbody></table></div>
+</section>
+
+<section class="doc-sec" id="agenda">
+  <div class="doc-sec__head"><div><span class="gst-tag" data-decode>.02 / AGENDA · M4.4</span><h2 class="doc-sec__title">Agenda</h2></div>
+    <p class="doc-sec__intro">La vue 3D est belle, pas toujours pratique. L'agenda double la roadmap : liste ou semaine, filtrable par unité, <em>imprimable sur A4 et lisible sans couleur</em>.</p></div>
+  <div class="doc-row no-print" style="justify-content:space-between;margin-bottom:var(--gst-space-5)">
+    <div class="gst-seg" role="group" aria-label="Vue" data-ag-view><button type="button" data-value="list" aria-pressed="true">Liste</button><button type="button" data-value="week" aria-pressed="false">Semaine</button></div>
+    <div class="doc-row"><div class="gst-control" style="min-width:240px"><select aria-label="Filtrer par unité" data-ag-unit><option value="">Toutes les unités</option></select><svg class="gst-icon gst-control__chev"><use href="#i-chevron-down"/></svg></div><button class="gst-btn gst-btn--secondary" onclick="window.print()"><svg class="gst-icon" aria-hidden="true"><use href="#i-printer"/></svg>Imprimer A4</button></div>
+  </div>
+  <div data-ag></div>
+</section>
+</main>
+
+<script src="assets/js/gst-icons.js"></script>
+<script src="assets/js/gst-motion.js"></script>
+<script src="assets/js/gst-data.js"></script>
+<script src="assets/js/gst-shell.js"></script>
+<script src="assets/js/gst-3d.js"></script>
+<script>
+/* ── État partagé 3D / 2D / bande / fiche / agenda ───────────────────── */
+window.RM = (function () {
+  var GST = window.GST, D = window.GST_DATA, P = D.PROGRAMME, N = P.length;
+  var rm = document.getElementById("rm");
+  var st = { today: 4, sel: null, view: "3d", listeners: [] };
+  var j = function (i) { return "J." + String(i + 1).padStart(2, "0"); };
+  var state = function (i) { return i < st.today ? "past" : i === st.today ? "now" : "future"; };
+  var strip = rm.querySelector("[data-strip]"), panel = rm.querySelector("[data-panel]");
+  function renderStrip() {
+    strip.innerHTML = P.map(function (p, i) {
+      return '<button type="button" role="option" class="rm__st is-' + state(i) + '" data-i="' + i + '" aria-pressed="' + (st.sel === i) + '" aria-label="' + j(i) + ", " + p.date + ", " + p.titre + ", " + ({ past: "passée", now: "aujourd'hui", future: "à venir" })[state(i)] + '"><b>' + j(i) + "</b><span>" + p.date + "</span></button>";
+    }).join("");
+  }
+  strip.addEventListener("click", function (e) { var b = e.target.closest("[data-i]"); if (b) api.select(+b.dataset.i); });
+  function openPanel(i) {
+    var p = P[i], s = state(i);
+    rm.querySelector("[data-p-tag]").textContent = j(i) + " / " + ({ past: "PASSÉE", now: "AUJOURD'HUI", future: "À VENIR" })[s];
+    GST.decode(rm.querySelector("[data-p-tag]"));
+    rm.querySelector("[data-p-body]").innerHTML =
+      "<div><span class=\"gst-tag\">" + p.date + ".26 · " + p.unites.toUpperCase() + '</span><h2 style="margin-top:8px">' + p.titre + "</h2></div>" +
+      '<dl class="gst-spec gst-spec--rules"><dt>Lieu</dt><dd>' + p.lieu + "</dd><dt>Responsable</dt><dd>" + p.resp + "</dd><dt>Unités</dt><dd>" + p.unites + "</dd></dl>" +
+      '<div><div class="doc-sub" style="margin:0 0 8px">Horaires</div><ul class="rm-hours">' + p.h.map(function (h) { return "<li><b>" + h[0] + "</b><span>" + h[1] + "</span></li>"; }).join("") + "</ul></div>" +
+      '<div><div class="doc-sub" style="margin:0 0 8px">Matériel <span class="rm-src">· groupe I · Activités</span></div><dl class="gst-spec">' + p.materiel.map(function (m) { return "<dt>" + I_("box") + "</dt><dd>" + m + "</dd>"; }).join("") + "</dl></div>" +
+      '<div><div class="doc-sub" style="margin:0 0 8px">Menu du jour <span class="rm-src">· module Cuisine</span></div>' + (p.sansCuisine ? '<div class="gst-badge">Quartier libre · aucun repas préparé</div>' : '<dl class="gst-spec gst-spec--rules"><dt>Matin</dt><dd>' + p.menu[0] + "</dd><dt>Midi</dt><dd>" + p.menu[1] + "</dd><dt>Soir</dt><dd>" + p.menu[2] + "</dd></dl>") + "</div>" +
+      (s === "past" ? '<div><div class="doc-sub" style="margin:0 0 8px">Compte-rendu & photos</div><p style="margin:0 0 10px">Journée réalisée comme prévu. Toutes les unités présentes ; retour au camp à l\'heure.</p><div class="rm-photos"><i>PHOTO 01</i><i>PHOTO 02</i><i>PHOTO 03</i></div></div>' :
+        '<p class="gst-field__help" style="margin:0">Les photos et le compte-rendu sont ajoutés après coup : la roadmap devient l\'album du camp.</p>');
+    panel.classList.add("is-open"); panel.setAttribute("aria-hidden", "false");
+  }
+  function I_(id) { return '<svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-' + id + '"/></svg>'; }
+  rm.querySelector("[data-p-close]").addEventListener("click", function () { api.select(null); });
+  var api = {
+    P: P, N: N, j: j, state: state, st: st, rm: rm,
+    on: function (fn) { st.listeners.push(fn); },
+    emit: function (ev, a) { st.listeners.forEach(function (fn) { fn(ev, a); }); },
+    select: function (i) {
+      st.sel = i; renderStrip();
+      if (i == null) { panel.classList.remove("is-open"); panel.setAttribute("aria-hidden", "true"); }
+      else { openPanel(i); var b = strip.querySelector('[data-i="' + i + '"]'); b && b.scrollIntoView({ inline: "center", block: "nearest", behavior: GST.reduced() ? "auto" : "smooth" }); }
+      api.emit("select", i);
+    },
+    advance: function (to) {
+      var prev = st.today; st.today = to != null ? to : (st.today + 1) % N; renderStrip();
+      api.emit("advance", { from: prev, to: st.today });
+      var tag = rm.querySelector("[data-rm-tag]");
+      tag.textContent = j(st.today) + " / AUJOURD'HUI · " + P[st.today].titre.toUpperCase(); GST.decode(tag, null, { delay: GST.reduced() ? 0 : 1400 });
+      if (st.sel != null) openPanel(st.sel);
+    },
+    setView: function (v, auto) {
+      st.view = v; rm.classList.toggle("is-2d", v === "2d");
+      rm.querySelectorAll("[data-view] button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.value === v); });
+      var seg = rm.querySelector("[data-view]"); seg._inkUpdate && seg._inkUpdate();
+      api.emit("view", v);
+      if (auto) GST.toast("Version 2D activée automatiquement : toutes les informations restent disponibles.", { tag: ".05 / ROADMAP 2D" });
+    }
+  };
+  renderStrip();
+  rm.querySelector("[data-view]").setAttribute("data-manual", "");
+  rm.querySelectorAll("[data-view] button").forEach(function (b) { b.addEventListener("click", function () { api.setView(b.dataset.value); }); });
+  rm.querySelector("[data-next]").addEventListener("click", function () { api.advance(); });
+  rm.querySelector("[data-today]").addEventListener("click", function () { api.emit("recenter"); api.select(st.today); });
+  document.addEventListener("keydown", function (e) {
+    if (!rm.contains(document.activeElement) && document.activeElement !== document.body) return;
+    if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+      e.preventDefault(); var cur = st.sel == null ? st.today : st.sel;
+      api.select(Math.max(0, Math.min(N - 1, cur + (e.key === "ArrowRight" ? 1 : -1))));
+    }
+    if (e.key === "Escape") api.select(null);
+  });
+
+  /* ── Frise 2D (SVG) : mêmes stations, mêmes états, même train ─────────── */
+  var box = rm.querySelector(".rm-2d");
+  var GAP = 168, PADX = 120;
+  function y2d(i) { return 0.56 + Math.sin(i * 0.85) * 0.14; }
+  function build2d() {
+    var H = box.clientHeight || 600, W = PADX * 2 + GAP * (N - 1);
+    var pts = P.map(function (_, i) { return [PADX + i * GAP, y2d(i) * H]; });
+    var d = "M" + (pts[0][0] - 100) + " " + pts[0][1] + " L" + pts[0][0] + " " + pts[0][1];
+    for (var i = 1; i < N; i++) { var a = pts[i - 1], b = pts[i], mx = (a[0] + b[0]) / 2; d += " C" + mx + " " + a[1] + " " + mx + " " + b[1] + " " + b[0] + " " + b[1]; }
+    d += " L" + (pts[N - 1][0] + 100) + " " + pts[N - 1][1];
+    var s = '<svg viewBox="0 0 ' + W + " " + H + '" width="' + W + '" height="' + H + '" role="img" aria-label="Frise du programme"><path class="trk" d="' + d + '" transform="translate(0,-4)"/><path class="trk" d="' + d + '" transform="translate(0,4)"/><path class="trk2" d="' + d + '"/>';
+    P.forEach(function (p, i) {
+      var x = pts[i][0], y = pts[i][1], s0 = state(i);
+      s += '<g class="st ' + s0 + '" data-i="' + i + '" tabindex="0" role="button" aria-label="' + j(i) + " " + p.titre + '">' +
+        '<line x1="' + (x + 22) + '" y1="' + (y - 30) + '" x2="' + (x + 22) + '" y2="' + (y - 92) + '" stroke="currentColor" style="stroke:var(--rm-ink)"/>' +
+        '<rect class="flag" x="' + (x + 23) + '" y="' + (s0 === "now" ? y - 92 : y - 50) + '" width="22" height="14" fill="' + (s0 === "now" ? "var(--gst-red-500)" : s0 === "past" ? "var(--gst-teal-500)" : "none") + '" stroke="var(--rm-ink)" stroke-width="1"/>' +
+        '<rect class="plat" x="' + (x - 26) + '" y="' + (y - 30) + '" width="52" height="18"/>' +
+        (s0 === "now" ? '<rect class="beacon" x="' + (x - 6) + '" y="' + (y - 6) + '" width="12" height="12" fill="none" stroke="var(--gst-red-500)" stroke-width="2"/>' : "") +
+        '<text class="j" x="' + (x - 26) + '" y="' + (y + 46) + '">' + j(i) + "</text>" +
+        '<text x="' + (x - 26) + '" y="' + (y + 64) + '">' + p.date + "</text>" +
+        '<text x="' + (x - 26) + '" y="' + (y + 82) + '" style="font-size:10px;letter-spacing:.06em">' + p.titre.toUpperCase().slice(0, 20) + "</text></g>";
+    });
+    s += '<g class="train" data-train>' + [0, 1, 2, 3, 4, 5, 6].map(function (k) { return '<rect x="' + (-k * 30 - 14) + '" y="-9" width="26" height="18" fill="' + (k ? ["var(--gst-teal-300)", "var(--gst-cream)", "var(--gst-teal-600)", "var(--gst-teal-200)", "var(--gst-teal-400)", "var(--gst-cream)"][k - 1] : "var(--gst-teal-500)") + '" stroke="var(--gst-ink)" stroke-width="1.2"/>' + (k ? "" : '<rect x="-14" y="2" width="26" height="3" fill="var(--gst-red-500)"/>'); }).join("") + "</g></svg>";
+    box.innerHTML = s;
+    box._path = box.querySelector(".trk2"); box._pts = pts;
+    placeTrain2d(st.today, true);
+    box.querySelectorAll(".st").forEach(function (g) {
+      g.addEventListener("click", function () { api.select(+g.dataset.i); });
+      g.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); api.select(+g.dataset.i); } });
+    });
+    var beacon = box.querySelector(".beacon");
+    if (beacon && !GST.reduced()) { beacon.style.transformBox = "fill-box"; beacon.style.transformOrigin = "center"; beacon.animate([{ transform: "scale(1)", opacity: 1 }, { transform: "scale(3)", opacity: 0 }], { duration: 1400, iterations: Infinity, easing: GST.ease("tonnerre") }); }
+  }
+  function lenAt(i) { // longueur le long du chemin jusqu'à la station i
+    var path = box._path, L = path.getTotalLength(), x = box._pts[i][0], lo = 0, hi = L;
+    for (var k = 0; k < 30; k++) { var m = (lo + hi) / 2; if (path.getPointAtLength(m).x < x) lo = m; else hi = m; }
+    return lo;
+  }
+  function placeTrain2d(i, instant, from) {
+    var tr = box.querySelector("[data-train]"), path = box._path; if (!tr) return;
+    var put = function (l) {
+      var p = path.getPointAtLength(l), q = path.getPointAtLength(Math.max(0, l - 4));
+      var ang = Math.atan2(p.y - q.y, p.x - q.x) * 180 / Math.PI;
+      tr.setAttribute("transform", "translate(" + p.x + "," + (p.y - 0) + ") rotate(" + ang + ")");
+    };
+    var target = lenAt(i);
+    if (instant) { put(target); return Promise.resolve(); }
+    var start = from != null ? lenAt(from) : target;
+    return GST.tween(1400, function (v) { put(start + (target - start) * v); }, "tonnerre").finished;
+  }
+  api.on(function (ev, a) {
+    if (ev === "advance" && box._path) {
+      placeTrain2d(a.to, false, a.from).then(function () { var keep = box.scrollLeft; build2d(); box.scrollLeft = keep;
+        var f = box.querySelector('.st[data-i="' + a.to + '"] .flag'); if (f && !GST.reduced()) { var y1 = +f.getAttribute("y"); f.animate([{ transform: "translateY(42px)" }, { transform: "translateY(0)" }], { duration: 700, easing: GST.ease("tonnerre") }); } });
+    }
+    if (ev === "view" && a === "2d") { build2d(); var x = box._pts[st.today][0] - box.clientWidth / 2; box.scrollLeft = Math.max(0, x); }
+    if (ev === "select" && st.view === "2d" && box._pts) box.querySelectorAll(".st").forEach(function (g) { g.querySelector(".plat").style.strokeWidth = +g.dataset.i === a ? 3 : ""; });
+  });
+  addEventListener("resize", function () { if (st.view === "2d") build2d(); });
+
+  /* ── Agenda ─────────────────────────────────────────────────────────── */
+  var agHost = document.querySelector("[data-ag]"), agView = "list", agUnit = "";
+  var sel = document.querySelector("[data-ag-unit]");
+  sel.innerHTML += D.UNITES.map(function (u) { return '<option value="' + u.nom.split(" ").pop() + '">' + u.nom + "</option>"; }).join("");
+  function renderAg() {
+    var days = P.map(function (p, i) { return { p: p, i: i }; }).filter(function (d) { return !agUnit || d.p.unites === "Toutes" || d.p.unites.indexOf("Toutes") === 0 || d.p.unites.indexOf(agUnit) > -1; });
+    if (agView === "list") {
+      agHost.innerHTML = '<div class="ag-days">' + days.map(function (d) {
+        return '<div class="ag-day' + (d.i === st.today ? " is-now" : "") + '"><div><b class="j">' + j(d.i) + '</b><div class="gst-tag">' + d.p.date + ".26</div></div><div><h4>" + d.p.titre + '</h4><div class="gst-field__help">' + d.p.lieu + " · " + d.p.resp + "</div></div><ul>" + d.p.h.map(function (h) { return "<li><b>" + h[0] + "</b><span>" + h[1] + "</span></li>"; }).join("") + '</ul><div class="gst-field__help">' + d.p.unites + "<br>" + (d.p.sansCuisine ? "Quartier libre" : d.p.menu[1]) + "</div></div>";
+      }).join("") + "</div>";
+    } else {
+      agHost.innerHTML = '<div class="ag-week">' + ["Mer", "Jeu", "Ven", "Sam", "Dim", "Lun", "Mar"].map(function (d) { return '<div style="min-height:auto;background:none"><span class="gst-label">' + d + "</span></div>"; }).join("") + days.map(function (d) {
+        return '<div class="' + (d.i === st.today ? "is-now" : "") + '"><span class="gst-tag">' + d.p.date + "</span><b>" + j(d.i) + "</b><p>" + d.p.titre + '</p><span class="gst-field__help">' + d.p.h[0][0] + " · " + d.p.unites + "</span></div>";
+      }).join("") + "</div>";
+    }
+  }
+  var agSeg = document.querySelector("[data-ag-view]");
+  agSeg.addEventListener("gst-change", function (e) { agView = e.detail.value; renderAg(); });
+  sel.addEventListener("change", function () { agUnit = sel.value; renderAg(); });
+  api.on(function (ev) { if (ev === "advance") renderAg(); });
+  renderAg();
+  return api;
+})();
+</script>
+
+<!-- ── Scène 3D · chargée à la demande ──────────────────────────────────── -->
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+<script type="module">
+const GST = window.GST, K = window.GST3D, RM = window.RM;
+const rm = RM.rm, canvas = rm.querySelector("canvas"), tagsHost = rm.querySelector(".rm-tags");
+const skySeg = rm.querySelector("[data-sky]");
+skySeg.setAttribute("data-manual", "");
+let skyMode = "auto";
+const skyFor = m => m === "auto" ? K.skyByHour() : m;
+function paintSky(m) { rm.dataset.sky = skyFor(m); skySeg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.value === m)); skySeg._inkUpdate && skySeg._inkUpdate(); }
+paintSky(skyMode);
+
+if (!K.webglOK() || K.lowEnd()) { RM.setView("2d", !K.webglOK() ? false : true); }
+else Promise.all([import("three"), import("three/addons/controls/OrbitControls.js")])
+  .then(([THREE, { OrbitControls }]) => build(THREE, OrbitControls))
+  .catch(err => { console.warn("3D indisponible, bascule 2D :", err); RM.setView("2d", true); });
+
+function build(THREE, OrbitControls) {
+  const api = K.setup(THREE, canvas, { fov: 32 });
+  const { scene, camera } = api;
+  const sky = K.sky(api, skyFor(skyMode));
+  const stars = K.stars(api, 220); stars.visible = skyFor(skyMode) === "nuit";
+  let s = 5; const rnd = () => (s = (s * 16807) % 2147483647, (s - 1) / 2147483646);
+  const world = new THREE.Group(); scene.add(world);
+  const SIZE = 66;
+  world.add(K.socle(api, SIZE, { h: 1.8, frame: 1.6 }));
+  const N = RM.N;
+
+  /* Voie ferrée en serpentin */
+  const PTS = [[-27, -24], [-12, -27], [3, -23], [17, -26], [27, -15], [18, -5], [3, -9], [-11, -5], [-25, -2], [-27, 11], [-14, 17], [0, 12], [14, 19], [27, 25]];
+  const curve = new THREE.CatmullRomCurve3(PTS.map(p => new THREE.Vector3(p[0], 0, p[1])), false, "catmullrom", 0.45);
+  const L = curve.getLength();
+  const samples = curve.getSpacedPoints(600);
+  const distTrack = (x, z) => samples.reduce((m, p) => Math.min(m, Math.hypot(p.x - x, p.z - z)), 1e9);
+
+  // Collines en courbes de niveau, posées hors de la voie
+  const ramp = ["--gst-teal-700", "--gst-teal-600", "--gst-teal-500", "--gst-teal-400", "--gst-teal-300", "--gst-teal-200", "--gst-teal-100"];
+  const hills = [], hillDefs = [];
+  [[10, 4], [-15, -14], [-4, 26], [24, 6], [-26, 25], [9, -15], [-20, 6]].forEach(([x, z], k) => {
+    const R = Math.min(8.5, distTrack(x, z) - 2.6);
+    if (R < 3) return;
+    hillDefs.push({ x, z, R });
+    const levels = Math.max(3, Math.round(R * 0.85));
+    const g = K.contourStack(api, { levels, step: 0.55, segments: 32, tokens: ramp, edgeToken: "--gst-teal-900", edgeOpacity: 0.3,
+      rFn: (l, th) => (R * Math.pow(1 - l / levels, 0.9) + 0.4) * (1 + 0.14 * Math.sin(3 * th + k) + 0.07 * Math.sin(5 * th + l * 0.3)),
+      cFn: () => [x, z] });
+    g.children.forEach(m => { m.userData.y = m.position.y; hills.push(m); });
+    world.add(g);
+  });
+  // Lac en aplat
+  const lake = K.contourPlate(api, Array.from({ length: 28 }, (_, i) => { const th = i / 28 * Math.PI * 2, r = 4.2 * (1 + 0.18 * Math.sin(3 * th)); return [-2 + Math.cos(th) * r * 1.3, -(2 + Math.sin(th) * r)]; }), 0.06, "--gst-teal-300", { edgeToken: "--gst-teal-700", edgeOpacity: 0.5 });
+  lake.position.y = 0.01; world.add(lake);
+
+  // Ballast (ruban), rails (hairlines), traverses (instanciées)
+  const M = 520, W = 1.05;
+  const pos = [];
+  const pt = i => curve.getPointAt(i / M), tg = i => curve.getTangentAt(Math.min(1, i / M));
+  for (let i = 0; i < M; i++) {
+    const a = pt(i), b = pt(i + 1), ta = tg(i), tb = tg(i + 1);
+    const na = new THREE.Vector3(-ta.z, 0, ta.x).multiplyScalar(W), nb = new THREE.Vector3(-tb.z, 0, tb.x).multiplyScalar(W);
+    const al = a.clone().add(na), ar = a.clone().sub(na), bl = b.clone().add(nb), br = b.clone().sub(nb);
+    pos.push(al.x, .06, al.z, ar.x, .06, ar.z, bl.x, .06, bl.z, ar.x, .06, ar.z, br.x, .06, br.z, bl.x, .06, bl.z);
+  }
+  const ballastGeo = new THREE.BufferGeometry(); ballastGeo.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3)); ballastGeo.computeVertexNormals();
+  const ballast = new THREE.Mesh(ballastGeo, api.mat("--gst-stone", { side: THREE.DoubleSide })); world.add(ballast);
+  const rails = [-0.42, 0.42].map(o => {
+    const pts = samples.map((p, i) => { const t = curve.getTangentAt(i / (samples.length - 1)); return new THREE.Vector3(p.x - t.z * o, 0.2, p.z + t.x * o); });
+    const l = new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({ color: K.col(THREE, "--gst-ink") }));
+    world.add(l); return l;
+  });
+  const nSleep = Math.floor(L / 1.15);
+  const sleepers = new THREE.InstancedMesh(new THREE.BoxGeometry(1.7, 0.12, 0.3), api.mat("--gst-ink-70"), nSleep);
+  { const m = new THREE.Matrix4(), q = new THREE.Quaternion(), up = new THREE.Vector3(0, 1, 0);
+    for (let i = 0; i < nSleep; i++) { const u = (i + 0.5) / nSleep, p = curve.getPointAt(u), t = curve.getTangentAt(u);
+      q.setFromAxisAngle(up, Math.atan2(t.x, t.z)); m.compose(new THREE.Vector3(p.x, 0.12, p.z), q, new THREE.Vector3(1, 1, 1)); sleepers.setMatrixAt(i, m); } }
+  world.add(sleepers);
+
+  /* Stations */
+  const stU = i => 0.02 + (i / (N - 1)) * 0.96;
+  const stations = [];
+  const facetBox = (w, h, d) => new THREE.BoxGeometry(w, h, d).toNonIndexed();
+  for (let i = 0; i < N; i++) {
+    const u = stU(i), p = curve.getPointAt(u), t = curve.getTangentAt(u);
+    const n = new THREE.Vector3(-t.z, 0, t.x);
+    const g = new THREE.Group();
+    g.position.copy(p).add(n.clone().multiplyScalar(2.3));
+    g.rotation.y = Math.atan2(t.x, t.z);
+    const platMat = api.mat("--gst-teal-500");
+    const plat = new THREE.Mesh(facetBox(1.6, 0.55, 3.6), platMat); plat.position.y = 0.28;
+    const platEdges = K.edges(api, plat, "--gst-teal-900", 0.6);
+    const totem = new THREE.Mesh(facetBox(0.5, 1.6, 0.5), api.mat("--gst-cream")); totem.position.set(0, 1.35, -1.2);
+    const totemEdges = K.edges(api, totem, "--gst-teal-900", 0.6);
+    const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 3.8, 5), api.mat("--gst-ink")); mast.position.set(0.3, 2.2, 1.4);
+    const flag = new THREE.Mesh(new THREE.PlaneGeometry(1.1, 0.68), api.mat("--gst-red-500", { side: THREE.DoubleSide })); flag.position.set(0.3 + 0.0, 0, 1.4 + 0.58); flag.rotation.y = Math.PI / 2;
+    const beacon = K.ring(api, "--gst-red-500"); beacon.position.set(0, 3.9, 0); beacon.scale.setScalar(0.8);
+    // Fenêtres de tente (allumées la nuit)
+    g.add(plat, totem, mast, flag, beacon);
+    plat.userData.station = i; totem.userData.station = i;
+    stations.push({ g, plat, totem, flag, beacon, mast, platEdges, totemEdges, u, p: g.position.clone(), solid: true });
+    world.add(g);
+  }
+  const FLAG_UP = 3.75, FLAG_DOWN = 1.35;
+  const col = tok => K.col(THREE, tok);
+  function setStationState(i, s0, animate) {
+    const S = stations[i];
+    const tri = S.plat.geometry.attributes.position.count, tri2 = S.totem.geometry.attributes.position.count;
+    const target = s0 === "now" ? "--gst-red-500" : s0 === "past" ? "--gst-teal-500" : "--gst-teal-500";
+    S.plat.material.color.copy(col(target)); S.plat.userData.orig = S.plat.material.color.clone();
+    S.flag.material.color.copy(col(s0 === "now" ? "--gst-red-500" : "--gst-teal-400")); S.flag.userData.orig = S.flag.material.color.clone();
+    S.flag.visible = s0 !== "future";
+    S.beacon.visible = s0 === "now";
+    S.mast.visible = s0 !== "future";
+    const wantSolid = s0 !== "future";
+    if (!wantSolid) { S.plat.geometry.setDrawRange(0, 0); S.totem.geometry.setDrawRange(0, 0); S.platEdges.material.opacity = 0.9; S.totemEdges.material.opacity = 0.9; S.solid = false; }
+    else if (!S.solid && animate && !GST.reduced()) {
+      // Matérialisation face par face
+      K.tween(620, v => { S.plat.geometry.setDrawRange(0, Math.ceil(v * tri / 3) * 3); S.totem.geometry.setDrawRange(0, Math.ceil(v * tri2 / 3) * 3); }, "snap");
+      S.solid = true;
+    } else { S.plat.geometry.setDrawRange(0, Infinity); S.totem.geometry.setDrawRange(0, Infinity); S.solid = true; }
+    const fy = s0 === "now" ? FLAG_UP : FLAG_DOWN;
+    if (animate && s0 === "now" && !GST.reduced()) K.tween(900, v => { S.flag.position.y = FLAG_DOWN + (FLAG_UP - FLAG_DOWN) * v; }, "tonnerre", 500);
+    else if (animate && s0 === "past" && !GST.reduced()) { const y0 = S.flag.position.y; K.tween(600, v => { S.flag.position.y = y0 + (FLAG_DOWN - y0) * v; }, "snap"); }
+    else S.flag.position.y = fy;
+  }
+  for (let i = 0; i < N; i++) setStationState(i, RM.state(i), false);
+
+  /* Tentes : petits campements avec fenêtres */
+  const windows = [];
+  [0, 7, 12].forEach((si, k) => {
+    const S = stations[si], base = S.p.clone();
+    for (let t = 0; t < 4; t++) {
+      const ang = t * 1.4 + k, r = 4.2 + (t % 2) * 1.2;
+      const x = base.x + Math.cos(ang) * r, z = base.z + Math.sin(ang) * r;
+      if (distTrack(x, z) < 2.2) continue;
+      const tent = new THREE.Mesh(K.facet(new THREE.ConeGeometry(0.9, 1.15, 4)), api.mat(t === 1 ? "--gst-red-500" : "--gst-cream"));
+      tent.position.set(x, 0.58, z); tent.rotation.y = Math.PI / 4 + t;
+      K.edges(api, tent, "--gst-teal-900", 0.5); world.add(tent);
+      const win = new THREE.Mesh(new THREE.PlaneGeometry(0.34, 0.34), new THREE.MeshBasicMaterial({ color: col("--gst-eclair-50") }));
+      win.position.set(0, -0.15, 0.62); win.rotation.x = -0.2; tent.add(win); windows.push(win);
+    }
+  });
+
+  /* Arbres instanciés */
+  const trees = [];
+  for (let i = 0; i < 900 && trees.length < 150; i++) {
+    const x = (rnd() - .5) * (SIZE - 3), z = (rnd() - .5) * (SIZE - 3);
+    if (distTrack(x, z) < 3.2) continue;
+    if (stations.some(S => Math.hypot(S.p.x - x, S.p.z - z) < 4)) continue;
+    if (Math.hypot((x + 2) / 1.3, z - 2) < 5.5) continue;
+    if (hillDefs.some(h => Math.hypot(h.x - x, h.z - z) < h.R + 0.8)) continue;
+    trees.push([x, 0, z, 0.6 + rnd() * 0.7]);
+  }
+  const forest = K.trees(api, trees, "--gst-teal-600"); world.add(forest);
+
+  /* Train scout : locomotive teal + filet rouge + ⚜ ; un wagon par unité */
+  const cv = document.createElement("canvas"); cv.width = 256; cv.height = 96;
+  const decal = new THREE.CanvasTexture(cv); decal.colorSpace = THREE.SRGBColorSpace;
+  const drawDecal = () => { const g = cv.getContext("2d"); g.fillStyle = GST.token("--gst-teal-500"); g.fillRect(0, 0, 256, 96); g.fillStyle = GST.token("--gst-cream"); g.font = "64px 'EB Garamond', serif"; g.fillText("⚜", 18, 72); g.font = "56px 'Bebas Neue', sans-serif"; g.fillText("GST", 110, 70); decal.needsUpdate = true; };
+  drawDecal(); if (document.fonts) document.fonts.ready.then(drawDecal);
+  const cars = [];
+  const loco = new THREE.Group();
+  { const body = new THREE.Mesh(new THREE.BoxGeometry(1.25, 1.05, 2.7), api.mat("--gst-teal-500")); body.position.y = 1.0; K.edges(api, body, "--gst-teal-900", 0.6);
+    const cab = new THREE.Mesh(new THREE.BoxGeometry(1.3, 1.0, 1.0), api.mat("--gst-teal-700")); cab.position.set(0, 1.7, -0.85); K.edges(api, cab, "--gst-teal-900", 0.6);
+    const stripe = new THREE.Mesh(new THREE.BoxGeometry(1.29, 0.13, 2.72), api.mat("--gst-red-500")); stripe.position.y = 0.78;
+    const chim = new THREE.Mesh(new THREE.CylinderGeometry(0.17, 0.22, 0.6, 6), api.mat("--gst-ink")); chim.position.set(0, 1.8, 0.9);
+    [-1, 1].forEach(sd => { const d = new THREE.Mesh(new THREE.PlaneGeometry(1.2, 0.45), new THREE.MeshBasicMaterial({ map: decal })); d.position.set(sd * 0.635, 1.12, 0.25); d.rotation.y = sd * Math.PI / 2; loco.add(d); });
+    loco.add(body, cab, stripe, chim); cars.push(loco); scene.add(loco); }
+  ["--gst-teal-300", "--gst-cream", "--gst-teal-600", "--gst-teal-200", "--gst-teal-400", "--gst-cream"].forEach(tok => {
+    const w = new THREE.Group();
+    const b = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.95, 2.2), api.mat(tok)); b.position.y = 0.95; K.edges(api, b, "--gst-teal-900", 0.6);
+    const r = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.08, 2.25), api.mat("--gst-ink")); r.position.y = 1.46;
+    w.add(b, r); cars.push(w); scene.add(w);
+  });
+  const CAR = 2.75 / L;
+  let trainU = 0;
+  function placeTrain(u) {
+    trainU = u;
+    cars.forEach((c, k) => {
+      const uk = Math.max(0.0001, u - k * CAR), p = curve.getPointAt(uk), q = curve.getPointAt(Math.min(1, uk + 0.002));
+      c.position.set(p.x, 0.05, p.z); c.lookAt(q.x, 0.05, q.z);
+    });
+  }
+
+  /* Étiquettes HTML projetées */
+  tagsHost.innerHTML = stations.map((S, i) => `<div class="rm-tag" data-t="${i}"><span>${RM.j(i)}</span><i></i></div>`).join("");
+  const tagEls = [...tagsHost.children];
+  function refreshTags() {
+    tagEls.forEach((el, i) => {
+      const s0 = RM.state(i);
+      el.classList.toggle("is-now", s0 === "now");
+      el.classList.toggle("is-sel", RM.st.sel === i);
+      el.querySelector("span").textContent = s0 === "now" ? RM.j(i) + " / AUJOURD'HUI" : RM.j(i);
+    });
+  }
+  refreshTags();
+
+  /* Caméra & contrôles contraints */
+  const AZ0 = Math.PI * 0.2, EL0 = 0.66, R0 = canvas.clientWidth < 700 ? 200 : 142;
+  const target = new THREE.Vector3(0, 0, 0);
+  camera.position.set(Math.sin(AZ0) * Math.cos(EL0) * R0, Math.sin(EL0) * R0, Math.cos(AZ0) * Math.cos(EL0) * R0);
+  const controls = new OrbitControls(camera, canvas);
+  controls.enableDamping = true; controls.dampingFactor = 0.08; controls.enablePan = false;
+  controls.minAzimuthAngle = AZ0 - 0.61; controls.maxAzimuthAngle = AZ0 + 0.61; // ±35°
+  controls.minPolarAngle = 0.5; controls.maxPolarAngle = 1.18;
+  controls.minDistance = 34; controls.maxDistance = 220;
+  controls.target.copy(target); controls.update();
+  api.onResize((w, h) => camera.setViewOffset(w, h, 0, -h * 0.02, w, h));
+  api.resize();
+  let camTween = null;
+  function flyTo(tgt, dist, dur) {
+    camTween && camTween.stop();
+    const fromT = controls.target.clone(), fromP = camera.position.clone();
+    const dir = fromP.clone().sub(fromT).normalize();
+    const toP = tgt.clone().add(dir.multiplyScalar(dist));
+    controls.enabled = false;
+    camTween = K.tween(dur != null ? dur : GST.ms("--gst-dur-scene"), v => { controls.target.lerpVectors(fromT, tgt, v); camera.position.lerpVectors(fromP, toP, v); camera.lookAt(controls.target); }, "trace");
+    camTween.finished.then(() => { controls.enabled = true; controls.update(); });
+  }
+
+  /* Désaturation vers l'écru autour de la station choisie */
+  const cream = col("--gst-cream");
+  const fadeables = [];
+  world.traverse(o => { if (o.isMesh && o.material && o.material.color && !o.material.map) { o.userData.orig = o.material.color.clone(); fadeables.push(o); } });
+  let fadeK = 0, fadeTween = null;
+  function setFade(on, keep) {
+    fadeTween && fadeTween.stop();
+    const from = fadeK, to = on ? 0.72 : 0;
+    fadeTween = K.tween(420, v => {
+      fadeK = from + (to - from) * v;
+      fadeables.forEach(o => {
+        const inKeep = keep && keep.g && (o.parent === keep.g);
+        const orig = o.userData.orig || o.material.color;
+        o.material.color.copy(orig).lerp(cream, inKeep ? 0 : fadeK);
+      });
+    }, "snap");
+  }
+
+  /* Interaction : survol, clic, double-tap */
+  const ray = new THREE.Raycaster(), mouse = new THREE.Vector2();
+  const pickables = stations.flatMap(S => [S.plat, S.totem]);
+  let hover = null, downAt = 0, downXY = [0, 0];
+  function pick(e) {
+    const r = canvas.getBoundingClientRect();
+    mouse.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(mouse, camera);
+    // drawRange vide : on teste une boîte englobante pour les stations fantômes
+    const hits = ray.intersectObjects(stations.map(S => S.g), true).filter(h => h.object.userData.station != null || h.object.parent.userData.station != null);
+    const h = hits[0]; return h ? (h.object.userData.station ?? h.object.parent.userData.station) : null;
+  }
+  // Les stations fantômes n'ont pas de faces dessinées : boîtes invisibles de sélection
+  stations.forEach((S, i) => { const hb = new THREE.Mesh(new THREE.BoxGeometry(2.2, 4, 4.2), new THREE.MeshBasicMaterial({ visible: false })); hb.position.y = 1.6; hb.userData.station = i; S.g.add(hb); });
+  canvas.addEventListener("pointermove", e => { const i = pick(e); if (i !== hover) { hover = i; canvas.style.cursor = i == null ? "grab" : "pointer"; tagEls.forEach((el, k) => el.classList.toggle("is-hover", k === i)); } });
+  canvas.addEventListener("pointerdown", e => { downAt = performance.now(); downXY = [e.clientX, e.clientY]; });
+  canvas.addEventListener("pointerup", e => { if (performance.now() - downAt < 300 && Math.hypot(e.clientX - downXY[0], e.clientY - downXY[1]) < 6) { const i = pick(e); if (i != null) RM.select(i); } });
+  canvas.addEventListener("dblclick", () => { RM.emit("recenter"); });
+  canvas.addEventListener("keydown", e => { if (e.key === "Enter" && RM.st.sel == null) RM.select(RM.st.today); });
+
+  RM.on((ev, a) => {
+    if (ev === "select") {
+      refreshTags();
+      if (a == null) { setFade(false); flyTo(target, R0 * 0.95); }
+      else { const S = stations[a]; setFade(true, S); const c = S.p.clone(); c.y = 1.2; flyTo(c, 48); }
+    }
+    if (ev === "recenter") { const S = stations[RM.st.today]; flyTo(new THREE.Vector3(S.p.x * 0.35, 0, S.p.z * 0.35), R0 * 0.8); }
+    if (ev === "advance") {
+      const { from, to } = a;
+      if (to < from) { for (let i = 0; i < N; i++) setStationState(i, RM.state(i), false); placeTrain(stU(to)); refreshTags(); return; }
+      const u0 = trainU, u1 = stU(to);
+      setStationState(from, "past", true);
+      K.tween(GST.reduced() ? 0 : 1400, v => placeTrain(u0 + (u1 - u0) * v), "tonnerre").finished.then(() => { setStationState(to, "now", true); refreshTags(); });
+      if (RM.st.sel == null && camera.position.distanceTo(controls.target) < R0 * 0.8) flyTo(target, R0, 1400);
+    }
+    if (ev === "view" && a === "3d") api.resize();
+  });
+
+  /* Ciel */
+  function applySky(m) {
+    const k = skyFor(m), night = k === "nuit";
+    sky.setMode(k); stars.visible = night; rm.dataset.sky = k;
+    windows.forEach(w => { w.visible = night; });
+    api.amb.intensity = night ? 0.8 : 1.15;
+  }
+  skySeg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => { skyMode = b.dataset.value; paintSky(skyMode); applySky(skyMode); }));
+  applySky(skyMode);
+
+  /* Boucle */
+  const proj = new THREE.Vector3();
+  api.onFrame((dt, t) => {
+    if (controls.enabled) controls.update();
+    stations.forEach((S, i) => {
+      if (S.beacon.visible) { S.beacon.quaternion.copy(camera.quaternion); const k = (t * 0.8) % 1; S.beacon.scale.setScalar(0.6 + k * 1.8); S.beacon.material.opacity = 1 - k; }
+      S.flag.rotation.z = Math.sin(t * 2.4 + i) * 0.05;
+      proj.copy(S.p); proj.y = 4.6;
+      const p = K.project(api, proj), el = tagEls[i];
+      el.style.transform = `translate(${p.x}px,${p.y}px) translate(-50%,-100%)`;
+      const show = RM.state(i) === "now" || RM.st.sel === i || hover === i || camera.position.distanceTo(controls.target) < 60;
+      el.classList.toggle("is-hidden", !show || p.behind);
+    });
+  });
+
+  /* Intro (1,6 s) : la caméra descend, les courbes s'empilent, la voie se trace, les stations surgissent, le train glisse */
+  const reduced = GST.reduced();
+  const finalPos = camera.position.clone();
+  hills.forEach(m => m.scale.y = 0.001);
+  forest.scale.y = 0.001;
+  stations.forEach(S => S.g.scale.setScalar(0.001));
+  cars.forEach(c => c.visible = false);
+  ballastGeo.setDrawRange(0, 0); rails.forEach(r => r.geometry.setDrawRange(0, 0)); sleepers.count = 0;
+  controls.enabled = false;
+  if (!reduced) camera.position.set(finalPos.x * 0.25, 150, finalPos.z * 0.25);
+  K.tween(reduced ? 0 : 1600, v => { camera.position.lerpVectors(new THREE.Vector3(finalPos.x * 0.25, 150, finalPos.z * 0.25), finalPos, v); camera.lookAt(target); }, "trace").finished.then(() => { controls.enabled = true; controls.update(); });
+  hills.forEach((m, i) => K.tween(reduced ? 0 : 520, v => { m.scale.y = Math.max(0.001, v); }, "tonnerre", reduced ? 0 : 200 + (m.userData.level || 0) * 90));
+  K.tween(reduced ? 0 : 600, v => { forest.scale.y = Math.max(0.001, v); }, "tonnerre", reduced ? 0 : 700);
+  const total = ballastGeo.attributes.position.count, rcount = rails[0].geometry.attributes.position.count;
+  K.tween(reduced ? 0 : 1100, v => { ballastGeo.setDrawRange(0, Math.floor(v * total / 3) * 3); rails.forEach(r => r.geometry.setDrawRange(0, Math.floor(v * rcount))); sleepers.count = Math.floor(v * nSleep); }, "trace", reduced ? 0 : 450);
+  const spring = GST.SPRING_SEAT.samples;
+  stations.forEach((S, i) => K.tween(reduced ? 0 : GST.SPRING_SEAT.duration, (v, raw) => { const k = spring[Math.min(spring.length - 1, Math.floor(raw * (spring.length - 1)))]; S.g.scale.setScalar(Math.max(0.001, k)); }, x => x, reduced ? 0 : 700 + i * GST.ms("--gst-stagger-loose")));
+  setTimeout(() => {
+    cars.forEach(c => c.visible = true);
+    K.tween(reduced ? 0 : 1600, v => placeTrain(Math.max(0.0001, stU(RM.st.today) * v)), "tonnerre");
+  }, reduced ? 0 : 1500);
+  placeTrain(0.0001);
+
+  K.perf(api, () => { api.stop(); RM.setView("2d", true); });
+  api.start();
+  canvas.focus({ preventScroll: true });
+}
+</script>
+</body>
+</html>

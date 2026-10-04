@@ -1,0 +1,379 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Motion — GST Government</title>
+<meta name="description" content="Système de motion « Le trait, le calcul, l'éclair » : tokens, cinq lois et onze animations signature M1 → M11, prototypes jouables.">
+<script>try{var t=localStorage.getItem("gst-theme");if(t&&t!=="jour")document.documentElement.setAttribute("data-theme",t);if(localStorage.getItem("gst-motion")==="reduce")document.documentElement.setAttribute("data-motion","reduce")}catch(e){}</script>
+<link rel="stylesheet" href="tokens/gst-tokens.css">
+<link rel="stylesheet" href="assets/css/gst.css">
+<link rel="stylesheet" href="assets/css/doc.css">
+<style>
+.laws{list-style:none;margin:0;padding:0;border-top:var(--gst-border) solid var(--gst-text-primary)}
+.laws li{display:grid;grid-template-columns:64px 1fr;gap:var(--gst-space-4);padding:var(--gst-space-5) 0;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);align-items:baseline}
+@media (min-width:1024px){.laws li{grid-template-columns:96px 5fr 7fr}}
+.laws b{font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:1}
+.laws h3{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:.95}
+.laws p{margin:0;color:var(--gst-text-secondary);grid-column:2}
+@media (min-width:1024px){.laws p{grid-column:3}}
+
+.durs{display:flex;flex-direction:column;gap:12px}
+.dur{display:grid;grid-template-columns:150px 70px 1fr;gap:var(--gst-space-4);align-items:center;cursor:pointer;background:none;border:0;padding:0;text-align:left;font-family:var(--gst-font-mono);font-size:var(--gst-fs-label);color:var(--gst-text-primary)}
+.dur__track{position:relative;height:18px;border-left:1px solid var(--gst-text-primary);border-right:1px solid var(--gst-line-strong)}
+.dur__track::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--gst-line-strong)}
+.dur__bar{position:absolute;left:0;top:4px;bottom:4px;background:var(--gst-brand)}
+.dur__dot{position:absolute;top:3px;width:12px;height:12px;margin-left:-6px;background:var(--gst-accent)}
+.eases{display:grid;gap:var(--gst-grid-gutter);grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+.ease{background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline);padding:var(--gst-space-4);display:flex;flex-direction:column;gap:var(--gst-space-3);cursor:pointer}
+.ease:hover{border-color:var(--gst-line-brand)}
+.ease svg{width:100%;height:auto;overflow:visible}
+.ease svg .ax{stroke:var(--gst-line-strong);stroke-width:1;fill:none;vector-effect:non-scaling-stroke}
+.ease svg .cv{stroke:var(--gst-accent);stroke-width:2;fill:none;vector-effect:non-scaling-stroke}
+.ease svg .ball{fill:var(--gst-brand)}
+.ease svg .ghost{stroke:var(--gst-line-strong);stroke-dasharray:2 3;stroke-width:1;vector-effect:non-scaling-stroke}
+.ease__run{position:relative;height:14px;border-bottom:1px solid var(--gst-line-strong)}
+.ease__run i{position:absolute;left:0;bottom:-4px;width:7px;height:7px;background:var(--gst-accent)}
+.ease b{font-family:var(--gst-font-mono);font-size:var(--gst-fs-label);letter-spacing:.06em}
+.ease code{font-family:var(--gst-font-mono);font-size:10px;color:var(--gst-text-secondary)}
+.staggers{display:flex;flex-direction:column;gap:var(--gst-space-4)}
+.stg{display:grid;grid-template-columns:150px 1fr;gap:var(--gst-space-4);align-items:center}
+.stg__cells{display:flex;gap:6px;flex-wrap:wrap}
+.stg__cells i{width:22px;height:22px;background:var(--gst-brand)}
+
+.mx{display:grid;gap:var(--gst-space-7)}
+.m{display:grid;gap:var(--gst-space-5);padding-top:var(--gst-space-6);border-top:var(--gst-hairline) solid var(--gst-line-hairline)}
+@media (min-width:1100px){.m{grid-template-columns:5fr 7fr;align-items:start}}
+.m__id{display:flex;align-items:center;gap:var(--gst-space-3);flex-wrap:wrap}
+.m__id b{font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-lg);line-height:.85;color:var(--gst-accent-text)}
+.m__id h3{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:.9}
+.m__desc{margin:var(--gst-space-3) 0 var(--gst-space-4);color:var(--gst-text-secondary);max-width:52ch}
+.m .gst-spec{grid-template-columns:120px 1fr}
+.m .gst-spec dd{font-size:var(--gst-fs-label);line-height:1.5}
+.stage{position:relative;min-height:300px;background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline);overflow:hidden;display:flex;flex-direction:column}
+.stage__bar{display:flex;justify-content:space-between;align-items:center;gap:var(--gst-space-3);padding:8px 8px 8px 14px;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline)}
+.stage__body{position:relative;flex:1;padding:var(--gst-space-5);display:flex;flex-direction:column;justify-content:center;gap:var(--gst-space-4)}
+.stage--canvas{background:var(--gst-bg-canvas)}
+
+/* M1 */
+.m1box{position:relative;height:220px;border:0}
+.m1box .kpi{position:absolute;padding:14px}
+/* M5 */
+.mini-chain{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media (min-width:640px){.mini-chain{grid-template-columns:repeat(4,1fr)}}
+.mini-chain .node{background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline);padding:10px;display:flex;flex-direction:column;gap:4px;min-height:92px}
+.mini-chain .node b{font-family:var(--gst-font-display);font-weight:400;font-size:1.7rem;line-height:1}
+.mini-chain .node>span:last-child{font-family:var(--gst-font-mono);font-size:9.5px;letter-spacing:.08em;color:var(--gst-text-secondary);text-transform:uppercase}
+/* M7 */
+.m7{position:relative;flex:1;min-height:240px;overflow:hidden}
+.m7__page{position:absolute;inset:0;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px}
+.m7__bars i{position:absolute;background:var(--gst-bg-frame);z-index:3}
+/* M10 */
+.splash{position:relative;flex:1;min-height:260px;display:grid;place-items:center;background:var(--gst-bg-invert);color:var(--gst-text-on-invert);text-align:center}
+.splash svg{width:160px;height:auto;overflow:visible}
+.splash svg path{fill:none;stroke:currentColor;stroke-width:2;vector-effect:non-scaling-stroke;stroke-linejoin:miter}
+.splash svg [data-bolt]{stroke:var(--gst-eclair);stroke-width:3.5}
+.splash__w{font-family:var(--gst-font-display);font-size:3.6rem;line-height:.9;letter-spacing:.06em;margin-top:10px}
+.splash .gst-tag{color:var(--gst-text-on-invert);opacity:.8}
+/* M11 */
+.queue{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;border-top:var(--gst-hairline) solid var(--gst-line-hairline)}
+.queue li{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);font-family:var(--gst-font-mono);font-size:var(--gst-fs-label)}
+.queue li span:last-of-type{margin-left:auto;font-variant-numeric:tabular-nums}
+.queue .gst-check{min-height:auto}
+
+.micro{display:grid;gap:var(--gst-grid-gutter);grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.micro .doc-plate{min-height:170px;display:flex;flex-direction:column;justify-content:space-between;gap:var(--gst-space-4)}
+.api td:first-child{white-space:nowrap}
+</style>
+</head>
+<body>
+<main id="main" class="doc-main">
+
+<header class="doc-head">
+  <span class="gst-tag gst-tag--accent" data-decode>.02 / MOTION · LE TRAIT, LE CALCUL, L'ÉCLAIR</span>
+  <h1 class="doc-head__title" data-rise>Motion</h1>
+  <p class="doc-head__lead">Le plan se trace, se calcule, s'élève. Onze animations signature, toutes jouables ici — et toutes interruptibles.</p>
+  <dl class="doc-head__meta">
+    <div><dt class="gst-label">Moteur</dt><dd>gst-motion.js · WAAPI · 0 dépendance</dd></div>
+    <div><dt class="gst-label">Terrain</dt><dd>80 – 240 ms</dd></div>
+    <div><dt class="gst-label">Ciel</dt><dd>400 – 1 600 ms</dd></div>
+    <div><dt class="gst-label">Réduit</dt><dd>fondu 120 ms · 3D figée</dd></div>
+  </dl>
+</header>
+
+<section class="doc-sec">
+  <div class="doc-sec__head">
+    <div><span class="gst-tag" data-decode>.01 / CINQ LOIS</span><h2 class="doc-sec__title">Les lois</h2></div>
+    <p class="doc-sec__intro">Elles s'appliquent à chaque pixel qui bouge, de la case cochée au bus qui décolle.</p>
+  </div>
+  <ol class="laws" data-stagger>
+    <li><b>.01</b><h3>Le trait d'abord</h3><p>Une structure se dessine — hairlines, cadres, axes — avant que son contenu n'apparaisse. Le contenu naît de la structure, jamais de nulle part.</p></li>
+    <li><b>.02</b><h3>Tout part d'un nœud</h3><p>Chaque animation a une origine visible : un réticule, un tag, le bouton touché. Les ondes, les tracés et les ouvertures partent de ce point.</p></li>
+    <li><b>.03</b><h3>Le chiffre se calcule</h3><p>Un nombre ne remplace jamais un autre : il roule, colonne par colonne, de l'ancienne à la nouvelle valeur. « Le calcul est continu », rendu visible.</p></li>
+    <li><b>.04</b><h3>L'éclair est rare</h3><p>Une seule animation Éclair par écran, réservée aux moments décisifs : seuil critique, budget validé, décollage.</p></li>
+    <li><b>.05</b><h3>La beauté ne bloque jamais</h3><p>Aucune animation ne retarde une saisie de terrain. Tout est interruptible. <code class="doc-code-i">prefers-reduced-motion</code> → fondus de 120 ms, 3D figée sur son état final.</p></li>
+  </ol>
+</section>
+
+<section class="doc-sec">
+  <div class="doc-sec__head">
+    <div><span class="gst-tag" data-decode>.02 / TOKENS DE MOTION</span><h2 class="doc-sec__title">Durées & courbes</h2></div>
+    <p class="doc-sec__intro">Cliquez sur une durée ou une courbe pour la jouer. Les courbes sont tracées à partir des vraies valeurs <code class="doc-code-i">cubic-bezier</code> des tokens ; le ressort <em>seat</em> est simulé à partir de sa raideur, de son amortissement et de sa masse.</p>
+  </div>
+  <div class="doc-sub" style="margin-top:0">Durées</div>
+  <div class="durs" id="durs"></div>
+  <div class="doc-sub">Courbes</div>
+  <div class="eases" id="eases"></div>
+  <div class="doc-sub">Cascades</div>
+  <div class="staggers" id="staggers"></div>
+</section>
+
+<section class="doc-sec">
+  <div class="doc-sec__head">
+    <div><span class="gst-tag" data-decode>.03 / CATALOGUE M1 → M11</span><h2 class="doc-sec__title">Onze signatures</h2></div>
+    <p class="doc-sec__intro">Chaque fiche donne la durée, la courbe, le déclencheur et la version réduite. Les cinq prototypes exigés — <em>M1, M4, M5, M6, M10</em> — sont marqués.</p>
+  </div>
+  <div class="mx" id="mx"></div>
+</section>
+
+<section class="doc-sec">
+  <div class="doc-sec__head">
+    <div><span class="gst-tag" data-decode>.04 / MICRO-INTERACTIONS</span><h2 class="doc-sec__title">À la main</h2></div>
+    <p class="doc-sec__intro">Toutes en <code class="doc-code-i">ease-snap</code>, 80 – 160 ms. Elles se sentent plus qu'elles ne se voient.</p>
+  </div>
+  <div class="micro">
+    <div class="doc-plate"><span class="gst-tag">BOUTON · TRANSLATION 1 PX + CONTOUR QUI SE FERME</span><div class="doc-row"><button class="gst-btn gst-btn--primary">Survoler</button><button class="gst-btn gst-btn--secondary">Appuyer</button></div></div>
+    <div class="doc-plate"><span class="gst-tag">CASE · COCHE TRACÉE</span><div class="doc-stack"><label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Pharmacie vérifiée</label><label class="gst-check"><input type="checkbox" checked><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Eau potable chargée</label></div></div>
+    <div class="doc-plate"><span class="gst-tag">ONGLET · FILET ROUGE QUI GLISSE</span><div class="gst-tabs" role="tablist"><button aria-selected="true">Prévu</button><button aria-selected="false">Réel</button><button aria-selected="false">Écart</button></div></div>
+    <div class="doc-plate"><span class="gst-tag">LIGNE · RÉTICULE À GAUCHE AU SURVOL</span><div class="gst-table-wrap"><table class="gst-table gst-table--compact"><tbody><tr><td>Riz 50 kg</td><td class="n">6</td></tr><tr><td>Huile 20 L</td><td class="n">3</td></tr><tr><td>Sachets d'eau</td><td class="n">6 720</td></tr></tbody></table></div></div>
+    <div class="doc-plate"><span class="gst-tag">TOAST · ENTRE PAR LE BAS, TAG DÉCODÉ</span><button class="gst-btn gst-btn--secondary" id="toastBtn">Enregistrer</button></div>
+    <div class="doc-plate"><span class="gst-tag">TOGGLE · ANGLE VIF</span><label class="gst-toggle"><input type="checkbox" checked><span class="gst-toggle__track"></span><span class="gst-ui">Mode hors ligne</span></label></div>
+  </div>
+</section>
+
+<section class="doc-sec">
+  <div class="doc-sec__head">
+    <div><span class="gst-tag" data-decode>.05 / PILE & API</span><h2 class="doc-sec__title">Dans le code</h2></div>
+    <p class="doc-sec__intro">Stack de production recommandée : <em>GSAP</em> (ScrollTrigger, SplitText, DrawSVG) pour la vitrine et les séquences ; <em>Motion</em> pour l'UI React ; <em>Lenis</em> pour le défilement doux, sur la vitrine seulement ; <em>Three.js via React Three Fiber + drei</em>, chargés à la demande sur les deux pages 3D. Ce site de référence utilise un moteur vanilla de quelques kilo-octets qui implémente exactement les mêmes tokens.</p>
+  </div>
+  <div class="doc-table-wrap"><table class="doc-table api">
+    <thead><tr><th>Appel</th><th>Animation</th><th>Équivalent production</th></tr></thead>
+    <tbody>
+      <tr><td><code class="doc-code-i">GST.traceGrid(el, {cols, rows})</code></td><td>M1 · Tracé de grille</td><td>GSAP DrawSVG + stagger</td></tr>
+      <tr><td><code class="doc-code-i">GST.decode(el, texte)</code></td><td>M2 · Décodage de tag</td><td>GSAP ScrambleText / hook React</td></tr>
+      <tr><td><code class="doc-code-i">GST.rise(el)</code></td><td>M3 · Levée Bebas</td><td>GSAP SplitText</td></tr>
+      <tr><td><code class="doc-code-i">GST.odometer(el, valeur, {tone})</code></td><td>M4 · Odomètre</td><td>Composant React &lt;StatOdometer&gt; + Motion</td></tr>
+      <tr><td><code class="doc-code-i">GST.wave(origine, nœuds, {onArrive})</code></td><td>M5 · Onde de recalcul</td><td>Timeline GSAP pilotée par le graphe de dépendances</td></tr>
+      <tr><td><code class="doc-code-i">GST.strike(carte, {origin})</code></td><td>M6 · Frappe de l'Éclair</td><td>GSAP + navigator.vibrate</td></tr>
+      <tr><td><code class="doc-code-i">GST.wipe(href, libellé)</code></td><td>M7 · Volet de cadre</td><td>View Transitions API / AnimatePresence</td></tr>
+      <tr><td><code class="doc-code-i">GST.stamp(hôte, {big, small})</code></td><td>M8 · Tampon</td><td>Motion keyframes</td></tr>
+      <tr><td><code class="doc-code-i">GST.chartLine(hôte, données)</code></td><td>M9 · Courbe tracée</td><td>visx / D3 + DrawSVG</td></tr>
+      <tr><td><code class="doc-code-i">GST.crest({svg, word, sub, long})</code></td><td>M10 · Crête du Tonnerre</td><td>Timeline GSAP</td></tr>
+      <tr><td><code class="doc-code-i">GST.syncFlush(indicateur, file)</code></td><td>M11 · Synchronisation</td><td>Motion layout + Service Worker</td></tr>
+    </tbody></table></div>
+</section>
+</main>
+
+<script src="assets/js/gst-icons.js"></script>
+<script src="assets/js/gst-motion.js"></script>
+<script src="assets/js/gst-data.js"></script>
+<script src="assets/js/gst-components.js"></script>
+<script src="assets/js/gst-shell.js"></script>
+<script>
+(function () {
+  var GST = window.GST, D = window.GST_DATA;
+  var ico = function (id, c) { return '<svg class="gst-icon ' + (c || "") + '" aria-hidden="true"><use href="#i-' + id + '"/></svg>'; };
+
+  /* ── Durées ───────────────────────────────────────────────────────── */
+  var DURS = [["instant", "Retour tactile"], ["fast", "Survol, bascule, focus"], ["base", "Panneau, onglet"], ["slow", "Page, section"], ["scene", "Caméra 3D, étape"], ["epic", "Décollage, ouverture de camp"]];
+  var durs = document.getElementById("durs");
+  durs.innerHTML = DURS.map(function (d) {
+    var ms = GST.token("--gst-dur-" + d[0]);
+    return '<button class="dur" data-d="' + d[0] + '" aria-label="Jouer ' + d[0] + '"><span><b>--gst-dur-' + d[0] + "</b><br><span style=\"color:var(--gst-text-secondary)\">" + d[1] + "</span></span><span>" + ms + '</span><span class="dur__track"><i class="dur__bar" style="width:' + (parseFloat(ms) / 1600) * 100 + '%"></i><i class="dur__dot" style="left:0"></i></span></button>';
+  }).join("");
+  durs.querySelectorAll(".dur").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var dot = b.querySelector(".dur__dot"), bar = b.querySelector(".dur__bar");
+      var ms = GST.ms("--gst-dur-" + b.dataset.d) || 120;
+      dot.animate([{ left: "0%" }, { left: bar.style.width }], { duration: ms, easing: GST.ease("tonnerre"), fill: "forwards" });
+    });
+  });
+
+  /* ── Courbes ──────────────────────────────────────────────────────── */
+  var EASES = [["tonnerre", "Signature · 80 % des cas"], ["trace", "Tracés, caméra"], ["snap", "UI terrain, sans rebond"], ["strike", "Entrée de l'éclair"]];
+  var eases = document.getElementById("eases");
+  function curveSvg(fn, samples) {
+    var pts = []; for (var i = 0; i <= 60; i++) { var t = i / 60; pts.push([t, samples ? samples(t) : fn(t)]); }
+    var minY = Math.min(0, Math.min.apply(null, pts.map(function (p) { return p[1]; }))), maxY = Math.max(1, Math.max.apply(null, pts.map(function (p) { return p[1]; })));
+    var Y = function (v) { return 110 - ((v - minY) / (maxY - minY)) * 100; };
+    var d = pts.map(function (p, i) { return (i ? "L" : "M") + (10 + p[0] * 180).toFixed(1) + " " + Y(p[1]).toFixed(1); }).join(" ");
+    return '<svg viewBox="0 0 200 120" aria-hidden="true"><path class="ax" d="M10 10 V110 H190"/><line class="ghost" x1="10" y1="' + Y(1) + '" x2="190" y2="' + Y(1) + '"/><path class="cv" d="' + d + '"/><rect class="ball" width="7" height="7" x="6.5" y="' + (Y(0) - 3.5) + '"/></svg>';
+  }
+  var spring = GST.SPRING_SEAT;
+  var springFn = function (t) { var f = t * (spring.samples.length - 1), k = Math.min(spring.samples.length - 2, Math.floor(f)), r = f - k; return spring.samples[k] + (spring.samples[k + 1] - spring.samples[k]) * r; };
+  eases.innerHTML = EASES.map(function (e) {
+    return '<div class="ease" tabindex="0" role="button" data-e="' + e[0] + '"><b>--gst-ease-' + e[0] + "</b><code>" + GST.token("--gst-ease-" + e[0]) + "</code>" + curveSvg(GST.easeFn(e[0])) + '<div class="ease__run"><i></i></div><span class="gst-field__help">' + e[1] + "</span></div>";
+  }).join("") + '<div class="ease" tabindex="0" role="button" data-e="spring"><b>--gst-spring-seat</b><code>k 420 · c 28 · m 0,8 · ' + spring.duration + " ms</code>" + curveSvg(null, springFn) + '<div class="ease__run"><i></i></div><span class="gst-field__help">Sièges, pins, badges</span></div>';
+  eases.querySelectorAll(".ease").forEach(function (el) {
+    var play = function () {
+      var name = el.dataset.e, fn = name === "spring" ? springFn : GST.easeFn(name);
+      var ball = el.querySelector(".ball"), run = el.querySelector(".ease__run i"), path = el.querySelector(".cv");
+      var dur = name === "spring" ? spring.duration * 2 : 900, w = run.parentNode.clientWidth - 7;
+      var len = path.getTotalLength();
+      GST.tween(dur, function (v, raw) {
+        var p = path.getPointAtLength(len * raw);
+        ball.setAttribute("x", p.x - 3.5); ball.setAttribute("y", p.y - 3.5);
+        run.style.transform = "translateX(" + fn(raw) * w + "px)";
+      }, function (t) { return t; });
+    };
+    el.addEventListener("click", play); el.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); play(); } });
+  });
+
+  /* ── Cascades ─────────────────────────────────────────────────────── */
+  var stg = document.getElementById("staggers");
+  stg.innerHTML = [["tight", "Lettres, cellules", 18], ["base", "Lignes, cartes", 10], ["loose", "Sections, stations", 7]].map(function (s) {
+    return '<button class="stg" data-s="' + s[0] + '" style="background:none;border:0;padding:0;text-align:left;cursor:pointer;color:inherit"><span class="gst-ui">--gst-stagger-' + s[0] + "<br><span class=\"gst-field__help\">" + GST.token("--gst-stagger-" + s[0]) + " · " + s[1] + '</span></span><span class="stg__cells">' + Array(s[2] + 1).join("<i></i>") + "</span></button>";
+  }).join("");
+  stg.querySelectorAll(".stg").forEach(function (b) {
+    var go = function () { var ms = GST.ms("--gst-stagger-" + b.dataset.s); b.querySelectorAll("i").forEach(function (c, i) { GST.anim(c, [{ transform: "scale(0)" }, { transform: "scale(1)" }], { duration: 320, delay: i * ms, easing: GST.ease("tonnerre") }); }); };
+    b.addEventListener("click", go);
+    new IntersectionObserver(function (es, io) { if (es[0].isIntersecting) { io.disconnect(); go(); } }, { threshold: .6 }).observe(b);
+  });
+
+  /* ══ Catalogue ════════════════════════════════════════════════════ */
+  var M = [
+    { id: "M1", nom: "Tracé de grille", proto: true, desc: "Les hairlines se dessinent depuis les réticules, les réticules apparaissent en pop d'échelle, puis le contenu se révèle.",
+      spec: [["Durée", "600 ms par trait · cascade 30 ms"], ["Courbe", "ease-trace · nœuds : spring-seat"], ["Déclencheur", "Chargement d'écran, entrée de section"], ["Réduit", "Fondu 120 ms du contenu, grille déjà posée"], ["Où", "Écrans, sections vitrine, Skeleton"]],
+      stage: '<div class="m1box" id="m1"><div data-m1-content class="kpi" style="left:0;top:0"><span class="gst-tag">.01 / BUDGET PRÉVISIONNEL</span></div><div data-m1-content class="kpi" style="left:0;top:33%"><span class="gst-display-md">4 850 000</span></div><div data-m1-content class="kpi" style="left:50%;top:33%"><span class="gst-label">F CFA · 80 participants</span></div><div data-m1-content class="kpi" style="left:0;top:66%"><span class="gst-badge gst-badge--success">Validé</span></div></div>',
+      play: function () { GST.traceGrid(document.getElementById("m1"), { cols: 4, rows: 3 }); } },
+    { id: "M2", nom: "Décodage de tag", desc: "Les data tags se déchiffrent caractère par caractère : brouillage mono → texte final, 24 ms par caractère.",
+      spec: [["Durée", "24 ms × nombre de caractères"], ["Courbe", "Linéaire (révélation gauche → droite)"], ["Déclencheur", "Apparition d'un en-tête de bloc"], ["Réduit", "Texte final immédiat"], ["Où", "Tous les en-têtes, toasts, sièges"]],
+      stage: '<div class="doc-stack" id="m2"><span class="gst-tag gst-tag--accent" style="font-size:14px">.01 / LOGISTIQUE</span><span class="gst-tag" style="font-size:14px">J.05 / AUJOURD\'HUI</span><span class="gst-tag gst-tag--brand" style="font-size:14px">SIÈGE 23 / KOFFI A.</span><span class="gst-tag" style="font-size:14px">B · ALIMENTAIRE / 6 720 SACHETS</span></div>',
+      play: function () { document.querySelectorAll("#m2 .gst-tag").forEach(function (t, i) { GST.decode(t, null, { delay: i * 160 }); }); } },
+    { id: "M3", nom: "Levée Bebas", desc: "Les titres montent d'un masque de découpe, lettre par lettre, avec une légère compression verticale 0,92 → 1.",
+      spec: [["Durée", "720 ms par lettre · cascade 24 ms"], ["Courbe", "ease-tonnerre"], ["Déclencheur", "Titre de module, hero"], ["Réduit", "Fondu 120 ms"], ["Où", "Titres de module, vitrine"]],
+      stage: '<div id="m3"><span class="gst-tag">.01 / MODULE</span><h4 class="gst-display-xl" style="margin-top:8px">Logistique</h4></div>',
+      play: function () { GST.rise(document.querySelector("#m3 h4")); } },
+    { id: "M4", nom: "Odomètre", proto: true, desc: "Les chiffres roulent verticalement, colonne par colonne, unités en dernier. Flash de 160 ms : forêt si favorable, rouge si dépassement.",
+      spec: [["Durée", "760 ms · cascade 42 ms par colonne"], ["Courbe", "ease-tonnerre"], ["Déclencheur", "Toute mise à jour d'un chiffre"], ["Réduit", "Valeur finale immédiate"], ["Où", "KPI, budgets, compteur de places"]],
+      stage: '<div class="doc-stack" id="m4"><div class="gst-stat gst-stat--lg"><span class="gst-label">Enveloppe restante · Alimentaire</span><span class="gst-stat__value"><span data-odo4>251 600</span><span class="gst-stat__unit">F CFA</span></span></div><div class="gst-stat"><span class="gst-label">Places restantes</span><span class="gst-stat__value"><span data-odo4b>23</span></span></div><div class="doc-row"><button class="gst-btn gst-btn--primary gst-btn--sm" data-a="dep">Dépense −18 500</button><button class="gst-btn gst-btn--secondary gst-btn--sm" data-a="ent">Remboursement +6 000</button><button class="gst-btn gst-btn--ghost gst-btn--sm" data-a="ins">+1 inscription</button></div></div>',
+      init: function () {
+        var a = document.querySelector("[data-odo4]"), b = document.querySelector("[data-odo4b]"), v = 251600, p = 23;
+        GST.odometer(a, v, { instant: true }); GST.odometer(b, p, { instant: true });
+        document.querySelectorAll("#m4 [data-a]").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            if (btn.dataset.a === "dep") { v -= 18500; GST.odometer(a, v, { tone: "bad" }); }
+            if (btn.dataset.a === "ent") { v += 6000; GST.odometer(a, v, { tone: "good" }); }
+            if (btn.dataset.a === "ins" && p > 0) { p -= 1; GST.odometer(b, p, { tone: "good" }); }
+          });
+        });
+      },
+      play: function () { var a = document.querySelector("[data-odo4]"); GST.odometer(a, 0, { instant: true }); GST.odometer(a, 251600, { tone: null, duration: 1100 }); } },
+    { id: "M5", nom: "Onde de recalcul", proto: true, desc: "Quand une donnée change, une onde hairline part du champ modifié et traverse la chaîne de chiffrage : chaque chiffre dépendant pulse, puis roule. C'est l'animation qui raconte le produit.",
+      spec: [["Durée", "300 ms par maillon + 140 ms de pause"], ["Courbe", "ease-trace (onde) · ease-tonnerre (chiffres)"], ["Déclencheur", "Changement d'effectif, de prix, de menu"], ["Réduit", "Chiffres mis à jour, sans onde"], ["Où", "Logistique, Compta, Cuisine"]],
+      stage: '<div class="doc-stack" id="m5"><div class="doc-row"><div class="gst-field" style="flex:1;min-width:200px"><div class="gst-field__label"><span>Prix du riz · sac 50 kg</span><span class="gst-badge gst-badge--info">Hook</span></div><div class="gst-control gst-control--money"><input data-riz value="32 000" inputmode="numeric" aria-label="Prix du riz"><span class="gst-control__affix">F CFA</span></div></div><button class="gst-btn gst-btn--primary" data-riz-go style="align-self:flex-end">Appliquer +8 %</button></div>' +
+        '<div class="mini-chain"><div class="node"><span class="gst-tag">.01 CUISINE</span><b data-c="0">39</b><span>sacs pour le menu</span></div><div class="node"><span class="gst-tag">.02 ALIMENTAIRE</span><b data-c="1">1 248 000</b><span>riz · F CFA</span></div><div class="node"><span class="gst-tag">.03 ÉCONOMIQUE</span><b data-c="2">4 850 000</b><span>budget · F CFA</span></div><div class="node"><span class="gst-tag">.04 COMPTA</span><b data-c="3">1 200 000</b><span>reste à financer</span></div></div></div>',
+      init: function () {
+        var price = 32000, sacs = 39, base = 4850000 - 39 * 32000, recettes = 3650000;
+        var els = document.querySelectorAll("#m5 [data-c]");
+        var vals = function () { var r = sacs * price, b = base + r; return [sacs, r, b, b - recettes]; };
+        vals().forEach(function (v, i) { GST.odometer(els[i], v, { instant: true }); });
+        var up = true;
+        document.querySelector("[data-riz-go]").addEventListener("click", function (e) {
+          price = up ? Math.round(price * 1.08) : 32000; up = !up;
+          e.currentTarget.textContent = up ? "Appliquer +8 %" : "Revenir au prix validé";
+          document.querySelector("[data-riz]").value = GST.fmt(price);
+          var v = vals();
+          GST.wave(document.querySelector("[data-riz]").closest(".gst-control"), Array.prototype.map.call(els, function (x) { return x.closest(".node"); }), {
+            onArrive: function (i) { GST.odometer(els[i], v[i], { tone: i === 0 ? null : (up ? "good" : "bad") }); }
+          });
+        });
+      },
+      play: function () { document.querySelector("[data-riz-go]").click(); } },
+    { id: "M6", nom: "Frappe de l'Éclair", proto: true, desc: "Seuil critique franchi : un zigzag Éclair traverse la carte en 180 ms, le contour passe au rouge 2 px, un anneau net pulse deux fois autour du réticule d'origine, puis tout se stabilise. Vibration courte sur mobile.",
+      spec: [["Durée", "180 ms (éclair) + 2 × 520 ms (anneau)"], ["Courbe", "ease-strike"], ["Déclencheur", "Franchissement d'un seuil critique"], ["Réduit", "Contour rouge + alerte, sans éclair"], ["Où", "Santé, eau, sécurité — 1 par écran"]],
+      stage: '<div id="m6" class="gst-card" style="max-width:420px"><div style="display:flex;justify-content:space-between;align-items:center"><span class="gst-tag">B · ALIMENTAIRE / EAU POTABLE</span><i class="gst-reticle gst-reticle--brand gst-reticle--lg" data-o></i></div><div class="gst-stat" style="margin:12px 0"><span class="gst-label">Stock sur le terrain</span><span class="gst-stat__value"><span data-w>1 140</span><span class="gst-stat__unit">sachets</span></span></div><div class="gst-need"><div class="gst-need__bar"><i class="gst-need__have" data-wb style="width:68%"></i><i class="gst-need__seuil" style="left:57%"></i></div><div class="gst-need__legend"><span>Seuil : 960 · 2 jours</span><span>Besoin 1 680</span></div></div><div class="doc-row" style="margin-top:14px"><button class="gst-btn gst-btn--secondary gst-btn--sm" data-cons>Distribuer 120</button><button class="gst-btn gst-btn--ghost gst-btn--sm" data-reset>Réapprovisionner</button></div></div>',
+      init: function () {
+        var w = 1140, el = document.querySelector("[data-w]"), bar = document.querySelector("[data-wb]"), card = document.getElementById("m6"), struck = false;
+        GST.odometer(el, w, { instant: true });
+        var set = function (tone) { GST.odometer(el, w, { tone: tone }); bar.style.width = (w / 1680) * 100 + "%"; };
+        document.querySelector("[data-cons]").addEventListener("click", function () {
+          if (w <= 120) return; w -= 120; set("bad");
+          if (w < 960 && !struck) { struck = true; GST.strike(card, { origin: card.querySelector("[data-o]") }); }
+        });
+        document.querySelector("[data-reset]").addEventListener("click", function () { w = 1140; struck = false; card.classList.remove("is-critical"); set("good"); });
+      },
+      play: function () { var c = document.getElementById("m6"); c.classList.remove("is-critical"); GST.strike(c, { origin: c.querySelector("[data-o]") }); } },
+    { id: "M7", nom: "Volet de cadre", desc: "Transition de page : le cadre teal des affiches se referme depuis les bords (34 px → plein écran → 34 px) et révèle la nouvelle page. La destination se décode pendant le noir.",
+      spec: [["Durée", "420 ms aller · 420 ms retour"], ["Courbe", "ease-trace puis ease-tonnerre"], ["Déclencheur", "Navigation entre modules"], ["Réduit", "Navigation directe"], ["Où", "Rail des modules, chapitres de ce site"]],
+      stage: '<div class="m7" id="m7"><div class="m7__page" data-p="0"><span class="gst-tag">.01 / LOGISTIQUE</span><span class="gst-display-lg">10 groupes</span></div><div class="m7__page" data-p="1" style="visibility:hidden;background:var(--gst-bg-sunken)"><span class="gst-tag">.02 / COMPTABILITÉ</span><span class="gst-display-lg">Version A | B</span></div><div class="m7__bars"><i style="top:0;left:0;right:0;height:50%;transform-origin:top"></i><i style="bottom:0;left:0;right:0;height:50%;transform-origin:bottom"></i><i style="top:0;bottom:0;left:0;width:50%;transform-origin:left"></i><i style="top:0;bottom:0;right:0;width:50%;transform-origin:right"></i></div></div><div style="padding:0 20px 16px"><a class="gst-btn gst-btn--ghost gst-btn--sm" href="composants.html">Essayer en vrai → Composants</a></div>',
+      init: function () {
+        var host = document.getElementById("m7"), bars = host.querySelectorAll(".m7__bars i"), pages = host.querySelectorAll(".m7__page"), cur = 0;
+        var fr = function () { return 17 / (host.clientHeight / 2); };
+        bars.forEach(function (b, i) { b.style.transform = (i < 2 ? "scaleY(" : "scaleX(") + (i < 2 ? 17 / (host.clientHeight / 2 || 120) : 17 / (host.clientWidth / 2 || 200)) + ")"; });
+        host._go = function () {
+          var sv = 17 / (host.clientHeight / 2), sh = 17 / (host.clientWidth / 2);
+          var anim = function (to, dur, ease) {
+            return Promise.all(Array.prototype.map.call(bars, function (b, i) {
+              var p = i < 2 ? "scaleY" : "scaleX", from = b.style.transform, t = p + "(" + (to === "full" ? 1 : i < 2 ? sv : sh) + ")";
+              b.style.transform = t;
+              return b.animate([{ transform: from }, { transform: t }], { duration: dur, easing: ease }).finished;
+            }));
+          };
+          anim("full", 420, GST.ease("trace")).then(function () {
+            pages[cur].style.visibility = "hidden"; cur = 1 - cur; pages[cur].style.visibility = "visible";
+            GST.decode(pages[cur].querySelector(".gst-tag"));
+            return anim("frame", 420, GST.ease("tonnerre"));
+          });
+        };
+      },
+      play: function () { document.getElementById("m7")._go(); } },
+    { id: "M8", nom: "Tampon de validation", desc: "Validation d'un budget ou clôture des comptes du jour : un tampon mono s'imprime en rotation −4°, avec un très léger écrasement d'échelle.",
+      spec: [["Durée", "520 ms"], ["Courbe", "ease-strike à l'impact, ressort court"], ["Déclencheur", "Arrêt de journée, budget gelé"], ["Réduit", "Tampon posé, sans impact"], ["Où", "Compta, Logistique, Bus complet"]],
+      stage: '<div id="m8" class="gst-card" style="max-width:440px;min-height:190px"><span class="gst-tag">COMPTES DU JOUR / J.04 · 08.08</span><dl class="gst-spec" style="margin-top:12px"><dt>Dépensé</dt><dd>173 000 F CFA</dd><dt>Solde caisse</dt><dd>412 500 F CFA</dd><dt>Écart caisse</dt><dd>0</dd></dl></div>',
+      play: function () { var h = document.getElementById("m8"); h.querySelectorAll(".gst-stamp").forEach(function (s) { s.remove(); }); GST.stamp(h, { big: "VALIDÉ", left: "64%", top: "58%" }); } },
+    { id: "M9", nom: "Courbe tracée", desc: "Les courbes se dessinent de gauche à droite ; le prévu en pointillé teal, le réel en rouge plein qui « rattrape » le prévu. Le point survolé devient un réticule qui s'agrandit et ouvre le détail.",
+      spec: [["Durée", "700 ms (prévu) · 1 300 ms (réel)"], ["Courbe", "ease-trace"], ["Déclencheur", "Affichage du graphique"], ["Réduit", "Courbes posées"], ["Où", "Comptabilité, bilan"]],
+      stage: '<div><div class="gst-legend" style="margin-bottom:8px"><span><i class="l-planned"></i>Prévu</span><span><i class="l-actual"></i>Réel</span></div><div id="m9"></div></div>',
+      init: function () { this.chart = GST.chartLine(document.getElementById("m9"), { labels: D.COURBE.prevu.map(function (_, i) { return "J." + String(i + 1).padStart(2, "0"); }), planned: D.COURBE.prevu, actual: D.COURBE.reel, unit: "k F CFA · cumul", every: 2 }); },
+      play: function () { this.chart && this.chart.play(); } },
+    { id: "M10", nom: "Crête du Tonnerre", proto: true, desc: "Loader et intro : la ligne de crête du logo se dessine d'un trait continu, un éclair la frappe, TONNERRE se lève en Bebas. Version courte 900 ms pour l'app, longue 2,4 s pour la vitrine (voir l'Ouverture).",
+      spec: [["Durée", "900 ms (app) · 2 400 ms (vitrine)"], ["Courbe", "trace → strike → tonnerre"], ["Déclencheur", "Chargement, splash PWA"], ["Réduit", "Logo posé"], ["Où", "Splash, connexion, vitrine"]],
+      stage: '<div class="splash" id="m10"><div><svg viewBox="0 -18 120 78" aria-hidden="true"><path data-crest d="M2 58 L20 41 L27 45 L40 27 L48 33 L61 9 L68 19 L75 15 L90 35 L98 31 L118 58"/><path data-bolt d="M80 -16 L68 1 L74 2 L62 10"/></svg><div class="splash__w" data-w>TONNERRE</div><span class="gst-tag" data-s>GST GOVERNMENT · CHARGEMENT</span></div></div>',
+      play: function () { var h = document.getElementById("m10"); GST.crest({ svg: h.querySelector("svg"), word: h.querySelector("[data-w]"), sub: h.querySelector("[data-s]"), long: false }); } },
+    { id: "M11", nom: "Synchronisation", desc: "Hors ligne, la pastille « respire » en teal tant que des données attendent ; au retour du réseau, les lignes en file défilent vers le haut et se cochent une à une.",
+      spec: [["Durée", "Respiration 1,6 s · 260 ms par ligne"], ["Courbe", "ease-trace · ease-tonnerre"], ["Déclencheur", "Perte / retour du réseau"], ["Réduit", "États sans respiration"], ["Où", "Barre supérieure terrain, écrans de saisie"]],
+      stage: '<div class="doc-stack" id="m11"><div class="doc-row" style="justify-content:space-between"><span class="gst-sync is-offline" data-sync><span class="gst-sync__dot"></span><span class="gst-sync__label">HORS LIGNE · 3 EN FILE</span></span><div class="doc-row"><button class="gst-btn gst-btn--secondary gst-btn--sm" data-net><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-refresh-cw"/></svg>Retour du réseau</button></div></div><ul class="queue" data-q></ul></div>',
+      init: function () {
+        var q = document.querySelector("[data-q]"), sync = document.querySelector("[data-sync]");
+        var fill = function () {
+          q.style.opacity = 1; q.style.transform = "none"; q.getAnimations && q.getAnimations().forEach(function (a) { a.cancel(); });
+          q.innerHTML = [["Dépense · carburant convoi", "86 500"], ["Inventaire · gilets × 80", "80"], ["Vote cuisine · J.06 midi", "1"]].map(function (r) {
+            return '<li><label class="gst-check"><input type="checkbox" tabindex="-1"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span></label><span>' + r[0] + "</span><span>" + r[1] + "</span></li>";
+          }).join("");
+          sync.className = "gst-sync is-pending"; sync.querySelector(".gst-sync__label").textContent = "EN ATTENTE · 3 EN FILE";
+        };
+        fill();
+        this.fill = fill;
+        document.querySelector("[data-net]").addEventListener("click", function () { GST.syncFlush(sync, q).then(function () { setTimeout(fill, 2600); }); });
+      },
+      play: function () { document.querySelector("[data-net]").click(); } }
+  ];
+  var mx = document.getElementById("mx");
+  mx.innerHTML = M.map(function (m, i) {
+    return '<article class="m" id="sig-' + m.id.toLowerCase() + '"><div><div class="m__id"><b>' + m.id + "</b><h3>" + m.nom + "</h3>" + (m.proto ? '<span class="gst-badge gst-badge--solid">Prototype</span>' : "") + '</div><p class="m__desc">' + m.desc + '</p><dl class="gst-spec gst-spec--rules">' +
+      m.spec.map(function (s) { return "<dt>" + s[0] + "</dt><dd>" + s[1] + "</dd>"; }).join("") + '</dl></div><div class="stage"><div class="stage__bar"><span class="gst-tag">' + m.id + " / SCÈNE</span><button class=\"gst-btn gst-btn--ghost gst-btn--sm\" data-play=\"" + i + '">' + ico("play", "gst-icon--sm") + 'Rejouer</button></div><div class="stage__body">' + m.stage + "</div></div></article>";
+  }).join("");
+  M.forEach(function (m) { if (m.init) m.init(); });
+  mx.querySelectorAll("[data-play]").forEach(function (b) { b.addEventListener("click", function () { M[+b.dataset.play].play(); }); });
+  // Lecture automatique à l'entrée dans l'écran
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); var i = +e.target.querySelector("[data-play]").dataset.play; if (["M6", "M7", "M11", "M5"].indexOf(M[i].id) < 0) M[i].play(); } });
+  }, { threshold: .55 });
+  mx.querySelectorAll(".m").forEach(function (a) { io.observe(a); });
+
+  document.getElementById("toastBtn").addEventListener("click", function () { GST.toast("Dépense enregistrée · 18 500 F CFA", { tag: ".02 / COMPTABILITÉ", tone: "success" }); });
+})();
+</script>
+</body>
+</html>

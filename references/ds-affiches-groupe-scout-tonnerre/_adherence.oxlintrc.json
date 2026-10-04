@@ -1,0 +1,370 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/brand/**",
+              "components/content/**",
+              "components/layout/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:Bebas Neue|EB Garamond|IBM Plex Mono))/i]",
+        "message": "Font not provided by the design system. Available: Bebas Neue, EB Garamond, IBM Plex Mono."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='BodyText'] > JSXAttribute > JSXIdentifier[name!=/^(?:children|size|color|maxWidth|note|align|style|key|ref|className|style|children)$/]",
+        "message": "<BodyText> doesn't accept that prop. Declared props: children, size, color, maxWidth, note, align, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='BodyText'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:md|sm)$/]",
+        "message": "<BodyText> size must be one of 'md' | 'sm'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='BodyText'] > JSXAttribute[name.name='align'] > Literal[value!=/^(?:left|center|right)$/]",
+        "message": "<BodyText> align must be one of 'left' | 'center' | 'right'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Countdown'] > JSXAttribute > JSXIdentifier[name!=/^(?:kicker|date|prefix|value|color|align|style|key|ref|className|style|children)$/]",
+        "message": "<Countdown> doesn't accept that prop. Declared props: kicker, date, prefix, value, color, align, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Countdown'] > JSXAttribute[name.name='color'] > Literal[value!=/^(?:ink|red|teal)$/]",
+        "message": "<Countdown> color must be one of 'ink' | 'red' | 'teal'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Countdown'] > JSXAttribute[name.name='align'] > Literal[value!=/^(?:left|center)$/]",
+        "message": "<Countdown> align must be one of 'left' | 'center'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='DataTag'] > JSXAttribute > JSXIdentifier[name!=/^(?:index|label|tone|style|key|ref|className|style|children)$/]",
+        "message": "<DataTag> doesn't accept that prop. Declared props: index, label, tone, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='DataTag'] > JSXAttribute[name.name='tone'] > Literal[value!=/^(?:auto|red)$/]",
+        "message": "<DataTag> tone must be one of 'auto' | 'red'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Divider'] > JSXAttribute > JSXIdentifier[name!=/^(?:width|weight|color|tag|tagIndex|align|style|key|ref|className|style|children)$/]",
+        "message": "<Divider> doesn't accept that prop. Declared props: width, weight, color, tag, tagIndex, align, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Divider'] > JSXAttribute[name.name='align'] > Literal[value!=/^(?:left|center|right)$/]",
+        "message": "<Divider> align must be one of 'left' | 'center' | 'right'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Fleur'] > JSXAttribute > JSXIdentifier[name!=/^(?:size|color|style|key|ref|className|style|children)$/]",
+        "message": "<Fleur> doesn't accept that prop. Declared props: size, color, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='GreetingBlock'] > JSXAttribute > JSXIdentifier[name!=/^(?:lead|highlight|message|highlightColor|fleur|align|style|key|ref|className|style|children)$/]",
+        "message": "<GreetingBlock> doesn't accept that prop. Declared props: lead, highlight, message, highlightColor, fleur, align, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='GreetingBlock'] > JSXAttribute[name.name='highlightColor'] > Literal[value!=/^(?:ink|red|teal)$/]",
+        "message": "<GreetingBlock> highlightColor must be one of 'ink' | 'red' | 'teal'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='GreetingBlock'] > JSXAttribute[name.name='align'] > Literal[value!=/^(?:center|left)$/]",
+        "message": "<GreetingBlock> align must be one of 'center' | 'left'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='GridOverlay'] > JSXAttribute > JSXIdentifier[name!=/^(?:cols|rows|nodes|inset|color|nodeColor|style|key|ref|className|style|children)$/]",
+        "message": "<GridOverlay> doesn't accept that prop. Declared props: cols, rows, nodes, inset, color, nodeColor, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='HeaderBand'] > JSXAttribute > JSXIdentifier[name!=/^(?:eyebrow|org|submention|collaborator|connector|closer|tone|align|style|key|ref|className|style|children)$/]",
+        "message": "<HeaderBand> doesn't accept that prop. Declared props: eyebrow, org, submention, collaborator, connector, closer, tone, align, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='HeaderBand'] > JSXAttribute[name.name='tone'] > Literal[value!=/^(?:light|dark)$/]",
+        "message": "<HeaderBand> tone must be one of 'light' | 'dark'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='HeaderBand'] > JSXAttribute[name.name='align'] > Literal[value!=/^(?:left|center|right)$/]",
+        "message": "<HeaderBand> align must be one of 'left' | 'center' | 'right'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='PartnerRow'] > JSXAttribute > JSXIdentifier[name!=/^(?:badgesSrc|height|caption|logo|align|style|key|ref|className|style|children)$/]",
+        "message": "<PartnerRow> doesn't accept that prop. Declared props: badgesSrc, height, caption, logo, align, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='PartnerRow'] > JSXAttribute[name.name='align'] > Literal[value!=/^(?:center|left)$/]",
+        "message": "<PartnerRow> align must be one of 'center' | 'left'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='PosterFrame'] > JSXAttribute > JSXIdentifier[name!=/^(?:tone|inset|grid|gridCols|gridRows|header|rail|footer|size|children|className|style|key|ref|className|style|children)$/]",
+        "message": "<PosterFrame> doesn't accept that prop. Declared props: tone, inset, grid, gridCols, gridRows, header, rail, footer, size, children, className, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='PosterFrame'] > JSXAttribute[name.name='tone'] > Literal[value!=/^(?:white|cream|teal)$/]",
+        "message": "<PosterFrame> tone must be one of 'white' | 'cream' | 'teal'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='SocialRail'] > JSXAttribute > JSXIdentifier[name!=/^(?:platforms|handle|iconColor|iconSize|gap|style|key|ref|className|style|children)$/]",
+        "message": "<SocialRail> doesn't accept that prop. Declared props: platforms, handle, iconColor, iconSize, gap, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='SpecItem'] > JSXAttribute > JSXIdentifier[name!=/^(?:label|value|index|key|ref|className|style|children)$/]",
+        "message": "<SpecItem> doesn't accept that prop. Declared props: label, value, index."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='TitleBlock'] > JSXAttribute > JSXIdentifier[name!=/^(?:eyebrow|title|subtitle|color|size|align|fleur|style|key|ref|className|style|children)$/]",
+        "message": "<TitleBlock> doesn't accept that prop. Declared props: eyebrow, title, subtitle, color, size, align, fleur, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='TitleBlock'] > JSXAttribute[name.name='color'] > Literal[value!=/^(?:red|ink|teal|white)$/]",
+        "message": "<TitleBlock> color must be one of 'red' | 'ink' | 'teal' | 'white'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='TitleBlock'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:xl|lg|md)$/]",
+        "message": "<TitleBlock> size must be one of 'xl' | 'lg' | 'md'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='TitleBlock'] > JSXAttribute[name.name='align'] > Literal[value!=/^(?:left|center|right)$/]",
+        "message": "<TitleBlock> align must be one of 'left' | 'center' | 'right'."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "BodyText": {
+        "replaces": []
+      },
+      "Countdown": {
+        "replaces": []
+      },
+      "DataTag": {
+        "replaces": []
+      },
+      "Divider": {
+        "replaces": []
+      },
+      "Fleur": {
+        "replaces": []
+      },
+      "GreetingBlock": {
+        "replaces": []
+      },
+      "GridOverlay": {
+        "replaces": []
+      },
+      "HeaderBand": {
+        "replaces": []
+      },
+      "PartnerRow": {
+        "replaces": []
+      },
+      "PosterFrame": {
+        "replaces": []
+      },
+      "SocialRail": {
+        "replaces": []
+      },
+      "SpecItem": {
+        "replaces": []
+      },
+      "TitleBlock": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--bg-frame",
+      "--bg-invert",
+      "--bg-panel",
+      "--bg-panel-alt",
+      "--border-weight",
+      "--cream",
+      "--font-display",
+      "--font-mono",
+      "--font-serif",
+      "--frame-pad",
+      "--fs-body",
+      "--fs-body-sm",
+      "--fs-display-2xl",
+      "--fs-display-lg",
+      "--fs-display-md",
+      "--fs-display-xl",
+      "--fs-eyebrow",
+      "--fs-mono",
+      "--fs-mono-sm",
+      "--fs-serif-lg",
+      "--fs-serif-xl",
+      "--fs-tag",
+      "--fw-medium",
+      "--fw-regular",
+      "--fw-semibold",
+      "--grid-cols",
+      "--grid-gutter",
+      "--hairline",
+      "--ink",
+      "--ink-40",
+      "--ink-70",
+      "--lh-body",
+      "--lh-display",
+      "--lh-mono",
+      "--lh-title",
+      "--line-on-teal",
+      "--line-on-white",
+      "--ls-display",
+      "--ls-eyebrow",
+      "--ls-label",
+      "--ls-mono",
+      "--ls-tag",
+      "--node-on-teal",
+      "--node-on-white",
+      "--node-size",
+      "--panel-pad",
+      "--poster-size",
+      "--radius-none",
+      "--radius-pill",
+      "--radius-sm",
+      "--rail-width",
+      "--red",
+      "--red-deep",
+      "--rule",
+      "--rule-weight",
+      "--space-1",
+      "--space-10",
+      "--space-2",
+      "--space-3",
+      "--space-4",
+      "--space-5",
+      "--space-6",
+      "--space-7",
+      "--space-8",
+      "--space-9",
+      "--tag",
+      "--teal",
+      "--teal-deep",
+      "--teal-ink",
+      "--text-accent",
+      "--text-body",
+      "--text-eyebrow",
+      "--text-faint",
+      "--text-muted",
+      "--text-on-teal",
+      "--white"
+    ],
+    "tokenKinds": {
+      "--teal": "color",
+      "--teal-deep": "color",
+      "--teal-ink": "color",
+      "--red": "color",
+      "--red-deep": "color",
+      "--cream": "color",
+      "--white": "color",
+      "--ink": "color",
+      "--ink-70": "color",
+      "--ink-40": "color",
+      "--line-on-white": "color",
+      "--line-on-teal": "color",
+      "--node-on-white": "color",
+      "--node-on-teal": "color",
+      "--bg-frame": "color",
+      "--bg-panel": "color",
+      "--bg-panel-alt": "color",
+      "--bg-invert": "color",
+      "--text-body": "font",
+      "--text-muted": "font",
+      "--text-faint": "font",
+      "--text-on-teal": "font",
+      "--text-accent": "font",
+      "--text-eyebrow": "font",
+      "--rule": "color",
+      "--tag": "color",
+      "--font-display": "font",
+      "--font-serif": "font",
+      "--font-mono": "font",
+      "--fs-display-2xl": "spacing",
+      "--fs-display-xl": "spacing",
+      "--fs-display-lg": "spacing",
+      "--fs-display-md": "spacing",
+      "--fs-serif-xl": "spacing",
+      "--fs-serif-lg": "spacing",
+      "--fs-body": "spacing",
+      "--fs-body-sm": "spacing",
+      "--fs-mono": "spacing",
+      "--fs-mono-sm": "spacing",
+      "--fs-eyebrow": "spacing",
+      "--fs-tag": "spacing",
+      "--fw-regular": "font",
+      "--fw-medium": "font",
+      "--fw-semibold": "font",
+      "--lh-display": "other",
+      "--lh-title": "other",
+      "--lh-body": "other",
+      "--lh-mono": "other",
+      "--ls-display": "spacing",
+      "--ls-eyebrow": "spacing",
+      "--ls-mono": "spacing",
+      "--ls-label": "spacing",
+      "--ls-tag": "spacing",
+      "--space-1": "spacing",
+      "--space-2": "spacing",
+      "--space-3": "spacing",
+      "--space-4": "spacing",
+      "--space-5": "spacing",
+      "--space-6": "spacing",
+      "--space-7": "spacing",
+      "--space-8": "spacing",
+      "--space-9": "spacing",
+      "--space-10": "spacing",
+      "--poster-size": "spacing",
+      "--frame-pad": "spacing",
+      "--panel-pad": "spacing",
+      "--rail-width": "spacing",
+      "--grid-cols": "other",
+      "--grid-gutter": "spacing",
+      "--hairline": "spacing",
+      "--node-size": "spacing",
+      "--radius-none": "radius",
+      "--radius-sm": "radius",
+      "--radius-pill": "radius",
+      "--rule-weight": "font",
+      "--border-weight": "font"
+    },
+    "fontFamilies": [
+      "Bebas Neue",
+      "EB Garamond",
+      "IBM Plex Mono"
+    ]
+  }
+}

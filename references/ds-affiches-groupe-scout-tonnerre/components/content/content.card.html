@@ -1,0 +1,57 @@
+<!-- @dsCard group="Components" viewport="1040x1520" name="Content — titre, texte, fiche, compte à rebours, vœux" subtitle="TitleBlock · BodyText · SpecSheet · Countdown · GreetingBlock · Divider" -->
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<link rel="stylesheet" href="../../styles.css">
+<style>html,body{margin:0;background:var(--white)}#root{width:1040px}</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const NS = window.GroupeScoutTonnerreDesignSystem_ad7474;
+const { TitleBlock, BodyText, SpecSheet, Countdown, GreetingBlock, Divider, DataTag } = NS;
+const label = { fontFamily:"var(--font-mono)", fontSize:13, letterSpacing:".16em", textTransform:"uppercase", color:"var(--ink-40)", marginBottom:20 };
+const sec = { padding:"40px 48px", borderTop:"1px solid var(--line-on-white)" };
+function Demo(){
+  return (
+    <div style={{fontFamily:"var(--font-serif)"}}>
+      <div style={{padding:"48px 48px 40px"}}>
+        <div style={label}>TitleBlock</div>
+        <TitleBlock eyebrow="Ce 17 juillet 2026," title="Journée de la Bonne Action" color="red" size="lg" />
+      </div>
+      <div style={sec}>
+        <div style={label}>Divider + DataTag</div>
+        <Divider width={280} tagIndex=".02" tag="Action ville propre" />
+      </div>
+      <div style={sec}>
+        <div style={label}>BodyText (+ note)</div>
+        <BodyText color="ink" note="NB : Prévoir des gants et des sacs poubelles">
+          La Journée de la Bonne Action est une tradition scoute où chaque membre s'engage
+          à accomplir un geste concret de service envers autrui.
+        </BodyText>
+      </div>
+      <div style={sec}>
+        <div style={label}>SpecSheet · inline</div>
+        <SpecSheet layout="inline" items={[{label:"Départ",value:"8h30"},{label:"Lieu",value:"Attikoumé"},{label:"Arrivée",value:"CPLT"}]} />
+      </div>
+      <div style={sec}>
+        <div style={label}>SpecSheet · cards</div>
+        <SpecSheet layout="cards" items={[{label:"Inscription",value:"5 000 F CFA"},{label:"Participation",value:"25 000 F CFA"}]} />
+      </div>
+      <div style={sec}>
+        <div style={label}>SpecSheet · stack</div>
+        <SpecSheet layout="stack" items={[{index:".01",label:"Date",value:"05 – 18 août 2026"},{index:".02",label:"Contact",value:"91 36 21 05 / 70 88 37 93"}]} />
+      </div>
+      <div style={{...sec, display:"flex", gap:64, flexWrap:"wrap"}}>
+        <div><div style={label}>Countdown</div><Countdown kicker="Fin des inscriptions" date="30 juillet 2026" value="10" /></div>
+        <div><div style={label}>GreetingBlock</div><GreetingBlock lead="Bonne fête de" highlight="Tabaski" highlightColor="red" fleur align="left" /></div>
+      </div>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<Demo/>);
+</script>
+</body></html>

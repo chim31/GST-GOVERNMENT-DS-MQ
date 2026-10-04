@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Affiche carrée — événement" description="Affiche 1080×1080 : cadre teal, en-tête association, gros titre, texte, fiche infos pratiques, rail réseaux, badges partenaires." -->
+<helmet><script src="./ds-base.js"></script></helmet>
+<div style="position:relative;width:1080px;height:1080px;background:var(--teal-deep);box-sizing:border-box;padding:34px;display:flex;flex-direction:column;font-family:var(--font-serif);overflow:hidden">
+  <div style="position:relative;z-index:1;flex:1;min-height:0;display:flex;flex-direction:column;padding-right:48px">
+    <div style="flex:none">
+      <x-import component-from-global-scope="GroupeScoutTonnerreDesignSystem_ad7474.HeaderBand" submention="{{ submention }}" hint-size="900px,180px"></x-import>
+    </div>
+    <div style="position:relative;flex:1;min-height:0;background:var(--white);box-sizing:border-box;padding:68px;margin-top:32px;display:flex;flex-direction:column">
+      <div style="position:relative;z-index:1;flex:1;min-height:0;display:flex;flex-direction:column;gap:32px;justify-content:center">
+        <x-import component-from-global-scope="GroupeScoutTonnerreDesignSystem_ad7474.TitleBlock" eyebrow="{{ eyebrow }}" title="{{ title }}" color="{{ titleColor }}" size="lg" hint-size="100%,240px"></x-import>
+        <x-import component-from-global-scope="GroupeScoutTonnerreDesignSystem_ad7474.BodyText" color="ink" maxWidth="32ch" hint-size="100%,120px">{{ body }}</x-import>
+        <x-import component-from-global-scope="GroupeScoutTonnerreDesignSystem_ad7474.Divider" width="260" tag="{{ dividerTag }}" hint-size="260px,30px"></x-import>
+        <x-import component-from-global-scope="GroupeScoutTonnerreDesignSystem_ad7474.SpecSheet" items="{{ items }}" layout="inline" hint-size="100%,60px"></x-import>
+      </div>
+      <div style="position:relative;z-index:1;flex:none;margin-top:32px">
+        <x-import component-from-global-scope="GroupeScoutTonnerreDesignSystem_ad7474.PartnerRow" badgesSrc="../../assets/partner-badges.png" hint-size="100%,60px"></x-import>
+      </div>
+    </div>
+  </div>
+  <div style="position:absolute;top:0;right:0;height:100%;width:34px;display:flex;align-items:center;justify-content:center;z-index:2">
+    <x-import component-from-global-scope="GroupeScoutTonnerreDesignSystem_ad7474.SocialRail" hint-size="34px,320px"></x-import>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1080,&quot;height&quot;:1080},&quot;eyebrow&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Ce 17 juillet 2026,&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Titre&quot;},&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Journée de la Bonne Action&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Titre&quot;},&quot;titleColor&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;red&quot;,&quot;teal&quot;,&quot;ink&quot;],&quot;default&quot;:&quot;red&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Titre&quot;},&quot;submention&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;vous présente&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;En-tête&quot;},&quot;body&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;La Journée de la Bonne Action est une tradition scoute où chaque membre s'engage à accomplir un geste concret de service envers autrui ou sa communauté.&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texte&quot;},&quot;dividerTag&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Action ville propre&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Texte&quot;},&quot;spec1Label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Départ&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Infos pratiques&quot;},&quot;spec1Value&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;8h30&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Infos pratiques&quot;},&quot;spec2Label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Lieu&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Infos pratiques&quot;},&quot;spec2Value&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Attikoumé&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Infos pratiques&quot;},&quot;spec3Label&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Arrivée&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Infos pratiques&quot;},&quot;spec3Value&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;CPLT&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Infos pratiques&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props;
+    const pairs = [
+      [p.spec1Label, p.spec1Value],
+      [p.spec2Label, p.spec2Value],
+      [p.spec3Label, p.spec3Value],
+    ];
+    const items = pairs
+      .filter(([l, v]) => (l && l.length) || (v && v.length))
+      .map(([label, value]) => ({ label: label || "", value: value || "" }));
+    return {
+      eyebrow: p.eyebrow ?? "Ce 17 juillet 2026,",
+      submention: p.submention ?? "vous présente",
+      title: p.title ?? "Journée de la Bonne Action",
+      titleColor: p.titleColor ?? "red",
+      body: p.body ?? "La Journée de la Bonne Action est une tradition scoute où chaque membre s'engage à accomplir un geste concret de service envers autrui ou sa communauté.",
+      dividerTag: p.dividerTag ?? "Action ville propre",
+      items,
+    };
+  }
+}
+</script>
+</body>
+</html>

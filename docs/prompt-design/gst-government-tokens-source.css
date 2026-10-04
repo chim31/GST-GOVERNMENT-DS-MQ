@@ -1,0 +1,71 @@
+/* GST GOVERNMENT — Extension web du design system Groupe Scout Tonnerre
+   À importer APRÈS styles.css du DS d'affiches.
+   Ajoute : échelles de couleurs, sémantique, modes Jour / Nuit / Plein soleil, motion. */
+
+:root {
+  /* ── Échelles ─────────────────────────────────────────── */
+  --gst-teal-50:#E7F2F1; --gst-teal-100:#C6E2E0; --gst-teal-200:#93C8C4; --gst-teal-300:#5FAAA5;
+  --gst-teal-400:#2E8F89; --gst-teal-500:#0C7873; --gst-teal-600:#06605E; --gst-teal-700:#064C4B;
+  --gst-teal-800:#063F3E; --gst-teal-900:#032726;
+  --gst-red-50:#FBEAE9; --gst-red-100:#F5C9C7; --gst-red-300:#E0716D; --gst-red-500:#C42621;
+  --gst-red-700:#9E1C18; --gst-red-900:#5E0F0D;
+  --gst-cream:#F4F4F2; --gst-paper:#FAFAF8; --gst-stone:#E4E4E1; --gst-sand:#C9C9C6; --gst-white:#FFFFFF;
+  --gst-ink:#141414; --gst-ink-70:#4A4A4A; --gst-ink-40:#8A8A8A;
+  --gst-eclair:#FFD23F; --gst-eclair-deep:#C79A00;   /* signal fonctionnel, jamais décoratif */
+  --gst-forest:#1F6F4A;
+
+  /* ── Sémantique — mode Jour (défaut) ──────────────────── */
+  --gst-bg-canvas:var(--gst-cream);   --gst-bg-panel:var(--gst-white);  --gst-bg-invert:var(--gst-teal-500);
+  --gst-text-primary:var(--gst-ink);  --gst-text-secondary:var(--gst-ink-70); --gst-text-on-invert:var(--gst-white);
+  --gst-line-hairline:var(--gst-stone); --gst-node-reticle:var(--gst-sand);
+  --gst-accent:var(--gst-red-500);
+  --gst-state-success:var(--gst-forest); --gst-state-warning:var(--gst-eclair-deep);
+  --gst-state-danger:var(--gst-red-500);  --gst-state-info:var(--gst-teal-500);
+  --gst-data-planned:var(--gst-teal-500); --gst-data-actual:var(--gst-red-500);
+  --gst-hairline:1px; --gst-focus-ring:2px solid var(--gst-red-500);
+
+  /* ── Élévation : une seule ombre, au-dessus de la 3D ──── */
+  --gst-shadow-lift:0 24px 48px -24px rgba(3,39,38,.45);
+
+  /* ── Rayons & cibles ──────────────────────────────────── */
+  --gst-radius-none:0; --gst-radius-sm:3px; --gst-radius-pill:999px;
+  --gst-touch-min:44px; --gst-touch-primary:56px;
+
+  /* ── Motion ───────────────────────────────────────────── */
+  --gst-dur-instant:80ms; --gst-dur-fast:160ms; --gst-dur-base:240ms;
+  --gst-dur-slow:420ms; --gst-dur-scene:800ms; --gst-dur-epic:1600ms;
+  --gst-ease-tonnerre:cubic-bezier(0.16,1,0.3,1);
+  --gst-ease-trace:cubic-bezier(0.65,0,0.35,1);
+  --gst-ease-snap:cubic-bezier(0.2,0,0,1);
+  --gst-ease-strike:cubic-bezier(0.7,0,0.84,0);
+  --gst-stagger-tight:24ms; --gst-stagger-base:56ms; --gst-stagger-loose:110ms;
+
+  /* ── Ciel 3D en aplats étagés (4 bandes) ─────────────── */
+  --gst-sky-day-1:#F4F4F2; --gst-sky-day-2:#E7F2F1; --gst-sky-day-3:#C6E2E0; --gst-sky-day-4:#93C8C4;
+  --gst-sky-dusk-1:#F4F4F2; --gst-sky-dusk-2:#FFF1C2; --gst-sky-dusk-3:#F5C9C7; --gst-sky-dusk-4:#E0716D;
+  --gst-sky-night-1:#032726; --gst-sky-night-2:#063F3E; --gst-sky-night-3:#064C4B; --gst-sky-night-4:#06605E;
+}
+
+/* ── Mode Nuit de camp ─────────────────────────────────── */
+[data-theme="nuit"] {
+  --gst-bg-canvas:var(--gst-teal-900); --gst-bg-panel:var(--gst-teal-800); --gst-bg-invert:var(--gst-cream);
+  --gst-text-primary:var(--gst-cream); --gst-text-secondary:var(--gst-teal-100); --gst-text-on-invert:var(--gst-ink);
+  --gst-line-hairline:rgba(255,255,255,.14); --gst-node-reticle:rgba(255,255,255,.34);
+  --gst-accent:var(--gst-red-300);
+  --gst-state-success:var(--gst-teal-300); --gst-state-warning:var(--gst-eclair);
+  --gst-state-danger:var(--gst-red-300);   --gst-state-info:var(--gst-teal-200);
+  --gst-data-planned:var(--gst-teal-200);  --gst-data-actual:var(--gst-red-300);
+}
+
+/* ── Mode Plein soleil (contraste AAA) ─────────────────── */
+[data-theme="soleil"] {
+  --gst-bg-canvas:var(--gst-white); --gst-text-primary:#000; --gst-text-secondary:var(--gst-ink);
+  --gst-line-hairline:var(--gst-ink-40); --gst-hairline:2px;
+  --gst-state-info:var(--gst-teal-700); --gst-accent:var(--gst-red-700);
+}
+
+/* ── Réduction des animations ──────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  :root { --gst-dur-base:120ms; --gst-dur-slow:120ms; --gst-dur-scene:0ms; --gst-dur-epic:0ms;
+          --gst-stagger-tight:0ms; --gst-stagger-base:0ms; --gst-stagger-loose:0ms; }
+}

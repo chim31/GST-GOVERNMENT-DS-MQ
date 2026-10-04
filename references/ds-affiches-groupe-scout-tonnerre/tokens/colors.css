@@ -1,0 +1,49 @@
+/* Colors — Groupe Scout Tonnerre
+   Palette RÉDUITE à 4 couleurs, zéro dégradé, contrastes stricts.
+   Échantillonnées sur les affiches existantes. */
+:root {
+  /* ── Base ──────────────────────────────────────────── */
+  --teal:        #0C7873;   /* teal de marque (fond principal des affiches) */
+  --teal-deep:   #06605E;   /* teal profond (cadre / bordures) */
+  --teal-ink:    #063f3e;   /* teal presque noir (texte sur écru) */
+  --red:         #C42621;   /* rouge accent (titres, alertes, chiffres) */
+  --red-deep:    #9E1C18;   /* rouge foncé (survol / pression) */
+  --cream:       #F4F4F2;   /* écru / papier mat */
+  --white:       #FFFFFF;   /* panneau blanc pur */
+  --ink:         #141414;   /* texte principal (quasi noir) */
+  --ink-70:      #4A4A4A;   /* texte secondaire / gris graphite */
+  --ink-40:      #8A8A8A;   /* texte tertiaire / légendes */
+
+  /* ── Lignes de grille (fines, façon Longbow) ─────────── */
+  --line-on-white: #E4E4E1; /* hairline sur fond blanc/écru */
+  --line-on-teal:  rgba(255,255,255,0.16); /* hairline sur fond teal */
+  --node-on-white: #C9C9C6; /* réticule / nœud sur blanc */
+  --node-on-teal:  rgba(255,255,255,0.34);
+
+  /* ── Alias sémantiques ───────────────────────────────── */
+  --bg-frame:      var(--teal-deep);   /* cadre extérieur de l'affiche */
+  --bg-panel:      var(--white);       /* panneau de contenu */
+  --bg-panel-alt:  var(--cream);       /* panneau alternatif (écru) */
+  --bg-invert:     var(--teal);        /* bloc teal plein */
+
+  --text-body:     var(--ink);
+  --text-muted:    var(--ink-70);
+  --text-faint:    var(--ink-40);
+  --text-on-teal:  var(--white);
+  --text-accent:   var(--red);
+  --text-eyebrow:  var(--teal-deep);
+
+  --rule:          var(--red);         /* filet de séparation éditorial */
+  --tag:           var(--ink-70);      /* couleur des tags mono .01 */
+}
+
+/* Fond teal → texte clair + lignes claires par défaut */
+.gst-on-teal {
+  --text-body: var(--white);
+  --text-muted: rgba(255,255,255,0.72);
+  --text-faint: rgba(255,255,255,0.5);
+  --line-on-white: var(--line-on-teal);
+  --node-on-white: var(--node-on-teal);
+  --tag: rgba(255,255,255,0.7);
+  --text-eyebrow: rgba(255,255,255,0.85);
+}

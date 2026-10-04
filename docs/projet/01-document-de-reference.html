@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GST GOVERNMENT — Document de référence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nuit:#0E1420;
+  --orage:#1B2436;
+  --ardoise:#3A465C;
+  --brume:#8894A8;
+  --toile:#EDE9E1;
+  --toile-2:#E2DCD1;
+  --papier:#F7F5F0;
+  --foudre:#FFD23F;
+  --foudre-sombre:#C79A00;
+  --vert:#1F6F4A;
+  --rouge:#C6402F;
+  --serif:"Newsreader",Georgia,serif;
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--toile);color:var(--nuit);
+  font-family:var(--serif);font-size:17px;line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+
+/* ---------- ORAGE : bandeau de tête ---------- */
+.orage{background:var(--nuit);color:var(--toile);padding:0;position:relative;overflow:hidden}
+.orage::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 80% at 78% 0%,rgba(255,210,63,.16),transparent 55%);
+}
+.orage-in{max-width:1180px;margin:0 auto;padding:76px 32px 66px;position:relative;z-index:1}
+.eyebrow{
+  font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--foudre);margin:0 0 22px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+}
+.eyebrow span.sep{width:34px;height:1px;background:var(--foudre-sombre);display:inline-block}
+h1.titre{
+  font-family:var(--display);font-weight:800;font-size:clamp(40px,7.4vw,86px);
+  line-height:.94;letter-spacing:-.035em;margin:0 0 8px;
+}
+h1.titre em{font-style:normal;color:var(--foudre);display:block}
+.sous-titre{
+  font-size:clamp(17px,2.1vw,21px);color:#C3CBD8;max-width:62ch;
+  font-weight:300;margin:22px 0 0;
+}
+.meta{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);
+  margin-top:52px;
+}
+.meta div{background:var(--nuit);padding:15px 17px}
+.meta dt{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--brume);margin:0 0 6px}
+.meta dd{margin:0;font-family:var(--display);font-size:15px;font-weight:600;color:var(--toile)}
+
+/* ---------- ÉCLAIR : signature ---------- */
+.eclair{display:block;width:100%;height:14px}
+.eclair path{fill:var(--foudre)}
+
+/* ---------- STRUCTURE ---------- */
+.shell{max-width:1180px;margin:0 auto;padding:0 32px 120px;display:grid;grid-template-columns:238px 1fr;gap:56px}
+@media (max-width:940px){.shell{grid-template-columns:1fr;gap:0;padding:0 20px 80px}}
+
+nav.sommaire{position:sticky;top:24px;align-self:start;padding-top:52px;max-height:calc(100vh - 48px);overflow-y:auto}
+@media (max-width:940px){nav.sommaire{position:static;max-height:none;padding-top:36px;border-bottom:2px solid var(--nuit);padding-bottom:28px;margin-bottom:8px}}
+nav.sommaire h2{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ardoise);margin:0 0 16px;font-weight:700}
+nav.sommaire ol{list-style:none;margin:0;padding:0;counter-reset:toc}
+nav.sommaire li{counter-increment:toc;margin:0 0 3px}
+nav.sommaire a{
+  display:flex;gap:10px;text-decoration:none;color:var(--orage);
+  font-family:var(--display);font-size:13.5px;line-height:1.35;font-weight:400;
+  padding:6px 8px 6px 0;border-left:2px solid transparent;padding-left:12px;
+  transition:border-color .15s,color .15s;
+}
+nav.sommaire a::before{content:counter(toc,decimal-leading-zero);font-family:var(--mono);font-size:10px;color:var(--brume);padding-top:3px}
+nav.sommaire a:hover,nav.sommaire a:focus-visible{border-left-color:var(--foudre);color:var(--nuit)}
+
+main{padding-top:52px;min-width:0}
+
+/* ---------- SECTIONS ---------- */
+section.bloc{padding-top:16px;margin-bottom:76px;scroll-margin-top:24px}
+.bloc-tete{border-top:2px solid var(--nuit);padding-top:14px;margin-bottom:26px}
+.bloc-num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--foudre-sombre);font-weight:700;display:block;margin-bottom:10px}
+h2.bloc-titre{font-family:var(--display);font-weight:800;font-size:clamp(27px,4vw,40px);line-height:1.03;letter-spacing:-.025em;margin:0;max-width:24ch}
+.chapeau{font-size:19px;color:var(--ardoise);max-width:66ch;margin:16px 0 0;font-weight:300}
+
+h3{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.015em;margin:44px 0 12px;line-height:1.2}
+h4{font-family:var(--display);font-weight:600;font-size:16.5px;margin:28px 0 8px;letter-spacing:-.005em}
+p{margin:0 0 15px;max-width:72ch}
+ul,ol{max-width:72ch;padding-left:22px;margin:0 0 16px}
+li{margin-bottom:7px}
+strong{font-weight:600}
+em.terme{font-style:normal;font-family:var(--mono);font-size:.86em;background:var(--toile-2);padding:1px 5px;border-radius:2px}
+a.lien{color:var(--vert);text-underline-offset:3px}
+
+/* ---------- FICHES GROUPES ---------- */
+.grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:14px;margin:22px 0 8px}
+.fiche{background:var(--papier);border:1px solid var(--toile-2);border-top:3px solid var(--nuit);padding:18px 18px 16px}
+.fiche.accent{border-top-color:var(--foudre)}
+.fiche .code{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--brume);text-transform:uppercase;display:block;margin-bottom:7px}
+.fiche h4{margin:0 0 8px;font-size:17px}
+.fiche p{font-size:14.5px;line-height:1.55;color:var(--ardoise);margin:0}
+.fiche ul{font-size:14px;margin:8px 0 0;padding-left:18px;color:var(--ardoise)}
+.fiche ul li{margin-bottom:4px}
+
+/* ---------- ENCADRÉS ---------- */
+.note{border-left:3px solid var(--foudre);background:var(--papier);padding:16px 20px;margin:24px 0;max-width:72ch}
+.note .etiq{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--foudre-sombre);display:block;margin-bottom:8px}
+.note p:last-child,.note ul:last-child{margin-bottom:0}
+.note.trancher{border-left-color:var(--rouge)}
+.note.trancher .etiq{color:var(--rouge)}
+.note.regle{border-left-color:var(--vert)}
+.note.regle .etiq{color:var(--vert)}
+
+/* ---------- TABLEAUX ---------- */
+.tableau-wrap{overflow-x:auto;margin:22px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px;background:var(--papier)}
+th{
+  font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  text-align:left;padding:10px 13px;background:var(--nuit);color:var(--toile);font-weight:700;vertical-align:bottom;
+}
+td{padding:11px 13px;border-bottom:1px solid var(--toile-2);vertical-align:top;line-height:1.5}
+tbody tr:last-child td{border-bottom:none}
+td.mono{font-family:var(--mono);font-size:12.5px;white-space:nowrap;color:var(--ardoise)}
+
+/* ---------- DIVERS ---------- */
+.mesure{display:flex;flex-wrap:wrap;gap:1px;background:var(--toile-2);border:1px solid var(--toile-2);margin:22px 0}
+.mesure div{background:var(--papier);padding:16px 20px;flex:1 1 150px}
+.mesure .val{font-family:var(--display);font-weight:800;font-size:30px;line-height:1;letter-spacing:-.02em;display:block}
+.mesure .lab{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ardoise);margin-top:8px;display:block}
+
+footer.pied{background:var(--nuit);color:var(--brume);padding:44px 32px;font-family:var(--mono);font-size:12px;letter-spacing:.04em}
+footer.pied div{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer.pied strong{color:var(--foudre);font-weight:400}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.reveal.vu{opacity:1;transform:none}
+:focus-visible{outline:2px solid var(--foudre);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<header class="orage">
+  <div class="orage-in">
+    <p class="eyebrow">Document 1 sur 3<span class="sep"></span>Document de référence<span class="sep"></span>Groupe Scout Tonnerre</p>
+    <h1 class="titre">GST<br><em>GOVERNMENT</em></h1>
+    <p class="sous-titre">La plateforme de commandement du Groupe Scout Tonnerre : cinq modules pour préparer, financer, nourrir, suivre et raconter chaque camp, chaque mission, chaque jamboree.</p>
+    <dl class="meta">
+      <div><dt>Projet</dt><dd>GST Government</dd></div>
+      <div><dt>Commanditaire</dt><dd>Groupe Scout Tonnerre</dd></div>
+      <div><dt>Nature</dt><dd>Document de référence</dd></div>
+      <div><dt>Version</dt><dd>1.0 — Cadrage</dd></div>
+      <div><dt>Statut</dt><dd>Base de travail</dd></div>
+    </dl>
+  </div>
+</header>
+<svg class="eclair" viewBox="0 0 1200 14" preserveAspectRatio="none" aria-hidden="true"><path d="M0 14 L96 0 L120 9 L216 0 L240 9 L336 0 L360 9 L456 0 L480 9 L576 0 L600 9 L696 0 L720 9 L816 0 L840 9 L936 0 L960 9 L1056 0 L1080 9 L1176 0 L1200 9 L1200 14 Z"/></svg>
+
+<div class="shell">
+
+<nav class="sommaire" aria-label="Sommaire">
+  <h2>Sommaire</h2>
+  <ol>
+    <li><a href="#s1">Le constat de départ</a></li>
+    <li><a href="#s2">Le problème à résoudre</a></li>
+    <li><a href="#s3">Vision et objectifs</a></li>
+    <li><a href="#s4">Architecture générale</a></li>
+    <li><a href="#s5">Typologie des camps</a></li>
+    <li><a href="#s6">Module 1 — Logistique</a></li>
+    <li><a href="#s7">Module 2 — Comptabilité</a></li>
+    <li><a href="#s8">Module 3 — Cuisine et menus</a></li>
+    <li><a href="#s9">Module 4 — Roadmap 3D</a></li>
+    <li><a href="#s10">Module 5 — Vitrine et Bus volant</a></li>
+    <li><a href="#s11">Le hook intelligent des prix</a></li>
+    <li><a href="#s12">Acteurs et rôles</a></li>
+    <li><a href="#s13">Règles transverses</a></li>
+    <li><a href="#s14">Ce que j'ajoute à ton idée</a></li>
+    <li><a href="#s15">Points à trancher</a></li>
+    <li><a href="#s16">Glossaire</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- 1 -->
+<section class="bloc reveal" id="s1">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 01</span><h2 class="bloc-titre">Le constat de départ</h2></div>
+  <p class="chapeau">Le Groupe Scout Tonnerre bouge beaucoup. Camps, missions, jamborees nationaux et internationaux, formations. Chaque sortie mobilise du matériel, de l'argent, de la nourriture, des transports et des dizaines de personnes — et tout cela se prépare aujourd'hui sans outil commun.</p>
+
+  <p>L'idée du GST Government part d'une observation simple : <strong>la logistique est le point le plus négligé alors qu'elle conditionne tout le reste</strong>. Un camp bien préparé sur le plan logistique se déroule bien. Un camp mal préparé se paie sur le terrain, en argent perdu, en vivres gaspillés, en matériel manquant et en fatigue pour les responsables.</p>
+
+  <p>Aujourd'hui, la préparation d'un camp repose sur la mémoire des anciens, des carnets, des listes séparées, des calculs refaits à la main à chaque édition. Les chiffres des camps passés — ce qu'a coûté le bus, combien de sacs de riz pour 80 personnes, combien de sachets d'eau par jour — ne sont conservés nulle part de manière exploitable. On recommence de zéro à chaque fois.</p>
+
+  <div class="note">
+    <span class="etiq">Le pari du projet</span>
+    <p>Transformer l'expérience accumulée du GST en un système qui calcule, se souvient, alerte et rend des comptes. Pas un logiciel de plus : un outil de commandement que le groupe ouvre au moment où il décide d'un camp, et qu'il referme avec un bilan chiffré.</p>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="bloc reveal" id="s2">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 02</span><h2 class="bloc-titre">Le problème à résoudre</h2></div>
+  <p class="chapeau">Cinq douleurs concrètes, identifiées à partir de l'expérience du groupe. Chacune appelle un module de la plateforme.</p>
+
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:20%">Douleur</th><th style="width:44%">Ce qui se passe aujourd'hui</th><th style="width:36%">Réponse apportée</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Recensement dispersé</strong></td>
+          <td>Chaque besoin (matériel, nourriture, santé, transport) est listé de son côté, souvent sur papier. Personne n'a la vue d'ensemble avant le départ.</td>
+          <td>Module Logistique : un recensement unique découpé en groupes de gestion, consolidé automatiquement.</td>
+        </tr>
+        <tr>
+          <td><strong>Budget approximatif</strong></td>
+          <td>Le budget est estimé « au feeling », puis dépassé sur le terrain sans qu'on sache exactement où.</td>
+          <td>Module Comptabilité : estimation continue puis suivi réel, avec écart prévu/réel visible à tout moment.</td>
+        </tr>
+        <tr>
+          <td><strong>Gaspillage alimentaire</strong></td>
+          <td>Un menu est décidé, mais tout le monde ne mange pas. Les règles changent sur le terrain. Des vivres sont achetés pour rien.</td>
+          <td>Module Cuisine : le menu est construit à partir des choix réels des jeunes, puis ajusté chaque jour sur le terrain.</td>
+        </tr>
+        <tr>
+          <td><strong>Programme opaque</strong></td>
+          <td>Les jeunes découvrent le programme au jour le jour. Les familles ne savent pas ce qui se passe.</td>
+          <td>Module Roadmap 3D : le parcours du camp visualisé, jour après jour, suivi en direct.</td>
+        </tr>
+        <tr>
+          <td><strong>Inscriptions et paiements flous</strong></td>
+          <td>Suivi des inscrits et des paiements dans des cahiers ou des groupes de discussion. Aucune visibilité publique.</td>
+          <td>Module Vitrine : site public du GST, inscription en ligne, et le Bus volant qui rend les places et les paiements visibles.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="bloc reveal" id="s3">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 03</span><h2 class="bloc-titre">Vision et objectifs</h2></div>
+
+  <h3>Vision</h3>
+  <p><strong>Le GST Government est le poste de commandement numérique du Groupe Scout Tonnerre.</strong> Une seule plateforme web, découpée en cinq grands modules, eux-mêmes découpés en sous-modules, qui couvre la vie d'un camp de sa décision jusqu'à son bilan.</p>
+
+  <h3>Objectifs mesurables</h3>
+  <div class="mesure">
+    <div><span class="val">1</span><span class="lab">source de vérité par camp</span></div>
+    <div><span class="val">&lt;10%</span><span class="lab">écart budget prévu / réel</span></div>
+    <div><span class="val">0</span><span class="lab">recensement refait à la main</span></div>
+    <div><span class="val">100%</span><span class="lab">dépenses rattachées à une activité</span></div>
+  </div>
+
+  <h3>Principes directeurs</h3>
+  <ol>
+    <li><strong>Tout part d'un camp.</strong> Rien n'existe hors d'un camp ou d'un événement. Chaque besoin, chaque franc dépensé, chaque plat servi est rattaché à une activité identifiée.</li>
+    <li><strong>Recenser, chiffrer, comparer.</strong> Chaque groupe logistique produit trois choses : ce dont on a besoin, ce que ça coûte, ce dont on dispose déjà.</li>
+    <li><strong>Le calcul est continu.</strong> Dès qu'une donnée change (un inscrit de plus, un prix qui monte, un plat retiré du menu), tous les totaux se recalculent.</li>
+    <li><strong>La mémoire du groupe est une donnée.</strong> Chaque camp passé alimente une base de références qui sert à estimer le suivant.</li>
+    <li><strong>Ouvert à la correction.</strong> Les responsables peuvent ajouter un besoin, un poste, une catégorie qui manque. La structure n'est jamais figée.</li>
+    <li><strong>Transparence choisie.</strong> Certaines vues sont publiques (retours, inscriptions, programme), d'autres strictement internes (comptabilité détaillée, données de santé).</li>
+  </ol>
+</section>
+
+<!-- 4 -->
+<section class="bloc reveal" id="s4">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 04</span><h2 class="bloc-titre">Architecture générale</h2></div>
+  <p class="chapeau">Cinq modules, un socle commun. Le socle porte ce que tous les modules partagent : les camps, les personnes, les rôles, les unités, les prix de référence.</p>
+
+  <div class="grille">
+    <div class="fiche accent">
+      <span class="code">Module 01</span>
+      <h4>Logistique</h4>
+      <p>Le module culminant. Recense et chiffre tous les besoins d'un camp, découpés en groupes de gestion spécialisés.</p>
+      <ul><li>10 groupes de gestion</li><li>Recensement + coûts + stock disponible</li><li>Consolidation vers la comptabilité</li></ul>
+    </div>
+    <div class="fiche">
+      <span class="code">Module 02</span>
+      <h4>Comptabilité</h4>
+      <p>La calculatrice vivante du camp. Deux modes : estimation supervisée et dépenses réelles supervisées.</p>
+      <ul><li>Courbes de dépenses cliquables</li><li>Comptes du jour</li><li>Écart prévu / réel</li></ul>
+    </div>
+    <div class="fiche">
+      <span class="code">Module 03</span>
+      <h4>Cuisine et menus</h4>
+      <p>Construit le menu à partir des choix réels des jeunes, en déduit les ingrédients et les envoie au budget.</p>
+      <ul><li>Espace jeune / espace intendance</li><li>Taux de proposition et de sélection</li><li>Suggestion live sur le terrain</li></ul>
+    </div>
+    <div class="fiche">
+      <span class="code">Module 04</span>
+      <h4>Roadmap 3D</h4>
+      <p>Le parcours du camp en 3D. Un véhicule avance d'étape en étape, une étape par journée.</p>
+      <ul><li>Circuit 3D animé</li><li>Détail des activités du jour</li><li>Agenda et suivi en direct</li></ul>
+    </div>
+    <div class="fiche">
+      <span class="code">Module 05</span>
+      <h4>Vitrine et Bus volant</h4>
+      <p>Le site public du GST, et l'inscription matérialisée par une place dans un bus suspendu dans le ciel.</p>
+      <ul><li>Site vitrine complet du groupe</li><li>Inscription en ligne</li><li>Paiements représentés visuellement</li></ul>
+    </div>
+    <div class="fiche">
+      <span class="code">Socle</span>
+      <h4>Noyau commun</h4>
+      <p>Ce qui ne appartient à aucun module mais sert à tous.</p>
+      <ul><li>Camps, unités, personnes, rôles</li><li>Base de prix de référence</li><li>Historique des camps passés</li><li>Notifications et journal d'activité</li></ul>
+    </div>
+  </div>
+
+  <h3>Comment les modules se parlent</h3>
+  <p>La chaîne principale est une <strong>chaîne de chiffrage</strong>. Elle part des besoins terrain et remonte jusqu'au budget :</p>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th>Étape</th><th>Qui produit</th><th>Quoi</th><th>Vers qui</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">1</td><td>Cuisine</td><td>Menu validé → liste d'ingrédients et quantités totales</td><td>Groupe Alimentaire</td></tr>
+        <tr><td class="mono">2</td><td>Groupe Alimentaire</td><td>Recensement chiffré des vivres et de l'eau potable</td><td>Groupe Économique</td></tr>
+        <tr><td class="mono">3</td><td>Groupe Transport</td><td>Itinéraires, modes de transport, coût des véhicules</td><td>Groupe Économique</td></tr>
+        <tr><td class="mono">4</td><td>Groupes Matériel, Technique, Santé, Salubrité, Activités</td><td>Recensement chiffré de leurs besoins</td><td>Groupe Économique</td></tr>
+        <tr><td class="mono">5</td><td>Groupe Économique</td><td>Budget prévisionnel consolidé du camp</td><td>Comptabilité</td></tr>
+        <tr><td class="mono">6</td><td>Comptabilité</td><td>Dispatch par poste, suivi des dépenses réelles, écarts</td><td>Direction du camp</td></tr>
+        <tr><td class="mono">7</td><td>Comptabilité + Logistique</td><td>Bilan chiffré du camp</td><td>Base de références (mémoire du groupe)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note regle">
+    <span class="etiq">Règle de dépendance</span>
+    <p>Le module Comptabilité <strong>ne fabrique pas de chiffres</strong> : il reçoit, dispatche et suit. Les chiffres naissent toujours dans un groupe logistique ou dans la cuisine. Cette règle évite d'avoir deux vérités qui se contredisent.</p>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="bloc reveal" id="s5">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 05</span><h2 class="bloc-titre">Typologie des camps</h2></div>
+  <p class="chapeau">Tous les camps n'ont pas besoin de toute la machine. Le type de camp détermine quels groupes logistiques s'ouvrent et quel niveau de préparation s'applique.</p>
+
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th>Type de camp</th><th>Durée</th><th>Niveau de logistique</th><th>Préparation</th><th>Modules activés</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Camp de réjouissance</strong><br><span style="font-size:13px;color:var(--ardoise)">Camp de vacances</span></td>
+          <td class="mono">2 semaines</td>
+          <td>Lourde — tous les groupes</td>
+          <td class="mono">J-60</td>
+          <td>1 · 2 · 3 · 4 · 5</td>
+        </tr>
+        <tr>
+          <td><strong>Camp de survie</strong></td>
+          <td class="mono">3 jours</td>
+          <td>Légère — quelques groupes seulement</td>
+          <td class="mono">J-14</td>
+          <td>1 (réduit) · 2</td>
+        </tr>
+        <tr>
+          <td><strong>Camp de formation</strong></td>
+          <td class="mono">3 jours</td>
+          <td>Moyenne — matériel pédagogique, restauration simple</td>
+          <td class="mono">J-21</td>
+          <td>1 (réduit) · 2 · 3</td>
+        </tr>
+        <tr>
+          <td><strong>Jamboree national</strong></td>
+          <td class="mono">2 semaines +</td>
+          <td>Très lourde</td>
+          <td class="mono">J-90</td>
+          <td>1 · 2 · 3 · 4 · 5</td>
+        </tr>
+        <tr>
+          <td><strong>Jamboree international / mondial</strong></td>
+          <td class="mono">2 semaines +</td>
+          <td>Maximale — voyage, documents, devises</td>
+          <td class="mono">J-180</td>
+          <td>1 · 2 · 3 · 4 · 5 + volet international</td>
+        </tr>
+        <tr>
+          <td><strong>Mission / sortie ponctuelle</strong></td>
+          <td class="mono">1 journée</td>
+          <td>Minimale</td>
+          <td class="mono">J-7</td>
+          <td>1 (minimal) · 2</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Le formulaire d'ouverture de camp</h3>
+  <p>Créer un camp dans le GST Government, c'est remplir un formulaire d'ouverture. Ce formulaire décide de tout ce qui suit :</p>
+  <ul>
+    <li>Nom, type de camp, dates de début et de fin, lieu</li>
+    <li>Unités participantes et effectif prévisionnel (jeunes, chefs, cuisine, invités)</li>
+    <li><strong>Groupes logistiques à ouvrir</strong> — cochés selon le type, modifiables manuellement</li>
+    <li>Responsable désigné pour chaque groupe ouvert</li>
+    <li>Enveloppe budgétaire de départ, si elle est connue</li>
+    <li>Modules à activer : roadmap 3D ? inscription publique ? bus volant ?</li>
+  </ul>
+
+  <div class="note">
+    <span class="etiq">Recommandation</span>
+    <p>Prévoir des <strong>modèles de camp</strong> réutilisables. Un camp de survie ressemble beaucoup au camp de survie de l'an dernier : au lieu de tout recréer, on duplique le modèle, on ajuste l'effectif, et 80 % du recensement est déjà là. C'est le gain de temps le plus immédiat de toute la plateforme.</p>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="bloc reveal" id="s6">
+  <div class="bloc-tete"><span class="bloc-num">Module 01</span><h2 class="bloc-titre">La gestion de la logistique</h2></div>
+  <p class="chapeau">Le module culminant. La logistique est une grande unité qui se subdivise en petits groupes de gestion, chacun autonome sur son périmètre, tous consolidés au même endroit.</p>
+
+  <h3>Ce que fait chaque groupe</h3>
+  <p>Un groupe logistique ne sert pas seulement à recenser. Chaque groupe produit un jeu complet d'informations :</p>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th>Production</th><th>Description</th><th>Concerne</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Le recensement</strong></td><td>La liste des besoins, par article, avec quantité demandée et unité de mesure.</td><td>Tous les groupes</td></tr>
+        <tr><td><strong>Le coût brut</strong></td><td>L'évaluation en dépenses de ce qu'il faut acquérir, louer ou payer.</td><td>Groupes à dépenses</td></tr>
+        <tr><td><strong>Ce dont on dispose</strong></td><td>Le stock existant du GST, l'état du matériel, ce qui est déjà payé. Sert à ne chiffrer que le manque.</td><td>Groupes à stock</td></tr>
+        <tr><td><strong>L'affectation</strong></td><td>Qui détient quoi, dans quel véhicule, sous la responsabilité de qui.</td><td>Matériel, technique</td></tr>
+        <tr><td><strong>Le seuil critique</strong></td><td>Le minimum en dessous duquel on ne peut pas partir. Déclenche une alerte.</td><td>Santé, eau, sécurité</td></tr>
+        <tr><td><strong>Le retour</strong></td><td>Ce qui revient, dans quel état, ce qui manque, ce qui est cassé. Publié.</td><td>Tous les groupes</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Les groupes de gestion</h3>
+  <p>Voici le découpage complet. Les groupes marqués d'un éclair jaune sont ceux qui prennent le plus d'importance quand le camp dure — les jamborees et les camps de deux semaines.</p>
+
+  <div class="grille">
+    <div class="fiche">
+      <span class="code">Groupe A</span>
+      <h4>Besoin en matériel</h4>
+      <p>Tout ce que le groupe emporte collectivement. On raisonne d'abord au niveau du groupe et de l'unité, avant de descendre à l'individu.</p>
+      <ul>
+        <li>Instruments : djembés, percussions</li>
+        <li>Bâches, selon l'événement ou celles du groupe</li>
+        <li>Drapeaux : Togo, AST, GST, et les porte-étendards adaptés</li>
+        <li>Sonorisation</li>
+        <li>Cordes et matériel de froissartage</li>
+        <li>Construction : marteau, clous, pioche, scie, pelle</li>
+        <li>Entretien : balais, seaux, bassines</li>
+        <li>Tentes, couchage, campement</li>
+      </ul>
+    </div>
+
+    <div class="fiche accent">
+      <span class="code">Groupe B · Renforcé</span>
+      <h4>Besoin alimentaire</h4>
+      <p>Ne recense rien tout seul : part du menu validé par le module Cuisine et le traduit en vivres.</p>
+      <ul>
+        <li>Ingrédients par plat : féculents, viandes, légumes, épices, huiles</li>
+        <li>Quantités calculées pour l'effectif réel</li>
+        <li><strong>Eau potable</strong> : 6 sachets par personne et par jour — 2 le matin, 2 à midi, 2 le soir</li>
+        <li>Eau technique (cuisine, vaisselle, toilette)</li>
+        <li>Coût unitaire et coût total par ligne</li>
+        <li>Conditionnement et conservation</li>
+      </ul>
+    </div>
+
+    <div class="fiche">
+      <span class="code">Groupe C</span>
+      <h4>Besoin technique</h4>
+      <p>Tout ce qui fait fonctionner le camp sur le plan de l'énergie et de l'équipement technique.</p>
+      <ul>
+        <li>Énergie : groupe électrogène, carburant, batteries</li>
+        <li>Éclairage : lampes, torches, projecteurs</li>
+        <li>Câblage, rallonges, multiprises</li>
+        <li>Matériel audiovisuel et de communication</li>
+        <li>Outillage de réparation</li>
+      </ul>
+    </div>
+
+    <div class="fiche">
+      <span class="code">Groupe D</span>
+      <h4>Besoin santé</h4>
+      <p>Le groupe à seuil critique : en dessous d'un certain niveau, le camp ne peut pas partir.</p>
+      <ul>
+        <li>Pharmacie de camp et consommables</li>
+        <li>Fiches sanitaires individuelles et traitements en cours</li>
+        <li>Contacts d'urgence et structure de santé la plus proche</li>
+        <li>Protocole d'évacuation</li>
+        <li>Responsable santé désigné</li>
+      </ul>
+    </div>
+
+    <div class="fiche">
+      <span class="code">Groupe E</span>
+      <h4>Besoin salubrité</h4>
+      <p>Qui dit scout dit propreté. Le scout aime et protège la nature — le camp doit repartir sans laisser de trace.</p>
+      <ul>
+        <li>Produits d'hygiène et de nettoyage</li>
+        <li>Sanitaires, douches, latrines</li>
+        <li>Gestion et évacuation des déchets, tri</li>
+        <li>Points d'eau et lavage des mains</li>
+        <li>Plan de remise en état du terrain</li>
+      </ul>
+    </div>
+
+    <div class="fiche accent">
+      <span class="code">Groupe F · Renforcé</span>
+      <h4>Besoin économique</h4>
+      <p>Le groupe pivot. Il ne recense pas de matériel : il agrège les chiffrages de tous les autres groupes et produit l'évaluation budgétaire du camp.</p>
+      <ul>
+        <li>Consolidation alimentaire, transport, matériel, technique, santé, salubrité, activités</li>
+        <li>Estimation du budget selon l'effectif, les moyens de transport et le menu</li>
+        <li>Recalcul en continu à chaque changement</li>
+        <li>Participation par personne et reste à financer</li>
+        <li>Transmission du prévisionnel à la Comptabilité</li>
+      </ul>
+    </div>
+
+    <div class="fiche accent">
+      <span class="code">Groupe G · Renforcé</span>
+      <h4>Transport et distribution</h4>
+      <p>Le GST voyage beaucoup. Ce groupe planifie les déplacements et la circulation du matériel.</p>
+      <ul>
+        <li>Planification des itinéraires</li>
+        <li>Sélection des modes de transport</li>
+        <li>Coordination des expéditions et des rotations</li>
+        <li>Coût des véhicules, du carburant, des péages</li>
+        <li>Plan de chargement : quoi dans quel véhicule</li>
+        <li>Horaires, points de rendez-vous, responsables de convoi</li>
+      </ul>
+    </div>
+
+    <div class="fiche">
+      <span class="code">Groupe H</span>
+      <h4>Retours — logistique inversée</h4>
+      <p>Ce qui revient du camp. <strong>Ce groupe est rendu public</strong> : il montre comment les choses sont gérées sur le terrain.</p>
+      <ul>
+        <li>Inventaire de retour, ligne par ligne</li>
+        <li>État : intact, usé, endommagé, perdu</li>
+        <li>Écart entre parti et revenu</li>
+        <li>Consommables réellement consommés</li>
+        <li>Matériel à réparer, à remplacer, à céder</li>
+        <li>Publication du bilan de retour</li>
+      </ul>
+    </div>
+
+    <div class="fiche">
+      <span class="code">Groupe I</span>
+      <h4>Visites et activités planifiées</h4>
+      <p>Tout ce qu'il faut pour réaliser les activités prévues au programme.</p>
+      <ul>
+        <li>Matériel spécifique par activité</li>
+        <li>Droits d'entrée, guides, autorisations de visite</li>
+        <li>Transport dédié aux sorties</li>
+        <li>Intervenants extérieurs</li>
+        <li>Lien direct avec les étapes de la Roadmap 3D</li>
+      </ul>
+    </div>
+
+    <div class="fiche">
+      <span class="code">Groupe J</span>
+      <h4>Social, humain et divers</h4>
+      <p>Ce qui ne rentre nulle part ailleurs, y compris l'équipement individuel.</p>
+      <ul>
+        <li>Uniformes, foulards, insignes, badges</li>
+        <li>Équipement individuel demandé aux participants</li>
+        <li>Récompenses, souvenirs, cadeaux protocolaires</li>
+        <li>Accueil des invités et des délégations</li>
+        <li>Postes divers non catégorisés</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="etiq">Extensibilité</span>
+    <p>Un responsable de groupe peut créer une <strong>nouvelle catégorie de besoin</strong> si elle manque. Elle est marquée comme « ajout terrain », validée par le commissaire logistique, et si elle revient sur plusieurs camps elle est promue en catégorie officielle. La structure apprend du terrain, elle ne l'enferme pas.</p>
+  </div>
+
+  <h3>Le calendrier de préparation</h3>
+  <p>Chaque groupe travaille selon un rétroplanning attaché au type de camp. Exemple pour un camp de deux semaines :</p>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th>Jalon</th><th>Ce qui doit être fait</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">J-60</td><td>Ouverture du camp, désignation des responsables de groupe, effectif prévisionnel</td></tr>
+        <tr><td class="mono">J-45</td><td>Menu proposé aux jeunes, ouverture des inscriptions publiques</td></tr>
+        <tr><td class="mono">J-30</td><td>Clôture des choix de menu, recensement de tous les groupes terminé</td></tr>
+        <tr><td class="mono">J-21</td><td>Budget prévisionnel consolidé et validé, itinéraires arrêtés</td></tr>
+        <tr><td class="mono">J-14</td><td>Achats engagés, devis validés, plan de chargement établi</td></tr>
+        <tr><td class="mono">J-7</td><td>Contrôle des seuils critiques, vérification santé et sécurité</td></tr>
+        <tr><td class="mono">J-1</td><td>Chargement, pointage du matériel au départ</td></tr>
+        <tr><td class="mono">J+3</td><td>Inventaire de retour, saisie des écarts</td></tr>
+        <tr><td class="mono">J+10</td><td>Bilan chiffré publié, versement dans la base de références</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="bloc reveal" id="s7">
+  <div class="bloc-tete"><span class="bloc-num">Module 02</span><h2 class="bloc-titre">La super-app de comptabilité</h2></div>
+  <p class="chapeau">Une calculatrice vivante. Elle reprend le découpage du groupe économique — transport, alimentaire, matériel, technique, santé, salubrité, activités, divers — et suit l'argent poste par poste, du premier devis au dernier reçu.</p>
+
+  <h3>Deux versions, toujours côte à côte</h3>
+  <div class="grille">
+    <div class="fiche">
+      <span class="code">Version A</span>
+      <h4>Test supervisé</h4>
+      <p>Toutes les estimations effectuées avant le camp. C'est le budget prévisionnel, celui qu'on soumet et qu'on fait valider.</p>
+      <ul>
+        <li>Alimenté par les groupes logistiques</li>
+        <li>Se recalcule à chaque changement de donnée</li>
+        <li>Peut être figé en « version validée » qui sert de référence</li>
+        <li>Plusieurs scénarios possibles : 60 participants / 80 / 100</li>
+      </ul>
+    </div>
+    <div class="fiche accent">
+      <span class="code">Version B</span>
+      <h4>Live supervisé</h4>
+      <p>Les dépenses réellement effectuées sur le terrain. Entrées et sorties, jour par jour.</p>
+      <ul>
+        <li>Saisie sur le terrain, avec justificatif</li>
+        <li>Comptes de la journée arrêtés chaque soir</li>
+        <li>Chaque dépense rattachée à une activité et à un poste</li>
+        <li>Écart en direct avec la version test</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Le fonctionnement</h3>
+  <p>Pour chaque champ de groupe renseigné, <strong>les soustractions s'effectuent automatiquement</strong> sur l'enveloppe du poste concerné. On ne calcule pas à la main : on saisit une dépense, l'enveloppe diminue, la courbe bouge, l'alerte se déclenche si le seuil est franchi.</p>
+
+  <h4>Les courbes</h4>
+  <ul>
+    <li>Courbe de dépense cumulée dans le temps, prévu contre réel</li>
+    <li>Courbe de fluctuation par poste, pour voir quel poste dérive</li>
+    <li><strong>Chaque point de la courbe est cliquable</strong> : on ouvre le détail des dépenses et des fluctuations qui composent ce point</li>
+    <li>Répartition du budget par groupe logistique, en part du total</li>
+  </ul>
+
+  <h4>Les comptes du jour</h4>
+  <p>Chaque soir, la journée est arrêtée : total dépensé, répartition par activité, solde restant, alertes. C'est le document que le trésorier présente au conseil de camp.</p>
+
+  <h3>Le rattachement obligatoire</h3>
+  <div class="note regle">
+    <span class="etiq">Règle</span>
+    <p>Aucune dépense n'existe sans être rattachée à <strong>une activité et un poste</strong>. C'est cette contrainte qui permet de répondre plus tard à la question « combien nous a coûté la sortie du mercredi ? » sans refaire le calcul.</p>
+  </div>
+
+  <h3>Ce que la comptabilité doit aussi porter</h3>
+  <ul>
+    <li><strong>Les entrées</strong> : participations des jeunes, subventions, dons, cotisations, recettes d'activités</li>
+    <li><strong>Le suivi des paiements</strong> : qui a payé, combien, quand, ce qui reste dû — synchronisé avec le Bus volant du module 5</li>
+    <li><strong>Les avances et régularisations</strong> : argent confié à un responsable, justifié au retour</li>
+    <li><strong>Les justificatifs</strong> : photo du reçu attachée à la ligne de dépense</li>
+    <li><strong>La double validation</strong> : au-delà d'un certain montant, une dépense demande deux signatures</li>
+    <li><strong>La caisse physique</strong> : rapprochement entre ce que dit le logiciel et ce qu'il y a réellement dans la caisse</li>
+    <li><strong>Le bilan de clôture</strong> : versé dans la base de références du groupe</li>
+  </ul>
+</section>
+
+<!-- 8 -->
+<section class="bloc reveal" id="s8">
+  <div class="bloc-tete"><span class="bloc-num">Module 03</span><h2 class="bloc-titre">La gestion des menus et de la cuisine</h2></div>
+  <p class="chapeau">Qui dit camp dit cuisine. Le problème connu : on décide un menu, mais tout le monde ne mange pas, les règles changent sur le terrain, et on gaspille. Ce module résout le problème en partant des choix réels avant de partir.</p>
+
+  <h3>Avant le camp — la construction du menu</h3>
+  <ol>
+    <li><strong>L'intendance propose.</strong> Un catalogue de plats — disons une dizaine par service — pour le matin, le midi et le soir. Chaque plat porte la liste complète de ses ingrédients et les quantités pour une portion.</li>
+    <li><strong>Les jeunes choisissent.</strong> Dans leur espace, distinct de celui des gérants, ils sélectionnent ce qu'ils veulent manger, dans un délai fixé.</li>
+    <li><strong>Les jeunes proposent aussi.</strong> Ils peuvent suggérer un plat que la cuisine aurait oublié. Ces propositions entrent dans le catalogue en attente de validation.</li>
+    <li><strong>L'app corrèle.</strong> Elle croise les plats proposés par les jeunes et les plats sélectionnés, et sort deux taux : le taux de proposition (ce qui revient le plus dans les suggestions) et le taux de sélection (ce qui est le plus choisi). Ce croisement facilite le tri final.</li>
+    <li><strong>Le menu est arrêté.</strong> L'intendance tranche à partir des taux, en tenant compte des contraintes de conservation, de coût et de faisabilité.</li>
+    <li><strong>Le calcul se déclenche.</strong> L'app calcule le nombre total d'ingrédients nécessaires pour réaliser tous les plats retenus, pour l'effectif réel.</li>
+    <li><strong>Le résultat part au budget.</strong> La liste chiffrée est envoyée au groupe Alimentaire puis au groupe Économique pour la budgétisation.</li>
+  </ol>
+
+  <div class="note">
+    <span class="etiq">Prérequis</span>
+    <p>Pour chiffrer, il faut une <strong>base de prix par produit</strong>, bien fournie et détaillée : produit, unité de vente, prix, marché ou fournisseur, date du relevé. Le GST peut la construire lui-même — cela prendra du temps, mais elle devient ensuite le patrimoine le plus utile de la plateforme, et elle est enrichie automatiquement par le hook intelligent (chapitre 11).</p>
+  </div>
+
+  <h3>Pendant le camp — la suggestion live</h3>
+  <p>Sur le lieu du camp, l'espace côté utilisateur passe en mode <strong>suggestion live</strong> :</p>
+  <ul>
+    <li>Les responsables de cuisine saisissent manuellement les <strong>ressources encore disponibles</strong> dans le stock</li>
+    <li>L'app propose aux jeunes uniquement les plats réalisables avec ces ressources</li>
+    <li>Les jeunes votent pour le lendemain : matin, midi, soir</li>
+    <li>Le jour J, la cuisine prépare ce que la majorité a choisi. Tout le monde mange ce qui a été voulu.</li>
+    <li>Le stock se décrémente automatiquement à chaque service</li>
+  </ul>
+
+  <h3>Les cas particuliers à prévoir</h3>
+  <ul>
+    <li><strong>Jours sans cuisine</strong> : quartier libre, décidé par les chefs avec les jeunes. La cuisine ne prépare rien ce jour-là, et le stock n'est pas entamé.</li>
+    <li><strong>Spécialités culinaires</strong> : jours de plat régional, de cuisine de délégation, de repas de fête. À intégrer au catalogue avec leur propre fiche.</li>
+    <li><strong>Régimes et interdits</strong> : allergies, régimes médicaux, interdits religieux. Recommandation forte — c'est ce qui provoque les vrais problèmes sur le terrain.</li>
+    <li><strong>Repas de route</strong> : ce qui se mange en déplacement, différent d'un repas de camp.</li>
+    <li><strong>Cuisine par unité</strong> : quand chaque patrouille cuisine pour elle-même, les quantités se calculent par patrouille et non pour le camp entier.</li>
+  </ul>
+
+  <h3>Ce que le module doit mesurer</h3>
+  <div class="mesure">
+    <div><span class="val">Taux</span><span class="lab">de proposition par plat</span></div>
+    <div><span class="val">Taux</span><span class="lab">de sélection par plat</span></div>
+    <div><span class="val">Écart</span><span class="lab">portions prévues / servies</span></div>
+    <div><span class="val">Reste</span><span class="lab">de vivres en fin de camp</span></div>
+  </div>
+  <p>Le reste de vivres en fin de camp est l'indicateur de gaspillage. C'est celui qui prouve, chiffre à l'appui, que le module fait son travail.</p>
+</section>
+
+<!-- 9 -->
+<section class="bloc reveal" id="s9">
+  <div class="bloc-tete"><span class="bloc-num">Module 04</span><h2 class="bloc-titre">L'espace Roadmap</h2></div>
+  <p class="chapeau">Réservé aux grands camps : les camps de deux semaines et les jamborees. Le programme n'est plus une feuille imprimée, c'est un circuit en 3D sur lequel un véhicule avance, une étape par journée.</p>
+
+  <h3>Le principe</h3>
+  <ul>
+    <li>Un <strong>circuit 3D</strong> représente la durée du camp</li>
+    <li>Un <strong>véhicule</strong> — un train ou un bus — avance le long du circuit</li>
+    <li>Chaque <strong>destination</strong> correspond à une journée du camp</li>
+    <li>Cliquer sur une destination ouvre le <strong>détail des activités prévues</strong> pour cette journée</li>
+    <li>Le véhicule se positionne sur la journée en cours : les jeunes suivent en direct l'évolution de ce qui se passe</li>
+    <li>Les étapes passées, en cours et à venir se distinguent visuellement</li>
+  </ul>
+
+  <h3>Le détail d'une journée</h3>
+  <p>Chaque étape porte le programme complet du jour :</p>
+  <ul>
+    <li>Horaires et enchaînement des activités</li>
+    <li>Lieu, responsable, unités concernées</li>
+    <li>Matériel nécessaire — <strong>tiré du groupe logistique « Visites et activités »</strong></li>
+    <li>Menu du jour — tiré du module Cuisine</li>
+    <li>Photos et compte-rendu ajoutés après coup</li>
+  </ul>
+
+  <h3>L'agenda</h3>
+  <p>La vue 3D est belle mais pas toujours pratique. Un <strong>système d'agenda</strong> classique double la roadmap : vue liste, vue semaine, filtrable par unité, imprimable, exportable pour ceux qui n'ont pas de connexion sur le terrain.</p>
+
+  <div class="note">
+    <span class="etiq">Recommandation technique</span>
+    <p>La 3D doit rester légère. Beaucoup de jeunes se connecteront depuis un téléphone d'entrée de gamme, parfois en réseau faible. Prévoir une <strong>version dégradée automatique</strong> — la même roadmap en 2D animée — qui s'active si l'appareil ne suit pas. La beauté ne doit jamais empêcher l'accès à l'information.</p>
+  </div>
+</section>
+
+<!-- 10 -->
+<section class="bloc reveal" id="s10">
+  <div class="bloc-tete"><span class="bloc-num">Module 05</span><h2 class="bloc-titre">L'espace public : vitrine et Bus volant</h2></div>
+  <p class="chapeau">Le seul module ouvert au grand public. D'abord un site vitrine complet du GST, ensuite — et c'est la pièce maîtresse — un bus 3D suspendu dans le ciel où chaque inscription réserve une place visible de tous.</p>
+
+  <h3>Le site vitrine</h3>
+  <p>Une présentation complète du Groupe Scout Tonnerre dans son ensemble, avec ses différentes sections :</p>
+  <ul>
+    <li>Histoire, identité et valeurs du groupe</li>
+    <li>Les unités et les tranches d'âge</li>
+    <li>Les activités et le calendrier de l'année</li>
+    <li>Galerie photo et vidéo des camps passés</li>
+    <li>Actualités et annonces</li>
+    <li>Rejoindre le GST — formulaire de contact et d'adhésion</li>
+    <li>Espace parents et familles</li>
+    <li><strong>Bilans de retour publiés</strong> — la transparence du groupe logistique H</li>
+  </ul>
+
+  <h3>Le Bus volant</h3>
+  <p>Une section se distingue de toutes les autres. Elle est construite pour chaque grand camp.</p>
+  <p>Un <strong>bus en 3D, suspendu dans le ciel</strong>, dans un cadre défini, naviguant au-dessus d'une carte — la référence assumée est le bus volant de Fortnite. Quand une personne s'enregistre pour un camp, elle garantit sa place dans le bus. <strong>Le bus matérialise visuellement les paiements et les inscriptions</strong>, et on voit les noms des inscrits.</p>
+
+  <h4>Ce que le bus donne à voir</h4>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th>État</th><th>Représentation proposée</th><th>Information portée</th></tr></thead>
+      <tbody>
+        <tr><td>Place libre</td><td>Siège vide</td><td>Il reste de la place</td></tr>
+        <tr><td>Inscrit non payé</td><td>Siège réservé, nom estompé</td><td>Inscription enregistrée, paiement attendu</td></tr>
+        <tr><td>Paiement partiel</td><td>Siège à moitié rempli</td><td>Acompte versé, solde à venir</td></tr>
+        <tr><td>Place garantie</td><td>Siège plein, nom affiché</td><td>Paiement complet, place confirmée</td></tr>
+        <tr><td>Bus complet</td><td>Le bus décolle</td><td>Effectif atteint</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note trancher">
+    <span class="etiq">Vigilance</span>
+    <p>Afficher publiquement qui a payé et qui n'a pas payé peut mettre des familles en difficulté. <strong>Recommandation :</strong> afficher publiquement les noms et le nombre de places prises, mais garder le statut de paiement visible uniquement pour la personne concernée et pour les responsables. Le bus reste spectaculaire sans exposer personne.</p>
+  </div>
+
+  <h3>Le lien avec la comptabilité</h3>
+  <p>Le Bus volant n'est pas une décoration : chaque siège rempli correspond à une <strong>entrée réelle enregistrée dans le module Comptabilité</strong>, et chaque inscription incrémente l'effectif qui sert de base à tous les calculs logistiques. Un inscrit de plus, c'est six sachets d'eau de plus par jour, une portion de plus à chaque repas, et une place de plus dans le bus réel.</p>
+</section>
+
+<!-- 11 -->
+<section class="bloc reveal" id="s11">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 11</span><h2 class="bloc-titre">Le hook intelligent des prix</h2></div>
+  <p class="chapeau">Le petit système intelligent du GST Government. Son rôle : faire en sorte que les calculs ne soient jamais erronés parce qu'ils reposent sur des prix périmés.</p>
+
+  <h3>Deux sources, une seule vérité</h3>
+  <div class="grille">
+    <div class="fiche accent">
+      <span class="code">Source 1</span>
+      <h4>La mémoire du GST</h4>
+      <p>Des champs dédiés permettent d'enregistrer les chiffres réels de nos expériences passées, à trois niveaux : alimentaire, transport, matériel.</p>
+      <ul>
+        <li>Ce qu'a coûté le bus pour tel trajet, telle année</li>
+        <li>Le prix payé pour tel produit, sur tel marché</li>
+        <li>Les quantités réellement consommées pour tel effectif</li>
+      </ul>
+    </div>
+    <div class="fiche">
+      <span class="code">Source 2</span>
+      <h4>La recherche automatique</h4>
+      <p>Un hook effectue des recherches sur le prix de certains postes — transport, denrées, carburant — et filtre l'information pour rester à jour.</p>
+      <ul>
+        <li>Recherche périodique sur des sources définies</li>
+        <li>Filtrage et nettoyage des résultats</li>
+        <li>Proposition de mise à jour, jamais appliquée seule</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note regle">
+    <span class="etiq">Règle de sécurité</span>
+    <p>Le hook <strong>propose</strong>, un humain <strong>valide</strong>. Un prix trouvé automatiquement entre dans la base au statut « suggestion » et n'entre dans aucun calcul tant qu'un responsable ne l'a pas confirmé. Une donnée fausse validée automatiquement fausserait tout un budget.</p>
+  </div>
+
+  <h3>Les alertes du hook</h3>
+  <ul>
+    <li><strong>Prix périmé</strong> : ce prix date de plus de six mois, à revérifier avant de l'utiliser</li>
+    <li><strong>Écart anormal</strong> : le prix trouvé est très éloigné du prix en base, à contrôler</li>
+    <li><strong>Écart prévu / réel</strong> : sur le terrain, le prix payé diffère de l'estimation — proposition de correction de la base</li>
+    <li><strong>Saisonnalité</strong> : ce produit était plus cher à la même période l'an dernier</li>
+  </ul>
+</section>
+
+<!-- 12 -->
+<section class="bloc reveal" id="s12">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 12</span><h2 class="bloc-titre">Acteurs et rôles</h2></div>
+
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th>Rôle</th><th>Ce qu'il fait dans la plateforme</th><th>Accès</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Chef de groupe</strong></td><td>Ouvre les camps, désigne les responsables, valide les budgets, voit tout</td><td class="mono">Total</td></tr>
+        <tr><td><strong>Commissaire logistique</strong></td><td>Pilote l'ensemble des groupes logistiques, valide les recensements et les ajouts de catégories</td><td class="mono">Module 1 complet</td></tr>
+        <tr><td><strong>Responsable de groupe</strong></td><td>Renseigne le recensement, les coûts et le stock de son groupe</td><td class="mono">Son groupe</td></tr>
+        <tr><td><strong>Trésorier / comptable</strong></td><td>Gère le dispatch budgétaire, saisit les dépenses, arrête les comptes du jour</td><td class="mono">Module 2 complet</td></tr>
+        <tr><td><strong>Responsable cuisine</strong></td><td>Construit le catalogue de plats, arrête le menu, saisit les ressources disponibles</td><td class="mono">Module 3 intendance</td></tr>
+        <tr><td><strong>Chef d'unité / de patrouille</strong></td><td>Suit son effectif, son matériel affecté, le programme de son unité</td><td class="mono">Son unité</td></tr>
+        <tr><td><strong>Scout / jeune</strong></td><td>Choisit ses repas, propose des plats, consulte la roadmap et son inscription</td><td class="mono">Espace jeune</td></tr>
+        <tr><td><strong>Parent / tuteur</strong></td><td>Inscrit son enfant, paie, suit le programme et le bus volant</td><td class="mono">Espace famille</td></tr>
+        <tr><td><strong>Public</strong></td><td>Consulte le site vitrine, le bus volant et les bilans de retour publiés</td><td class="mono">Lecture publique</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 13 -->
+<section class="bloc reveal" id="s13">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 13</span><h2 class="bloc-titre">Règles transverses</h2></div>
+  <p class="chapeau">Ce qui vaut pour tous les modules et ne se négocie pas.</p>
+
+  <h3>Fonctionnement hors ligne</h3>
+  <p>Un camp se tient souvent là où le réseau est mauvais ou absent. Les écrans de terrain — saisie des dépenses, inventaire, ressources cuisine, pointage — doivent <strong>fonctionner hors ligne et se synchroniser au retour du réseau</strong>. C'est une contrainte structurante : elle se décide au début du projet, elle ne se rattrape pas à la fin.</p>
+
+  <h3>Traçabilité</h3>
+  <p>Toute modification d'un chiffre est journalisée : qui, quand, ancienne valeur, nouvelle valeur. Sur un budget scout, savoir qui a changé quoi désamorce les conflits avant qu'ils n'arrivent.</p>
+
+  <h3>Données sensibles</h3>
+  <p>Les fiches sanitaires, les traitements, les coordonnées des mineurs et les statuts de paiement sont <strong>strictement internes</strong>. Aucune de ces données ne transite par un module public.</p>
+
+  <h3>Langue et monnaie</h3>
+  <p>Interface en français. Monnaie de référence : le franc CFA. Le volet international des jamborees mondiaux prévoit une gestion multi-devises avec taux de change saisi manuellement.</p>
+
+  <h3>Mobile d'abord</h3>
+  <p>La majorité des usages se fera sur téléphone, souvent en plein soleil, parfois avec les mains sales. Grands boutons, fort contraste, peu de champs par écran.</p>
+</section>
+
+<!-- 14 -->
+<section class="bloc reveal" id="s14">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 14</span><h2 class="bloc-titre">Ce que j'ajoute à ton idée</h2></div>
+  <p class="chapeau">Tu m'as demandé de compléter là où il manquait quelque chose. Voici ce que j'ajoute, classé par module, avec la raison.</p>
+
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:18%">Module</th><th style="width:32%">Ajout</th><th>Pourquoi</th></tr></thead>
+      <tbody>
+        <tr><td>Logistique</td><td><strong>Inventaire permanent du GST</strong></td><td>Tu parles de « ce dont on dispose ». Pour que ce soit fiable, il faut un inventaire qui vit entre les camps, pas seulement au moment d'un camp.</td></tr>
+        <tr><td>Logistique</td><td><strong>Affectation et responsabilité du matériel</strong></td><td>Savoir qui détient quoi permet de retrouver ce qui manque au retour, sans accuser personne au hasard.</td></tr>
+        <tr><td>Logistique</td><td><strong>Seuils critiques et alertes</strong></td><td>Certains manques ne sont pas des inconforts mais des risques : trousse de secours, eau potable, éclairage.</td></tr>
+        <tr><td>Logistique</td><td><strong>Fournisseurs et devis</strong></td><td>Comparer deux devis avant d'acheter, c'est souvent 10 à 20 % du budget d'un poste.</td></tr>
+        <tr><td>Logistique</td><td><strong>Groupe Énergie intégré au technique</strong></td><td>Groupe électrogène, carburant, batteries, éclairage : un camp de deux semaines ne tient pas sans.</td></tr>
+        <tr><td>Logistique</td><td><strong>Documents administratifs</strong></td><td>Autorisations parentales, listes nominatives, assurances, autorisations de sortie de territoire pour les jamborees. Un oubli ici bloque un départ.</td></tr>
+        <tr><td>Logistique</td><td><strong>Plan B par poste critique</strong></td><td>Que fait-on si le bus ne vient pas, s'il pleut, si le fournisseur fait défaut ? À écrire avant, pas pendant.</td></tr>
+        <tr><td>Comptabilité</td><td><strong>Gestion des entrées</strong></td><td>Ton idée couvre bien les dépenses. Les participations, subventions et dons doivent être suivis avec la même rigueur.</td></tr>
+        <tr><td>Comptabilité</td><td><strong>Justificatifs photographiés</strong></td><td>Un reçu pris en photo et attaché à la ligne de dépense rend le bilan incontestable.</td></tr>
+        <tr><td>Comptabilité</td><td><strong>Avances et régularisations</strong></td><td>Sur le terrain, on confie de l'argent à des responsables. Il faut un mécanisme pour le suivre.</td></tr>
+        <tr><td>Comptabilité</td><td><strong>Rapprochement de caisse</strong></td><td>Comparer ce que dit le logiciel et ce qu'il y a réellement dans la caisse, chaque soir.</td></tr>
+        <tr><td>Cuisine</td><td><strong>Régimes, allergies et interdits</strong></td><td>C'est la première cause de repas non consommés — et le seul risque sanitaire du module.</td></tr>
+        <tr><td>Cuisine</td><td><strong>Décrémentation automatique du stock</strong></td><td>Sans ça, les ressources disponibles saisies manuellement se désynchronisent en deux jours.</td></tr>
+        <tr><td>Cuisine</td><td><strong>Indicateur de gaspillage</strong></td><td>Le reste de vivres en fin de camp est la preuve chiffrée que le module fonctionne.</td></tr>
+        <tr><td>Roadmap</td><td><strong>Version 2D dégradée</strong></td><td>Pour les téléphones modestes et le réseau faible. Sinon, une partie du groupe est exclue.</td></tr>
+        <tr><td>Roadmap</td><td><strong>Compte-rendu et photos après coup</strong></td><td>La roadmap devient l'album du camp, pas seulement un programme.</td></tr>
+        <tr><td>Vitrine</td><td><strong>Confidentialité du statut de paiement</strong></td><td>Le bus doit être spectaculaire sans exposer les familles en difficulté.</td></tr>
+        <tr><td>Socle</td><td><strong>Base de références alimentée par chaque camp</strong></td><td>C'est le cœur de la valeur du projet : au troisième camp, la plateforme estime mieux que n'importe qui.</td></tr>
+        <tr><td>Socle</td><td><strong>Mode hors ligne</strong></td><td>Contrainte non négociable en camp. À décider maintenant, pas plus tard.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- 15 -->
+<section class="bloc reveal" id="s15">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 15</span><h2 class="bloc-titre">Points à trancher</h2></div>
+  <p class="chapeau">Questions ouvertes qu'il faut résoudre avant d'écrire la première ligne de code. Elles engagent l'architecture.</p>
+
+  <div class="note trancher">
+    <span class="etiq">Question 01 — Effectif</span>
+    <p>Combien de personnes le GST mobilise-t-il en moyenne par camp ? Une plateforme pour 40 personnes et une pour 400 ne se construisent pas de la même manière.</p>
+  </div>
+  <div class="note trancher">
+    <span class="etiq">Question 02 — Paiements</span>
+    <p>Les paiements se font-ils en espèces auprès d'un trésorier, ou faut-il intégrer un moyen de paiement mobile ? Cela change complètement le module 5.</p>
+  </div>
+  <div class="note trancher">
+    <span class="etiq">Question 03 — Équipe technique</span>
+    <p>Qui développe ? Toi seul, une équipe du groupe, des prestataires ? Le découpage en missions du cahier des charges en dépend directement.</p>
+  </div>
+  <div class="note trancher">
+    <span class="etiq">Question 04 — Base de prix</span>
+    <p>Qui construit la base de prix initiale et sur quels marchés ? C'est un travail de terrain, pas de développement, et il peut commencer dès aujourd'hui, en parallèle du code.</p>
+  </div>
+  <div class="note trancher">
+    <span class="etiq">Question 05 — Premier camp cible</span>
+    <p>Quel camp sert de pilote ? Il faut une date réelle. Sans échéance, le projet s'étire sans fin.</p>
+  </div>
+  <div class="note trancher">
+    <span class="etiq">Question 06 — Périmètre du GST seul</span>
+    <p>La plateforme est-elle réservée au GST, ou destinée à terme aux autres groupes de l'AST ? Si c'est le cas, il faut prévoir le multi-groupe dès le modèle de données.</p>
+  </div>
+</section>
+
+<!-- 16 -->
+<section class="bloc reveal" id="s16">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 16</span><h2 class="bloc-titre">Glossaire</h2></div>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:22%">Terme</th><th>Définition</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">GST</td><td>Groupe Scout Tonnerre. Le commanditaire du projet.</td></tr>
+        <tr><td class="mono">AST</td><td>Association Scoute du Togo. L'organisation nationale de rattachement.</td></tr>
+        <tr><td class="mono">GST Government</td><td>Le nom de la plateforme : l'ensemble des cinq modules et du socle.</td></tr>
+        <tr><td class="mono">Module</td><td>L'un des cinq grands ensembles fonctionnels de la plateforme.</td></tr>
+        <tr><td class="mono">Groupe logistique</td><td>Une unité de gestion à l'intérieur du module Logistique. Dix groupes au total.</td></tr>
+        <tr><td class="mono">Recensement</td><td>La liste chiffrée des besoins d'un groupe pour un camp donné.</td></tr>
+        <tr><td class="mono">Version test</td><td>Le budget prévisionnel, fait d'estimations supervisées.</td></tr>
+        <tr><td class="mono">Version live</td><td>Le budget réel, fait des dépenses effectuées sur le terrain.</td></tr>
+        <tr><td class="mono">Hook</td><td>Le mécanisme de recherche et de mise à jour automatique des prix.</td></tr>
+        <tr><td class="mono">Bus volant</td><td>La représentation 3D des inscriptions et des paiements sur le site public.</td></tr>
+        <tr><td class="mono">Roadmap</td><td>Le circuit 3D représentant le déroulé jour par jour d'un grand camp.</td></tr>
+        <tr><td class="mono">Base de références</td><td>La mémoire chiffrée du groupe, alimentée par le bilan de chaque camp.</td></tr>
+        <tr><td class="mono">Seuil critique</td><td>Le niveau minimum d'un besoin en dessous duquel le départ est bloqué.</td></tr>
+        <tr><td class="mono">Logistique inversée</td><td>La gestion de tout ce qui revient du camp : inventaire de retour, écarts, état du matériel.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer class="pied">
+  <div>
+    <span><strong>GST GOVERNMENT</strong> — Document de référence · Version 1.0</span>
+    <span>Groupe Scout Tonnerre · Association Scoute du Togo</span>
+    <span>Document 1 sur 3</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cibles = document.querySelectorAll('.reveal');
+  if(reduit || !('IntersectionObserver' in window)){
+    cibles.forEach(function(e){e.classList.add('vu')});
+    return;
+  }
+  var obs = new IntersectionObserver(function(entrees){
+    entrees.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vu'); obs.unobserve(e.target); } });
+  },{rootMargin:'0px 0px -60px 0px'});
+  cibles.forEach(function(e){obs.observe(e)});
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!-- @dsCard group="Posters" viewport="1080x1080" name="Camp de l'Unité Africaine — J-10" subtitle="Affiche compte à rebours / date limite" -->
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<title>Camp de l'Unité Africaine — Fin des inscriptions</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>html,body{margin:0;background:#cfd3d2;display:flex;justify-content:center}#root{width:1080px;height:1080px}</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const NS = window.GroupeScoutTonnerreDesignSystem_ad7474;
+const { PosterFrame, HeaderBand, SocialRail, PartnerRow, TitleBlock, Countdown, Divider } = NS;
+
+function Poster(){
+  return (
+    <PosterFrame
+      tone="white"
+      header={<HeaderBand
+        collaborator="Le Groupe Scout Saint Pierre de Gounghin du Burkina Faso"
+        connector="en collaboration avec"
+        org="Groupe Scout Tonnerre"
+        closer="organisent" />}
+      rail={<SocialRail />}
+      footer={<PartnerRow badgesSrc="../../assets/partner-badges.png"
+        logo={<img src="../../assets/camp-unite-badge.png" alt="Camp de l'Unité Africaine" style={{ height:104, width:"auto", display:"block" }} />} />}
+    >
+      <div style={{ display:"flex", flexDirection:"column", gap:"var(--space-6)", flex:1, justifyContent:"center" }}>
+        <TitleBlock title="Camp de l'Unité Africaine" color="red" size="lg" />
+        <Divider width={300} tagIndex=".03" tag="3ᵉ édition" />
+        <Countdown kicker="Fin des inscriptions" date="30 juillet 2026" prefix="JJ -" value="10" color="ink" />
+      </div>
+    </PosterFrame>
+  );
+}
+ReactDOM.createRoot(document.getElementById("root")).render(<Poster/>);
+</script>
+</body></html>

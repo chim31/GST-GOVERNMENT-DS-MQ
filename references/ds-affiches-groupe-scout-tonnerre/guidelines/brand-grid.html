@@ -1,0 +1,20 @@
+<!-- @dsCard group="Brand" viewport="760x260" name="Grille & marqueurs" subtitle="Lignes hairline · réticules · tags mono" -->
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>html,body{margin:0;background:var(--white)}
+ .stage{position:relative;height:260px}
+ .v{position:absolute;top:0;bottom:0;width:1px;background:var(--line-on-white)}
+ .h{position:absolute;left:0;right:0;height:1px;background:var(--line-on-white)}
+ .node{position:absolute;width:7px;height:7px;border:1px solid var(--node-on-white);transform:translate(-50%,-50%)}
+ .tag{position:absolute;font-family:var(--font-mono);font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-70)}
+ .tag b{color:var(--ink)}
+ .red{color:var(--red)}
+</style></head><body>
+<div class="stage">
+  <div class="v" style="left:33.33%"></div><div class="v" style="left:66.66%"></div>
+  <div class="h" style="top:50%"></div>
+  <div class="node" style="left:33.33%;top:50%"></div>
+  <div class="node" style="left:66.66%;top:50%"></div>
+  <div class="tag" style="left:20px;top:16px">.01&nbsp;<span style="opacity:.5">/</span>&nbsp;<b>Bonne action</b></div>
+  <div class="tag red" style="right:20px;bottom:16px;position:absolute">N°&nbsp;<span style="opacity:.5">/</span>&nbsp;<b>Infos</b></div>
+</div>
+</body></html>

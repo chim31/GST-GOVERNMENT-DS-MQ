@@ -1,0 +1,45 @@
+/* Typography — Groupe Scout Tonnerre
+   Échelle pensée pour un canevas carré 1080×1080 (Instagram/Facebook).
+   Trio : display condensé (Bebas) · serif éditorial (EB Garamond) · mono data (IBM Plex Mono). */
+:root {
+  /* ── Familles ────────────────────────────────────────── */
+  --font-display: "Bebas Neue", "Arial Narrow", sans-serif;   /* gros titres capitales */
+  --font-serif:   "EB Garamond", Georgia, serif;              /* titres élégants + texte courant */
+  --font-mono:    "IBM Plex Mono", "Geist Mono", ui-monospace, monospace; /* infos pratiques / data */
+
+  /* ── Échelle display (Bebas) ─────────────────────────── */
+  --fs-display-2xl: 168px;  /* compte à rebours / chiffres géants */
+  --fs-display-xl:  120px;  /* gros titre principal */
+  --fs-display-lg:  84px;   /* titre secondaire */
+  --fs-display-md:  56px;   /* sur-titre / lockup nom du groupe */
+
+  /* ── Échelle serif (EB Garamond) ─────────────────────── */
+  --fs-serif-xl:    58px;   /* titre éditorial serif */
+  --fs-serif-lg:    38px;   /* sous-titre italique */
+  --fs-body:        29px;   /* texte courant */
+  --fs-body-sm:     23px;   /* texte courant secondaire */
+
+  /* ── Échelle mono (data / labels) ────────────────────── */
+  --fs-mono:        22px;   /* valeurs pratiques */
+  --fs-mono-sm:     17px;   /* labels courts */
+  --fs-eyebrow:     19px;   /* bandeau association (letterspacé) */
+  --fs-tag:         13px;   /* marqueurs de grille .01 / .FEV */
+
+  /* ── Graisses ────────────────────────────────────────── */
+  --fw-regular: 400;  /* @kind font */
+  --fw-medium:  500;  /* @kind font */
+  --fw-semibold:600;  /* @kind font */
+
+  /* ── Interlignes ─────────────────────────────────────── */
+  --lh-display: 0.86; /* @kind other */
+  --lh-title:   1.0;  /* @kind other */
+  --lh-body:    1.5;  /* @kind other */
+  --lh-mono:    1.55; /* @kind other */
+
+  /* ── Interlettrages ──────────────────────────────────── */
+  --ls-display:  0.01em;   /* Bebas : quasi nul */
+  --ls-eyebrow:  0.34em;   /* bandeau : très espacé (façon affiches) */
+  --ls-mono:     0.02em;
+  --ls-label:    0.16em;   /* labels mono en capitales */
+  --ls-tag:      0.18em;   /* tags de grille */
+}

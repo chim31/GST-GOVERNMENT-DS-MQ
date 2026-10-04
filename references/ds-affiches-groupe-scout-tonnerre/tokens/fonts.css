@@ -1,0 +1,11 @@
+/* Fonts — Groupe Scout Tonnerre
+   Trio typographique (esprit Longbow) :
+   - Bebas Neue  → gros titres condensés capitales (impact / accents)
+   - EB Garamond → titres élégants (italique) + texte courant lisible
+   - IBM Plex Mono → toutes les infos pratiques (data : date, heure, lieu, prix, contact)
+
+   SUBSTITUTION À VALIDER : la maquette Longbow utilise « Geist Mono ».
+   Geist Mono n'étant pas garanti sur Google Fonts, on utilise IBM Plex Mono
+   (même esprit technique, chasse fixe nette). Remplaçable si les .woff2 Geist
+   sont fournis. Fontes chargées depuis le CDN Google Fonts. */
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap");

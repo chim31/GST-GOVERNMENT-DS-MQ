@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Fondations — GST Government</title>
+<meta name="description" content="Couleurs, sémantique, modes Jour / Nuit / Plein soleil, typographie fluide, grille, espacements, rayons, élévation, iconographie et ciels 3D.">
+<script>try{var t=localStorage.getItem("gst-theme");if(t&&t!=="jour")document.documentElement.setAttribute("data-theme",t);if(localStorage.getItem("gst-motion")==="reduce")document.documentElement.setAttribute("data-motion","reduce")}catch(e){}</script>
+<link rel="stylesheet" href="tokens/gst-tokens.css">
+<link rel="stylesheet" href="assets/css/gst.css">
+<link rel="stylesheet" href="assets/css/doc.css">
+<style>
+.scale{display:grid;gap:0;border:var(--gst-hairline) solid var(--gst-line-hairline);grid-template-columns:repeat(2,1fr)}
+@media (min-width:640px){.scale{grid-template-columns:repeat(5,1fr)}}
+@media (min-width:1100px){.scale--10{grid-template-columns:repeat(10,1fr)}.scale--6{grid-template-columns:repeat(6,1fr)}}
+.sw{display:flex;flex-direction:column;min-height:170px;border-right:var(--gst-hairline) solid var(--gst-line-hairline);background:var(--gst-bg-panel)}
+.sw__chip{flex:1;min-height:92px;position:relative;display:flex;align-items:flex-end;justify-content:flex-end;padding:6px}
+.sw__body{padding:10px 10px 12px;display:flex;flex-direction:column;gap:3px;font-family:var(--gst-font-mono);font-size:10.5px;letter-spacing:.04em}
+.sw__body b{font-size:11.5px;font-weight:600}
+.sw__body span{color:var(--gst-text-secondary)}
+.sw__ratio{display:flex;gap:4px;flex-wrap:wrap}
+.sw__ratio i{font-style:normal;font-size:9px;letter-spacing:.06em;padding:1px 4px;border:1px solid currentColor;border-radius:var(--gst-radius-sm)}
+.sw__ratio .ok{color:var(--gst-state-success-text)}.sw__ratio .ko{color:var(--gst-state-danger-text)}
+.sw__brand{position:absolute;top:6px;left:6px;font-family:var(--gst-font-mono);font-size:9px;letter-spacing:.14em;padding:2px 5px}
+
+.sem td .chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--gst-font-mono);font-size:11px;white-space:nowrap}
+.sem td .chip i{width:22px;height:22px;border:1px solid var(--gst-line-strong);flex:none}
+.sem td .badge-ratio{display:block;margin-top:4px;font-family:var(--gst-font-mono);font-size:10px;letter-spacing:.06em}
+.sem td .badge-ratio.ok{color:var(--gst-state-success-text)}.sem td .badge-ratio.ko{color:var(--gst-state-danger-text)}
+
+.modes{display:grid;gap:var(--gst-grid-gutter)}
+@media (min-width:1024px){.modes{grid-template-columns:repeat(3,1fr)}}
+.mode{background:var(--gst-bg-canvas);color:var(--gst-text-primary);border:var(--gst-hairline) solid var(--gst-line-hairline);padding:var(--gst-space-5);display:flex;flex-direction:column;gap:var(--gst-space-4)}
+.mode__kpi{background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline);padding:var(--gst-space-4);display:flex;justify-content:space-between;align-items:end}
+
+.type-trio{display:grid;gap:var(--gst-grid-gutter)}
+@media (min-width:1024px){.type-trio{grid-template-columns:repeat(3,1fr)}}
+.trio{background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline);padding:var(--gst-space-5);display:flex;flex-direction:column;gap:var(--gst-space-3);min-height:340px}
+.trio__glyph{font-size:9rem;line-height:.8;margin:var(--gst-space-4) 0}
+.trio__chars{font-size:1.25rem;line-height:1.3;word-break:break-all;color:var(--gst-text-secondary)}
+.tscale td{vertical-align:middle}
+.tscale .spec{overflow:hidden;white-space:nowrap;text-overflow:clip;max-width:60vw}
+
+.gridviz{position:relative;height:260px;background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline);overflow:hidden}
+.gridviz__cols{position:absolute;top:44px;bottom:36px;display:grid;transition:all var(--gst-dur-base) var(--gst-ease-tonnerre)}
+.gridviz__cols i{background:var(--gst-state-danger-bg);border-left:1px solid var(--gst-state-danger);border-right:1px solid var(--gst-state-danger)}
+.gridviz__dim{position:absolute;font-family:var(--gst-font-mono);font-size:10px;letter-spacing:.12em;color:var(--gst-text-secondary)}
+
+.spacebars{display:flex;flex-direction:column;gap:10px}
+.spacebars div{display:grid;grid-template-columns:120px 60px 1fr;align-items:center;gap:var(--gst-space-4);font-family:var(--gst-font-mono);font-size:var(--gst-fs-label)}
+.spacebars i{height:14px;background:var(--gst-brand);transform-origin:left}
+
+.icons{display:grid;grid-template-columns:repeat(3,1fr);border-top:var(--gst-hairline) solid var(--gst-line-hairline);border-left:var(--gst-hairline) solid var(--gst-line-hairline)}
+@media (min-width:640px){.icons{grid-template-columns:repeat(6,1fr)}}
+@media (min-width:1100px){.icons{grid-template-columns:repeat(12,1fr)}}
+.icons div{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 4px 10px;border-right:var(--gst-hairline) solid var(--gst-line-hairline);border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);background:var(--gst-bg-panel)}
+.icons div span{font-family:var(--gst-font-mono);font-size:9px;letter-spacing:.06em;color:var(--gst-text-secondary);text-align:center;word-break:break-all}
+.icons .gst-icon{width:24px;height:24px}
+
+.skies{display:grid;gap:var(--gst-grid-gutter)}
+@media (min-width:900px){.skies{grid-template-columns:repeat(3,1fr)}}
+.sky{display:flex;flex-direction:column-reverse;height:260px;border:var(--gst-hairline) solid var(--gst-line-strong);position:relative}
+.sky i{flex:1;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;font-family:var(--gst-font-mono);font-size:10px;letter-spacing:.1em;font-style:normal}
+.sky b{position:absolute;left:12px;top:10px;font-family:var(--gst-font-mono);font-size:10px;letter-spacing:.18em;font-weight:500}
+.radii{display:grid;gap:var(--gst-grid-gutter);grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
+.radii .doc-plate{min-height:170px;display:flex;flex-direction:column;justify-content:space-between;gap:12px}
+</style>
+</head>
+<body>
+<main id="main" class="doc-main">
+
+<header class="doc-head">
+  <span class="gst-tag gst-tag--accent" data-decode>.01 / FONDATIONS · PLANCHES</span>
+  <h1 class="doc-head__title" data-rise>Fondations</h1>
+  <p class="doc-head__lead">Les atomes du système, lus en direct dans <code class="doc-code-i">tokens/gst-tokens.css</code>. Basculez Jour, Nuit ou Plein soleil en haut de page : toutes les valeurs se recalculent.</p>
+  <dl class="doc-head__meta">
+    <div><dt class="gst-label">Préfixe</dt><dd>--gst-</dd></div>
+    <div><dt class="gst-label">Modes</dt><dd>Jour · Nuit · Plein soleil</dd></div>
+    <div><dt class="gst-label">Cible</dt><dd>WCAG AA · AAA en Plein soleil</dd></div>
+    <div><dt class="gst-label">Fichiers</dt><dd><a href="tokens/gst-tokens.css">tokens.css</a> · <a href="tokens/gst-tokens.json">tokens.json</a></dd></div>
+  </dl>
+</header>
+
+<!-- .01 Échelles -->
+<section class="doc-sec" id="couleurs">
+  <div class="doc-sec__head">
+    <div><span class="gst-tag" data-decode>.01 / COULEURS · ÉCHELLES</span><h2 class="doc-sec__title">Échelles</h2></div>
+    <p class="doc-sec__intro">Six familles. Le teal porte la marque et le terrain, le rouge l'accent et l'action, l'écru le papier. <em>L'Éclair est une couleur fonctionnelle</em> : jamais en grande surface, jamais pour décorer. Chaque pastille affiche son contraste mesuré sur blanc et sur encre.</p>
+  </div>
+  <div class="doc-sub">Teal — marque, terrain, véhicules</div>
+  <div class="scale scale--10" data-scale="teal"></div>
+  <div class="doc-sub">Rouge — accent, action, réel, étape en cours</div>
+  <div class="scale scale--6" data-scale="red"></div>
+  <div class="doc-sub">Papier & encre — surfaces et texte</div>
+  <div class="scale scale--10" data-scale="neutral"></div>
+  <div class="doc-sub">Éclair & forêt — signaux fonctionnels</div>
+  <div class="scale scale--10" data-scale="signal"></div>
+</section>
+
+<!-- .02 Sémantique -->
+<section class="doc-sec" id="semantique">
+  <div class="doc-sec__head">
+    <div><span class="gst-tag" data-decode>.02 / COULEURS · SÉMANTIQUE</span><h2 class="doc-sec__title">Sémantique</h2></div>
+    <p class="doc-sec__intro">Un composant ne lit <em>jamais</em> une échelle ni un hexadécimal : il lit un rôle. Le tableau est résolu en direct dans les trois modes ; les contrastes texte sont mesurés sur le fond auquel le rôle est destiné.</p>
+  </div>
+  <div class="doc-table-wrap"><table class="doc-table sem" id="sem"><thead><tr><th>Rôle · token</th><th>Jour</th><th>Nuit de camp</th><th>Plein soleil</th><th>Usage</th></tr></thead><tbody></tbody></table></div>
+
+  <div class="doc-cols doc-cols--2" style="margin-top:var(--gst-space-7)">
+    <div class="gst-alert gst-alert--warning">
+      <svg class="gst-icon gst-alert__ico" aria-hidden="true"><use href="#i-zap"/></svg>
+      <div><div class="gst-alert__title">Règle Éclair</div>
+        <div class="gst-alert__text">Uniquement : alerte de seuil critique, badge « groupe renforcé » (en marqueur de 6 px), décollage du bus, validation définitive d'un budget. <b>Un seul élément Éclair visible par écran.</b> Jamais en aplat de grande surface.</div></div><span></span>
+    </div>
+    <div class="gst-alert gst-alert--info">
+      <svg class="gst-icon gst-alert__ico" aria-hidden="true"><use href="#i-shield-check"/></svg>
+      <div><div class="gst-alert__title">Trois corrections d'accessibilité</div>
+        <div class="gst-alert__text">Éclair profond <code class="doc-code-i">#C79A00</code> = 2,6:1 sur blanc : réservé aux aplats ; le texte d'avertissement passe par <code class="doc-code-i">--gst-eclair-700</code> (6,3:1). En Nuit, rouge-300 (3,8:1) et teal-300 (4,4:1) deviennent des couleurs d'icône ; le texte d'état lit les tokens <code class="doc-code-i">*-text</code>. En Plein soleil, forêt passe à <code class="doc-code-i">--gst-forest-700</code> (8,5:1).</div></div><span></span>
+    </div>
+  </div>
+</section>
+
+<!-- .03 Modes -->
+<section class="doc-sec" id="modes">
+  <div class="doc-sec__head">
+    <div><span class="gst-tag" data-decode>.03 / MODES D'AFFICHAGE</span><h2 class="doc-sec__title">Jour, nuit, soleil</h2></div>
+    <p class="doc-sec__intro">Le même écran, trois lectures. <em>Nuit de camp</em> est pensé pour la lampe frontale, pas pour le style : étoiles = réticules écru. <em>Plein soleil</em> double les hairlines, passe le texte en noir pur et vise AAA ; il se bascule en un tap depuis la barre supérieure. Les modes se posent aussi sur une seule zone : <code class="doc-code-i">data-theme="nuit"</code>.</p>
+  </div>
+  <div class="modes">
+    <div class="mode" data-theme="jour" data-mode-demo></div>
+    <div class="mode" data-theme="nuit" data-mode-demo></div>
+    <div class="mode" data-theme="soleil" data-mode-demo></div>
+  </div>
+</section>
+
+<!-- .04 Typographie -->
+<section class="doc-sec" id="typo">
+  <div class="doc-sec__head">
+    <div><span class="gst-tag" data-decode>.04 / TYPOGRAPHIE</span><h2 class="doc-sec__title">Le trio</h2></div>
+    <p class="doc-sec__intro">Bebas pour l'impact, Garamond pour la voix, Plex Mono pour toutes les données. Aucune police hors du trio. Échelle fluide <code class="doc-code-i">clamp()</code> de 390 à 1 440 px ; la colonne « actuel » se recalcule quand vous redimensionnez la fenêtre.</p>
+  </div>
+  <div class="type-trio">
+    <div class="trio"><span class="gst-tag">DISPLAY · --gst-font-display</span><div class="trio__glyph" style="font-family:var(--gst-font-display)">GST</div><b class="gst-display-md">Bebas Neue</b><span class="trio__chars" style="font-family:var(--gst-font-display);letter-spacing:.04em">ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789 J-21</span><p class="gst-field__help">Titres capitales condensés, chiffres géants, compte à rebours.</p></div>
+    <div class="trio"><span class="gst-tag">SERIF · --gst-font-serif</span><div class="trio__glyph" style="font-family:var(--gst-font-serif);font-style:italic">Aa</div><b class="gst-serif-lg">EB Garamond</b><span class="trio__chars" style="font-family:var(--gst-font-serif)">Tout part d'un camp. <i>Le calcul est continu.</i> àâçéèêëîïôûùü — « nous »</span><p class="gst-field__help">Titres éditoriaux en italique, texte courant.</p></div>
+    <div class="trio"><span class="gst-tag">MONO · --gst-font-mono</span><div class="trio__glyph" style="font-family:var(--gst-font-mono);font-size:7.5rem">Aa</div><b style="font-family:var(--gst-font-mono);font-size:1.4rem;font-weight:500">IBM Plex Mono</b><span class="trio__chars gst-data">4 850 000 F CFA · 6 720 · 05.08.26 · J-21 · .01 / LABEL</span><p class="gst-field__help">Montants, dates, quantités, labels, tags. Chiffres tabulaires, alignés à droite.</p></div>
+  </div>
+  <div class="doc-sub">Échelle fluide</div>
+  <div class="doc-table-wrap"><table class="doc-table tscale" id="tscale"><thead><tr><th>Token</th><th>Police</th><th>390 → 1440</th><th>Actuel</th><th>Spécimen</th></tr></thead><tbody></tbody></table></div>
+
+  <div class="doc-cols doc-cols--2" style="margin-top:var(--gst-space-7)">
+    <div class="doc-plate">
+      <span class="gst-tag">MONNAIE · F CFA</span>
+      <div style="margin-top:var(--gst-space-4)" class="doc-stack">
+        <div class="gst-table-wrap"><table class="gst-table gst-table--compact"><thead><tr><th>Poste</th><th class="n">Prévu</th><th class="n">Réel</th></tr></thead>
+          <tbody><tr><td>Alimentaire</td><td class="n">1 940 000</td><td class="n">1 688 400</td></tr><tr><td>Transport</td><td class="n">1 120 000</td><td class="n">1 236 000</td></tr><tr><td>Santé</td><td class="n">240 000</td><td class="n">212 300</td></tr></tbody>
+          <tfoot><tr><td>Total</td><td class="n">3 300 000</td><td class="n">3 136 700</td></tr></tfoot></table></div>
+        <p class="gst-field__help">Écriture : <code class="doc-code-i">25 000 F CFA</code> — espace fine insécable (U+202F) entre les milliers, insécable avant « F CFA ». Helper : <code class="doc-code-i">GST.fcfa(25000)</code>.</p>
+      </div>
+    </div>
+    <div class="doc-plate">
+      <span class="gst-tag">TON · ÉMETTEUR « NOUS »</span>
+      <div class="doc-stack" style="margin-top:var(--gst-space-4)">
+        <span class="gst-eyebrow">Association Scoute du Togo</span>
+        <span class="gst-display-lg">Fin des inscriptions</span>
+        <span class="gst-serif-lg">Nous vous attendons à Attikoumé.</span>
+        <dl class="gst-spec gst-spec--inline"><div><dt>Départ</dt><dd>07:30</dd></div><div><dt>Lieu</dt><dd>Attikoumé</dd></div><div><dt>Inscription</dt><dd>25 000 F CFA</dd></div></dl>
+        <p class="gst-field__help">Capitales espacées pour les bandeaux, Bebas pour les titres, bas-de-casse discret pour les mentions, fiche technique pour les infos pratiques.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- .05 Grille -->
+<section class="doc-sec" id="grille">
+  <div class="doc-sec__head">
+    <div><span class="gst-tag" data-decode>.05 / GRILLE & ESPACEMENTS</span><h2 class="doc-sec__title">La planche</h2></div>
+    <p class="doc-sec__intro">4 colonnes sur mobile (gouttière 16), 8 sur tablette (24), 12 sur desktop (24) ; marges 20 / 40 / 80. La grille peut être rendue visible en filigrane sur les écrans éditoriaux — c'est le cas de cette documentation.</p>
+  </div>
+  <div class="doc-row" style="margin-bottom:var(--gst-space-4)">
+    <div class="gst-seg" id="gridseg" role="group" aria-label="Gabarit">
+      <button type="button" data-value="390" aria-pressed="true">Mobile · 390</button>
+      <button type="button" data-value="768" aria-pressed="false">Tablette · 768</button>
+      <button type="button" data-value="1440" aria-pressed="false">Desktop · 1440</button>
+    </div>
+  </div>
+  <div class="gridviz" id="gridviz" data-crosshair><div class="gridviz__cols" id="gridcols"></div>
+    <span class="gridviz__dim" id="gdim1" style="top:14px;left:16px"></span><span class="gridviz__dim" id="gdim2" style="bottom:12px;left:16px"></span></div>
+
+  <div class="doc-cols doc-cols--2" style="margin-top:var(--gst-space-7)">
+    <div><div class="doc-sub" style="margin-top:0">Espacement — base 4</div><div class="spacebars" id="spacebars"></div></div>
+    <div><div class="doc-sub" style="margin-top:0">Cibles tactiles</div>
+      <div class="doc-plate doc-stack">
+        <div class="doc-row"><button class="gst-btn gst-btn--secondary">Minimum · 44 px</button><span class="gst-field__help">Toute cible interactive.</span></div>
+        <div class="doc-row"><button class="gst-btn gst-btn--primary gst-btn--lg">Action terrain · 56 px</button><span class="gst-field__help">Actions principales, mains sales.</span></div>
+        <div class="gst-stepper" role="group" aria-label="Exemple"><button type="button" aria-label="Moins"><svg class="gst-icon gst-icon--lg"><use href="#i-minus"/></svg></button><span class="gst-stepper__val">12</span><button type="button" aria-label="Plus"><svg class="gst-icon gst-icon--lg"><use href="#i-plus"/></svg></button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- .06 Rayons, contours, élévation -->
+<section class="doc-sec" id="formes">
+  <div class="doc-sec__head">
+    <div><span class="gst-tag" data-decode>.06 / RAYONS · CONTOURS · ÉLÉVATION</span><h2 class="doc-sec__title">Angles vifs</h2></div>
+    <p class="doc-sec__intro">Rayon 0 partout. 3 px pour les puces et badges. 999 px uniquement pour l'indicateur de synchronisation et les avatars. <em>Pas d'ombre portée</em> : la hiérarchie passe par hairlines, contours 2 px et aplats — sauf <code class="doc-code-i">lift</code>, au-dessus d'une scène 3D.</p>
+  </div>
+  <div class="radii">
+    <div class="doc-plate"><span class="gst-tag">--gst-radius-none · 0</span><div class="gst-cartouche" style="padding:14px;font-family:var(--gst-font-mono)">Cartouche</div></div>
+    <div class="doc-plate"><span class="gst-tag">--gst-radius-sm · 3 px</span><div class="doc-row"><span class="gst-badge gst-badge--brand">Validé</span><span class="gst-badge gst-badge--renforce">Renforcé</span></div></div>
+    <div class="doc-plate"><span class="gst-tag">--gst-radius-pill · 999 px</span><div class="doc-row"><span class="gst-sync is-pending"><span class="gst-sync__dot"></span><span class="gst-sync__label">3 en file</span></span><span class="gst-avatar">KA</span></div></div>
+    <div class="doc-plate"><span class="gst-tag">--gst-hairline · 1 px</span><div style="height:1px;background:var(--gst-line-strong)"></div></div>
+    <div class="doc-plate"><span class="gst-tag">--gst-border · 2 px</span><div style="height:44px;border:var(--gst-border) solid var(--gst-line-brand)"></div></div>
+    <div class="doc-plate"><span class="gst-tag">--gst-rule · 4 px</span><div class="gst-divider"><div class="gst-divider__rule"></div><span class="gst-tag">.03 / 3ᵉ ÉDITION</span></div></div>
+    <div class="doc-plate" style="background:var(--gst-sky-day-3);border-color:transparent;grid-column:1/-1;min-height:220px;align-items:center;justify-content:center">
+      <span class="gst-tag" style="align-self:flex-start">--gst-shadow-lift · LE SEUL CAS D'OMBRE : PANNEAU AU-DESSUS D'UNE SCÈNE 3D</span>
+      <div class="gst-card gst-lift" style="width:min(360px,100%)"><span class="gst-tag">J.05 / AUJOURD'HUI</span><div class="gst-display-md" style="margin-top:8px">Service communautaire</div><p class="gst-field__help" style="margin:6px 0 0">École primaire d'Attikoumé · 07:30</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- .07 Iconographie -->
+<section class="doc-sec" id="icones">
+  <div class="doc-sec__head">
+    <div><span class="gst-tag" data-decode>.07 / ICONOGRAPHIE</span><h2 class="doc-sec__title">Un seul set</h2></div>
+    <p class="doc-sec__intro">Un sous-ensemble de Lucide (licence ISC), redessiné par la feuille de style en « plan technique » : trait 1,5, extrémités carrées, angles vifs. Aucun emoji. La fleur de lys n'existe qu'en glyphe <span class="gst-fleur" style="font-size:1.3em">⚜</span> U+269C, à plat. Les logos officiels ne sont jamais redessinés.</p>
+  </div>
+  <div class="icons" id="icons"></div>
+  <div class="doc-cols doc-cols--3" style="margin-top:var(--gst-space-7)">
+    <div class="doc-plate doc-plate--center"><span class="gst-tag">FLEUR · TEAL</span><span class="gst-fleur" style="font-size:5rem">⚜</span></div>
+    <div class="doc-plate doc-plate--center doc-plate--invert"><span class="gst-tag gst-tag--on-invert">FLEUR · SUR TEAL</span><span class="gst-fleur" style="font-size:5rem;color:var(--gst-text-on-invert)">⚜</span></div>
+    <div class="doc-plate doc-plate--center"><span class="gst-tag">LOGO OFFICIEL · JAMAIS REDESSINÉ</span><img src="assets/img/logo-gst.jpeg" alt="Logo du Groupe Scout Tonnerre — District Golfe, since 2013" style="width:150px;height:auto"></div>
+  </div>
+</section>
+
+<!-- .08 Ciels -->
+<section class="doc-sec" id="ciels">
+  <div class="doc-sec__head">
+    <div><span class="gst-tag" data-decode>.08 / CIELS 3D</span><h2 class="doc-sec__title">Aplats étagés</h2></div>
+    <p class="doc-sec__intro">La traduction du « zéro dégradé » en 3D : quatre bandes nettes, de l'horizon (1) au zénith (4), choisies selon l'heure réelle du camp. La bascule se fait bande par bande en 800 ms.</p>
+  </div>
+  <div class="skies" id="skies"></div>
+</section>
+
+<!-- .09 Utilisation -->
+<section class="doc-sec" id="usage">
+  <div class="doc-sec__head">
+    <div><span class="gst-tag" data-decode>.09 / INTÉGRATION</span><h2 class="doc-sec__title">Dans le code</h2></div>
+    <p class="doc-sec__intro">Un seul fichier de tokens, autonome, qui reprend aussi les alias du DS d'affiches (<code class="doc-code-i">--teal</code>, <code class="doc-code-i">--font-display</code>…) : les composants d'affiches existants fonctionnent sans modification.</p>
+  </div>
+<pre class="doc-code"><span class="c">&lt;!-- 1. Tokens, puis composants --&gt;</span>
+&lt;link rel="stylesheet" href="tokens/gst-tokens.css"&gt;
+&lt;link rel="stylesheet" href="assets/css/gst.css"&gt;
+
+<span class="c">/* 2. Un composant ne lit que des rôles */</span>
+<span class="k">.expense-total</span> {
+  color: var(<span class="s">--gst-text-primary</span>);
+  border-top: var(<span class="s">--gst-border</span>) solid var(<span class="s">--gst-line-strong</span>);
+  font: 600 var(<span class="s">--gst-fs-data</span>)/1 var(<span class="s">--gst-font-mono</span>);
+  font-variant-numeric: tabular-nums;
+  transition: color var(<span class="s">--gst-dur-fast</span>) var(<span class="s">--gst-ease-snap</span>);
+}
+
+<span class="c">&lt;!-- 3. Mode : sur la racine (bascule) ou sur une zone --&gt;</span>
+&lt;html data-theme="soleil"&gt;     &lt;section data-theme="nuit"&gt;…&lt;/section&gt;</pre>
+</section>
+</main>
+
+<script src="assets/js/gst-icons.js"></script>
+<script src="assets/js/gst-motion.js"></script>
+<script src="assets/js/gst-shell.js"></script>
+<script>
+(function () {
+  var GST = window.GST, root = document.documentElement;
+  /* Contraste WCAG */
+  function lum(hex) {
+    var m = hex.replace("#", ""); if (m.length === 3) m = m.split("").map(function (c) { return c + c; }).join("");
+    var rgb = [0, 2, 4].map(function (i) { var c = parseInt(m.substr(i, 2), 16) / 255; return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4); });
+    return 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];
+  }
+  function toHex(c) {
+    if (!c) return null; c = c.trim();
+    if (c[0] === "#") return c.length === 4 ? "#" + c[1] + c[1] + c[2] + c[2] + c[3] + c[3] : c.slice(0, 7);
+    var m = c.match(/rgba?\(([^)]+)\)/); if (!m) return null;
+    var p = m[1].split(",").map(parseFloat);
+    return "#" + p.slice(0, 3).map(function (v) { return ("0" + Math.round(v).toString(16)).slice(-2); }).join("");
+  }
+  function alpha(c) { var m = (c || "").match(/rgba\([^,]+,[^,]+,[^,]+,\s*([\d.]+)/); return m ? parseFloat(m[1]) : 1; }
+  function blend(fg, bg) { // fg rgba sur bg hex
+    var a = alpha(fg); if (a >= 1) return toHex(fg);
+    var f = toHex(fg), b = toHex(bg);
+    var mix = [0, 2, 4].map(function (i) { return Math.round(parseInt(f.substr(1 + i, 2), 16) * a + parseInt(b.substr(1 + i, 2), 16) * (1 - a)); });
+    return "#" + mix.map(function (v) { return ("0" + v.toString(16)).slice(-2); }).join("");
+  }
+  function ratio(a, b) { var la = lum(a), lb = lum(b); return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05); }
+  function grade(r) { return r >= 7 ? "AAA" : r >= 4.5 ? "AA" : r >= 3 ? "AA·G" : "—"; }
+  function fr(n) { return n.toFixed(1).replace(".", ","); }
+
+  /* ── Échelles ─────────────────────────────────────────────────────── */
+  var SCALES = {
+    teal: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"].map(function (k) { return ["--gst-teal-" + k, "Teal " + k, k === "500" ? "marque" : k === "600" ? "cadre" : k === "800" ? "encre teal" : ""]; }),
+    red: ["50", "100", "300", "500", "700", "900"].map(function (k) { return ["--gst-red-" + k, "Rouge " + k, k === "500" ? "marque" : k === "700" ? "survol" : ""]; }),
+    neutral: [["--gst-white", "Blanc", "panneau"], ["--gst-paper", "Papier", ""], ["--gst-cream", "Écru", "fond"], ["--gst-stone", "Pierre", "hairline"], ["--gst-sand", "Sable", "réticule"],
+      ["--gst-ink-40", "Encre 40", "≥ 18 px"], ["--gst-ink-70", "Encre 70", "texte 2"], ["--gst-ink", "Encre", "texte"], ["--gst-black", "Noir", "soleil"], ["--gst-teal-900", "Nuit", "fond nuit"]],
+    signal: [["--gst-eclair-50", "Éclair 50", "fond alerte"], ["--gst-eclair", "Éclair", "signal"], ["--gst-eclair-deep", "Éclair profond", "aplat"], ["--gst-eclair-700", "Éclair 700", "texte"], ["--gst-eclair-800", "Éclair 800", "texte soleil"],
+      ["--gst-forest", "Forêt", "succès"], ["--gst-forest-700", "Forêt 700", "succès soleil"], ["--gst-state-success-bg", "Succès fond", ""], ["--gst-red-50", "Danger fond", ""], ["--gst-teal-50", "Info fond", ""]]
+  };
+  var W = "#FFFFFF", INK = "#141414";
+  Object.keys(SCALES).forEach(function (k) {
+    var host = document.querySelector('[data-scale="' + k + '"]');
+    host.innerHTML = SCALES[k].map(function (s) {
+      var hex = toHex(GST.token(s[0])) || "#000000";
+      var rw = ratio(hex, W), ri = ratio(hex, INK);
+      var on = rw > ri ? W : INK;
+      return '<div class="sw"><div class="sw__chip" style="background:var(' + s[0] + ')">' + (s[2] ? '<span class="sw__brand" style="color:' + on + ';border:1px solid ' + on + '">' + s[2].toUpperCase() + "</span>" : "") + '</div><div class="sw__body"><b>' + s[1] + "</b><span>" + s[0] + "</span><span>" + hex.toUpperCase() +
+        '</span><span class="sw__ratio"><i class="' + (rw >= 4.5 ? "ok" : "ko") + '">□ ' + fr(rw) + '</i><i class="' + (ri >= 4.5 ? "ok" : "ko") + '">■ ' + fr(ri) + "</i></span></div></div>";
+    }).join("");
+  });
+
+  /* ── Sémantique résolue dans les 3 modes ─────────────────────────── */
+  var probe = {};
+  ["jour", "nuit", "soleil"].forEach(function (m) {
+    var d = document.createElement("div"); d.setAttribute("data-theme", m); d.style.display = "none";
+    document.body.appendChild(d); probe[m] = d;
+  });
+  var SEM = [
+    ["--gst-bg-canvas", null, "Fond de page"], ["--gst-bg-panel", null, "Panneaux, cartes, tables"], ["--gst-bg-invert", null, "Bloc teal plein"],
+    ["--gst-text-primary", "--gst-bg-panel", "Texte principal, données"], ["--gst-text-secondary", "--gst-bg-panel", "Labels, légendes"],
+    ["--gst-line-hairline", null, "Grille, séparateurs"], ["--gst-node-reticle", null, "Réticules aux nœuds"],
+    ["--gst-accent", null, "Action primaire, filet rouge"], ["--gst-accent-text", "--gst-bg-panel", "Texte d'accent"],
+    ["--gst-state-success", null, "Payé, validé (trait, icône)"], ["--gst-state-success-text", "--gst-bg-panel", "Texte de succès"],
+    ["--gst-state-warning", null, "À vérifier (trait, icône)"], ["--gst-state-warning-text", "--gst-bg-panel", "Texte d'avertissement"],
+    ["--gst-state-danger", null, "Seuil critique (trait)"], ["--gst-state-danger-text", "--gst-bg-panel", "Texte critique"],
+    ["--gst-state-info", null, "Suggestion du hook"], ["--gst-state-info-text", "--gst-bg-panel", "Texte d'info"],
+    ["--gst-data-planned", null, "Prévu — pointillé"], ["--gst-data-actual", null, "Réel — trait plein"]
+  ];
+  function renderSem() {
+    document.querySelector("#sem tbody").innerHTML = SEM.map(function (r) {
+      return "<tr><td><code class=\"doc-code-i\">" + r[0] + "</code></td>" + ["jour", "nuit", "soleil"].map(function (m) {
+        var raw = GST.token(r[0], probe[m]);
+        var bg = GST.token("--gst-bg-panel", probe[m]);
+        var hex = blend(raw, toHex(bg)) || "";
+        var extra = "";
+        if (r[1]) { var rr = ratio(hex, toHex(GST.token(r[1], probe[m]))); extra = '<span class="badge-ratio ' + (rr >= (m === "soleil" ? 7 : 4.5) ? "ok" : "ko") + '">' + fr(rr) + ":1 · " + grade(rr) + "</span>"; }
+        return '<td><span class="chip"><i style="background:' + raw + '"></i>' + (alpha(raw) < 1 ? raw.replace(/\s/g, "") : hex.toUpperCase()) + "</span>" + extra + "</td>";
+      }).join("") + "<td>" + r[2] + "</td></tr>";
+    }).join("");
+  }
+  renderSem();
+
+  /* ── Démo des modes ───────────────────────────────────────────────── */
+  document.querySelectorAll("[data-mode-demo]").forEach(function (m) {
+    var name = { jour: "Jour", nuit: "Nuit de camp", soleil: "Plein soleil" }[m.dataset.theme];
+    m.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center"><span class="gst-tag">MODE / ' + name.toUpperCase() + '</span><span class="gst-sync is-pending"><span class="gst-sync__dot"></span>2 en file</span></div>' +
+      '<div class="mode__kpi"><div><div class="gst-label">Écart prévu / réel</div><div class="gst-display-md">−4,8 %</div></div><span class="gst-badge gst-badge--success">Sous budget</span></div>' +
+      '<div class="gst-need"><div class="gst-need__bar"><i class="gst-need__have" style="width:72%"></i><i class="gst-need__miss" style="left:72%;width:28%"></i><i class="gst-need__seuil" style="left:85%"></i></div><div class="gst-need__legend"><span>Pharmacie · 102 / 140</span><span>Seuil 120</span></div></div>' +
+      '<div class="gst-alert gst-alert--critical"><svg class="gst-icon gst-alert__ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg><div><div class="gst-alert__title">Seuil critique</div><div class="gst-alert__text">Pharmacie sous le minimum de départ.</div></div><span></span></div>' +
+      '<div class="doc-row"><button class="gst-btn gst-btn--primary">Saisir</button><button class="gst-btn gst-btn--secondary">Voir</button></div>';
+  });
+
+  /* ── Échelle typographique ────────────────────────────────────────── */
+  var TS = [
+    ["display-hero", "Bebas", "72 → 220", "J-21", "gst-display-hero"], ["display-xl", "Bebas", "48 → 120", "Vitrine", "gst-display-xl"],
+    ["display-lg", "Bebas", "36 → 72", "Logistique", "gst-display-lg"], ["display-md", "Bebas", "28 → 48", "4 850 000", "gst-display-md"],
+    ["serif-xl", "Garamond it.", "32 → 56", "Le camp raconté", "gst-serif-xl"], ["serif-lg", "Garamond it.", "22 → 32", "Nous vous attendons", "gst-serif-lg"],
+    ["body", "Garamond", "17 → 19", "Chaque inscription réserve une place visible de tous.", "gst-body"],
+    ["ui", "Plex Mono 500", "14 → 15", "ENREGISTRER LA DÉPENSE", "gst-ui"], ["data", "Plex Mono 400", "15 → 16", "1 688 400 F CFA · 6 720", "gst-data"],
+    ["label", "Plex Mono 500 caps", "11 → 12", "Coût unitaire", "gst-label"], ["tag", "Plex Mono caps", "10 → 11", ".01 / Logistique", "gst-tag"]
+  ];
+  var tb = document.querySelector("#tscale tbody");
+  tb.innerHTML = TS.map(function (t) {
+    return "<tr><td><code class=\"doc-code-i\">--gst-fs-" + t[0] + "</code></td><td>" + t[1] + '</td><td class="m">' + t[2] + ' px</td><td class="m" data-now="' + t[0] + '"></td><td><div class="spec"><span class="' + t[4] + '" style="' + (t[0].indexOf("display") === 0 ? "line-height:1" : "") + '">' + t[3] + "</span></div></td></tr>";
+  }).join("");
+  function nowSizes() { tb.querySelectorAll("[data-now]").forEach(function (td) { var s = td.parentNode.querySelector(".spec > span"); td.textContent = Math.round(parseFloat(getComputedStyle(s).fontSize)) + " px"; }); }
+  nowSizes(); addEventListener("resize", nowSizes); if (document.fonts) document.fonts.ready.then(nowSizes);
+
+  /* ── Grille ───────────────────────────────────────────────────────── */
+  var GRIDS = { 390: [4, 16, 20], 768: [8, 24, 40], 1440: [12, 24, 80] };
+  var viz = document.getElementById("gridviz"), colsEl = document.getElementById("gridcols");
+  function drawGrid(w) {
+    var g = GRIDS[w], W = viz.clientWidth, scale = Math.min(1, (W - 32) / w);
+    var vw = w * scale, left = (W - vw) / 2;
+    colsEl.style.left = left + g[2] * scale + "px"; colsEl.style.width = vw - 2 * g[2] * scale + "px";
+    colsEl.style.gridTemplateColumns = "repeat(" + g[0] + ",1fr)"; colsEl.style.columnGap = g[1] * scale + "px";
+    colsEl.innerHTML = Array(g[0] + 1).join("<i></i>");
+    document.getElementById("gdim1").textContent = "GABARIT " + w + " PX · ÉCHELLE " + Math.round(scale * 100) + " %";
+    document.getElementById("gdim2").textContent = g[0] + " COLONNES · GOUTTIÈRE " + g[1] + " · MARGE " + g[2];
+    if (!GST.reduced()) colsEl.querySelectorAll("i").forEach(function (c, i) { c.animate([{ transform: "scaleY(0)" }, { transform: "scaleY(1)" }], { duration: 420, delay: i * 24, easing: GST.ease("tonnerre"), fill: "backwards" }); });
+  }
+  var current = 390;
+  document.getElementById("gridseg").addEventListener("gst-change", function (e) { current = +e.detail.value; drawGrid(current); });
+  drawGrid(current); addEventListener("resize", function () { drawGrid(current); });
+
+  /* ── Espacements ──────────────────────────────────────────────────── */
+  document.getElementById("spacebars").innerHTML = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(function (k) {
+    var v = GST.token("--gst-space-" + k);
+    return '<div><code class="doc-code-i">--gst-space-' + k + "</code><span>" + v + '</span><i style="width:' + v + '"></i></div>';
+  }).join("");
+
+  /* ── Icônes ───────────────────────────────────────────────────────── */
+  document.getElementById("icons").innerHTML = (window.GST_ICONS || []).map(function (n) {
+    return '<div><svg class="gst-icon" aria-hidden="true"><use href="#i-' + n + '"/></svg><span>' + n + "</span></div>";
+  }).join("");
+
+  /* ── Ciels ────────────────────────────────────────────────────────── */
+  document.getElementById("skies").innerHTML = [["day", "JOUR · 08 H – 17 H"], ["dusk", "AUBE & CRÉPUSCULE"], ["night", "NUIT DE CAMP"]].map(function (s) {
+    var bands = [1, 2, 3, 4].map(function (i) {
+      var tok = "--gst-sky-" + s[0] + "-" + i, hex = toHex(GST.token(tok)) || "#000";
+      var light = ratio(hex, INK) > ratio(hex, W);
+      return '<i style="background:var(' + tok + ");color:" + (light ? INK : W) + '">' + i + " · " + hex.toUpperCase() + "</i>";
+    }).join("");
+    var top = toHex(GST.token("--gst-sky-" + s[0] + "-4"));
+    return '<div class="sky">' + bands + '<b style="color:' + (ratio(top, INK) > ratio(top, W) ? INK : W) + '">' + s[1] + "</b></div>";
+  }).join("");
+
+  window.addEventListener("gst-theme", function () { renderSem(); });
+})();
+</script>
+</body>
+</html>

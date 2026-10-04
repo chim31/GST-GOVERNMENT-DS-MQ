@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<title>Affiches — Groupe Scout Tonnerre</title>
+<link rel="stylesheet" href="../../styles.css">
+<style>
+  html,body{margin:0;background:var(--cream);font-family:var(--font-serif);color:var(--ink)}
+  .wrap{max-width:1160px;margin:0 auto;padding:56px 40px 80px}
+  .kicker{font-family:var(--font-mono);font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--teal)}
+  h1{font-family:var(--font-display);font-size:76px;line-height:.9;letter-spacing:.02em;text-transform:uppercase;margin:12px 0 4px;color:var(--ink)}
+  .sub{font-family:var(--font-serif);font-style:italic;font-size:24px;color:var(--ink-70);margin-bottom:48px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:40px}
+  .card{display:flex;flex-direction:column;gap:14px}
+  .frame{position:relative;width:100%;aspect-ratio:1/1;border:1px solid var(--line-on-white);overflow:hidden;background:#fff}
+  .frame iframe{position:absolute;top:0;left:0;width:1080px;height:1080px;transform:scale(.315);transform-origin:top left;border:0;pointer-events:none}
+  .meta{font-family:var(--font-mono);font-size:13px;letter-spacing:.04em;color:var(--ink-70)}
+  .meta b{color:var(--ink)}
+  a.card{text-decoration:none;color:inherit}
+  a.card:hover .frame{outline:2px solid var(--red);outline-offset:2px}
+</style></head>
+<body>
+<div class="wrap">
+  <div class="kicker">Système d'affiches · Format 1:1 · 1080×1080</div>
+  <h1>Affiches</h1>
+  <div class="sub">Exemples appliquant le système à du contenu réel — prêts pour Instagram / Facebook.</div>
+  <div class="grid">
+    <a class="card" href="journee-bonne-action.html" target="_blank">
+      <div class="frame"><iframe src="journee-bonne-action.html" scrolling="no"></iframe></div>
+      <div class="meta"><b>Journée de la Bonne Action</b> · annonce d'événement</div>
+    </a>
+    <a class="card" href="camp-unite-africaine.html" target="_blank">
+      <div class="frame"><iframe src="camp-unite-africaine.html" scrolling="no"></iframe></div>
+      <div class="meta"><b>Camp de l'Unité Africaine</b> · compte à rebours J-10</div>
+    </a>
+    <a class="card" href="bonne-chance-examens.html" target="_blank">
+      <div class="frame"><iframe src="bonne-chance-examens.html" scrolling="no"></iframe></div>
+      <div class="meta"><b>Bonne chance aux examens</b> · variante vœux</div>
+    </a>
+  </div>
+</div>
+</body></html>

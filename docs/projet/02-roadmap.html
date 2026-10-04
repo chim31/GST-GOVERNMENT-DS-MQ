@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GST GOVERNMENT — Roadmap du projet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nuit:#0E1420;--orage:#1B2436;--ardoise:#3A465C;--brume:#8894A8;
+  --toile:#EDE9E1;--toile-2:#E2DCD1;--papier:#F7F5F0;
+  --foudre:#FFD23F;--foudre-sombre:#C79A00;--vert:#1F6F4A;--rouge:#C6402F;--bleu:#2C5B8F;
+  --serif:"Newsreader",Georgia,serif;--display:"Bricolage Grotesque",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--toile);color:var(--nuit);font-family:var(--serif);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+
+.orage{background:var(--nuit);color:var(--toile);position:relative;overflow:hidden}
+.orage::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 80% at 20% 0%,rgba(255,210,63,.16),transparent 55%)}
+.orage-in{max-width:1180px;margin:0 auto;padding:76px 32px 66px;position:relative;z-index:1}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--foudre);margin:0 0 22px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.eyebrow span.sep{width:34px;height:1px;background:var(--foudre-sombre);display:inline-block}
+h1.titre{font-family:var(--display);font-weight:800;font-size:clamp(38px,6.6vw,78px);line-height:.96;letter-spacing:-.035em;margin:0}
+h1.titre em{font-style:normal;color:var(--foudre);display:block}
+.sous-titre{font-size:clamp(17px,2.1vw,21px);color:#C3CBD8;max-width:64ch;font-weight:300;margin:22px 0 0}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);margin-top:52px}
+.meta div{background:var(--nuit);padding:15px 17px}
+.meta dt{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--brume);margin:0 0 6px}
+.meta dd{margin:0;font-family:var(--display);font-size:15px;font-weight:600;color:var(--toile)}
+.eclair{display:block;width:100%;height:14px}
+.eclair path{fill:var(--foudre)}
+
+.shell{max-width:1180px;margin:0 auto;padding:0 32px 120px;display:grid;grid-template-columns:238px 1fr;gap:56px}
+@media (max-width:940px){.shell{grid-template-columns:1fr;gap:0;padding:0 20px 80px}}
+nav.sommaire{position:sticky;top:24px;align-self:start;padding-top:52px;max-height:calc(100vh - 48px);overflow-y:auto}
+@media (max-width:940px){nav.sommaire{position:static;max-height:none;padding-top:36px;border-bottom:2px solid var(--nuit);padding-bottom:28px}}
+nav.sommaire h2{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ardoise);margin:0 0 16px;font-weight:700}
+nav.sommaire ol{list-style:none;margin:0;padding:0;counter-reset:toc}
+nav.sommaire li{counter-increment:toc;margin:0 0 3px}
+nav.sommaire a{display:flex;gap:10px;text-decoration:none;color:var(--orage);font-family:var(--display);font-size:13.5px;line-height:1.35;padding:6px 8px 6px 12px;border-left:2px solid transparent;transition:border-color .15s,color .15s}
+nav.sommaire a::before{content:counter(toc,decimal-leading-zero);font-family:var(--mono);font-size:10px;color:var(--brume);padding-top:3px}
+nav.sommaire a:hover,nav.sommaire a:focus-visible{border-left-color:var(--foudre);color:var(--nuit)}
+main{padding-top:52px;min-width:0}
+
+section.bloc{padding-top:16px;margin-bottom:76px;scroll-margin-top:24px}
+.bloc-tete{border-top:2px solid var(--nuit);padding-top:14px;margin-bottom:26px}
+.bloc-num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--foudre-sombre);font-weight:700;display:block;margin-bottom:10px}
+h2.bloc-titre{font-family:var(--display);font-weight:800;font-size:clamp(27px,4vw,40px);line-height:1.03;letter-spacing:-.025em;margin:0;max-width:24ch}
+.chapeau{font-size:19px;color:var(--ardoise);max-width:66ch;margin:16px 0 0;font-weight:300}
+h3{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.015em;margin:44px 0 12px;line-height:1.2}
+h4{font-family:var(--display);font-weight:600;font-size:16.5px;margin:28px 0 8px}
+p{margin:0 0 15px;max-width:72ch}
+ul,ol{max-width:72ch;padding-left:22px;margin:0 0 16px}
+li{margin-bottom:7px}
+strong{font-weight:600}
+
+/* --- CHRONOLOGIE : la voie ferrée --- */
+.voie{position:relative;margin:34px 0 10px;padding-left:0}
+.etape{position:relative;padding-left:64px;padding-bottom:36px}
+.etape::before{
+  content:"";position:absolute;left:19px;top:8px;bottom:-8px;width:2px;background:var(--toile-2);
+}
+.etape:last-child::before{display:none}
+.etape .pastille{
+  position:absolute;left:0;top:0;width:40px;height:40px;border-radius:50%;
+  background:var(--nuit);color:var(--foudre);display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:12px;font-weight:700;z-index:1;
+}
+.etape.socle .pastille{background:var(--vert);color:#fff}
+.etape.pilote .pastille{background:var(--foudre);color:var(--nuit)}
+.etape h3{margin:2px 0 4px;font-size:21px}
+.etape .duree{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ardoise);display:block;margin-bottom:12px}
+.etape .contenu{background:var(--papier);border:1px solid var(--toile-2);padding:16px 18px}
+.etape .contenu p:last-child,.etape .contenu ul:last-child{margin-bottom:0}
+.etape .livrable{font-family:var(--mono);font-size:11.5px;color:var(--vert);border-top:1px dashed var(--toile-2);margin-top:14px;padding-top:12px;display:block}
+
+.grille{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:14px;margin:22px 0 8px}
+.fiche{background:var(--papier);border:1px solid var(--toile-2);border-top:3px solid var(--nuit);padding:18px}
+.fiche.accent{border-top-color:var(--foudre)}
+.fiche .code{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--brume);text-transform:uppercase;display:block;margin-bottom:7px}
+.fiche h4{margin:0 0 8px;font-size:17px}
+.fiche p{font-size:14.5px;line-height:1.55;color:var(--ardoise);margin:0}
+.fiche ul{font-size:14px;margin:8px 0 0;padding-left:18px;color:var(--ardoise)}
+.fiche ul li{margin-bottom:4px}
+
+.note{border-left:3px solid var(--foudre);background:var(--papier);padding:16px 20px;margin:24px 0;max-width:72ch}
+.note .etiq{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--foudre-sombre);display:block;margin-bottom:8px}
+.note p:last-child,.note ul:last-child{margin-bottom:0}
+.note.risque{border-left-color:var(--rouge)}.note.risque .etiq{color:var(--rouge)}
+.note.regle{border-left-color:var(--vert)}.note.regle .etiq{color:var(--vert)}
+
+.tableau-wrap{overflow-x:auto;margin:22px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:560px;background:var(--papier)}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;text-align:left;padding:10px 13px;background:var(--nuit);color:var(--toile);font-weight:700;vertical-align:bottom}
+td{padding:11px 13px;border-bottom:1px solid var(--toile-2);vertical-align:top;line-height:1.5}
+tbody tr:last-child td{border-bottom:none}
+td.mono{font-family:var(--mono);font-size:12.5px;white-space:nowrap;color:var(--ardoise)}
+
+.tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--ardoise);color:var(--ardoise);border-radius:2px;margin:0 4px 4px 0;white-space:nowrap}
+.tag.mvp{background:var(--nuit);color:var(--foudre);border-color:var(--nuit)}
+.tag.v1{background:var(--vert);color:#fff;border-color:var(--vert)}
+.tag.v2{background:transparent;color:var(--bleu);border-color:var(--bleu)}
+
+footer.pied{background:var(--nuit);color:var(--brume);padding:44px 32px;font-family:var(--mono);font-size:12px;letter-spacing:.04em}
+footer.pied div{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer.pied strong{color:var(--foudre);font-weight:400}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.reveal.vu{opacity:1;transform:none}
+:focus-visible{outline:2px solid var(--foudre);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<header class="orage">
+  <div class="orage-in">
+    <p class="eyebrow">Document 2 sur 3<span class="sep"></span>Roadmap<span class="sep"></span>Du cadrage au camp pilote</p>
+    <h1 class="titre">LA <em>ROADMAP</em></h1>
+    <p class="sous-titre">Comment construire le GST Government, dans quel ordre, avec quels livrables et quels critères d'acceptation. Onze phases, du socle au premier camp réellement piloté par la plateforme.</p>
+    <dl class="meta">
+      <div><dt>Projet</dt><dd>GST Government</dd></div>
+      <div><dt>Nature</dt><dd>Roadmap projet</dd></div>
+      <div><dt>Phases</dt><dd>11</dd></div>
+      <div><dt>Horizon</dt><dd>≈ 12 mois</dd></div>
+      <div><dt>Version</dt><dd>1.0</dd></div>
+    </dl>
+  </div>
+</header>
+<svg class="eclair" viewBox="0 0 1200 14" preserveAspectRatio="none" aria-hidden="true"><path d="M0 14 L96 0 L120 9 L216 0 L240 9 L336 0 L360 9 L456 0 L480 9 L576 0 L600 9 L696 0 L720 9 L816 0 L840 9 L936 0 L960 9 L1056 0 L1080 9 L1176 0 L1200 9 L1200 14 Z"/></svg>
+
+<div class="shell">
+<nav class="sommaire" aria-label="Sommaire">
+  <h2>Sommaire</h2>
+  <ol>
+    <li><a href="#r1">Stratégie de construction</a></li>
+    <li><a href="#r2">Les onze phases</a></li>
+    <li><a href="#r3">Architecture technique</a></li>
+    <li><a href="#r4">Modèle de données</a></li>
+    <li><a href="#r5">Détail — Socle</a></li>
+    <li><a href="#r6">Détail — Logistique</a></li>
+    <li><a href="#r7">Détail — Comptabilité</a></li>
+    <li><a href="#r8">Détail — Cuisine</a></li>
+    <li><a href="#r9">Détail — Roadmap 3D</a></li>
+    <li><a href="#r10">Détail — Vitrine et Bus</a></li>
+    <li><a href="#r11">Détail — Hook des prix</a></li>
+    <li><a href="#r12">Camp pilote</a></li>
+    <li><a href="#r13">Équipe et rôles</a></li>
+    <li><a href="#r14">Risques et parades</a></li>
+    <li><a href="#r15">Indicateurs de succès</a></li>
+  </ol>
+</nav>
+
+<main>
+
+<!-- R1 -->
+<section class="bloc reveal" id="r1">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 01</span><h2 class="bloc-titre">Stratégie de construction</h2></div>
+  <p class="chapeau">Le GST Government est massif. Le construire d'un bloc serait la meilleure façon de ne jamais le finir. La stratégie retenue : livrer par utilité, en commençant par ce qui fait mal aujourd'hui.</p>
+
+  <h3>Trois règles de construction</h3>
+  <ol>
+    <li><strong>Le socle d'abord, toujours.</strong> Camps, personnes, unités, rôles, base de prix. Sans ça, aucun module ne tient debout. Rien ne se développe avant que le socle existe.</li>
+    <li><strong>Suivre la chaîne de chiffrage.</strong> Logistique → Comptabilité → Cuisine. C'est l'ordre dans lequel les données circulent, donc l'ordre dans lequel on construit. La Cuisine arrive troisième parce qu'elle a besoin de la base de prix et du groupe Alimentaire pour produire quelque chose d'utile.</li>
+    <li><strong>Le spectaculaire en dernier.</strong> La Roadmap 3D et le Bus volant sont les pièces qui feront parler du projet. Ce sont aussi celles qui ne bloquent personne si elles arrivent au mois neuf. On ne commence jamais par la vitrine d'une maison qui n'a pas de fondations.</li>
+  </ol>
+
+  <h3>Trois paliers de version</h3>
+  <div class="grille">
+    <div class="fiche accent">
+      <span class="code">Palier 1</span>
+      <h4>MVP — Le camp chiffré</h4>
+      <p>Le strict minimum pour qu'un camp réel soit préparé et suivi dans la plateforme.</p>
+      <ul><li>Socle complet</li><li>Logistique : recensement et coûts</li><li>Comptabilité : prévisionnel et réel</li><li>Base de prix manuelle</li></ul>
+    </div>
+    <div class="fiche">
+      <span class="code">Palier 2</span>
+      <h4>V1 — Le camp complet</h4>
+      <p>Tout ce qui sert directement à la préparation et au déroulement.</p>
+      <ul><li>Les 10 groupes logistiques</li><li>Cuisine et menus complets</li><li>Mode hors ligne</li><li>Inventaire permanent</li><li>Bilan et base de références</li></ul>
+    </div>
+    <div class="fiche">
+      <span class="code">Palier 3</span>
+      <h4>V2 — Le camp raconté</h4>
+      <p>Ce qui ouvre le projet vers l'extérieur et vers l'intelligence.</p>
+      <ul><li>Roadmap 3D</li><li>Site vitrine public</li><li>Bus volant</li><li>Hook intelligent des prix</li><li>Multi-groupe AST</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- R2 -->
+<section class="bloc reveal" id="r2">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 02</span><h2 class="bloc-titre">Les onze phases</h2></div>
+  <p class="chapeau">Le parcours complet, du cadrage au camp pilote. Les durées sont indicatives et supposent une équipe réduite travaillant en parallèle d'une vie scoute active.</p>
+
+  <div class="voie">
+
+    <div class="etape socle">
+      <div class="pastille">00</div>
+      <h3>Cadrage et décisions</h3>
+      <span class="duree">≈ 3 semaines · Avant tout code</span>
+      <div class="contenu">
+        <p>Trancher les six questions ouvertes du document de référence. Fixer une date de camp pilote. Constituer l'équipe.</p>
+        <ul>
+          <li>Réponses écrites aux six points à trancher</li>
+          <li>Choix du camp pilote et de sa date</li>
+          <li>Choix de la pile technique</li>
+          <li>Constitution de l'équipe et attribution des rôles</li>
+          <li>Récupération des chiffres des camps passés — même sur papier</li>
+        </ul>
+        <span class="livrable">Livrable → Note de cadrage signée + date de camp pilote arrêtée</span>
+      </div>
+    </div>
+
+    <div class="etape socle">
+      <div class="pastille">01</div>
+      <h3>Le socle</h3>
+      <span class="duree">≈ 5 semaines · Fondations</span>
+      <div class="contenu">
+        <p>Ce qui sert à tous les modules. Rien d'excitant, tout d'indispensable.</p>
+        <ul>
+          <li>Authentification, comptes, rôles et permissions</li>
+          <li>Annuaire : personnes, unités, tranches d'âge</li>
+          <li>Entité Camp et formulaire d'ouverture avec typologie</li>
+          <li>Base de prix de référence, saisie manuelle</li>
+          <li>Journal d'activité et traçabilité</li>
+          <li>Charte graphique et bibliothèque de composants</li>
+        </ul>
+        <span class="livrable">Livrable → On peut créer un camp, y rattacher des unités et des personnes</span>
+      </div>
+    </div>
+
+    <div class="etape">
+      <div class="pastille">02</div>
+      <h3>Module Logistique — noyau</h3>
+      <span class="duree">≈ 6 semaines · MVP</span>
+      <div class="contenu">
+        <p>Les groupes de gestion, le recensement et le chiffrage. On démarre avec quatre groupes seulement : Matériel, Alimentaire, Transport, Économique.</p>
+        <ul>
+          <li>Ouverture de groupes logistiques rattachés à un camp</li>
+          <li>Recensement : article, quantité, unité, coût unitaire, coût total</li>
+          <li>Champ « ce dont on dispose » et calcul du manque</li>
+          <li>Consolidation automatique vers le groupe Économique</li>
+          <li>Ajout libre de catégories par un responsable</li>
+        </ul>
+        <span class="livrable">Livrable → Un camp complet peut être recensé et chiffré</span>
+      </div>
+    </div>
+
+    <div class="etape">
+      <div class="pastille">03</div>
+      <h3>Module Comptabilité</h3>
+      <span class="duree">≈ 6 semaines · MVP</span>
+      <div class="contenu">
+        <p>La calculatrice vivante. Les deux versions, les courbes, les comptes du jour.</p>
+        <ul>
+          <li>Version test supervisée alimentée par le groupe Économique</li>
+          <li>Version live supervisée, saisie des dépenses réelles avec justificatif</li>
+          <li>Soustraction automatique sur les enveloppes de poste</li>
+          <li>Courbes de dépense et de fluctuation, points cliquables</li>
+          <li>Comptes du jour et arrêt de journée</li>
+          <li>Gestion des entrées : participations, subventions, dons</li>
+        </ul>
+        <span class="livrable">Livrable → Fin du MVP. Un camp réel peut être piloté financièrement.</span>
+      </div>
+    </div>
+
+    <div class="etape">
+      <div class="pastille">04</div>
+      <h3>Mode hors ligne</h3>
+      <span class="duree">≈ 3 semaines · Structurant</span>
+      <div class="contenu">
+        <p>Les écrans de terrain fonctionnent sans réseau et se synchronisent au retour. À faire tôt : c'est une contrainte d'architecture, pas une fonctionnalité qu'on ajoute.</p>
+        <ul>
+          <li>Stockage local des écrans de saisie terrain</li>
+          <li>File d'attente de synchronisation</li>
+          <li>Résolution des conflits de saisie</li>
+          <li>Indicateur d'état de synchronisation visible en permanence</li>
+        </ul>
+        <span class="livrable">Livrable → Saisie de dépenses et d'inventaire sans réseau, testée sur le terrain</span>
+      </div>
+    </div>
+
+    <div class="etape">
+      <div class="pastille">05</div>
+      <h3>Module Cuisine et menus</h3>
+      <span class="duree">≈ 7 semaines · V1</span>
+      <div class="contenu">
+        <p>Le module qui règle le gaspillage. Espace intendance et espace jeune.</p>
+        <ul>
+          <li>Catalogue de plats avec fiches d'ingrédients</li>
+          <li>Espace jeune : sélection et proposition de plats</li>
+          <li>Corrélation, taux de proposition et taux de sélection</li>
+          <li>Calcul des quantités totales d'ingrédients</li>
+          <li>Envoi automatique au groupe Alimentaire</li>
+          <li>Calcul de l'eau potable : 6 sachets/personne/jour</li>
+          <li>Suggestion live sur le terrain selon les ressources disponibles</li>
+          <li>Régimes, allergies et interdits</li>
+        </ul>
+        <span class="livrable">Livrable → Le menu produit automatiquement la liste de courses chiffrée</span>
+      </div>
+    </div>
+
+    <div class="etape">
+      <div class="pastille">06</div>
+      <h3>Logistique — groupes complémentaires</h3>
+      <span class="duree">≈ 5 semaines · V1</span>
+      <div class="contenu">
+        <p>Les six groupes restants et l'inventaire permanent.</p>
+        <ul>
+          <li>Groupes Technique, Santé, Salubrité, Activités, Divers</li>
+          <li>Groupe Retours et logistique inversée, avec publication</li>
+          <li>Inventaire permanent du GST entre les camps</li>
+          <li>Affectation du matériel et responsabilité</li>
+          <li>Seuils critiques et alertes de blocage</li>
+          <li>Fournisseurs et comparaison de devis</li>
+          <li>Documents administratifs et autorisations</li>
+        </ul>
+        <span class="livrable">Livrable → Les dix groupes opérationnels, inventaire vivant</span>
+      </div>
+    </div>
+
+    <div class="etape">
+      <div class="pastille">07</div>
+      <h3>Bilan et base de références</h3>
+      <span class="duree">≈ 3 semaines · V1</span>
+      <div class="contenu">
+        <p>La boucle se ferme : ce qu'a coûté ce camp sert à estimer le suivant.</p>
+        <ul>
+          <li>Bilan chiffré de fin de camp, automatique</li>
+          <li>Écart prévu / réel par poste</li>
+          <li>Versement des chiffres réels dans la base de références</li>
+          <li>Modèles de camp réutilisables</li>
+          <li>Indicateur de gaspillage alimentaire</li>
+        </ul>
+        <span class="livrable">Livrable → Fin de la V1. La plateforme apprend de chaque camp.</span>
+      </div>
+    </div>
+
+    <div class="etape">
+      <div class="pastille">08</div>
+      <h3>Module Roadmap 3D</h3>
+      <span class="duree">≈ 6 semaines · V2</span>
+      <div class="contenu">
+        <p>Le circuit 3D, le véhicule qui avance, l'agenda.</p>
+        <ul>
+          <li>Construction du programme jour par jour</li>
+          <li>Circuit 3D avec véhicule positionné sur la journée en cours</li>
+          <li>Détail d'étape cliquable : activités, matériel, menu, responsable</li>
+          <li>Version 2D dégradée pour appareils modestes</li>
+          <li>Agenda liste, filtrable et exportable</li>
+          <li>Photos et compte-rendu ajoutés après coup</li>
+        </ul>
+        <span class="livrable">Livrable → Le programme d'un grand camp est suivi en direct</span>
+      </div>
+    </div>
+
+    <div class="etape">
+      <div class="pastille">09</div>
+      <h3>Site vitrine et Bus volant</h3>
+      <span class="duree">≈ 7 semaines · V2</span>
+      <div class="contenu">
+        <p>La face publique du GST.</p>
+        <ul>
+          <li>Site vitrine complet : histoire, unités, activités, galerie, actualités</li>
+          <li>Formulaire d'inscription en ligne relié au socle</li>
+          <li>Publication des bilans de retour</li>
+          <li>Bus volant 3D : sièges, noms, états de paiement</li>
+          <li>Synchronisation avec la comptabilité et l'effectif</li>
+          <li>Confidentialité du statut de paiement</li>
+        </ul>
+        <span class="livrable">Livrable → Une inscription publique remplit un siège et met à jour l'effectif</span>
+      </div>
+    </div>
+
+    <div class="etape">
+      <div class="pastille">10</div>
+      <h3>Hook intelligent des prix</h3>
+      <span class="duree">≈ 4 semaines · V2</span>
+      <div class="contenu">
+        <p>La plateforme se met à jour toute seule — sous supervision humaine.</p>
+        <ul>
+          <li>Recherche périodique de prix sur sources définies</li>
+          <li>Filtrage et nettoyage des résultats</li>
+          <li>Statut « suggestion » et validation humaine obligatoire</li>
+          <li>Alertes : prix périmé, écart anormal, saisonnalité</li>
+          <li>Correction de la base à partir des prix réellement payés</li>
+        </ul>
+        <span class="livrable">Livrable → Les estimations reposent sur des prix à jour</span>
+      </div>
+    </div>
+
+    <div class="etape pilote">
+      <div class="pastille">11</div>
+      <h3>Camp pilote</h3>
+      <span class="duree">Un camp réel · Le vrai test</span>
+      <div class="contenu">
+        <p>Un camp entier préparé, vécu et clôturé dans la plateforme, avec un carnet d'observation ouvert du premier au dernier jour.</p>
+        <ul>
+          <li>Formation des responsables une semaine avant</li>
+          <li>Préparation complète dans la plateforme, papier en secours</li>
+          <li>Observation quotidienne : ce qui bloque, ce qui manque, ce qui est ignoré</li>
+          <li>Bilan chiffré et comparaison avec la méthode précédente</li>
+          <li>Liste de corrections priorisées</li>
+        </ul>
+        <span class="livrable">Livrable → Rapport de camp pilote et feuille de route de la version suivante</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="note regle">
+    <span class="etiq">Jalon de vérité</span>
+    <p>La fin de la phase 03 est le seul jalon qui compte vraiment. À ce moment-là, le GST peut préparer et suivre un camp entier dans la plateforme. Tout ce qui vient après améliore, élargit et embellit — mais si le projet devait s'arrêter là, il aurait déjà rendu service.</p>
+  </div>
+</section>
+
+<!-- R3 -->
+<section class="bloc reveal" id="r3">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 03</span><h2 class="bloc-titre">Architecture technique</h2></div>
+  <p class="chapeau">Une proposition, à valider en phase 00. Le principe directeur : une seule application web, responsive, fonctionnant sur téléphone modeste et réseau faible.</p>
+
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:22%">Couche</th><th style="width:30%">Proposition</th><th>Justification</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Interface</strong></td><td>Application web progressive, responsive, installable sur téléphone</td><td>Une seule base de code pour tous les usages. Pas de magasin d'applications à gérer.</td></tr>
+        <tr><td><strong>Hors ligne</strong></td><td>Stockage local + file de synchronisation</td><td>Contrainte non négociable en camp. Décidée dès la phase 04.</td></tr>
+        <tr><td><strong>Serveur</strong></td><td>API centrale, découpée par module</td><td>Chaque module peut évoluer sans casser les autres.</td></tr>
+        <tr><td><strong>Base de données</strong></td><td>Relationnelle</td><td>Les données du projet sont fortement liées : camps, groupes, articles, dépenses. Un modèle relationnel s'impose.</td></tr>
+        <tr><td><strong>Fichiers</strong></td><td>Stockage d'objets pour photos, reçus, documents</td><td>Justificatifs et galerie du site vitrine.</td></tr>
+        <tr><td><strong>3D</strong></td><td>Bibliothèque 3D navigateur, chargée uniquement sur les pages concernées</td><td>Ne pas alourdir toute la plateforme pour deux écrans.</td></tr>
+        <tr><td><strong>Tâches planifiées</strong></td><td>Ordonnanceur pour le hook des prix et les alertes</td><td>Recherche périodique, rappels de jalons, arrêt de journée.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="etiq">Contraintes de terrain</span>
+    <ul>
+      <li>Chargement complet d'un écran en moins de 3 secondes sur réseau lent</li>
+      <li>Poids initial de l'application sous 500 Ko hors modules 3D</li>
+      <li>Contraste élevé — la plateforme sera utilisée en plein soleil</li>
+      <li>Zones tactiles d'au moins 44 pixels — les mains ne sont pas toujours propres au camp</li>
+      <li>Aucune fonctionnalité de terrain ne doit dépendre d'un service externe payant</li>
+    </ul>
+  </div>
+</section>
+
+<!-- R4 -->
+<section class="bloc reveal" id="r4">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 04</span><h2 class="bloc-titre">Modèle de données</h2></div>
+  <p class="chapeau">Les entités principales et leurs liens. C'est la colonne vertébrale : tout le reste s'y accroche.</p>
+
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:20%">Entité</th><th style="width:38%">Attributs principaux</th><th>Relations</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">Camp</td><td>nom, type, dates, lieu, statut, effectif prévu, enveloppe</td><td>possède des GroupeLogistique, un Budget, un Programme, des Inscriptions</td></tr>
+        <tr><td class="mono">Personne</td><td>nom, date de naissance, unité, rôle, contact, fiche sanitaire</td><td>appartient à une Unité, a des Inscriptions et des Choix de menu</td></tr>
+        <tr><td class="mono">Unité</td><td>nom, tranche d'âge, responsable</td><td>contient des Personne, participe à des Camp</td></tr>
+        <tr><td class="mono">GroupeLogistique</td><td>type, responsable, statut, camp</td><td>appartient à un Camp, contient des LigneRecensement</td></tr>
+        <tr><td class="mono">LigneRecensement</td><td>article, quantité, unité, coût unitaire, disponible, manquant, seuil</td><td>appartient à un GroupeLogistique, référence un Article</td></tr>
+        <tr><td class="mono">Article</td><td>nom, catégorie, unité de mesure, périssable</td><td>référencé par LigneRecensement, PrixReference, Ingredient</td></tr>
+        <tr><td class="mono">PrixReference</td><td>article, prix, marché, date, source, statut de validation</td><td>alimente les calculs de coût</td></tr>
+        <tr><td class="mono">Inventaire</td><td>article, quantité, état, localisation, détenteur</td><td>patrimoine permanent du GST, indépendant des camps</td></tr>
+        <tr><td class="mono">Budget</td><td>camp, version (test/live), montant total, statut</td><td>appartient à un Camp, contient des Poste</td></tr>
+        <tr><td class="mono">Poste</td><td>groupe logistique, montant prévu, montant engagé, montant dépensé</td><td>appartient à un Budget</td></tr>
+        <tr><td class="mono">Mouvement</td><td>type (entrée/sortie), montant, date, justificatif, activité, poste</td><td>rattaché obligatoirement à un Poste et à une Activité</td></tr>
+        <tr><td class="mono">Plat</td><td>nom, service, ingrédients, portions, spécialité</td><td>composé d'Ingredient, sélectionné dans des Choix</td></tr>
+        <tr><td class="mono">Ingredient</td><td>article, quantité par portion</td><td>lie Plat et Article</td></tr>
+        <tr><td class="mono">Menu</td><td>camp, jour, service, plat retenu, portions</td><td>produit les besoins alimentaires</td></tr>
+        <tr><td class="mono">ChoixMenu</td><td>personne, plat, type (proposition/sélection)</td><td>alimente les taux de proposition et de sélection</td></tr>
+        <tr><td class="mono">Journee</td><td>camp, date, numéro d'étape</td><td>porte des Activite, un Menu, un arrêt de comptes</td></tr>
+        <tr><td class="mono">Activite</td><td>journée, titre, horaires, lieu, responsable, unités</td><td>rattache des Mouvement et des besoins matériels</td></tr>
+        <tr><td class="mono">Inscription</td><td>personne, camp, statut, montant payé, montant dû, siège</td><td>lie Personne et Camp, alimente le Bus volant</td></tr>
+        <tr><td class="mono">Retour</td><td>ligne d'inventaire, état constaté, écart, commentaire</td><td>logistique inversée, publiable</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note regle">
+    <span class="etiq">Invariant du modèle</span>
+    <p>Tout <span class="tag">Mouvement</span> est rattaché à un <span class="tag">Poste</span> et à une <span class="tag">Activite</span>. Aucune exception, aucun mouvement orphelin. C'est cette contrainte, posée dès le premier jour, qui rend possibles tous les rapports par activité, par jour et par poste.</p>
+  </div>
+</section>
+
+<!-- R5 -->
+<section class="bloc reveal" id="r5">
+  <div class="bloc-tete"><span class="bloc-num">Détail 01</span><h2 class="bloc-titre">Socle — écrans et fonctions</h2></div>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:26%">Écran</th><th style="width:50%">Fonctions</th><th>Palier</th></tr></thead>
+      <tbody>
+        <tr><td>Connexion</td><td>Authentification, récupération de mot de passe, première connexion</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Tableau de bord</td><td>Camps en cours, alertes, jalons proches, accès rapide aux modules selon le rôle</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Annuaire</td><td>Personnes, unités, rôles, recherche, import en masse</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Fiche personne</td><td>Coordonnées, unité, historique de participation, fiche sanitaire (accès restreint)</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Ouverture de camp</td><td>Formulaire complet, typologie, groupes à ouvrir, responsables, effectif</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Fiche camp</td><td>Vue d'ensemble, avancement des groupes, budget, jalons du rétroplanning</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Base de prix</td><td>Catalogue d'articles, prix, marché, date, historique, saisie manuelle</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Gestion des rôles</td><td>Attribution des permissions par personne et par camp</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Journal d'activité</td><td>Qui a modifié quoi, quand, ancienne et nouvelle valeur</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Modèles de camp</td><td>Duplication d'un camp passé comme base d'un nouveau</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Notifications</td><td>Alertes de jalon, seuils critiques, validations en attente</td><td><span class="tag v1">V1</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h4>Critères d'acceptation du socle</h4>
+  <ul>
+    <li>Un chef de groupe crée un camp de type « réjouissance » et voit les huit groupes logistiques correspondants s'ouvrir automatiquement</li>
+    <li>Un responsable de groupe n'accède qu'à son groupe et ne voit pas la comptabilité</li>
+    <li>La base de prix contient au moins 150 articles saisis avant la fin de la phase</li>
+    <li>Chaque modification d'un montant apparaît dans le journal avec son auteur</li>
+  </ul>
+</section>
+
+<!-- R6 -->
+<section class="bloc reveal" id="r6">
+  <div class="bloc-tete"><span class="bloc-num">Détail 02</span><h2 class="bloc-titre">Logistique — écrans et fonctions</h2></div>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:26%">Écran</th><th style="width:50%">Fonctions</th><th>Palier</th></tr></thead>
+      <tbody>
+        <tr><td>Vue d'ensemble logistique</td><td>Les groupes du camp, leur avancement, leur coût, les alertes</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Fiche groupe</td><td>Recensement en tableau : article, quantité, unité, coût unitaire, disponible, manquant, total</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Ajout d'article</td><td>Recherche dans la base, prix pré-rempli, création d'un nouvel article</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Consolidation économique</td><td>Somme de tous les groupes, répartition, transmission au budget</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Nouvelle catégorie</td><td>Ajout terrain d'une catégorie manquante, en attente de validation</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Transport et itinéraires</td><td>Trajets, modes, véhicules, coûts, plan de chargement, horaires</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Inventaire permanent</td><td>Patrimoine du GST, état, localisation, détenteur, historique</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Affectation matériel</td><td>Qui emporte quoi, dans quel véhicule, sous quelle responsabilité</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Seuils et alertes</td><td>Définition des minimums, blocage de départ si non atteints</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Fournisseurs et devis</td><td>Carnet de fournisseurs, comparaison de devis, historique de fiabilité</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Documents administratifs</td><td>Autorisations, listes nominatives, assurances, checklist par camp</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Inventaire de retour</td><td>Pointage au retour, état, écart, matériel à réparer ou remplacer</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Bilan de retour public</td><td>Version publiable du retour, pour la transparence</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Plan B</td><td>Alternative écrite pour chaque poste critique</td><td><span class="tag v2">V2</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h4>Critères d'acceptation</h4>
+  <ul>
+    <li>Un recensement de 200 lignes se saisit sans ralentissement perceptible</li>
+    <li>Le coût total d'un groupe se recalcule instantanément quand l'effectif du camp change</li>
+    <li>Le groupe Économique affiche la somme correcte des huit autres groupes, vérifiée manuellement</li>
+    <li>Une catégorie ajoutée sur le terrain remonte au commissaire logistique pour validation</li>
+    <li>Un pointage de retour produit automatiquement la liste des écarts</li>
+  </ul>
+</section>
+
+<!-- R7 -->
+<section class="bloc reveal" id="r7">
+  <div class="bloc-tete"><span class="bloc-num">Détail 03</span><h2 class="bloc-titre">Comptabilité — écrans et fonctions</h2></div>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:26%">Écran</th><th style="width:50%">Fonctions</th><th>Palier</th></tr></thead>
+      <tbody>
+        <tr><td>Budget prévisionnel</td><td>Version test, postes issus du groupe Économique, enveloppe par poste, validation</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Scénarios</td><td>Comparaison de plusieurs hypothèses d'effectif : 60 / 80 / 100 participants</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Saisie de dépense</td><td>Montant, poste, activité, date, justificatif photo, double validation au-delà d'un seuil</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Saisie d'entrée</td><td>Participations, subventions, dons, recettes d'activité</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Courbes</td><td>Dépense cumulée prévu/réel, fluctuation par poste, points cliquables ouvrant le détail</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Comptes du jour</td><td>Arrêt de journée : total, répartition par activité, solde, alertes</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Écart prévu / réel</td><td>Par poste, en valeur et en pourcentage, avec alerte de dérive</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Avances et régularisations</td><td>Argent confié à un responsable, justification au retour, solde</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Rapprochement de caisse</td><td>Comparaison entre solde théorique et espèces réellement en caisse</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Suivi des paiements</td><td>Qui a payé, combien, reste dû, relances</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Bilan de clôture</td><td>Rapport final, export, versement dans la base de références</td><td><span class="tag v1">V1</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h4>Critères d'acceptation</h4>
+  <ul>
+    <li>Une dépense saisie décrémente immédiatement l'enveloppe de son poste et déplace la courbe</li>
+    <li>Cliquer sur un point de courbe ouvre la liste exacte des mouvements qui le composent</li>
+    <li>Aucune dépense ne peut être enregistrée sans poste ni activité</li>
+    <li>L'arrêt de journée est reproductible : refait deux fois, il donne le même résultat</li>
+    <li>Le bilan de clôture est exportable en un fichier lisible hors de la plateforme</li>
+  </ul>
+</section>
+
+<!-- R8 -->
+<section class="bloc reveal" id="r8">
+  <div class="bloc-tete"><span class="bloc-num">Détail 04</span><h2 class="bloc-titre">Cuisine — écrans et fonctions</h2></div>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:26%">Écran</th><th style="width:50%">Fonctions</th><th>Palier</th></tr></thead>
+      <tbody>
+        <tr><td>Catalogue de plats</td><td>Fiche par plat : nom, service, ingrédients, quantité par portion, temps, spécialité</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Espace jeune — choix</td><td>Sélection des plats par service, dans un délai fixé, avec confirmation</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Espace jeune — proposition</td><td>Suggérer un plat absent du catalogue</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Corrélation et taux</td><td>Taux de proposition, taux de sélection, croisement, classement des plats</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Arrêt du menu</td><td>L'intendance tranche à partir des taux, jour par jour, service par service</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Calcul des ingrédients</td><td>Quantités totales pour l'effectif réel, envoi au groupe Alimentaire</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Eau potable</td><td>Calcul automatique : 6 sachets par personne et par jour, réparti matin/midi/soir</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Régimes et allergies</td><td>Déclaration par personne, exclusion automatique des plats incompatibles</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Ressources disponibles</td><td>Saisie manuelle par l'intendance du stock restant sur le terrain</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Suggestion live</td><td>Vote des jeunes pour le lendemain, limité aux plats réalisables</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Jours sans cuisine</td><td>Quartier libre : aucun repas préparé, stock non entamé</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Décrémentation du stock</td><td>Chaque service consommé diminue automatiquement les ressources</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Indicateur de gaspillage</td><td>Portions prévues contre servies, reste de vivres en fin de camp</td><td><span class="tag v1">V1</span></td></tr>
+        <tr><td>Cuisine par unité</td><td>Calcul des quantités par patrouille quand chacune cuisine pour elle-même</td><td><span class="tag v2">V2</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h4>Critères d'acceptation</h4>
+  <ul>
+    <li>Un menu de 14 jours produit une liste de courses chiffrée sans intervention manuelle</li>
+    <li>Ajouter 10 participants recalcule instantanément toutes les quantités et l'eau potable</li>
+    <li>Un jeune allergique ne voit jamais un plat contenant son allergène</li>
+    <li>La suggestion live ne propose que des plats réalisables avec les ressources déclarées</li>
+    <li>Le reste de vivres en fin de camp est calculé automatiquement</li>
+  </ul>
+</section>
+
+<!-- R9 -->
+<section class="bloc reveal" id="r9">
+  <div class="bloc-tete"><span class="bloc-num">Détail 05</span><h2 class="bloc-titre">Roadmap 3D — écrans et fonctions</h2></div>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:26%">Écran</th><th style="width:50%">Fonctions</th><th>Palier</th></tr></thead>
+      <tbody>
+        <tr><td>Construction du programme</td><td>Journées, activités, horaires, lieux, responsables, unités concernées</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Circuit 3D</td><td>Parcours représentant la durée du camp, une étape par journée</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Véhicule animé</td><td>Train ou bus positionné sur la journée en cours, avance automatique</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Détail d'étape</td><td>Programme du jour, matériel nécessaire, menu, photos, compte-rendu</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Version 2D dégradée</td><td>Même contenu, sans 3D, activée automatiquement sur appareil modeste</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Agenda</td><td>Vue liste et semaine, filtrable par unité, imprimable, exportable</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Suivi en direct</td><td>Étapes passées, en cours, à venir, distinguées visuellement</td><td><span class="tag v2">V2</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h4>Critères d'acceptation</h4>
+  <ul>
+    <li>La roadmap se charge en moins de 5 secondes sur un téléphone d'entrée de gamme</li>
+    <li>La version 2D s'active automatiquement, sans que l'utilisateur ait à choisir</li>
+    <li>Le matériel affiché sur une étape provient réellement du groupe logistique « Activités »</li>
+    <li>L'agenda s'imprime correctement sur une feuille A4</li>
+  </ul>
+</section>
+
+<!-- R10 -->
+<section class="bloc reveal" id="r10">
+  <div class="bloc-tete"><span class="bloc-num">Détail 06</span><h2 class="bloc-titre">Vitrine et Bus volant — écrans et fonctions</h2></div>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:26%">Écran</th><th style="width:50%">Fonctions</th><th>Palier</th></tr></thead>
+      <tbody>
+        <tr><td>Accueil du site</td><td>Présentation du GST, identité, valeurs, appel à rejoindre</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Les unités</td><td>Tranches d'âge, activités propres, responsables</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Activités et calendrier</td><td>Programme de l'année, camps annoncés</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Galerie</td><td>Photos et vidéos des camps passés, par édition</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Actualités</td><td>Annonces, comptes-rendus, communiqués</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Bilans de retour</td><td>Publication de la logistique inversée, pour la transparence</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Rejoindre le GST</td><td>Formulaire de contact et d'adhésion</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Inscription à un camp</td><td>Formulaire relié au socle, création de l'inscription et du siège</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Bus volant</td><td>Bus 3D suspendu, sièges, noms des inscrits, états visuels, décollage à effectif plein</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Mon inscription</td><td>Espace privé : statut, montant payé, reste dû, place confirmée</td><td><span class="tag v2">V2</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h4>Critères d'acceptation</h4>
+  <ul>
+    <li>Une inscription publique crée une Personne, une Inscription et un siège dans le bus</li>
+    <li>L'effectif du camp augmente automatiquement, ce qui recalcule les besoins logistiques</li>
+    <li>Un paiement enregistré en comptabilité change l'état du siège dans le bus</li>
+    <li>Le statut de paiement n'est visible que par la personne concernée et les responsables</li>
+    <li>Le site vitrine se charge correctement sur connexion mobile lente</li>
+  </ul>
+</section>
+
+<!-- R11 -->
+<section class="bloc reveal" id="r11">
+  <div class="bloc-tete"><span class="bloc-num">Détail 07</span><h2 class="bloc-titre">Hook des prix — écrans et fonctions</h2></div>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:26%">Écran</th><th style="width:50%">Fonctions</th><th>Palier</th></tr></thead>
+      <tbody>
+        <tr><td>Mémoire du GST</td><td>Saisie des chiffres réels des camps passés : alimentaire, transport, matériel</td><td><span class="tag mvp">MVP</span></td></tr>
+        <tr><td>Recherche automatique</td><td>Interrogation périodique de sources définies, filtrage des résultats</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>File de suggestions</td><td>Prix trouvés en attente de validation humaine, avec leur source</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Validation</td><td>Accepter, corriger ou rejeter une suggestion de prix</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Alertes de prix</td><td>Prix périmé, écart anormal, saisonnalité, écart prévu/réel constaté</td><td><span class="tag v2">V2</span></td></tr>
+        <tr><td>Historique par article</td><td>Évolution du prix d'un article dans le temps, par marché</td><td><span class="tag v2">V2</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note regle">
+    <span class="etiq">Critère non négociable</span>
+    <p>Aucun prix issu d'une recherche automatique n'entre dans un calcul avant validation humaine. Un test de recette doit le prouver : injecter un prix aberrant et vérifier qu'aucun budget n'en est affecté.</p>
+  </div>
+</section>
+
+<!-- R12 -->
+<section class="bloc reveal" id="r12">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 12</span><h2 class="bloc-titre">Le camp pilote</h2></div>
+  <p class="chapeau">Un logiciel de camp ne se valide pas au bureau. Il se valide au camp, sous le soleil, avec un réseau capricieux et des gens fatigués.</p>
+
+  <h3>Protocole</h3>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:16%">Moment</th><th>Ce qu'on fait</th></tr></thead>
+      <tbody>
+        <tr><td class="mono">J-14</td><td>Formation des responsables. Chacun manipule son module avec des données réelles.</td></tr>
+        <tr><td class="mono">J-14 → J-1</td><td>Préparation complète dans la plateforme. Le papier reste en secours, mais on ne s'en sert que si la plateforme échoue — et on note chaque fois que ça arrive.</td></tr>
+        <tr><td class="mono">J-1</td><td>Sauvegarde complète. Export papier du recensement, du budget et du programme.</td></tr>
+        <tr><td class="mono">Pendant</td><td>Carnet d'observation quotidien : ce qui bloque, ce qui manque, ce que personne n'utilise, ce qui est fait sur papier malgré tout.</td></tr>
+        <tr><td class="mono">Chaque soir</td><td>Arrêt de journée dans la plateforme, même si c'est plus lent que d'habitude.</td></tr>
+        <tr><td class="mono">J+3</td><td>Inventaire de retour complet dans le module logistique inversée.</td></tr>
+        <tr><td class="mono">J+7</td><td>Réunion de bilan avec tous les responsables. Chacun dit ce qui l'a aidé et ce qui l'a gêné.</td></tr>
+        <tr><td class="mono">J+10</td><td>Rapport de camp pilote et liste de corrections priorisées.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Ce qu'on mesure</h3>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th>Mesure</th><th>Cible</th></tr></thead>
+      <tbody>
+        <tr><td>Écart entre budget prévu et budget réel</td><td class="mono">&lt; 15 % au pilote, &lt; 10 % ensuite</td></tr>
+        <tr><td>Part des dépenses saisies dans la plateforme</td><td class="mono">&gt; 90 %</td></tr>
+        <tr><td>Nombre de fois où le papier a remplacé la plateforme</td><td class="mono">Compté, chaque cas documenté</td></tr>
+        <tr><td>Vivres restants en fin de camp</td><td class="mono">&lt; 10 % des achats</td></tr>
+        <tr><td>Matériel manquant au retour</td><td class="mono">Mesuré pour établir la référence</td></tr>
+        <tr><td>Temps de saisie d'une dépense sur le terrain</td><td class="mono">&lt; 60 secondes</td></tr>
+        <tr><td>Responsables ayant utilisé la plateforme seuls</td><td class="mono">100 % de ceux formés</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- R13 -->
+<section class="bloc reveal" id="r13">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 13</span><h2 class="bloc-titre">Équipe et rôles projet</h2></div>
+  <p class="chapeau">Distinct des rôles dans la plateforme : ici, il s'agit de qui construit le projet.</p>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:24%">Rôle projet</th><th>Responsabilité</th><th>Charge</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Porteur du projet</strong></td><td>Décide du périmètre, arbitre, garde le cap, représente le GST</td><td class="mono">Continu</td></tr>
+        <tr><td><strong>Référent métier scout</strong></td><td>Vérifie que chaque écran correspond à la réalité du terrain scout</td><td class="mono">Continu</td></tr>
+        <tr><td><strong>Développement</strong></td><td>Construit le socle, les modules, l'API, la synchronisation hors ligne</td><td class="mono">Phases 01 à 10</td></tr>
+        <tr><td><strong>Interface et design</strong></td><td>Charte graphique, composants, ergonomie de terrain, 3D</td><td class="mono">Phases 01, 08, 09</td></tr>
+        <tr><td><strong>Collecte de données</strong></td><td>Constitue la base de prix et récupère les chiffres des camps passés</td><td class="mono">Dès la phase 00</td></tr>
+        <tr><td><strong>Recette et formation</strong></td><td>Teste chaque livraison, forme les responsables, tient le carnet d'observation</td><td class="mono">Phases 03 à 11</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">
+    <span class="etiq">Conseil</span>
+    <p>Le rôle <strong>Collecte de données</strong> peut démarrer dès aujourd'hui, sans une ligne de code. Envoyer deux personnes relever les prix sur les marchés et retrouver les carnets des camps passés, c'est du travail utile qui fera gagner deux mois plus tard. C'est aussi la meilleure façon d'impliquer le groupe dans un projet qui reste sinon abstrait pendant des mois.</p>
+  </div>
+</section>
+
+<!-- R14 -->
+<section class="bloc reveal" id="r14">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 14</span><h2 class="bloc-titre">Risques et parades</h2></div>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:26%">Risque</th><th style="width:12%">Gravité</th><th>Parade</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Le projet s'étale sans fin</strong></td><td class="mono">Élevée</td><td>Une date de camp pilote fixée dès la phase 00 et jamais déplacée. Le périmètre s'adapte à la date, pas l'inverse.</td></tr>
+        <tr><td><strong>Base de prix vide</strong></td><td class="mono">Élevée</td><td>Démarrer la collecte à la phase 00, avant le code. Objectif : 150 articles avant la fin du socle.</td></tr>
+        <tr><td><strong>Personne n'utilise la plateforme au camp</strong></td><td class="mono">Élevée</td><td>Formation obligatoire à J-14, écrans de terrain testés en conditions réelles, et un responsable qui accompagne physiquement les autres pendant le pilote.</td></tr>
+        <tr><td><strong>Pas de réseau au camp</strong></td><td class="mono">Élevée</td><td>Mode hors ligne développé en phase 04, avant le premier camp réel. Export papier systématique à J-1.</td></tr>
+        <tr><td><strong>Équipe bénévole indisponible</strong></td><td class="mono">Moyenne</td><td>Découper en missions courtes et indépendantes, comme dans le cahier des charges. Une mission perdue ne bloque pas les autres.</td></tr>
+        <tr><td><strong>La 3D exclut une partie du groupe</strong></td><td class="mono">Moyenne</td><td>Version 2D dégradée obligatoire, développée en même temps que la 3D, pas après.</td></tr>
+        <tr><td><strong>Le bus volant expose les familles</strong></td><td class="mono">Moyenne</td><td>Statut de paiement privé par défaut. Décision actée avant le développement du module 5.</td></tr>
+        <tr><td><strong>Deux vérités contradictoires</strong></td><td class="mono">Moyenne</td><td>Règle d'architecture : la comptabilité ne fabrique pas de chiffres, elle les reçoit.</td></tr>
+        <tr><td><strong>Perte de données</strong></td><td class="mono">Élevée</td><td>Sauvegarde automatique quotidienne, restauration testée au moins une fois avant le pilote.</td></tr>
+        <tr><td><strong>Données de mineurs exposées</strong></td><td class="mono">Élevée</td><td>Cloisonnement strict des fiches sanitaires. Aucune donnée sensible dans les modules publics. Vérifié en recette.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- R15 -->
+<section class="bloc reveal" id="r15">
+  <div class="bloc-tete"><span class="bloc-num">Chapitre 15</span><h2 class="bloc-titre">Indicateurs de succès</h2></div>
+  <p class="chapeau">Comment on saura, dans un an, que le GST Government a réussi.</p>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:30%">Indicateur</th><th style="width:20%">Aujourd'hui</th><th>Cible à 1 an</th></tr></thead>
+      <tbody>
+        <tr><td>Temps de préparation d'un camp</td><td class="mono">Non mesuré</td><td>Réduit de moitié par rapport au premier camp mesuré</td></tr>
+        <tr><td>Écart budget prévu / réel</td><td class="mono">Inconnu</td><td>Moins de 10 %</td></tr>
+        <tr><td>Vivres restants en fin de camp</td><td class="mono">Inconnu</td><td>Moins de 10 % des achats</td></tr>
+        <tr><td>Matériel perdu par camp</td><td class="mono">Inconnu</td><td>Mesuré et en baisse d'un camp à l'autre</td></tr>
+        <tr><td>Camps préparés dans la plateforme</td><td class="mono">0</td><td>Tous les camps du groupe</td></tr>
+        <tr><td>Articles dans la base de prix</td><td class="mono">0</td><td>Plus de 400, avec prix de moins de 6 mois</td></tr>
+        <tr><td>Bilans de retour publiés</td><td class="mono">0</td><td>Un par grand camp</td></tr>
+        <tr><td>Responsables autonomes sur la plateforme</td><td class="mono">0</td><td>Tous les responsables de groupe</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="etiq">Le vrai signe de réussite</span>
+    <p>Le jour où un responsable de camp ouvre la plateforme <strong>avant</strong> d'ouvrir son carnet, le projet a gagné. Tout le reste — la 3D, le bus volant, le hook intelligent — n'est que la suite.</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer class="pied">
+  <div>
+    <span><strong>GST GOVERNMENT</strong> — Roadmap · Version 1.0</span>
+    <span>Groupe Scout Tonnerre · Association Scoute du Togo</span>
+    <span>Document 2 sur 3</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cibles = document.querySelectorAll('.reveal');
+  if(reduit || !('IntersectionObserver' in window)){cibles.forEach(function(e){e.classList.add('vu')});return;}
+  var obs = new IntersectionObserver(function(entrees){
+    entrees.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vu'); obs.unobserve(e.target); } });
+  },{rootMargin:'0px 0px -60px 0px'});
+  cibles.forEach(function(e){obs.observe(e)});
+})();
+</script>
+</body>
+</html>

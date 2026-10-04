@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Guide — GST Government</title>
+<meta name="description" content="Guide d'utilisation du design system GST Government : quand utiliser quoi, erreurs à éviter, interdits et checklist de recette.">
+<script>try{var t=localStorage.getItem("gst-theme");if(t&&t!=="jour")document.documentElement.setAttribute("data-theme",t);if(localStorage.getItem("gst-motion")==="reduce")document.documentElement.setAttribute("data-motion","reduce")}catch(e){}</script>
+<link rel="stylesheet" href="tokens/gst-tokens.css">
+<link rel="stylesheet" href="assets/css/gst.css">
+<link rel="stylesheet" href="assets/css/doc.css">
+<style>
+.when{display:grid;gap:0;border-top:var(--gst-border) solid var(--gst-text-primary)}
+.when>div{display:grid;gap:8px var(--gst-space-6);padding:var(--gst-space-5) 0;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline)}
+@media (min-width:900px){.when>div{grid-template-columns:260px 1fr 1fr}}
+.when h3{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:1.9rem;line-height:.95}
+.when p{margin:0;font-size:1rem}
+.when .use{color:var(--gst-text-primary)}
+.when .avoid{color:var(--gst-text-secondary)}
+.when .use::before{content:"Utiliser · ";font-family:var(--gst-font-mono);font-size:var(--gst-fs-tag);letter-spacing:var(--gst-ls-tag);text-transform:uppercase;color:var(--gst-state-success-text)}
+.when .avoid::before{content:"Éviter · ";font-family:var(--gst-font-mono);font-size:var(--gst-fs-tag);letter-spacing:var(--gst-ls-tag);text-transform:uppercase;color:var(--gst-state-danger-text)}
+.bans{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));border-top:var(--gst-hairline) solid var(--gst-line-hairline);border-left:var(--gst-hairline) solid var(--gst-line-hairline)}
+.bans div{display:flex;gap:12px;align-items:flex-start;padding:16px;border-right:var(--gst-hairline) solid var(--gst-line-hairline);border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);background:var(--gst-bg-panel);font-size:.98rem}
+.bans svg{color:var(--gst-state-danger);flex:none;margin-top:3px}
+.checks{display:grid;gap:4px}
+@media (min-width:900px){.checks{grid-template-columns:1fr 1fr;column-gap:var(--gst-space-7)}}
+.checks label{border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);padding:4px 0}
+.mini-ex{min-height:120px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.files{font-family:var(--gst-font-mono);font-size:12.5px;line-height:1.8}
+</style>
+</head>
+<body>
+<main id="main" class="doc-main">
+<header class="doc-head">
+  <span class="gst-tag gst-tag--accent" data-decode>.07 / GUIDE D'UTILISATION</span>
+  <h1 class="doc-head__title" data-rise>Guide</h1>
+  <p class="doc-head__lead">Ce que l'on fait, ce que l'on ne fait jamais, et comment vérifier qu'un écran respecte le système avant de le livrer.</p>
+</header>
+
+<section class="doc-sec">
+  <div class="doc-sec__head"><div><span class="gst-tag" data-decode>.01 / QUAND UTILISER QUOI</span><h2 class="doc-sec__title">Les choix courants</h2></div>
+    <p class="doc-sec__intro">Les décisions qui reviennent sur chaque écran. En cas de doute, choisir la version Terrain : plus dense, plus rapide, plus lisible au soleil.</p></div>
+  <div class="when">
+    <div><h3>Registre Terrain ou Ciel</h3><p class="use">Terrain pour tout écran où l'on saisit, vérifie ou décide : logistique, compta, cuisine, tableaux de bord.</p><p class="avoid">Ciel (3D, scrollytelling, 400 – 1 600 ms) ailleurs que sur la vitrine, la Roadmap et le Bus.</p></div>
+    <div><h3>Bouton primaire rouge</h3><p class="use">Une seule action principale par écran : saisir, enregistrer, réserver. 56 px sur le terrain.</p><p class="avoid">Deux boutons rouges côte à côte. Pour l'action secondaire : contour teal.</p></div>
+    <div><h3>Bouton Éclair</h3><p class="use">Uniquement la validation définitive d'un budget (gel de la version A) ou la transmission du prévisionnel.</p><p class="avoid">Le cumuler avec une alerte critique visible sur le même écran : un seul Éclair par écran.</p></div>
+    <div><h3>Bebas, Garamond, Plex Mono</h3><p class="use">Bebas pour les titres et chiffres géants ; Garamond pour la voix et le texte ; Plex Mono pour toute donnée (montant, date, quantité, label).</p><p class="avoid">Un montant en Garamond, un paragraphe en Bebas, une quatrième police.</p></div>
+    <div><h3>Odomètre (M4)</h3><p class="use">Toute valeur qui change sous les yeux de l'utilisateur : budget, places restantes, totaux recalculés.</p><p class="avoid">Les valeurs statiques d'une table de 200 lignes — on ne fait pas rouler 200 chiffres.</p></div>
+    <div><h3>Onde de recalcul (M5)</h3><p class="use">Quand une donnée en amont modifie des chiffres en aval visibles à l'écran : effectif, prix, menu.</p><p class="avoid">Une onde sans chiffre dépendant à l'arrivée : l'onde raconte un calcul, pas une décoration.</p></div>
+    <div><h3>Alerte critique (M6)</h3><p class="use">Un seuil franchi qui bloque un départ ou met en danger : santé, eau, sécurité, documents.</p><p class="avoid">Un dépassement de budget ordinaire : c'est un avertissement, pas une frappe.</p></div>
+    <div><h3>Tampon (M8)</h3><p class="use">Un acte irréversible et tracé : arrêt de journée, gel d'une version, bus complet.</p><p class="avoid">Une simple sauvegarde : un toast suffit.</p></div>
+    <div><h3>Drawer ou Modal</h3><p class="use">Drawer pour consulter un détail sans quitter le contexte (mouvements, fiche journée). Modal pour une interruption volontaire (double signature).</p><p class="avoid">Une modale pour un formulaire long : passer par un écran ou un assistant.</p></div>
+    <div><h3>Nuit & Plein soleil</h3><p class="use">Nuit à la lampe frontale, le soir au camp. Plein soleil dehors à midi : texte noir pur, hairlines doublées.</p><p class="avoid">Coder un écran « sombre » à la main : tout passe par data-theme et les tokens.</p></div>
+  </div>
+</section>
+
+<section class="doc-sec">
+  <div class="doc-sec__head"><div><span class="gst-tag" data-decode>.02 / À FAIRE · À ÉVITER</span><h2 class="doc-sec__title">Par l'exemple</h2></div>
+    <p class="doc-sec__intro">Quatre erreurs fréquentes, montrées dans leur version correcte et dans leur version fautive.</p></div>
+  <div class="doc-stack" style="gap:var(--gst-space-6)">
+    <div class="doc-dd">
+      <div class="doc-do"><span class="gst-tag">À FAIRE · MONTANTS</span><div class="mini-ex"><div class="gst-table-wrap"><table class="gst-table gst-table--compact"><tbody><tr><td>Transport</td><td class="n">1 236 000</td></tr><tr><td>Santé</td><td class="n">212 300</td></tr></tbody></table></div></div><p>Plex Mono, chiffres tabulaires, alignés à droite, espaces fines.</p></div>
+      <div class="doc-dont"><span class="gst-tag">À ÉVITER</span><div class="mini-ex"><div class="gst-table-wrap"><table class="gst-table gst-table--compact" style="font-family:var(--gst-font-serif)"><tbody><tr><td>Transport</td><td>1236000 FCFA</td></tr><tr><td>Santé</td><td>212.300 F</td></tr></tbody></table></div></div><p>Serif, alignés à gauche, séparateurs incohérents, devise mal écrite.</p></div>
+    </div>
+    <div class="doc-dd">
+      <div class="doc-do"><span class="gst-tag">À FAIRE · ÉTAT HORS LIGNE</span><div class="mini-ex"><span class="gst-sync is-pending"><span class="gst-sync__dot"></span>3 en file</span><button class="gst-btn gst-btn--secondary is-offline" style="align-self:flex-start">Enregistrer <span class="gst-btn__badge">EN FILE</span></button></div><p>L'état de synchronisation est toujours visible, en texte.</p></div>
+      <div class="doc-dont"><span class="gst-tag">À ÉVITER</span><div class="mini-ex"><button class="gst-btn gst-btn--secondary" style="align-self:flex-start">Enregistrer</button><span class="gst-field__help">(aucune indication : l'utilisateur croit que c'est envoyé)</span></div><p>Une saisie hors ligne qui ressemble à une saisie envoyée.</p></div>
+    </div>
+    <div class="doc-dd">
+      <div class="doc-do"><span class="gst-tag">À FAIRE · BUS PUBLIC</span><div class="mini-ex"><div class="doc-row"><span class="gst-seat gst-seat--occupied"><i class="gst-seat__fill"></i><span>23</span></span><span class="gst-ui">Sélom A.</span><span class="gst-seat"><span>24</span></span><span class="gst-ui" style="color:var(--gst-text-secondary)">Libre</span></div></div><p>Deux états publics : libre, occupé. Prénom + initiale.</p></div>
+      <div class="doc-dont"><span class="gst-tag">À ÉVITER</span><div class="mini-ex"><div class="doc-row"><span class="gst-seat gst-seat--reserved"><span>23</span></span><span class="gst-ui">Sélom Akakpo — non payé</span></div></div><p>Exposer publiquement qui n'a pas payé. La contrainte de dignité prime sur l'effet.</p></div>
+    </div>
+    <div class="doc-dd">
+      <div class="doc-do"><span class="gst-tag">À FAIRE · TOKENS</span><pre class="doc-code">.total { color: var(--gst-state-danger-text); }</pre><p>Un rôle sémantique, qui suit les trois modes.</p></div>
+      <div class="doc-dont"><span class="gst-tag">À ÉVITER</span><pre class="doc-code">.total { color: #C42621; box-shadow: 0 0 12px #FFD23F; }</pre><p>Un hex brut (cassé en Nuit) et un glow décoratif.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="doc-sec">
+  <div class="doc-sec__head"><div><span class="gst-tag" data-decode>.03 / INTERDITS</span><h2 class="doc-sec__title">Jamais</h2></div>
+    <p class="doc-sec__intro">La liste du prompt de design, sans exception.</p></div>
+  <div class="bans">
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Dégradés dans l'interface</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Glow et flou décoratifs</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Ombres portées partout (seule exception : lift au-dessus d'une scène 3D)</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Glassmorphism</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Coins arrondis généreux</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Emoji</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Illustrations 3D réalistes ou générées par IA</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Icônes hétérogènes (un seul set)</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Plus d'un élément Éclair par écran</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Animation qui bloque une saisie</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Texte gris clair sur fond clair</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Carrousels automatiques</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Statut de paiement public</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>3D chargée sur toute l'application</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Police hors du trio</div>
+  </div>
+</section>
+
+<section class="doc-sec">
+  <div class="doc-sec__head"><div><span class="gst-tag" data-decode>.04 / CHECKLIST DE RECETTE</span><h2 class="doc-sec__title">Avant de livrer</h2></div>
+    <p class="doc-sec__intro">À dérouler par une personne qui n'a pas construit l'écran — la règle de validation du cahier des charges.</p></div>
+  <div class="checks">
+    <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>On reconnaît l'identité des affiches GST au premier regard</label>
+    <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Aucun hex brut dans les composants (grep #[0-9a-f])</label>
+    <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>L'écran fonctionne sans animation et reste beau</label>
+    <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Lisible sur 360 px, cibles ≥ 44 px, actions terrain 56 px</label>
+    <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Testé en Jour, Nuit et Plein soleil</label>
+    <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>État hors ligne visible sur chaque écran de saisie</label>
+    <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Navigation clavier complète, focus visible (contour rouge + réticule)</label>
+    <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Aucune donnée sensible dans un écran public</label>
+    <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Un seul élément Éclair visible</label>
+    <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Poids initial &lt; 500 Ko hors 3D, écran &lt; 3 s en réseau lent</label>
+    <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>La version 2D ne perd aucune information</label>
+    <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Programme de demain retrouvé en moins de 3 taps</label>
+  </div>
+</section>
+
+<section class="doc-sec">
+  <div class="doc-sec__head"><div><span class="gst-tag" data-decode>.05 / FICHIERS</span><h2 class="doc-sec__title">Le kit</h2></div>
+    <p class="doc-sec__intro">Tout le système tient dans ce dossier. Aucune étape de build : les pages s'ouvrent directement dans le navigateur.</p></div>
+<pre class="doc-code files">tokens/gst-tokens.css      <span class="c">tokens CSS · modes Jour / Nuit / Plein soleil · motion · ciels</span>
+tokens/gst-tokens.json     <span class="c">mêmes tokens au format JSON (DTCG) pour Figma / Style Dictionary</span>
+assets/css/gst.css         <span class="c">52 composants · tokens sémantiques uniquement</span>
+assets/css/doc.css         <span class="c">mise en page de cette documentation</span>
+assets/js/gst-motion.js    <span class="c">moteur de motion M1 → M11 (WAAPI, 0 dépendance)</span>
+assets/js/gst-components.js<span class="c"> courbe prévu/réel, barres jumelles</span>
+assets/js/gst-3d.js        <span class="c">kit 3D « diorama papier technique » (Three.js à la demande)</span>
+assets/js/gst-icons.js     <span class="c">sprite d'icônes (Lucide, ISC) · trait technique</span>
+assets/js/gst-data.js      <span class="c">données factices : Camp de Réjouissance 2026</span>
+assets/js/gst-shell.js     <span class="c">shell de la documentation</span></pre>
+</section>
+</main>
+<script src="assets/js/gst-icons.js"></script>
+<script src="assets/js/gst-motion.js"></script>
+<script src="assets/js/gst-shell.js"></script>
+</body>
+</html>

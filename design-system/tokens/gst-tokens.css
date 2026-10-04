@@ -1,0 +1,275 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   GST GOVERNMENT — Tokens web · v1.0
+   Extension web du design system d'affiches « Groupe Scout Tonnerre ».
+
+   Ce fichier est AUTONOME : il réunit
+     1. l'héritage du DS d'affiches (alias --teal, --red, --font-*, --space-*…),
+     2. les échelles de couleurs GST,
+     3. la sémantique en trois modes : Jour (défaut) · Nuit de camp · Plein soleil,
+     4. la typographie fluide (clamp, mobile 390 → desktop 1440),
+     5. grille, espacement, rayons, élévation, cibles tactiles, calques,
+     6. la motion (durées, courbes, ressorts, cascades),
+     7. les ciels 3D en aplats étagés.
+
+   Règle d'or : un composant ne lit JAMAIS une valeur hexadécimale ni une
+   échelle brute (--gst-teal-500…). Il lit uniquement les tokens sémantiques
+   (--gst-bg-*, --gst-text-*, --gst-state-*, --gst-data-*…).
+
+   Corrections d'accessibilité (mesurées, documentées dans fondations.html) :
+   - éclair profond #C79A00 = 2,6:1 sur blanc → réservé aux aplats et contours ;
+     le texte d'avertissement utilise --gst-eclair-700 #7A5B00 (6,3:1).
+   - en Nuit, rouge-300 (3,8:1) et teal-300 (4,4:1) sur panneau teal-800 restent
+     des couleurs d'icône et de trait ; le texte d'état passe par les tokens
+     *-text (rouge-100 7,9:1 · teal-100 8,6:1).
+   - en Plein soleil, tout texte de donnée atteint AAA (≥ 7:1).
+   ═══════════════════════════════════════════════════════════════════════ */
+
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+:root {
+  /* ── 1 · Échelles ──────────────────────────────────────────────────── */
+  --gst-teal-50:#E7F2F1;  --gst-teal-100:#C6E2E0; --gst-teal-200:#93C8C4; --gst-teal-300:#5FAAA5;
+  --gst-teal-400:#2E8F89; --gst-teal-500:#0C7873; --gst-teal-600:#06605E; --gst-teal-700:#064C4B;
+  --gst-teal-800:#063F3E; --gst-teal-900:#032726;
+
+  --gst-red-50:#FBEAE9; --gst-red-100:#F5C9C7; --gst-red-300:#E0716D;
+  --gst-red-500:#C42621; --gst-red-700:#9E1C18; --gst-red-900:#5E0F0D;
+
+  --gst-cream:#F4F4F2; --gst-paper:#FAFAF8; --gst-stone:#E4E4E1; --gst-sand:#C9C9C6; --gst-white:#FFFFFF;
+  --gst-ink:#141414; --gst-ink-70:#4A4A4A; --gst-ink-40:#8A8A8A; --gst-black:#000000;
+
+  /* Éclair : 5ᵉ couleur, FONCTIONNELLE. Un seul élément Éclair visible par écran. */
+  --gst-eclair:#FFD23F;      /* signal (sur fond sombre, ou aplat court) */
+  --gst-eclair-deep:#C79A00; /* aplat / contour sur fond clair — jamais du texte */
+  --gst-eclair-700:#7A5B00;  /* texte d'avertissement sur fond clair (6,3:1) */
+  --gst-eclair-800:#6B4F00;  /* texte d'avertissement en Plein soleil (7,6:1) */
+  --gst-eclair-50:#FFF1C2;
+
+  --gst-forest:#1F6F4A;      /* succès · payé · validé */
+  --gst-forest-700:#17573A;  /* succès en Plein soleil (8,5:1) */
+
+  /* ── 3 · Typographie ───────────────────────────────────────────────── */
+  --gst-font-display:"Bebas Neue","Arial Narrow",sans-serif;
+  --gst-font-serif:"EB Garamond",Georgia,serif;
+  --gst-font-mono:"IBM Plex Mono","Geist Mono",ui-monospace,monospace;
+
+  /* Échelle fluide : mobile 390 px → desktop 1440 px */
+  --gst-fs-display-hero:clamp(4.5rem, 1.064rem + 14.095vw, 13.75rem);  /* 72 → 220 */
+  --gst-fs-display-xl:  clamp(3rem,   1.329rem + 6.857vw,  7.5rem);    /* 48 → 120 */
+  --gst-fs-display-lg:  clamp(2.25rem,1.414rem + 3.429vw,  4.5rem);    /* 36 → 72  */
+  --gst-fs-display-md:  clamp(1.75rem,1.286rem + 1.905vw,  3rem);      /* 28 → 48  */
+  --gst-fs-serif-xl:    clamp(2rem,   1.443rem + 2.286vw,  3.5rem);    /* 32 → 56  */
+  --gst-fs-serif-lg:    clamp(1.375rem,1.143rem + .952vw,  2rem);      /* 22 → 32  */
+  --gst-fs-body:        clamp(1.0625rem,1.016rem + .19vw,  1.1875rem); /* 17 → 19  */
+  --gst-fs-ui:          clamp(.875rem, .852rem + .095vw,   .9375rem);  /* 14 → 15  */
+  --gst-fs-data:        clamp(.9375rem,.914rem + .095vw,   1rem);      /* 15 → 16  */
+  --gst-fs-label:       clamp(.6875rem,.664rem + .095vw,   .75rem);    /* 11 → 12  */
+  --gst-fs-tag:         clamp(.625rem, .602rem + .095vw,   .6875rem);  /* 10 → 11  */
+
+  --gst-lh-display:.86; --gst-lh-title:1; --gst-lh-serif:1.15; --gst-lh-body:1.5; --gst-lh-data:1.45;
+  --gst-ls-display:.01em; --gst-ls-eyebrow:.34em; --gst-ls-ui:.04em; --gst-ls-label:.16em; --gst-ls-tag:.18em;
+  --gst-fw-regular:400; --gst-fw-medium:500; --gst-fw-semibold:600;
+
+  /* ── 4 · Espacement (base 4) ───────────────────────────────────────── */
+  --gst-space-1:4px;  --gst-space-2:8px;  --gst-space-3:12px; --gst-space-4:16px;  --gst-space-5:24px;
+  --gst-space-6:32px; --gst-space-7:48px; --gst-space-8:64px; --gst-space-9:96px;  --gst-space-10:128px;
+
+  /* ── 5 · Grille — 4 col · 8 col (≥ 640) · 12 col (≥ 1024) ─────────── */
+  --gst-grid-cols:4;  --gst-grid-gutter:16px; --gst-grid-margin:20px;
+  --gst-container:1440px;
+  --gst-node-size:7px;
+
+  /* Cadre des affiches → cadre web */
+  --gst-frame-poster:34px;                        /* épaisseur héritée de l'affiche */
+  --gst-frame-viewport:clamp(6px, .9vw, 14px);    /* cadre permanent du registre Ciel */
+
+  /* ── Rayons ────────────────────────────────────────────────────────── */
+  --gst-radius-none:0; --gst-radius-sm:3px; --gst-radius-pill:999px;
+
+  /* ── Élévation : une seule ombre, au-dessus d'une scène 3D ─────────── */
+  --gst-shadow-lift:0 24px 48px -24px rgba(3,39,38,.45);
+  --gst-scrim:rgba(3,39,38,.55);   /* voile sous tiroir / modale */
+
+  /* ── Cibles tactiles ───────────────────────────────────────────────── */
+  --gst-touch-min:44px; --gst-touch-primary:56px;
+
+  /* ── Calques ───────────────────────────────────────────────────────── */
+  --gst-z-base:0; --gst-z-raised:10; --gst-z-sticky:100; --gst-z-rail:200; --gst-z-drawer:400;
+  --gst-z-modal:500; --gst-z-toast:600; --gst-z-overlay-motion:800; --gst-z-wipe:900;
+
+  /* ── 6 · Motion ────────────────────────────────────────────────────── */
+  --gst-dur-instant:80ms;   /* retour tactile */
+  --gst-dur-fast:160ms;     /* survol, bascule, focus */
+  --gst-dur-base:240ms;     /* panneau, onglet */
+  --gst-dur-slow:420ms;     /* page, révélation de section */
+  --gst-dur-scene:800ms;    /* caméra 3D, arrivée sur étape */
+  --gst-dur-epic:1600ms;    /* décollage, ouverture de camp, intro vitrine */
+
+  --gst-ease-tonnerre:cubic-bezier(0.16, 1, 0.3, 1);   /* signature — 80 % des cas */
+  --gst-ease-trace:cubic-bezier(0.65, 0, 0.35, 1);     /* tracés, caméra */
+  --gst-ease-snap:cubic-bezier(0.2, 0, 0, 1);          /* UI terrain */
+  --gst-ease-strike:cubic-bezier(0.7, 0, 0.84, 0);     /* entrée de l'éclair */
+  /* --gst-spring-seat : { stiffness: 420, damping: 28, mass: 0.8 } — échantillonné en JS (gst-motion.js) */
+  --gst-spring-seat-stiffness:420; --gst-spring-seat-damping:28; --gst-spring-seat-mass:.8;
+
+  --gst-stagger-tight:24ms;  /* lettres, cellules */
+  --gst-stagger-base:56ms;   /* lignes, cartes */
+  --gst-stagger-loose:110ms; /* sections, stations */
+
+  /* ── 7 · Ciels 3D en aplats étagés — bande 1 = horizon … bande 4 = zénith ─ */
+  --gst-sky-day-1:#F4F4F2;  --gst-sky-day-2:#E7F2F1;  --gst-sky-day-3:#C6E2E0;  --gst-sky-day-4:#93C8C4;
+  --gst-sky-dusk-1:#F4F4F2; --gst-sky-dusk-2:#FFF1C2; --gst-sky-dusk-3:#F5C9C7; --gst-sky-dusk-4:#E0716D;
+  --gst-sky-night-1:#032726;--gst-sky-night-2:#063F3E;--gst-sky-night-3:#064C4B;--gst-sky-night-4:#06605E;
+
+  /* ── Héritage DS d'affiches (alias, pour réutiliser les composants existants) ── */
+  --teal:var(--gst-teal-500); --teal-deep:var(--gst-teal-600); --teal-ink:var(--gst-teal-800);
+  --red:var(--gst-red-500); --red-deep:var(--gst-red-700);
+  --cream:var(--gst-cream); --white:var(--gst-white);
+  --ink:var(--gst-ink); --ink-70:var(--gst-ink-70); --ink-40:var(--gst-ink-40);
+  --font-display:var(--gst-font-display); --font-serif:var(--gst-font-serif); --font-mono:var(--gst-font-mono);
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px;
+  --space-6:32px; --space-7:48px; --space-8:64px; --space-9:96px; --space-10:128px;
+  --hairline:1px; --node-size:7px; --rule-weight:4px; --border-weight:2px;
+  --radius-none:0; --radius-sm:3px; --radius-pill:999px;
+}
+
+@media (min-width:640px)  { :root { --gst-grid-cols:8;  --gst-grid-gutter:24px; --gst-grid-margin:40px; } }
+@media (min-width:1024px) { :root { --gst-grid-cols:12; --gst-grid-gutter:24px; --gst-grid-margin:80px; } }
+
+/* ── Mode JOUR (défaut) — sur la racine, ou sur une zone avec data-theme="jour" ── */
+:root,[data-theme="jour"],[data-theme="soleil"] {
+  --gst-bg-canvas:var(--gst-cream);
+  --gst-bg-panel:var(--gst-white);
+  --gst-bg-sunken:var(--gst-paper);
+  --gst-bg-invert:var(--gst-teal-500);
+  --gst-bg-frame:var(--gst-teal-600);
+  --gst-bg-ink:var(--gst-ink);
+
+  --gst-text-primary:var(--gst-ink);
+  --gst-text-secondary:var(--gst-ink-70);
+  --gst-text-on-invert:var(--gst-white);
+  --gst-text-brand:var(--gst-teal-600);
+  --gst-text-accent:var(--gst-red-500);
+
+  --gst-line-hairline:var(--gst-stone);
+  --gst-line-strong:var(--gst-ink-40);
+  --gst-line-brand:var(--gst-teal-500);
+  --gst-node-reticle:var(--gst-sand);
+
+  --gst-accent:var(--gst-red-500);
+  --gst-accent-hover:var(--gst-red-700);
+  --gst-accent-text:var(--gst-red-500);
+  --gst-on-accent:var(--gst-white);
+  --gst-brand:var(--gst-teal-500);
+  --gst-brand-hover:var(--gst-teal-600);
+  --gst-on-brand:var(--gst-white);
+
+  --gst-state-success:var(--gst-forest);       --gst-state-success-text:var(--gst-forest);       --gst-state-success-bg:#E6F0EB;
+  --gst-state-warning:var(--gst-eclair-deep);  --gst-state-warning-text:var(--gst-eclair-700);   --gst-state-warning-bg:var(--gst-eclair-50);
+  --gst-state-danger:var(--gst-red-500);       --gst-state-danger-text:var(--gst-red-500);       --gst-state-danger-bg:var(--gst-red-50);
+  --gst-state-info:var(--gst-teal-500);        --gst-state-info-text:var(--gst-teal-600);        --gst-state-info-bg:var(--gst-teal-50);
+
+  --gst-data-planned:var(--gst-teal-500);  /* prévu : trait pointillé */
+  --gst-data-actual:var(--gst-red-500);    /* réel : trait plein */
+  --gst-data-muted:var(--gst-sand);
+
+  --gst-eclair-signal:var(--gst-eclair);
+  --gst-eclair-on:var(--gst-ink);          /* texte posé sur un aplat Éclair */
+
+  --gst-hairline:1px;
+  --gst-border:2px;
+  --gst-rule:4px;
+  --gst-focus-ring:2px solid var(--gst-red-500);
+  --gst-tag-weight:500;
+
+  color-scheme:light;
+}
+
+/* ── Mode NUIT DE CAMP — pensé pour la lampe frontale ───────────────── */
+[data-theme="nuit"] {
+  --gst-bg-canvas:var(--gst-teal-900);
+  --gst-bg-panel:var(--gst-teal-800);
+  --gst-bg-sunken:#04312F;
+  --gst-bg-invert:var(--gst-cream);
+  --gst-bg-frame:var(--gst-teal-700);
+  --gst-bg-ink:var(--gst-cream);
+
+  --gst-text-primary:var(--gst-cream);
+  --gst-text-secondary:var(--gst-teal-100);
+  --gst-text-on-invert:var(--gst-ink);
+  --gst-text-brand:var(--gst-teal-200);
+  --gst-text-accent:var(--gst-red-100);
+
+  --gst-line-hairline:rgba(255,255,255,.14);
+  --gst-line-strong:rgba(255,255,255,.34);
+  --gst-line-brand:var(--gst-teal-300);
+  --gst-node-reticle:rgba(255,255,255,.34);
+
+  --gst-accent:var(--gst-red-500);
+  --gst-accent-hover:var(--gst-red-700);
+  --gst-accent-text:var(--gst-red-100);
+  --gst-brand:var(--gst-teal-300);
+  --gst-brand-hover:var(--gst-teal-200);
+  --gst-on-brand:var(--gst-teal-900);
+
+  --gst-state-success:var(--gst-teal-300); --gst-state-success-text:var(--gst-teal-100); --gst-state-success-bg:rgba(95,170,165,.16);
+  --gst-state-warning:var(--gst-eclair);   --gst-state-warning-text:var(--gst-eclair);   --gst-state-warning-bg:rgba(255,210,63,.12);
+  --gst-state-danger:var(--gst-red-300);   --gst-state-danger-text:var(--gst-red-100);   --gst-state-danger-bg:rgba(224,113,109,.16);
+  --gst-state-info:var(--gst-teal-200);    --gst-state-info-text:var(--gst-teal-100);    --gst-state-info-bg:rgba(147,200,196,.12);
+
+  --gst-data-planned:var(--gst-teal-200);
+  --gst-data-actual:var(--gst-red-300);
+  --gst-data-muted:rgba(255,255,255,.22);
+
+  --gst-focus-ring:2px solid var(--gst-red-300);
+  color-scheme:dark;
+}
+
+/* ── Mode PLEIN SOLEIL — contraste AAA, hairlines doublées ──────────── */
+[data-theme="soleil"] {
+  --gst-bg-canvas:var(--gst-white);
+  --gst-bg-panel:var(--gst-white);
+  --gst-bg-sunken:var(--gst-cream);
+  --gst-bg-invert:var(--gst-teal-700);
+  --gst-bg-frame:var(--gst-teal-700);
+
+  --gst-text-primary:var(--gst-black);
+  --gst-text-secondary:var(--gst-ink);
+  --gst-text-brand:var(--gst-teal-700);
+  --gst-text-accent:var(--gst-red-700);
+
+  --gst-line-hairline:var(--gst-ink-40);
+  --gst-line-strong:var(--gst-ink);
+  --gst-line-brand:var(--gst-teal-700);
+  --gst-node-reticle:var(--gst-ink);
+
+  --gst-accent:var(--gst-red-700);
+  --gst-accent-hover:var(--gst-red-900);
+  --gst-accent-text:var(--gst-red-700);
+  --gst-brand:var(--gst-teal-700);
+  --gst-brand-hover:var(--gst-teal-800);
+
+  --gst-state-success:var(--gst-forest-700); --gst-state-success-text:var(--gst-forest-700);
+  --gst-state-warning:var(--gst-eclair-deep);--gst-state-warning-text:var(--gst-eclair-800);
+  --gst-state-danger:var(--gst-red-700);     --gst-state-danger-text:var(--gst-red-700);
+  --gst-state-info:var(--gst-teal-700);      --gst-state-info-text:var(--gst-teal-700);
+
+  --gst-data-planned:var(--gst-teal-700);
+  --gst-data-actual:var(--gst-red-700);
+
+  --gst-hairline:2px;
+  --gst-tag-weight:600;
+  --gst-focus-ring:3px solid var(--gst-red-700);
+}
+
+/* ── Réduction des animations : fondus 120 ms, 3D figée ─────────────── */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --gst-dur-base:120ms; --gst-dur-slow:120ms; --gst-dur-scene:0ms; --gst-dur-epic:0ms;
+    --gst-stagger-tight:0ms; --gst-stagger-base:0ms; --gst-stagger-loose:0ms;
+  }
+}
+[data-motion="reduce"] {
+  --gst-dur-base:120ms; --gst-dur-slow:120ms; --gst-dur-scene:0ms; --gst-dur-epic:0ms;
+  --gst-stagger-tight:0ms; --gst-stagger-base:0ms; --gst-stagger-loose:0ms;
+}

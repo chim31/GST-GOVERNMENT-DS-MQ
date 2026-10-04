@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GST GOVERNMENT — Cahier des charges</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,600;1,6..72,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --nuit:#0E1420;--orage:#1B2436;--ardoise:#3A465C;--brume:#8894A8;
+  --toile:#EDE9E1;--toile-2:#E2DCD1;--papier:#F7F5F0;
+  --foudre:#FFD23F;--foudre-sombre:#C79A00;--vert:#1F6F4A;--rouge:#C6402F;--bleu:#2C5B8F;
+  --serif:"Newsreader",Georgia,serif;--display:"Bricolage Grotesque",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--toile);color:var(--nuit);font-family:var(--serif);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+
+.orage{background:var(--nuit);color:var(--toile);position:relative;overflow:hidden}
+.orage::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(130% 90% at 50% 0%,rgba(255,210,63,.15),transparent 58%)}
+.orage-in{max-width:1180px;margin:0 auto;padding:76px 32px 66px;position:relative;z-index:1}
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--foudre);margin:0 0 22px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.eyebrow span.sep{width:34px;height:1px;background:var(--foudre-sombre);display:inline-block}
+h1.titre{font-family:var(--display);font-weight:800;font-size:clamp(36px,6.2vw,74px);line-height:.96;letter-spacing:-.035em;margin:0}
+h1.titre em{font-style:normal;color:var(--foudre);display:block}
+.sous-titre{font-size:clamp(17px,2.1vw,21px);color:#C3CBD8;max-width:64ch;font-weight:300;margin:22px 0 0}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.13);margin-top:52px}
+.meta div{background:var(--nuit);padding:15px 17px}
+.meta dt{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--brume);margin:0 0 6px}
+.meta dd{margin:0;font-family:var(--display);font-size:15px;font-weight:600;color:var(--toile)}
+.eclair{display:block;width:100%;height:14px}
+.eclair path{fill:var(--foudre)}
+
+.shell{max-width:1180px;margin:0 auto;padding:0 32px 120px;display:grid;grid-template-columns:238px 1fr;gap:56px}
+@media (max-width:940px){.shell{grid-template-columns:1fr;gap:0;padding:0 20px 80px}}
+nav.sommaire{position:sticky;top:24px;align-self:start;padding-top:52px;max-height:calc(100vh - 48px);overflow-y:auto}
+@media (max-width:940px){nav.sommaire{position:static;max-height:none;padding-top:36px;border-bottom:2px solid var(--nuit);padding-bottom:28px}}
+nav.sommaire h2{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ardoise);margin:0 0 16px;font-weight:700}
+nav.sommaire ul{list-style:none;margin:0;padding:0}
+nav.sommaire li{margin:0 0 3px}
+nav.sommaire a{display:flex;gap:9px;text-decoration:none;color:var(--orage);font-family:var(--display);font-size:13.5px;line-height:1.35;padding:6px 8px 6px 12px;border-left:2px solid transparent;transition:border-color .15s,color .15s}
+nav.sommaire a .ref{font-family:var(--mono);font-size:10px;color:var(--brume);padding-top:3px;min-width:24px}
+nav.sommaire a:hover,nav.sommaire a:focus-visible{border-left-color:var(--foudre);color:var(--nuit)}
+main{padding-top:52px;min-width:0}
+
+section.bloc{padding-top:16px;margin-bottom:76px;scroll-margin-top:24px}
+.bloc-tete{border-top:2px solid var(--nuit);padding-top:14px;margin-bottom:26px}
+.bloc-num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--foudre-sombre);font-weight:700;display:block;margin-bottom:10px}
+h2.bloc-titre{font-family:var(--display);font-weight:800;font-size:clamp(26px,3.8vw,38px);line-height:1.05;letter-spacing:-.025em;margin:0;max-width:24ch}
+.chapeau{font-size:19px;color:var(--ardoise);max-width:66ch;margin:16px 0 0;font-weight:300}
+h3{font-family:var(--display);font-weight:700;font-size:21px;letter-spacing:-.015em;margin:42px 0 12px;line-height:1.2}
+h4{font-family:var(--display);font-weight:600;font-size:16.5px;margin:26px 0 8px}
+p{margin:0 0 15px;max-width:72ch}
+ul,ol{max-width:72ch;padding-left:22px;margin:0 0 16px}
+li{margin-bottom:7px}
+strong{font-weight:600}
+
+/* --- MISSIONS --- */
+.mission{background:var(--papier);border:1px solid var(--toile-2);border-left:4px solid var(--nuit);margin:0 0 16px}
+.mission-tete{display:flex;gap:14px;align-items:flex-start;padding:15px 18px 12px;flex-wrap:wrap}
+.mission-ref{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;background:var(--nuit);color:var(--foudre);padding:5px 9px;white-space:nowrap}
+.mission-tete h4{margin:2px 0 0;font-size:17.5px;flex:1 1 200px}
+.mission-corps{padding:0 18px 16px}
+.mission-corps p{font-size:15px;color:var(--ardoise);margin:0 0 12px}
+.mission-corps .lot{margin:0 0 12px}
+.mission-corps .lot-titre{font-family:var(--mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--foudre-sombre);font-weight:700;display:block;margin-bottom:6px}
+.mission-corps ul{font-size:15px;margin:0;padding-left:20px}
+.mission-corps ul li{margin-bottom:5px}
+.mission-corps .acceptation{border-top:1px dashed var(--toile-2);padding-top:12px;margin-top:14px}
+.mission-corps .acceptation .lot-titre{color:var(--vert)}
+.mission.critique{border-left-color:var(--foudre)}
+.mission.critique .mission-ref{background:var(--foudre);color:var(--nuit)}
+
+.tag{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 7px;border:1px solid var(--ardoise);color:var(--ardoise);margin:0 4px 4px 0;white-space:nowrap;border-radius:2px}
+.tag.must{background:var(--nuit);color:var(--foudre);border-color:var(--nuit)}
+.tag.should{background:var(--vert);color:#fff;border-color:var(--vert)}
+.tag.could{background:transparent;color:var(--bleu);border-color:var(--bleu)}
+
+.note{border-left:3px solid var(--foudre);background:var(--papier);padding:16px 20px;margin:24px 0;max-width:72ch}
+.note .etiq{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--foudre-sombre);display:block;margin-bottom:8px}
+.note p:last-child,.note ul:last-child{margin-bottom:0}
+.note.regle{border-left-color:var(--vert)}.note.regle .etiq{color:var(--vert)}
+.note.alerte{border-left-color:var(--rouge)}.note.alerte .etiq{color:var(--rouge)}
+
+.tableau-wrap{overflow-x:auto;margin:22px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:560px;background:var(--papier)}
+th{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;text-align:left;padding:10px 13px;background:var(--nuit);color:var(--toile);font-weight:700;vertical-align:bottom}
+td{padding:11px 13px;border-bottom:1px solid var(--toile-2);vertical-align:top;line-height:1.5}
+tbody tr:last-child td{border-bottom:none}
+td.mono{font-family:var(--mono);font-size:12px;white-space:nowrap;color:var(--ardoise)}
+td.id{font-family:var(--mono);font-size:12px;font-weight:700;white-space:nowrap;color:var(--nuit)}
+
+.projet-carte{background:var(--nuit);color:var(--toile);padding:20px 22px;margin:0 0 12px;display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center}
+@media (max-width:640px){.projet-carte{grid-template-columns:1fr;gap:10px}}
+.projet-carte .pref{font-family:var(--mono);font-size:20px;font-weight:700;color:var(--foudre)}
+.projet-carte h4{margin:0 0 4px;font-size:18px;color:var(--toile)}
+.projet-carte p{margin:0;font-size:14.5px;color:#AAB4C4;max-width:none}
+.projet-carte .compte{font-family:var(--mono);font-size:11px;color:var(--brume);text-align:right;white-space:nowrap}
+
+footer.pied{background:var(--nuit);color:var(--brume);padding:44px 32px;font-family:var(--mono);font-size:12px;letter-spacing:.04em}
+footer.pied div{max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer.pied strong{color:var(--foudre);font-weight:400}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.reveal.vu{opacity:1;transform:none}
+:focus-visible{outline:2px solid var(--foudre);outline-offset:3px}
+</style>
+</head>
+<body>
+
+<header class="orage">
+  <div class="orage-in">
+    <p class="eyebrow">Document 3 sur 3<span class="sep"></span>Cahier des charges<span class="sep"></span>Projets · Missions · Exigences</p>
+    <h1 class="titre">CAHIER<br><em>DES CHARGES</em></h1>
+    <p class="sous-titre">Le grand projet morcelé en sept projets, eux-mêmes morcelés en missions, chacune avec son périmètre, ses livrables et ses critères d'acceptation. Le document que l'on ouvre pour savoir quoi construire, et le document que l'on ouvre pour vérifier que c'est fait.</p>
+    <dl class="meta">
+      <div><dt>Projet</dt><dd>GST Government</dd></div>
+      <div><dt>Nature</dt><dd>Cahier des charges</dd></div>
+      <div><dt>Projets</dt><dd>7</dd></div>
+      <div><dt>Missions</dt><dd>38</dd></div>
+      <div><dt>Version</dt><dd>1.0</dd></div>
+    </dl>
+  </div>
+</header>
+<svg class="eclair" viewBox="0 0 1200 14" preserveAspectRatio="none" aria-hidden="true"><path d="M0 14 L96 0 L120 9 L216 0 L240 9 L336 0 L360 9 L456 0 L480 9 L576 0 L600 9 L696 0 L720 9 L816 0 L840 9 L936 0 L960 9 L1056 0 L1080 9 L1176 0 L1200 9 L1200 14 Z"/></svg>
+
+<div class="shell">
+<nav class="sommaire" aria-label="Sommaire">
+  <h2>Sommaire</h2>
+  <ul>
+    <li><a href="#c0"><span class="ref">§0</span>Objet et lecture</a></li>
+    <li><a href="#carte"><span class="ref">§1</span>Carte des projets</a></li>
+    <li><a href="#p0"><span class="ref">P0</span>Socle et fondations</a></li>
+    <li><a href="#p1"><span class="ref">P1</span>Logistique</a></li>
+    <li><a href="#p2"><span class="ref">P2</span>Comptabilité</a></li>
+    <li><a href="#p3"><span class="ref">P3</span>Cuisine et menus</a></li>
+    <li><a href="#p4"><span class="ref">P4</span>Roadmap 3D</a></li>
+    <li><a href="#p5"><span class="ref">P5</span>Vitrine et Bus volant</a></li>
+    <li><a href="#p6"><span class="ref">P6</span>Données et intelligence</a></li>
+    <li><a href="#enf"><span class="ref">§2</span>Exigences non fonctionnelles</a></li>
+    <li><a href="#contraintes"><span class="ref">§3</span>Contraintes</a></li>
+    <li><a href="#livrables"><span class="ref">§4</span>Livrables attendus</a></li>
+    <li><a href="#recette"><span class="ref">§5</span>Recette et réception</a></li>
+    <li><a href="#matrice"><span class="ref">§6</span>Matrice de dépendances</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- C0 -->
+<section class="bloc reveal" id="c0">
+  <div class="bloc-tete"><span class="bloc-num">Section 0</span><h2 class="bloc-titre">Objet du document et mode de lecture</h2></div>
+  <p class="chapeau">Ce cahier des charges décrit ce que le GST Government doit faire. Il ne décrit pas comment le coder — c'est le rôle de l'équipe technique. Il décrit ce qui doit exister, et à quoi on reconnaîtra que ça existe.</p>
+
+  <h3>Le morcellement</h3>
+  <p>Le grand projet <strong>GST Government</strong> est découpé en <strong>7 projets</strong>. Chaque projet est découpé en <strong>missions</strong>. Chaque mission porte un périmètre précis, des livrables et des critères d'acceptation vérifiables.</p>
+  <p>Une mission est conçue pour être <strong>confiable à une personne ou à un binôme</strong> et achevée en quelques semaines. C'est l'unité de travail du projet : on la prend, on la finit, on la valide, on passe à la suivante.</p>
+
+  <h3>Nomenclature</h3>
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:18%">Forme</th><th style="width:26%">Signification</th><th>Exemple</th></tr></thead>
+      <tbody>
+        <tr><td class="id">Pn</td><td>Projet</td><td>P1 — Logistique</td></tr>
+        <tr><td class="id">Mn.m</td><td>Mission du projet n</td><td>M1.3 — Groupe Alimentaire</td></tr>
+        <tr><td class="id">EF-nnn</td><td>Exigence fonctionnelle</td><td>EF-042 — Calcul de l'eau potable</td></tr>
+        <tr><td class="id">ENF-nn</td><td>Exigence non fonctionnelle</td><td>ENF-03 — Fonctionnement hors ligne</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Priorités</h3>
+  <p>Chaque mission porte une priorité :</p>
+  <p>
+    <span class="tag must">Indispensable</span> Sans elle, le projet ne rend pas service. Elle est faite.<br>
+    <span class="tag should">Important</span> Attendue, mais peut glisser d'un palier si le calendrier se tend.<br>
+    <span class="tag could">Souhaité</span> Améliore l'expérience. Sacrifiable sans dommage.
+  </p>
+
+  <div class="note regle">
+    <span class="etiq">Règle de validation</span>
+    <p>Une mission n'est terminée que lorsque <strong>tous ses critères d'acceptation sont vérifiés par une personne qui n'a pas développé la mission</strong>. Sur un projet bénévole, cette règle est ce qui sépare un logiciel qui marche d'un logiciel qui semble marcher.</p>
+  </div>
+</section>
+
+<!-- CARTE -->
+<section class="bloc reveal" id="carte">
+  <div class="bloc-tete"><span class="bloc-num">Section 1</span><h2 class="bloc-titre">Carte des sept projets</h2></div>
+
+  <div class="projet-carte"><span class="pref">P0</span><div><h4>Socle et fondations</h4><p>Camps, personnes, unités, rôles, base de prix, journal. Ce sur quoi tout repose.</p></div><span class="compte">6 missions</span></div>
+  <div class="projet-carte"><span class="pref">P1</span><div><h4>Gestion de la logistique</h4><p>Les dix groupes de gestion, le recensement, le chiffrage, l'inventaire, les retours.</p></div><span class="compte">10 missions</span></div>
+  <div class="projet-carte"><span class="pref">P2</span><div><h4>Super-app comptabilité</h4><p>Prévisionnel, dépenses réelles, courbes, comptes du jour, bilan de clôture.</p></div><span class="compte">7 missions</span></div>
+  <div class="projet-carte"><span class="pref">P3</span><div><h4>Cuisine et menus</h4><p>Catalogue de plats, choix des jeunes, corrélation, calcul des vivres, suggestion live.</p></div><span class="compte">6 missions</span></div>
+  <div class="projet-carte"><span class="pref">P4</span><div><h4>Roadmap 3D</h4><p>Programme jour par jour, circuit 3D, véhicule animé, agenda, version dégradée.</p></div><span class="compte">4 missions</span></div>
+  <div class="projet-carte"><span class="pref">P5</span><div><h4>Vitrine et Bus volant</h4><p>Site public du GST, inscriptions en ligne, bus 3D suspendu, bilans publiés.</p></div><span class="compte">3 missions</span></div>
+  <div class="projet-carte"><span class="pref">P6</span><div><h4>Données et intelligence</h4><p>Mémoire du GST, hook des prix, base de références, modèles de camp.</p></div><span class="compte">2 missions</span></div>
+</section>
+
+<!-- P0 -->
+<section class="bloc reveal" id="p0">
+  <div class="bloc-tete"><span class="bloc-num">Projet P0</span><h2 class="bloc-titre">Socle et fondations</h2></div>
+  <p class="chapeau">Objectif : permettre de créer un camp, d'y rattacher des personnes et des unités, et de disposer d'une base de prix utilisable. Sans ce projet, aucun autre ne peut démarrer.</p>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M0.1</span><h4>Comptes, rôles et permissions</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Mettre en place l'accès à la plateforme et le cloisonnement des droits.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Connexion, déconnexion, récupération de mot de passe</li>
+          <li>Neuf rôles : chef de groupe, commissaire logistique, responsable de groupe, trésorier, responsable cuisine, chef d'unité, scout, parent, public</li>
+          <li>Attribution des rôles par personne et par camp — un même individu peut être responsable matériel sur un camp et simple participant sur un autre</li>
+          <li>Cloisonnement des données sensibles : fiches sanitaires et statuts de paiement</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Un responsable de groupe ne peut ouvrir aucun écran de comptabilité, testé par tentative d'accès direct</li>
+          <li>Un parent ne voit que son enfant</li>
+          <li>Un rôle attribué sur un camp ne donne aucun droit sur un autre camp</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M0.2</span><h4>Annuaire des personnes et des unités</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Constituer le répertoire humain du GST.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Fiche personne : identité, date de naissance, contact, contact d'urgence, unité</li>
+          <li>Fiche sanitaire à accès restreint : allergies, traitements, antécédents</li>
+          <li>Unités et tranches d'âge, avec leurs responsables</li>
+          <li>Import en masse depuis un fichier tableur</li>
+          <li>Historique de participation aux camps</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Import de 200 personnes en une opération, sans doublon</li>
+          <li>La fiche sanitaire est invisible pour tout rôle non habilité</li>
+          <li>La recherche par nom trouve une personne en moins d'une seconde</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M0.3</span><h4>Entité Camp et formulaire d'ouverture</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Le point d'entrée de toute la plateforme. Créer un camp, c'est déclencher tout le reste.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Six types de camp : réjouissance, survie, formation, jamboree national, jamboree international, mission ponctuelle</li>
+          <li>Nom, dates, lieu, effectif prévisionnel, enveloppe de départ</li>
+          <li>Unités participantes</li>
+          <li>Sélection des groupes logistiques à ouvrir, pré-cochés selon le type et modifiables</li>
+          <li>Désignation d'un responsable par groupe ouvert</li>
+          <li>Activation des modules optionnels : roadmap, inscription publique, bus volant</li>
+          <li>Rétroplanning généré automatiquement selon le type</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Créer un camp de type « réjouissance » ouvre automatiquement les huit groupes logistiques prévus</li>
+          <li>Créer un camp de type « survie » n'ouvre que les groupes réduits</li>
+          <li>Le rétroplanning affiche les jalons J-60 à J+10 avec les bonnes dates</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M0.4</span><h4>Base de prix de référence</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Le catalogue des articles et de leurs prix. C'est ce qui rend possible tout chiffrage automatique.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Fiche article : nom, catégorie, unité de mesure, périssable ou non</li>
+          <li>Fiche prix : article, montant, marché ou fournisseur, date du relevé, source, statut de validation</li>
+          <li>Historique des prix par article</li>
+          <li>Saisie manuelle et import en masse</li>
+          <li>Indicateur de fraîcheur : un prix de plus de six mois est signalé</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Au moins 150 articles saisis à la livraison de la mission</li>
+          <li>Sélectionner un article dans un recensement pré-remplit son prix le plus récent et validé</li>
+          <li>Un prix périmé est visuellement signalé partout où il apparaît</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission">
+    <div class="mission-tete"><span class="mission-ref">M0.5</span><h4>Tableau de bord et navigation</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>L'écran d'accueil, adapté au rôle de chacun.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Camps en cours et à venir</li>
+          <li>Alertes : seuils critiques non atteints, jalons dépassés, validations en attente</li>
+          <li>Accès rapide aux modules autorisés par le rôle</li>
+          <li>Vue avancement : quels groupes ont terminé leur recensement</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Chaque rôle voit un tableau de bord différent, sans écran vide</li>
+          <li>Une alerte de seuil critique apparaît dans les 30 secondes suivant son déclenchement</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission">
+    <div class="mission-tete"><span class="mission-ref">M0.6</span><h4>Journal d'activité et traçabilité</h4><span class="tag should">Important</span></div>
+    <div class="mission-corps">
+      <p>Savoir qui a changé quoi. Sur un projet collectif où circule de l'argent, c'est la fonction qui désamorce les conflits.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Enregistrement de toute modification : auteur, horodatage, ancienne et nouvelle valeur</li>
+          <li>Consultation filtrable par camp, par personne, par type d'objet</li>
+          <li>Journal en lecture seule, non modifiable</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Modifier un montant de dépense crée une entrée de journal lisible</li>
+          <li>Aucun rôle, pas même le chef de groupe, ne peut effacer une entrée de journal</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- P1 -->
+<section class="bloc reveal" id="p1">
+  <div class="bloc-tete"><span class="bloc-num">Projet P1</span><h2 class="bloc-titre">Gestion de la logistique</h2></div>
+  <p class="chapeau">Objectif : recenser et chiffrer l'intégralité des besoins d'un camp, groupe par groupe, et consolider le tout vers le budget. C'est le module culminant.</p>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M1.1</span><h4>Moteur de recensement</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Le mécanisme commun à tous les groupes. Développé une fois, réutilisé dix fois.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Tableau de saisie : article, quantité demandée, unité, coût unitaire, quantité disponible, quantité manquante, coût total</li>
+          <li>Calcul automatique du manque et du coût total par ligne et par groupe</li>
+          <li>Recherche d'article dans la base de prix, avec pré-remplissage</li>
+          <li>Création d'un article absent de la base, directement depuis le recensement</li>
+          <li>Quantité exprimable par personne — recalcul automatique si l'effectif change</li>
+          <li>Statut du groupe : en cours, soumis, validé</li>
+          <li>Ajout libre d'une catégorie manquante, marquée « ajout terrain », en attente de validation par le commissaire logistique</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Un recensement de 200 lignes se saisit et se recalcule sans ralentissement perceptible</li>
+          <li>Passer l'effectif du camp de 60 à 80 recalcule instantanément toutes les lignes exprimées par personne</li>
+          <li>Une catégorie ajoutée sur le terrain apparaît dans la file de validation du commissaire</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M1.2</span><h4>Groupe Matériel</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Tout ce que le groupe emporte collectivement. Le raisonnement part du groupe et de l'unité, avant de descendre à l'individu.</p>
+      <div class="lot"><span class="lot-titre">Catégories pré-remplies</span>
+        <ul>
+          <li>Instruments et animation : djembés, percussions</li>
+          <li>Abris : bâches du groupe ou de l'événement, tentes, campement</li>
+          <li>Protocole : drapeaux Togo, AST et GST, porte-étendards adaptés</li>
+          <li>Sonorisation</li>
+          <li>Cordes et matériel de froissartage</li>
+          <li>Construction : marteau, clous, pioche, scie, pelle</li>
+          <li>Entretien : balais, seaux, bassines</li>
+          <li>Couchage</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Les catégories pré-remplies sont présentes à l'ouverture du groupe, sans saisie manuelle</li>
+          <li>Le coût du groupe ne compte que le manquant, pas ce dont on dispose déjà</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M1.3</span><h4>Groupe Alimentaire</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Ne recense pas seul : reçoit le menu validé du projet P3 et le traduit en vivres chiffrés. Gère aussi l'eau potable.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Réception automatique de la liste d'ingrédients issue du menu</li>
+          <li>Chiffrage ligne par ligne depuis la base de prix</li>
+          <li><strong>Eau potable : 6 sachets par personne et par jour, répartis 2 le matin, 2 à midi, 2 le soir</strong> — quantités et coût calculés automatiquement</li>
+          <li>Eau technique : cuisine, vaisselle, toilette</li>
+          <li>Marge de sécurité paramétrable sur les quantités</li>
+          <li>Conditionnement et contraintes de conservation par article</li>
+          <li>Saisie manuelle possible si le module Cuisine n'est pas activé sur ce camp</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Pour 80 personnes sur 14 jours, le calcul donne exactement 6 720 sachets d'eau</li>
+          <li>Valider un menu dans P3 remplit automatiquement ce groupe</li>
+          <li>Le groupe reste utilisable en saisie manuelle si P3 n'est pas encore livré</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M1.4</span><h4>Groupe Transport et distribution</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Le GST voyage beaucoup. Ce groupe planifie les déplacements et la circulation du matériel.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Itinéraires : départ, arrivée, étapes, distance, durée estimée</li>
+          <li>Modes de transport et véhicules retenus, avec capacité</li>
+          <li>Coûts : location, carburant, péages, chauffeur, stationnement</li>
+          <li>Plan de chargement : quel matériel dans quel véhicule</li>
+          <li>Rotations et expéditions séparées du convoi principal</li>
+          <li>Horaires, points de rendez-vous, responsable de convoi</li>
+          <li>Trajets de retour et sorties intermédiaires</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>La capacité totale des véhicules est comparée à l'effectif, avec alerte si insuffisante</li>
+          <li>Le plan de chargement liste tout le matériel des autres groupes, sans oubli</li>
+          <li>Le coût transport remonte automatiquement au groupe Économique</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M1.5</span><h4>Groupe Économique et consolidation</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Le groupe pivot. Il ne recense rien : il agrège tous les autres et produit l'évaluation budgétaire du camp.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Consolidation automatique des coûts de tous les groupes ouverts</li>
+          <li>Répartition du budget par groupe, en valeur et en pourcentage</li>
+          <li>Recalcul en continu à chaque modification d'un groupe</li>
+          <li>Calcul de la participation par personne à partir du reste à financer</li>
+          <li>Simulation d'effectif : que devient le budget à 60, 80, 100 participants</li>
+          <li>Transmission du prévisionnel validé au projet P2</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Le total consolidé est vérifié manuellement sur un camp complet et correspond au centime près</li>
+          <li>Modifier une ligne dans un groupe met à jour le total consolidé en moins de 2 secondes</li>
+          <li>La simulation d'effectif produit trois budgets cohérents et comparables</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission">
+    <div class="mission-tete"><span class="mission-ref">M1.6</span><h4>Groupes Technique, Santé et Salubrité</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Trois groupes construits sur le moteur commun, avec leurs spécificités.</p>
+      <div class="lot"><span class="lot-titre">Technique</span>
+        <ul><li>Énergie : groupe électrogène, carburant, batteries</li><li>Éclairage, câblage, rallonges</li><li>Matériel audiovisuel et outillage de réparation</li></ul>
+      </div>
+      <div class="lot"><span class="lot-titre">Santé — groupe à seuil critique</span>
+        <ul><li>Pharmacie de camp et consommables, avec quantités minimales</li><li>Récapitulatif des fiches sanitaires du camp</li><li>Contacts d'urgence et structure de santé la plus proche</li><li>Protocole d'évacuation écrit</li><li>Responsable santé désigné, obligatoire</li></ul>
+      </div>
+      <div class="lot"><span class="lot-titre">Salubrité</span>
+        <ul><li>Produits d'hygiène et de nettoyage</li><li>Sanitaires, douches, latrines</li><li>Gestion et évacuation des déchets, tri</li><li>Points d'eau et lavage des mains</li><li>Plan de remise en état du terrain</li></ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Un camp sans responsable santé désigné affiche un blocage visible sur le tableau de bord</li>
+          <li>Un seuil critique non atteint sur la pharmacie déclenche une alerte au chef de groupe</li>
+          <li>Le plan de remise en état est exportable pour le propriétaire du terrain</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission">
+    <div class="mission-tete"><span class="mission-ref">M1.7</span><h4>Groupes Activités et Divers</h4><span class="tag should">Important</span></div>
+    <div class="mission-corps">
+      <p>Les besoins liés au programme, et tout ce qui ne rentre nulle part ailleurs.</p>
+      <div class="lot"><span class="lot-titre">Visites et activités planifiées</span>
+        <ul><li>Matériel spécifique par activité</li><li>Droits d'entrée, guides, autorisations de visite</li><li>Transport dédié aux sorties</li><li>Intervenants extérieurs et leur rémunération</li><li>Lien direct avec les étapes de la roadmap du projet P4</li></ul>
+      </div>
+      <div class="lot"><span class="lot-titre">Social, humain et divers</span>
+        <ul><li>Uniformes, foulards, insignes, badges</li><li>Équipement individuel demandé aux participants</li><li>Récompenses, souvenirs, cadeaux protocolaires</li><li>Accueil des invités et des délégations</li><li>Postes divers non catégorisés</li></ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Le matériel saisi pour une activité apparaît sur l'étape correspondante de la roadmap</li>
+          <li>L'équipement individuel produit une liste imprimable à remettre aux familles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission">
+    <div class="mission-tete"><span class="mission-ref">M1.8</span><h4>Inventaire permanent et affectation</h4><span class="tag should">Important</span></div>
+    <div class="mission-corps">
+      <p>Le patrimoine du GST, qui vit entre les camps. C'est lui qui alimente le champ « ce dont on dispose ».</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Fiche d'inventaire : article, quantité, état, localisation, détenteur</li>
+          <li>États : neuf, bon, usé, à réparer, hors service</li>
+          <li>Sortie et retour de matériel liés à un camp</li>
+          <li>Affectation : qui emporte quoi, dans quel véhicule, sous quelle responsabilité</li>
+          <li>Historique de vie d'un article : achats, camps, réparations, réforme</li>
+          <li>Alimentation automatique du champ « disponible » dans les recensements</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Ouvrir un recensement pré-remplit la quantité disponible depuis l'inventaire</li>
+          <li>Chaque article sorti a un détenteur nommé</li>
+          <li>Un article hors service n'est jamais compté comme disponible</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission">
+    <div class="mission-tete"><span class="mission-ref">M1.9</span><h4>Fournisseurs, devis et documents administratifs</h4><span class="tag should">Important</span></div>
+    <div class="mission-corps">
+      <p>Deux fonctions qui font gagner de l'argent et évitent de bloquer un départ.</p>
+      <div class="lot"><span class="lot-titre">Fournisseurs et devis</span>
+        <ul><li>Carnet de fournisseurs : nom, contact, spécialité, historique de fiabilité</li><li>Enregistrement de devis concurrents sur un même poste</li><li>Comparaison côte à côte et sélection du devis retenu</li><li>Suivi des commandes passées</li></ul>
+      </div>
+      <div class="lot"><span class="lot-titre">Documents administratifs</span>
+        <ul><li>Checklist de documents obligatoires par type de camp</li><li>Autorisations parentales, listes nominatives, attestations d'assurance</li><li>Autorisations de sortie de territoire pour les jamborees internationaux</li><li>Dépôt de fichiers et suivi des pièces manquantes par personne</li></ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Comparer trois devis affiche clairement l'écart et l'économie potentielle</li>
+          <li>La liste des participants sans autorisation parentale est consultable en un écran</li>
+          <li>Un camp avec des documents manquants affiche un blocage à J-7</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M1.10</span><h4>Retours et logistique inversée</h4><span class="tag should">Important</span></div>
+    <div class="mission-corps">
+      <p>Ce qui revient du camp. <strong>Ce groupe est destiné à être rendu public</strong> : il montre comment les choses sont réellement gérées sur le terrain.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Pointage de retour ligne par ligne, sur mobile, hors ligne</li>
+          <li>État constaté : intact, usé, endommagé, perdu</li>
+          <li>Écart automatique entre ce qui est parti et ce qui est revenu</li>
+          <li>Consommables réellement consommés</li>
+          <li>Liste du matériel à réparer, à remplacer, à réformer</li>
+          <li>Mise à jour automatique de l'inventaire permanent</li>
+          <li>Génération d'un bilan de retour publiable</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Le pointage de retour fonctionne intégralement sans réseau</li>
+          <li>Les écarts sont calculés automatiquement, sans saisie manuelle</li>
+          <li>L'inventaire permanent reflète le retour dès la synchronisation</li>
+          <li>Le bilan publiable ne contient aucune donnée nominative sensible</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- P2 -->
+<section class="bloc reveal" id="p2">
+  <div class="bloc-tete"><span class="bloc-num">Projet P2</span><h2 class="bloc-titre">Super-app de comptabilité</h2></div>
+  <p class="chapeau">Objectif : suivre l'argent du camp du premier devis au dernier reçu, avec deux versions permanentes — l'estimation et le réel — et un écart visible à tout moment.</p>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M2.1</span><h4>Budget prévisionnel — version test supervisée</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Le budget d'estimation, alimenté par le groupe Économique.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Création automatique des postes à partir des groupes logistiques</li>
+          <li>Enveloppe par poste, ajustable manuellement avec justification</li>
+          <li>Recalcul à chaque changement dans un groupe logistique</li>
+          <li>Gel d'une version validée qui devient la référence de comparaison</li>
+          <li>Scénarios multiples d'effectif, comparables côte à côte</li>
+          <li>Circuit de validation : soumission, avis, approbation</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Le budget prévisionnel correspond exactement à la consolidation du groupe Économique</li>
+          <li>Une version gelée ne bouge plus, même si les groupes logistiques changent après</li>
+          <li>La comparaison de trois scénarios tient sur un seul écran</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M2.2</span><h4>Dépenses réelles — version live supervisée</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Ce qui sort réellement, sur le terrain, jour après jour.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Saisie d'une dépense : montant, poste, activité, date, bénéficiaire, mode de règlement</li>
+          <li><strong>Rattachement obligatoire à un poste et à une activité</strong></li>
+          <li>Justificatif photographié attaché à la ligne</li>
+          <li>Soustraction automatique sur l'enveloppe du poste</li>
+          <li>Double validation au-delà d'un seuil paramétrable</li>
+          <li>Saisie fonctionnant hors ligne, synchronisée au retour du réseau</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Aucune dépense ne peut être enregistrée sans poste ni activité — vérifié par tentative</li>
+          <li>Une dépense saisie diminue immédiatement l'enveloppe visible du poste</li>
+          <li>La saisie d'une dépense prend moins de 60 secondes sur téléphone</li>
+          <li>Dix dépenses saisies hors ligne se synchronisent correctement au retour du réseau</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M2.3</span><h4>Entrées, participations et paiements</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>L'argent qui rentre. Aussi rigoureux que l'argent qui sort.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Participations des jeunes : montant dû, versements, solde</li>
+          <li>Subventions, dons, cotisations, recettes d'activités</li>
+          <li>Échéanciers et paiements partiels</li>
+          <li>Reçu généré pour chaque versement</li>
+          <li>État des impayés, exportable pour relance</li>
+          <li>Synchronisation avec le Bus volant du projet P5</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Le total encaissé correspond à la somme des versements individuels</li>
+          <li>Un paiement enregistré change immédiatement l'état du siège dans le bus</li>
+          <li>La liste des impayés est exacte, vérifiée manuellement</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M2.4</span><h4>Courbes et visualisation</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Voir où va l'argent, et pouvoir descendre dans le détail d'un simple clic.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Courbe de dépense cumulée dans le temps : prévu contre réel, superposés</li>
+          <li>Courbe de fluctuation par poste, pour identifier la dérive</li>
+          <li><strong>Points de courbe cliquables</strong> ouvrant la liste exacte des mouvements qui les composent</li>
+          <li>Répartition du budget par groupe logistique</li>
+          <li>Répartition des dépenses par activité</li>
+          <li>Affichage lisible sur téléphone</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Cliquer sur un point ouvre exactement les mouvements de cette date et de ce poste</li>
+          <li>Les courbes restent lisibles sur un écran de 360 pixels de large</li>
+          <li>Une dérive de plus de 15 % sur un poste est visuellement évidente</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission">
+    <div class="mission-tete"><span class="mission-ref">M2.5</span><h4>Comptes du jour et arrêt de journée</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Le document que le trésorier présente chaque soir au conseil de camp.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Total dépensé dans la journée</li>
+          <li>Répartition par activité et par poste</li>
+          <li>Solde restant, global et par poste</li>
+          <li>Alertes du jour : dépassements, seuils franchis</li>
+          <li>Arrêt de journée : la journée est close et ne peut plus être modifiée sans trace</li>
+          <li>Export imprimable ou partageable</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>L'arrêt de journée est reproductible : refait deux fois, il donne le même résultat</li>
+          <li>Modifier une dépense d'une journée close laisse une trace visible</li>
+          <li>Le compte du jour s'imprime sur une page A4</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission">
+    <div class="mission-tete"><span class="mission-ref">M2.6</span><h4>Avances, régularisations et caisse</h4><span class="tag should">Important</span></div>
+    <div class="mission-corps">
+      <p>Sur le terrain, on confie de l'argent à des responsables. Il faut pouvoir le suivre.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Avance : montant confié, bénéficiaire, motif, date</li>
+          <li>Justification au retour : dépenses réalisées, reliquat rendu</li>
+          <li>Solde d'avance par personne, visible à tout moment</li>
+          <li>Rapprochement de caisse : solde théorique contre espèces réellement comptées</li>
+          <li>Enregistrement des écarts de caisse avec commentaire</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Une avance non justifiée apparaît en alerte après un délai paramétrable</li>
+          <li>Le rapprochement de caisse affiche l'écart en une opération</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission">
+    <div class="mission-tete"><span class="mission-ref">M2.7</span><h4>Bilan de clôture</h4><span class="tag should">Important</span></div>
+    <div class="mission-corps">
+      <p>Le point final d'un camp, et le point de départ du suivant.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Récapitulatif entrées et sorties</li>
+          <li>Écart prévu / réel par poste, en valeur et en pourcentage</li>
+          <li>Coût réel par participant</li>
+          <li>Coût par activité</li>
+          <li>Commentaires d'analyse par poste</li>
+          <li>Export dans un format lisible hors de la plateforme</li>
+          <li>Versement automatique des chiffres réels dans la base de références du projet P6</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Le bilan se génère sans intervention manuelle</li>
+          <li>Les chiffres du bilan alimentent effectivement la base de références</li>
+          <li>Le fichier exporté s'ouvre sans la plateforme</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- P3 -->
+<section class="bloc reveal" id="p3">
+  <div class="bloc-tete"><span class="bloc-num">Projet P3</span><h2 class="bloc-titre">Cuisine et gestion des menus</h2></div>
+  <p class="chapeau">Objectif : construire le menu à partir des choix réels des jeunes, en déduire automatiquement les vivres nécessaires, et ne plus gaspiller.</p>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M3.1</span><h4>Catalogue de plats et fiches d'ingrédients</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>La bibliothèque culinaire du GST. Sans elle, aucun calcul n'est possible.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Fiche plat : nom, service (matin, midi, soir), temps de préparation, difficulté</li>
+          <li>Liste complète des ingrédients : féculents, viandes, légumes, épices, huiles, condiments</li>
+          <li>Quantité de chaque ingrédient par portion</li>
+          <li>Marqueurs : plat de spécialité, plat de route, plat de fête</li>
+          <li>Allergènes contenus</li>
+          <li>Photo du plat</li>
+          <li>Objectif : au moins 10 plats par service à la livraison</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Au moins 30 plats renseignés avec ingrédients complets à la livraison</li>
+          <li>Chaque ingrédient est relié à un article de la base de prix</li>
+          <li>Un plat sans quantité par portion ne peut pas être validé</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M3.2</span><h4>Espace jeune — choix et propositions</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>L'espace des participants, distinct de celui des gérants.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Consultation du catalogue par service, avec photos</li>
+          <li>Sélection des plats souhaités, dans un délai fixé par l'intendance</li>
+          <li>Proposition libre d'un plat absent du catalogue</li>
+          <li>Déclaration de régime, d'allergie ou d'interdit alimentaire</li>
+          <li>Confirmation et modification jusqu'à la clôture</li>
+          <li>Interface simple, pensée pour un téléphone</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Un jeune ayant déclaré une allergie ne voit jamais un plat contenant son allergène</li>
+          <li>Après la date de clôture, aucune modification n'est possible</li>
+          <li>Un plat proposé par un jeune arrive dans la file de validation de l'intendance</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M3.3</span><h4>Corrélation, taux et arrêt du menu</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Le cœur du module : croiser ce que les jeunes proposent et ce qu'ils choisissent, pour trancher sur des chiffres.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li><strong>Taux de proposition</strong> : quels plats reviennent le plus dans les suggestions libres</li>
+          <li><strong>Taux de sélection</strong> : quels plats du catalogue sont le plus choisis</li>
+          <li>Croisement des deux taux et classement des plats</li>
+          <li>Écran d'arrêt du menu : l'intendance compose le menu jour par jour, service par service, en voyant les taux</li>
+          <li>Prise en compte des contraintes de conservation, de coût et de faisabilité</li>
+          <li>Jours sans cuisine : quartier libre, aucun repas préparé</li>
+          <li>Jours de spécialité culinaire</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Les deux taux sont calculés correctement, vérifiés à la main sur un échantillon</li>
+          <li>Le classement facilite visiblement le tri — l'intendance compose un menu de 14 jours en moins d'une heure</li>
+          <li>Un jour marqué sans cuisine ne génère aucun besoin en vivres</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M3.4</span><h4>Calcul des vivres et transmission au budget</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Le menu devient une liste de courses chiffrée, envoyée au groupe Alimentaire.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Multiplication des ingrédients par le nombre de portions et l'effectif réel</li>
+          <li>Agrégation par article sur toute la durée du camp</li>
+          <li>Chiffrage depuis la base de prix</li>
+          <li>Marge de sécurité paramétrable</li>
+          <li>Transmission automatique au groupe Alimentaire du projet P1</li>
+          <li>Recalcul si l'effectif ou le menu change</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Un menu de 14 jours produit une liste de courses chiffrée sans intervention manuelle</li>
+          <li>Ajouter 10 participants recalcule toutes les quantités en moins de 5 secondes</li>
+          <li>Le total transmis au groupe Alimentaire correspond exactement au calcul</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M3.5</span><h4>Suggestion live sur le terrain</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Le mode camp. Les jeunes choisissent la veille pour le lendemain, dans la limite du stock réel.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Saisie manuelle par l'intendance des ressources encore disponibles</li>
+          <li>Filtrage automatique : seuls les plats réalisables avec ces ressources sont proposés</li>
+          <li>Vote des jeunes pour le lendemain, matin, midi et soir</li>
+          <li>Résultat consultable par l'intendance, avec le plat majoritaire par service</li>
+          <li>Décrémentation automatique du stock à chaque service préparé</li>
+          <li>Fonctionnement hors ligne</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Un plat dont un ingrédient est épuisé disparaît immédiatement des propositions</li>
+          <li>Le stock déclaré diminue automatiquement après chaque service, sans double saisie</li>
+          <li>Le vote fonctionne sans réseau et se synchronise ensuite</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission">
+    <div class="mission-tete"><span class="mission-ref">M3.6</span><h4>Indicateurs de gaspillage</h4><span class="tag should">Important</span></div>
+    <div class="mission-corps">
+      <p>La preuve chiffrée que le module fait son travail.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Portions prévues contre portions réellement servies, par service</li>
+          <li>Reste de vivres en fin de camp, par article et en valeur</li>
+          <li>Taux de gaspillage global du camp</li>
+          <li>Comparaison d'un camp à l'autre</li>
+          <li>Intégration au bilan de clôture</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Le reste de vivres est calculé automatiquement à partir du stock et de la consommation</li>
+          <li>L'indicateur apparaît dans le bilan de clôture du projet P2</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- P4 -->
+<section class="bloc reveal" id="p4">
+  <div class="bloc-tete"><span class="bloc-num">Projet P4</span><h2 class="bloc-titre">Espace Roadmap 3D</h2></div>
+  <p class="chapeau">Objectif : rendre le programme d'un grand camp lisible et vivant, avec un véhicule qui avance d'étape en étape, une étape par journée. Réservé aux camps de deux semaines et aux jamborees.</p>
+
+  <div class="mission">
+    <div class="mission-tete"><span class="mission-ref">M4.1</span><h4>Construction du programme</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>La partie non spectaculaire mais indispensable : saisir ce qui se passe chaque jour.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Génération des journées à partir des dates du camp</li>
+          <li>Activités : titre, horaires, lieu, responsable, unités concernées, description</li>
+          <li>Rattachement du matériel nécessaire, tiré du groupe Activités du projet P1</li>
+          <li>Rattachement du menu du jour, tiré du projet P3</li>
+          <li>Duplication d'une journée type</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Le programme complet d'un camp de 14 jours se saisit en moins de deux heures</li>
+          <li>Le matériel affiché sur une activité provient réellement du groupe logistique</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M4.2</span><h4>Circuit 3D et véhicule animé</h4><span class="tag should">Important</span></div>
+    <div class="mission-corps">
+      <p>La signature visuelle du module.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Circuit 3D représentant la durée du camp, une étape par journée</li>
+          <li>Véhicule — train ou bus — positionné sur la journée en cours</li>
+          <li>Avance automatique du véhicule au fil des jours</li>
+          <li>Distinction visuelle des étapes passées, en cours et à venir</li>
+          <li>Étape cliquable ouvrant le détail complet de la journée</li>
+          <li>Animation d'arrivée sur une nouvelle étape</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>La roadmap se charge en moins de 5 secondes sur un téléphone d'entrée de gamme</li>
+          <li>Le véhicule est positionné sur la bonne journée sans intervention manuelle</li>
+          <li>L'animation respecte la préférence système de réduction du mouvement</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission">
+    <div class="mission-tete"><span class="mission-ref">M4.3</span><h4>Version 2D dégradée</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>La même information, sans 3D, pour les appareils modestes et les réseaux faibles. Développée en même temps que la 3D, jamais après.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Frise 2D horizontale avec les mêmes étapes</li>
+          <li>Même contenu au clic, même détail de journée</li>
+          <li>Bascule automatique selon les capacités de l'appareil</li>
+          <li>Bascule manuelle possible</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>La bascule est automatique, l'utilisateur n'a rien à choisir</li>
+          <li>Aucune information disponible en 3D n'est absente de la version 2D</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission">
+    <div class="mission-tete"><span class="mission-ref">M4.4</span><h4>Agenda, suivi et compte-rendu</h4><span class="tag should">Important</span></div>
+    <div class="mission-corps">
+      <p>La roadmap devient l'album du camp.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Vue liste et vue semaine</li>
+          <li>Filtrage par unité et par responsable</li>
+          <li>Impression sur A4 et export</li>
+          <li>Ajout de photos et d'un compte-rendu après chaque journée</li>
+          <li>Consultation publique optionnelle, reliée au site vitrine</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>L'agenda s'imprime correctement, lisible sans couleur</li>
+          <li>Un chef d'unité peut imprimer uniquement le programme de son unité</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- P5 -->
+<section class="bloc reveal" id="p5">
+  <div class="bloc-tete"><span class="bloc-num">Projet P5</span><h2 class="bloc-titre">Site vitrine et Bus volant</h2></div>
+  <p class="chapeau">Objectif : donner au GST une présence publique complète, et matérialiser les inscriptions par une place visible dans un bus suspendu dans le ciel.</p>
+
+  <div class="mission">
+    <div class="mission-tete"><span class="mission-ref">M5.1</span><h4>Site vitrine du GST</h4><span class="tag should">Important</span></div>
+    <div class="mission-corps">
+      <p>La présentation complète du groupe, dans son ensemble et dans ses sections.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Accueil : identité, valeurs, appel à rejoindre</li>
+          <li>Histoire du groupe</li>
+          <li>Les unités et les tranches d'âge</li>
+          <li>Activités et calendrier de l'année</li>
+          <li>Galerie photo et vidéo, organisée par camp</li>
+          <li>Actualités et annonces</li>
+          <li>Publication des bilans de retour issus du projet P1</li>
+          <li>Contact et formulaire d'adhésion</li>
+          <li>Espace parents et familles</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Le site se charge en moins de 3 secondes sur connexion mobile lente</li>
+          <li>Aucune donnée nominative sensible n'est accessible publiquement</li>
+          <li>Le site est lisible et navigable sur téléphone</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission">
+    <div class="mission-tete"><span class="mission-ref">M5.2</span><h4>Inscription en ligne</h4><span class="tag should">Important</span></div>
+    <div class="mission-corps">
+      <p>Le pont entre le public et la plateforme interne.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Formulaire d'inscription à un camp ouvert</li>
+          <li>Création automatique de la Personne et de l'Inscription dans le socle</li>
+          <li>Attribution d'un siège dans le bus</li>
+          <li>Mise à jour automatique de l'effectif du camp — donc de tous les calculs logistiques</li>
+          <li>Espace « Mon inscription » : statut, montant payé, reste dû</li>
+          <li>Fermeture automatique quand l'effectif maximum est atteint</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Une inscription publique augmente l'effectif et recalcule les besoins logistiques</li>
+          <li>Le siège attribué est unique et non réattribuable</li>
+          <li>Les inscriptions se ferment automatiquement à effectif plein</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M5.3</span><h4>Bus volant 3D</h4><span class="tag could">Souhaité</span></div>
+    <div class="mission-corps">
+      <p>La pièce qui fera parler du projet : un bus 3D suspendu dans le ciel, dans un cadre défini, naviguant au-dessus d'une carte, où chaque siège rempli représente une inscription.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Bus 3D suspendu, animé, navigable</li>
+          <li>Sièges représentant les places du camp</li>
+          <li>Noms des inscrits affichés sur les sièges occupés</li>
+          <li>Quatre états visuels : libre, réservé, partiellement payé, garanti</li>
+          <li>Décollage du bus quand l'effectif est atteint</li>
+          <li>Compteur de places restantes</li>
+          <li>Version 2D dégradée pour appareils modestes</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Un paiement enregistré en comptabilité change l'état du siège dans la minute</li>
+          <li><strong>Le statut de paiement n'est visible que par la personne concernée et les responsables</strong> — testé avec un compte public</li>
+          <li>La version 2D affiche les mêmes places et les mêmes noms</li>
+        </ul>
+      </div>
+      <div class="acceptation" style="border-top-style:solid;border-top-color:var(--rouge)"><span class="lot-titre" style="color:var(--rouge)">Contrainte de dignité</span>
+        <ul><li>Aucun affichage public ne doit permettre d'identifier qui n'a pas payé. Cette contrainte prime sur l'effet visuel.</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- P6 -->
+<section class="bloc reveal" id="p6">
+  <div class="bloc-tete"><span class="bloc-num">Projet P6</span><h2 class="bloc-titre">Données et intelligence</h2></div>
+  <p class="chapeau">Objectif : faire en sorte que la plateforme se souvienne et se mette à jour, pour que les calculs ne soient jamais faux parce qu'ils reposent sur des chiffres périmés.</p>
+
+  <div class="mission critique">
+    <div class="mission-tete"><span class="mission-ref">M6.1</span><h4>Mémoire du GST et base de références</h4><span class="tag must">Indispensable</span></div>
+    <div class="mission-corps">
+      <p>Les chiffres réels de nos expériences passées, enregistrés à trois niveaux : alimentaire, transport, matériel.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Champs de saisie des chiffres des camps antérieurs, même ceux d'avant la plateforme</li>
+          <li>Versement automatique des chiffres réels de chaque camp clôturé</li>
+          <li>Consultation par article, par poste, par type de camp</li>
+          <li>Ratios de référence : coût moyen par personne et par jour, par type de camp</li>
+          <li>Modèles de camp réutilisables, construits sur un camp passé</li>
+          <li>Proposition automatique d'estimation à l'ouverture d'un nouveau camp</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li>Le bilan d'un camp clôturé alimente effectivement la base, sans saisie manuelle</li>
+          <li>Créer un camp à partir d'un modèle reprend au moins 80 % du recensement</li>
+          <li>Le ratio coût par personne et par jour est calculé pour chaque type de camp</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="mission">
+    <div class="mission-tete"><span class="mission-ref">M6.2</span><h4>Hook intelligent des prix</h4><span class="tag could">Souhaité</span></div>
+    <div class="mission-corps">
+      <p>La recherche automatique de prix, filtrée, et toujours validée par un humain avant d'entrer dans un calcul.</p>
+      <div class="lot"><span class="lot-titre">Contenu</span>
+        <ul>
+          <li>Recherche périodique sur des sources définies : transport, denrées, carburant</li>
+          <li>Filtrage et nettoyage des résultats</li>
+          <li>File de suggestions, avec la source et la date de chaque proposition</li>
+          <li>Validation humaine : accepter, corriger, rejeter</li>
+          <li>Alertes : prix périmé de plus de six mois, écart anormal avec la base, saisonnalité</li>
+          <li>Correction de la base à partir des prix réellement payés sur le terrain</li>
+        </ul>
+      </div>
+      <div class="acceptation"><span class="lot-titre">Critères d'acceptation</span>
+        <ul>
+          <li><strong>Un prix aberrant injecté dans la file n'affecte aucun budget tant qu'il n'est pas validé</strong> — testé explicitement</li>
+          <li>Chaque suggestion affiche sa source et permet de la vérifier</li>
+          <li>Les alertes de prix périmé apparaissent sur les recensements concernés</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ENF -->
+<section class="bloc reveal" id="enf">
+  <div class="bloc-tete"><span class="bloc-num">Section 2</span><h2 class="bloc-titre">Exigences non fonctionnelles</h2></div>
+  <p class="chapeau">Ce qui n'apparaît sur aucun écran mais conditionne l'usage réel. Ces exigences s'appliquent à tous les projets.</p>
+
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:9%">Réf.</th><th style="width:24%">Exigence</th><th>Détail et vérification</th></tr></thead>
+      <tbody>
+        <tr><td class="id">ENF-01</td><td><strong>Mobile d'abord</strong></td><td>Tous les écrans utilisables sur un écran de 360 pixels de large. Zones tactiles d'au moins 44 pixels. Vérifié sur un téléphone réel d'entrée de gamme.</td></tr>
+        <tr><td class="id">ENF-02</td><td><strong>Performance en réseau faible</strong></td><td>Chargement d'un écran en moins de 3 secondes sur connexion lente. Poids initial sous 500 Ko hors modules 3D.</td></tr>
+        <tr><td class="id">ENF-03</td><td><strong>Fonctionnement hors ligne</strong></td><td>Saisie de dépenses, inventaire, ressources cuisine, pointage et vote fonctionnent sans réseau. Synchronisation automatique au retour. Testé sur le terrain avant le camp pilote.</td></tr>
+        <tr><td class="id">ENF-04</td><td><strong>Lisibilité en extérieur</strong></td><td>Contraste conforme au niveau AA. Texte lisible en plein soleil. Pas d'information portée uniquement par la couleur.</td></tr>
+        <tr><td class="id">ENF-05</td><td><strong>Accessibilité</strong></td><td>Navigation au clavier, focus visible, alternatives textuelles aux images, respect de la préférence de réduction du mouvement.</td></tr>
+        <tr><td class="id">ENF-06</td><td><strong>Protection des données de mineurs</strong></td><td>Fiches sanitaires, coordonnées et statuts de paiement strictement internes. Aucune de ces données dans un module public. Vérifié par tentative d'accès public.</td></tr>
+        <tr><td class="id">ENF-07</td><td><strong>Traçabilité</strong></td><td>Toute modification d'un montant ou d'une quantité est journalisée avec auteur et horodatage. Le journal est inaltérable.</td></tr>
+        <tr><td class="id">ENF-08</td><td><strong>Sauvegarde et restauration</strong></td><td>Sauvegarde automatique quotidienne. Restauration complète testée au moins une fois avant le camp pilote.</td></tr>
+        <tr><td class="id">ENF-09</td><td><strong>Export sans dépendance</strong></td><td>Budget, recensement, programme et bilan exportables dans un format lisible sans la plateforme.</td></tr>
+        <tr><td class="id">ENF-10</td><td><strong>Langue et monnaie</strong></td><td>Interface en français. Monnaie de référence : franc CFA. Multi-devises avec taux saisi manuellement pour les jamborees internationaux.</td></tr>
+        <tr><td class="id">ENF-11</td><td><strong>Extensibilité fonctionnelle</strong></td><td>Un responsable habilité peut ajouter une catégorie de besoin, un article, un plat, un poste, sans intervention technique.</td></tr>
+        <tr><td class="id">ENF-12</td><td><strong>Une seule vérité</strong></td><td>Un chiffre naît en un seul endroit et circule. La comptabilité ne fabrique jamais de chiffre logistique.</td></tr>
+        <tr><td class="id">ENF-13</td><td><strong>Reprise après incident</strong></td><td>Une coupure pendant une saisie ne perd pas les données déjà entrées.</td></tr>
+        <tr><td class="id">ENF-14</td><td><strong>Documentation utilisateur</strong></td><td>Un guide court par rôle, illustré, imprimable, remis lors de la formation.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- CONTRAINTES -->
+<section class="bloc reveal" id="contraintes">
+  <div class="bloc-tete"><span class="bloc-num">Section 3</span><h2 class="bloc-titre">Contraintes du projet</h2></div>
+
+  <h3>Contraintes de terrain</h3>
+  <ul>
+    <li>Le camp se tient souvent sans réseau fiable et sans électricité continue</li>
+    <li>Les utilisateurs de terrain sont fatigués, pressés, parfois les mains sales</li>
+    <li>Le matériel utilisé est majoritairement des téléphones personnels d'entrée de gamme</li>
+    <li>Le papier reste le recours de secours et doit toujours être possible</li>
+  </ul>
+
+  <h3>Contraintes humaines</h3>
+  <ul>
+    <li>Équipe bénévole, disponibilité variable — d'où le découpage en missions courtes et indépendantes</li>
+    <li>Les utilisateurs ne sont pas des informaticiens : chaque écran doit être compréhensible sans formation longue</li>
+    <li>Le turnover des responsables scouts impose que la plateforme soit reprenable par un nouveau venu</li>
+  </ul>
+
+  <h3>Contraintes budgétaires</h3>
+  <ul>
+    <li>Aucune fonctionnalité de terrain ne doit dépendre d'un service externe payant</li>
+    <li>Les coûts d'hébergement doivent rester compatibles avec le budget d'une association scoute</li>
+    <li>La base de prix est construite par le groupe lui-même, pas achetée</li>
+  </ul>
+
+  <div class="note alerte">
+    <span class="etiq">Contrainte de calendrier</span>
+    <p>La date du camp pilote, fixée en phase de cadrage, est <strong>non négociable</strong>. Si le calendrier se tend, on réduit le périmètre — jamais la date. Un logiciel de camp qui rate son camp perd une année entière.</p>
+  </div>
+</section>
+
+<!-- LIVRABLES -->
+<section class="bloc reveal" id="livrables">
+  <div class="bloc-tete"><span class="bloc-num">Section 4</span><h2 class="bloc-titre">Livrables attendus</h2></div>
+
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:28%">Livrable</th><th style="width:20%">Échéance</th><th>Contenu</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Note de cadrage</strong></td><td class="mono">Fin phase 00</td><td>Réponses aux six points à trancher, date du camp pilote, composition de l'équipe, pile technique retenue</td></tr>
+        <tr><td><strong>Charte graphique et composants</strong></td><td class="mono">Fin P0</td><td>Couleurs, typographies, composants réutilisables, règles d'ergonomie de terrain</td></tr>
+        <tr><td><strong>Base de prix initiale</strong></td><td class="mono">Fin P0</td><td>Minimum 150 articles avec prix, marché et date de relevé</td></tr>
+        <tr><td><strong>Plateforme MVP</strong></td><td class="mono">Fin P2</td><td>Socle, logistique noyau, comptabilité. Un camp complet peut être préparé et suivi.</td></tr>
+        <tr><td><strong>Plateforme V1</strong></td><td class="mono">Fin P3 + M1.6→M1.10</td><td>Dix groupes logistiques, cuisine complète, hors ligne, inventaire, bilan</td></tr>
+        <tr><td><strong>Plateforme V2</strong></td><td class="mono">Fin P4, P5, P6</td><td>Roadmap 3D, site vitrine, bus volant, hook des prix</td></tr>
+        <tr><td><strong>Guides utilisateur</strong></td><td class="mono">Avant camp pilote</td><td>Un guide court et illustré par rôle, imprimable</td></tr>
+        <tr><td><strong>Documentation technique</strong></td><td class="mono">Continu</td><td>Modèle de données, API, procédure de sauvegarde et de restauration, procédure de déploiement</td></tr>
+        <tr><td><strong>Rapport de camp pilote</strong></td><td class="mono">J+10 du pilote</td><td>Mesures, carnet d'observation, liste de corrections priorisées</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- RECETTE -->
+<section class="bloc reveal" id="recette">
+  <div class="bloc-tete"><span class="bloc-num">Section 5</span><h2 class="bloc-titre">Recette et réception</h2></div>
+  <p class="chapeau">Comment on valide une mission, un projet, et l'ensemble.</p>
+
+  <h3>Recette d'une mission</h3>
+  <ol>
+    <li>Le développeur déclare la mission terminée</li>
+    <li>Un <strong>recetteur qui n'a pas développé la mission</strong> déroule tous les critères d'acceptation, un par un</li>
+    <li>Chaque critère est marqué conforme ou non conforme, avec une capture ou une note</li>
+    <li>Un seul critère non conforme renvoie la mission en correction</li>
+    <li>Une mission recettée est marquée validée et datée</li>
+  </ol>
+
+  <h3>Recette d'un projet</h3>
+  <p>Un projet est reçu quand toutes ses missions indispensables sont validées, que les exigences non fonctionnelles applicables sont vérifiées, et qu'un <strong>parcours de bout en bout</strong> a été déroulé avec des données réelles d'un camp passé.</p>
+
+  <h3>Réception générale</h3>
+  <p>Le GST Government est réceptionné quand :</p>
+  <ul>
+    <li>Un camp réel a été intégralement préparé, vécu et clôturé dans la plateforme</li>
+    <li>L'écart entre budget prévu et budget réel est inférieur à 15 %</li>
+    <li>Plus de 90 % des dépenses du camp ont été saisies dans la plateforme</li>
+    <li>Le bilan de retour a été produit et publié</li>
+    <li>Les chiffres du camp ont alimenté la base de références</li>
+    <li>Tous les responsables formés ont utilisé leur module sans assistance</li>
+  </ul>
+
+  <div class="note regle">
+    <span class="etiq">Le vrai critère</span>
+    <p>Au camp suivant, un responsable ouvre la plateforme avant d'ouvrir son carnet. C'est le seul critère de réception qui ne se coche pas sur une liste — et c'est celui qui compte.</p>
+  </div>
+</section>
+
+<!-- MATRICE -->
+<section class="bloc reveal" id="matrice">
+  <div class="bloc-tete"><span class="bloc-num">Section 6</span><h2 class="bloc-titre">Matrice de dépendances</h2></div>
+  <p class="chapeau">Quelle mission ne peut pas commencer avant quelle autre. À lire avant d'attribuer les missions.</p>
+
+  <div class="tableau-wrap">
+    <table>
+      <thead><tr><th style="width:12%">Mission</th><th style="width:30%">Dépend de</th><th>Raison</th></tr></thead>
+      <tbody>
+        <tr><td class="id">M1.1</td><td class="mono">M0.3, M0.4</td><td>Le recensement a besoin d'un camp et de la base de prix</td></tr>
+        <tr><td class="id">M1.2 à M1.7</td><td class="mono">M1.1</td><td>Tous les groupes reposent sur le moteur de recensement</td></tr>
+        <tr><td class="id">M1.3</td><td class="mono">M3.4 (optionnel)</td><td>Le groupe Alimentaire reçoit du menu, mais reste utilisable en saisie manuelle</td></tr>
+        <tr><td class="id">M1.5</td><td class="mono">M1.2, M1.3, M1.4</td><td>La consolidation a besoin d'au moins trois groupes à agréger</td></tr>
+        <tr><td class="id">M1.8</td><td class="mono">M0.4, M1.1</td><td>L'inventaire alimente le champ « disponible » des recensements</td></tr>
+        <tr><td class="id">M1.10</td><td class="mono">M1.8, ENF-03</td><td>Le pointage de retour met à jour l'inventaire et doit fonctionner hors ligne</td></tr>
+        <tr><td class="id">M2.1</td><td class="mono">M1.5</td><td>Le prévisionnel vient de la consolidation économique</td></tr>
+        <tr><td class="id">M2.2</td><td class="mono">M2.1, M4.1 ou activités minimales</td><td>Une dépense doit se rattacher à un poste et à une activité</td></tr>
+        <tr><td class="id">M2.3</td><td class="mono">M0.2</td><td>Les participations se rattachent à des personnes</td></tr>
+        <tr><td class="id">M2.4</td><td class="mono">M2.1, M2.2</td><td>Les courbes comparent le prévu et le réel</td></tr>
+        <tr><td class="id">M2.7</td><td class="mono">M2.2, M2.3, M6.1</td><td>Le bilan agrège tout et verse dans la base de références</td></tr>
+        <tr><td class="id">M3.1</td><td class="mono">M0.4</td><td>Chaque ingrédient est un article de la base de prix</td></tr>
+        <tr><td class="id">M3.2</td><td class="mono">M3.1, M0.1</td><td>Les jeunes choisissent dans le catalogue, avec leur propre compte</td></tr>
+        <tr><td class="id">M3.3</td><td class="mono">M3.2</td><td>Les taux se calculent sur les choix et propositions</td></tr>
+        <tr><td class="id">M3.4</td><td class="mono">M3.3, M1.3</td><td>Le menu arrêté alimente le groupe Alimentaire</td></tr>
+        <tr><td class="id">M3.5</td><td class="mono">M3.4, ENF-03</td><td>La suggestion live suppose un stock connu et fonctionne hors ligne</td></tr>
+        <tr><td class="id">M4.1</td><td class="mono">M0.3</td><td>Le programme se construit sur les dates du camp</td></tr>
+        <tr><td class="id">M4.2</td><td class="mono">M4.1</td><td>Le circuit 3D affiche le programme saisi</td></tr>
+        <tr><td class="id">M4.3</td><td class="mono">M4.2</td><td>La version dégradée reprend le même contenu</td></tr>
+        <tr><td class="id">M5.2</td><td class="mono">M0.2, M0.3</td><td>Une inscription crée une personne rattachée à un camp</td></tr>
+        <tr><td class="id">M5.3</td><td class="mono">M5.2, M2.3</td><td>Le bus reflète les inscriptions et les paiements</td></tr>
+        <tr><td class="id">M6.1</td><td class="mono">M2.7</td><td>La base de références se remplit à la clôture d'un camp</td></tr>
+        <tr><td class="id">M6.2</td><td class="mono">M0.4, M6.1</td><td>Le hook corrige la base de prix et s'appuie sur l'historique</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note">
+    <span class="etiq">Missions parallélisables</span>
+    <p>Une fois M0.1 à M0.4 livrées, les missions <span class="tag">M1.2</span> <span class="tag">M1.4</span> <span class="tag">M1.6</span> <span class="tag">M1.7</span> <span class="tag">M3.1</span> <span class="tag">M5.1</span> peuvent être menées en parallèle par des personnes différentes. C'est le moment où le projet peut accélérer le plus si l'équipe est disponible.</p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer class="pied">
+  <div>
+    <span><strong>GST GOVERNMENT</strong> — Cahier des charges · Version 1.0</span>
+    <span>Groupe Scout Tonnerre · Association Scoute du Togo</span>
+    <span>Document 3 sur 3</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduit = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var cibles = document.querySelectorAll('.reveal');
+  if(reduit || !('IntersectionObserver' in window)){cibles.forEach(function(e){e.classList.add('vu')});return;}
+  var obs = new IntersectionObserver(function(entrees){
+    entrees.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vu'); obs.unobserve(e.target); } });
+  },{rootMargin:'0px 0px -60px 0px'});
+  cibles.forEach(function(e){obs.observe(e)});
+})();
+</script>
+</body>
+</html>
