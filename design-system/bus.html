@@ -4,86 +4,85 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Bus volant — GST Government</title>
-<meta name="description" content="Le Bus du Tonnerre : chaque siège est une inscription au Camp de Réjouissance 2026. Quand l'effectif est atteint, le bus décolle.">
+<meta name="description" content="Le Bus du Tonnerre : chaque siège est une inscription au Camp de Réjouissance 2026. Chaque inscription gonfle la grappe de ballons ; quand le bus est plein, il décolle.">
 <script>try{var t=localStorage.getItem("gst-theme");if(t&&t!=="jour")document.documentElement.setAttribute("data-theme",t);if(localStorage.getItem("gst-motion")==="reduce")document.documentElement.setAttribute("data-motion","reduce")}catch(e){}</script>
 <link rel="stylesheet" href="tokens/gst-tokens.css">
 <link rel="stylesheet" href="assets/css/gst.css">
 <link rel="stylesheet" href="assets/css/doc.css">
 <style>
-.bus-stage{position:relative;padding:var(--gst-space-5) var(--gst-grid-margin) var(--gst-space-6);background:var(--gst-bg-canvas);display:grid;place-items:center}
-.bus-frame{position:relative;width:min(100%,1320px);aspect-ratio:16/9.4;max-height:calc(100vh - 120px);border:var(--gst-frame-poster) solid var(--gst-bg-frame);background:var(--gst-sky-day-1);overflow:hidden;
-  --b-ink:var(--gst-ink);--b-sub:var(--gst-ink-70)}
-@media (max-width:899px){.bus-frame{aspect-ratio:auto;height:calc(100vh - 110px);min-height:640px;border-width:var(--gst-frame-viewport)}}
-.bus-frame[data-sky="nuit"]{--b-ink:var(--gst-cream);--b-sub:var(--gst-teal-100);background:var(--gst-sky-night-1)}
+.bus-stage{position:relative;padding:var(--gst-space-4) var(--gst-space-4) var(--gst-space-6)}
+.bus-frame{position:relative;width:100%;height:calc(100vh - 64px - 2 * var(--gst-frame-viewport) - var(--gst-space-4) * 2);min-height:620px;border-radius:var(--gst-radius-2xl);overflow:hidden;background:#CFE5E2;box-shadow:var(--gst-shadow-lift)}
 .bus-frame canvas{position:absolute;inset:0;width:100%;height:100%;outline:none;touch-action:none;cursor:grab}
-.bus-ui{position:absolute;inset:0;pointer-events:none;z-index:3;display:grid;grid-template-rows:auto 1fr auto;padding:var(--gst-space-4)}
-@media (min-width:900px){.bus-ui{padding:var(--gst-space-5) var(--gst-space-6)}}
-.bus-ui button,.bus-ui a,.bus-ui [role="group"],.bus-ui label{pointer-events:auto}
+.bus-flash{position:absolute;inset:0;z-index:2;background:#FFFDF0;opacity:0;pointer-events:none;mix-blend-mode:screen}
+.bus-glass{background:var(--gst-glass);-webkit-backdrop-filter:blur(18px) saturate(1.3);backdrop-filter:blur(18px) saturate(1.3);border-radius:var(--gst-radius-xl);box-shadow:var(--gst-shadow-md),inset 0 0 0 1px rgba(255,255,255,.3)}
+.bus-ui{position:absolute;inset:0;pointer-events:none;z-index:3;display:grid;grid-template-rows:auto 1fr auto;grid-template-columns:minmax(0,1fr);padding:var(--gst-space-4)}
+@media (min-width:900px){.bus-ui{padding:var(--gst-space-5)}}
+.bus-ui button,.bus-ui a,.bus-ui [role="group"],.bus-ui label,.bus-glass{pointer-events:auto}
 .bus-top{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--gst-space-4)}
-.bus-title{background:var(--gst-bg-panel);border:var(--gst-border) solid var(--gst-line-brand);padding:14px 18px 16px;pointer-events:auto}
-.bus-title .gst-tag{color:var(--gst-text-secondary)}
-.bus-title h1{margin:6px 0 0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-lg);line-height:.84;color:var(--gst-text-primary)}
-.bus-title p{margin:8px 0 0;font-family:var(--gst-font-serif);font-style:italic;color:var(--gst-text-secondary);max-width:28ch}
-.bus-sheet{background:var(--gst-bg-panel);border:var(--gst-border) solid var(--gst-line-brand);padding:14px 16px;display:flex;flex-direction:column;gap:10px;min-width:220px;pointer-events:auto}
+.bus-title{padding:var(--gst-space-4) var(--gst-space-5);max-width:420px}
+.bus-title h1{margin:6px 0 0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:.88}
+.bus-title p{margin:8px 0 0;font-family:var(--gst-font-serif);font-style:italic;color:var(--gst-text-secondary);max-width:32ch}
+.bus-sheet{padding:var(--gst-space-4) var(--gst-space-5);display:flex;flex-direction:column;gap:12px;min-width:250px}
 .bus-sheet .gst-spec{grid-template-columns:auto 1fr;gap:6px 14px}
 .bus-sheet .gst-spec dd{text-align:right;font-size:var(--gst-fs-label)}
-.bus-count{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
-.bus-count b{font-family:var(--gst-font-display);font-weight:400;font-size:4.2rem;line-height:.85;color:var(--gst-accent-text)}
+.bus-count{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.bus-count b{font-family:var(--gst-font-display);font-weight:400;font-size:4rem;line-height:.85;color:var(--gst-accent-text)}
+.bus-lift{display:flex;flex-direction:column;gap:6px}
+.bus-lift .gst-gauge__bar{height:8px}
 .bus-bottom{display:flex;justify-content:space-between;align-items:flex-end;gap:var(--gst-space-4);flex-wrap:wrap}
-.bus-ctl{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.bus-ctl{display:flex;flex-direction:column;gap:10px;align-items:flex-start;padding:var(--gst-space-3) var(--gst-space-4)}
 .bus-ctl .doc-row{gap:6px}
-.bus-ctl .gst-btn{background:var(--gst-bg-panel)}
-.bus-ctl .gst-seg{background:var(--gst-bg-panel)}
-.bus-cta{box-shadow:var(--gst-shadow-lift)}
-.bus-hint{font-family:var(--gst-font-mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gst-text-secondary);background:var(--gst-bg-panel);padding:3px 7px}
-.bus-tip{position:absolute;z-index:4;left:0;top:0;pointer-events:none;opacity:0;transform:translate(-50%,-120%);transition:opacity var(--gst-dur-fast) var(--gst-ease-snap);
-  background:var(--gst-bg-panel);border:var(--gst-border) solid var(--gst-text-primary);padding:6px 10px;font-family:var(--gst-font-mono);font-size:11px;letter-spacing:.08em;white-space:nowrap;color:var(--gst-text-primary)}
+.bus-ctl .gst-seg{background:var(--gst-bg-sunken)}
+.bus-cta{box-shadow:0 18px 40px -16px var(--gst-accent)}
+.bus-tip{position:absolute;z-index:4;left:0;top:0;pointer-events:none;opacity:0;transform:translate(-50%,-125%);transition:opacity var(--gst-dur-fast) var(--gst-ease-snap);
+  background:var(--gst-bg-ink);color:var(--gst-bg-panel);border-radius:var(--gst-radius-pill);padding:7px 14px;font-family:var(--gst-font-mono);font-size:11px;letter-spacing:.08em;white-space:nowrap;box-shadow:var(--gst-shadow-md)}
 .bus-tip.is-on{opacity:1}
 .bus-names{position:absolute;inset:0;pointer-events:none;z-index:2}
-.bus-name{position:absolute;left:0;top:0;transform:translate(-50%,-100%);font-family:var(--gst-font-mono);font-size:11px;letter-spacing:.12em;padding:3px 7px;background:var(--gst-bg-panel);border:var(--gst-border) solid var(--gst-line-brand);color:var(--gst-text-primary);white-space:nowrap}
+.bus-name{position:absolute;left:0;top:0;transform:translate(-50%,-100%);font-family:var(--gst-font-mono);font-size:11px;letter-spacing:.12em;padding:5px 11px;border-radius:var(--gst-radius-pill);background:var(--gst-bg-panel);box-shadow:var(--gst-shadow-md),inset 0 0 0 1.5px var(--gst-brand);color:var(--gst-text-primary);white-space:nowrap}
+.bus-camp{position:absolute;left:0;top:0;z-index:2;pointer-events:none;transition:opacity var(--gst-dur-base)}
+.bus-camp span{display:inline-flex;align-items:center;gap:6px;font-family:var(--gst-font-mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;padding:5px 11px;border-radius:var(--gst-radius-pill);background:var(--gst-accent);color:var(--gst-on-accent);box-shadow:var(--gst-shadow-md)}
+.bus-camp.is-hidden{opacity:0}
 .bus-count3{position:absolute;inset:0;z-index:6;display:grid;place-items:center;pointer-events:none}
-.bus-count3 span{font-family:var(--gst-font-display);font-size:min(46vh,24rem);line-height:.8;color:var(--gst-red-500);-webkit-text-stroke:8px var(--gst-cream);paint-order:stroke fill;opacity:0}
-.bus-moi{position:absolute;z-index:5;right:var(--gst-space-5);top:50%;transform:translate(calc(100% + 60px),-50%);width:min(340px,calc(100% - 32px));background:var(--gst-bg-panel);border:var(--gst-border) solid var(--gst-line-brand);box-shadow:var(--gst-shadow-lift);padding:18px;display:flex;flex-direction:column;gap:12px;
+.bus-count3 span{font-family:var(--gst-font-display);font-size:min(46vh,24rem);line-height:.8;color:var(--gst-red-500);-webkit-text-stroke:8px var(--gst-cream);paint-order:stroke fill;opacity:0;text-shadow:0 20px 60px rgba(3,39,38,.35)}
+.bus-moi{position:absolute;z-index:5;right:var(--gst-space-5);top:50%;transform:translate(calc(100% + 60px),-50%);width:min(340px,calc(100% - 32px));padding:20px;display:flex;flex-direction:column;gap:12px;
   transition:transform var(--gst-dur-base) var(--gst-ease-tonnerre);pointer-events:auto}
 .bus-moi.is-open{transform:translate(0,-50%)}
-@media (max-width:899px){.bus-moi{top:auto;bottom:90px;right:16px;transform:translateY(calc(100% + 120px))}.bus-moi.is-open{transform:none}}
+@media (max-width:899px){.bus-moi{top:auto;bottom:90px;right:16px;transform:translateY(calc(100% + 140px))}.bus-moi.is-open{transform:none}}
 .bus-moi h3{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:2rem;line-height:.9}
-.bus-2d{position:absolute;inset:0;z-index:1;display:none;align-items:center;justify-content:center}
+.bus-2d{position:absolute;inset:0;z-index:1;display:none;align-items:center;justify-content:center;background:linear-gradient(180deg,#93C8C4,#E7F2F1)}
 .bus-frame.is-2d .bus-2d{display:flex}
-.bus-frame.is-2d canvas{display:none}
-.bus-2d svg{height:78%;max-width:92%;overflow:visible}
-.seat2d{stroke:var(--b-ink);stroke-width:1.2}
-.seat2d.free{fill:none}
-.seat2d.res{fill:var(--gst-cream);stroke-dasharray:3 2}
-.seat2d.occ,.seat2d.gar{fill:var(--gst-teal-500)}
+.bus-frame.is-2d canvas,.bus-frame.is-2d .bus-camp{display:none}
+.bus-2d svg{height:78%;max-width:92%;overflow:visible;filter:drop-shadow(0 24px 40px rgba(3,39,38,.25))}
+.seat2d{stroke:var(--gst-teal-700);stroke-width:1.2}
+.seat2d.free{fill:var(--gst-bg-panel);stroke-dasharray:3 2}
+.seat2d.res{fill:var(--gst-stone)}
+.seat2d.occ,.seat2d.gar{fill:var(--gst-teal-500);stroke:none}
 .seat2d.part{fill:var(--gst-cream)}
-.seat2d.me{stroke:var(--gst-red-500);stroke-width:3}
-.manifest{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:var(--gst-border) solid var(--gst-text-primary)}
+.seat2d.me{stroke:var(--gst-red-500);stroke-width:3;stroke-dasharray:none}
+.manifest{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
 @media (min-width:640px){.manifest{grid-template-columns:repeat(4,1fr)}}
 @media (min-width:1100px){.manifest{grid-template-columns:repeat(8,1fr)}}
-.manifest>div{display:flex;align-items:center;gap:8px;padding:8px 6px 8px 0;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);font-family:var(--gst-font-mono);font-size:11.5px;min-width:0}
+.manifest>div{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:var(--gst-radius-md);background:var(--gst-bg-panel);box-shadow:inset 0 0 0 1px var(--gst-line-soft);font-family:var(--gst-font-mono);font-size:11.5px;min-width:0}
 .manifest>div span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .manifest .gst-seat{width:26px;height:30px;font-size:8px;flex:none}
 .form-grid{display:grid;gap:14px}
-.bus-ui{grid-template-columns:minmax(0,1fr)}
 @media (max-width:899px){
-  .bus-stage{padding:var(--gst-space-3) var(--gst-space-3) var(--gst-space-5)}
+  .bus-stage{padding:var(--gst-space-2) var(--gst-space-2) var(--gst-space-5)}
+  .bus-frame{border-radius:var(--gst-radius-xl);height:calc(100vh - 80px);min-height:600px}
   .bus-ui{padding:10px}
   .bus-top{flex-direction:column;align-items:stretch;gap:8px}
-  .bus-title{padding:10px 12px}
+  .bus-title{padding:10px 14px;max-width:none}
   .bus-title p,.bus-title .gst-tag{display:none}
-  .bus-title h1{font-size:2.1rem;margin:0}
+  .bus-title h1{font-size:2rem;margin:0}
   .bus-title h1 br{display:none}
-  .bus-sheet{min-width:0;padding:8px 12px}
-  .bus-sheet .gst-spec{display:none}
+  .bus-sheet{min-width:0;padding:10px 14px}
+  .bus-sheet .gst-spec,.bus-lift{display:none}
   .bus-count b{font-size:2.6rem}
-  .bus-count .gst-label br{display:none}
   .bus-bottom{flex-direction:column;align-items:stretch;gap:8px}
-  .bus-ctl{align-items:stretch}
+  .bus-ctl{align-items:stretch;padding:10px}
   .bus-ctl .doc-row{flex-wrap:wrap}
-  .bus-ctl .gst-seg button{padding:0 9px;font-size:9.5px;letter-spacing:.1em}
-  .bus-ctl .gst-btn--sm{padding:0 10px;font-size:10px;letter-spacing:.06em}
-  .bus-hint{display:none}
+  .bus-ctl .gst-seg button{padding:0 9px;font-size:9.5px;letter-spacing:.08em}
+  .bus-ctl .gst-btn--sm{padding:0 10px;font-size:10px;letter-spacing:.05em}
   .bus-cta{width:100%}
 }
 </style>
@@ -91,37 +90,40 @@
 <body>
 <section class="bus-stage" aria-label="Le Bus du Tonnerre">
   <div class="bus-frame" id="bf">
-    <canvas tabindex="0" aria-label="Bus volant 3D : 80 sièges. Glisser pour tourner autour du bus. La liste des places est disponible sous la scène."></canvas>
+    <canvas tabindex="0" aria-label="Bus volant 3D : 80 sièges sous une grappe de ballons. Glisser pour tourner. La liste des places est disponible sous la scène."></canvas>
     <div class="bus-2d" aria-label="Plan des sièges vu de dessus"></div>
     <div class="bus-names" aria-hidden="true"></div>
+    <div class="bus-camp" data-camp aria-hidden="true"><span><svg class="gst-icon gst-icon--sm"><use href="#i-tent"/></svg>Attikoumé · le camp</span></div>
     <div class="bus-tip" role="status" aria-live="polite"></div>
+    <div class="bus-flash" data-flash aria-hidden="true"></div>
     <div class="bus-count3" aria-hidden="true"><span></span></div>
     <div class="bus-ui">
       <div class="bus-top">
-        <div class="bus-title"><span class="gst-tag" data-b-tag>.06 / LE BUS DU TONNERRE · CAMP DE RÉJOUISSANCE 2026</span><h1>Le bus <br>du Tonnerre</h1><p>Chaque siège est une inscription. Quand le bus est plein, il décolle.</p></div>
-        <div class="bus-sheet">
-          <div class="bus-count"><span class="gst-label">Places <br>restantes</span><b data-left aria-live="polite">23</b></div>
+        <div class="bus-glass bus-title"><span class="gst-tag gst-tag--accent" data-b-tag>.06 / LE BUS DU TONNERRE · RÉJOUISSANCE 2026</span><h1>Le bus <br>du Tonnerre</h1><p>Chaque siège est une inscription. Chaque inscription gonfle les ballons. Quand le bus est plein, il décolle.</p></div>
+        <div class="bus-glass bus-sheet">
+          <div class="bus-count"><span class="gst-label">Places<br>restantes</span><b data-left aria-live="polite">23</b></div>
+          <div class="bus-lift"><div class="gst-gauge__row"><span class="gst-label">Portance</span><span data-liftv>71 %</span></div><div class="gst-gauge__bar"><i class="gst-gauge__fill" data-lift style="width:71%"></i></div></div>
           <dl class="gst-spec"><dt class="gst-label">Inscrits</dt><dd data-reg>57 / 80</dd><dt class="gst-label">Départ</dt><dd>05.08.26 · 07:30</dd><dt class="gst-label">Lieu</dt><dd>Attikoumé</dd><dt class="gst-label">Inscription</dt><dd>25 000 F CFA</dd></dl>
         </div>
       </div>
       <div></div>
       <div class="bus-bottom">
-        <div class="bus-ctl">
-          <span class="bus-hint">Vue · protection des familles</span>
+        <div class="bus-glass bus-ctl">
+          <span class="gst-label">Vue · protection des familles</span>
           <div class="gst-seg gst-seg--sm" role="group" aria-label="Vue" data-bview><button type="button" data-value="public" aria-pressed="true">Public</button><button type="button" data-value="moi" aria-pressed="false">Mon inscription</button><button type="button" data-value="resp" aria-pressed="false">Responsables</button></div>
           <div class="doc-row">
             <button class="gst-btn gst-btn--secondary gst-btn--sm" data-demo="ins"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-plus"/></svg>Inscription en direct</button>
             <button class="gst-btn gst-btn--secondary gst-btn--sm" data-demo="pay"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-coins"/></svg>Paiement</button>
-            <button class="gst-btn gst-btn--secondary gst-btn--sm" data-demo="fill"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-zap"/></svg>Remplir · décollage</button>
-            <button class="gst-btn gst-btn--ghost gst-btn--sm" data-demo="reset" style="background:var(--gst-bg-panel)"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-rotate-ccw"/></svg></button>
+            <button class="gst-btn gst-btn--eclair gst-btn--sm" data-demo="fill"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-zap"/></svg>Remplir · décollage</button>
+            <button class="gst-icon-btn" data-demo="reset" aria-label="Réinitialiser" title="Réinitialiser"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-rotate-ccw"/></svg></button>
             <div class="gst-seg gst-seg--sm" role="group" aria-label="Rendu" data-b2d><button type="button" data-value="3d" aria-pressed="true">3D</button><button type="button" data-value="2d" aria-pressed="false">2D</button></div>
           </div>
         </div>
         <button class="gst-btn gst-btn--primary gst-btn--lg bus-cta" data-reserve><svg class="gst-icon" aria-hidden="true"><use href="#i-ticket"/></svg>Réserver ma place</button>
       </div>
     </div>
-    <aside class="bus-moi" data-moi aria-label="Mon inscription" aria-hidden="true">
-      <span class="gst-tag gst-tag--accent">MON INSCRIPTION · ESPACE PRIVÉ</span>
+    <aside class="bus-moi bus-glass" data-moi aria-label="Mon inscription" aria-hidden="true">
+      <span class="gst-chip gst-chip--accent">MON INSCRIPTION · ESPACE PRIVÉ</span>
       <h3>Sélom Akakpo</h3>
       <div style="display:flex;gap:12px;align-items:center"><span class="gst-seat gst-seat--partial" style="width:40px;height:46px"><i class="gst-seat__fill"></i><span>23</span></span><div><div class="gst-ui">Siège 23 · Troupe des Éclaireurs</div><span class="gst-badge gst-badge--warning">Acompte versé</span></div></div>
       <div class="gst-gauge"><div class="gst-gauge__row"><span class="gst-label">Payé</span><span>12 500 / 25 000 F CFA</span></div><div class="gst-gauge__bar"><i class="gst-gauge__fill" style="width:50%"></i></div><div class="gst-gauge__row"><span style="color:var(--gst-state-warning-text)">Reste dû 12 500</span><span>avant le 22.07</span></div></div>
@@ -149,7 +151,7 @@
 </aside>
 
 <main id="main" class="doc-main">
-<section class="doc-sec" style="border-top:0;padding-top:var(--gst-space-6)">
+<section class="doc-sec" style="padding-top:var(--gst-space-7)">
   <div class="doc-sec__head"><div><span class="gst-tag" data-decode>.01 / LISTE DES PLACES · ÉQUIVALENT ACCESSIBLE</span><h2 class="doc-sec__title">Le manifeste</h2></div>
     <p class="doc-sec__intro">Les 80 places, dans la vue choisie. En vue publique : prénom et initiale du nom, rien d'autre. <em>Aucun affichage public ne permet d'identifier qui n'a pas payé</em> — cette contrainte prime sur l'effet visuel.</p></div>
   <div class="manifest" data-manifest></div>
@@ -157,19 +159,19 @@
 
 <section class="doc-sec">
   <div class="doc-sec__head"><div><span class="gst-tag" data-decode>.02 / 3D-2 · SPÉCIFICATION</span><h2 class="doc-sec__title">États & séquences</h2></div>
-    <p class="doc-sec__intro">Un bus scout stylisé — carrosserie teal, bande rouge, toit écru en coupe nette, ⚜ et GST sur le flanc — suspendu sous une montgolfière à hélices, au-dessus d'une carte en plaques du Togo et du Bénin.</p></div>
+    <p class="doc-sec__intro">Un bus scout à toit ouvert — carrosserie teal arrondie, bande rouge, ⚜ GST · TONNERRE sur le flanc — porté par une grappe de 22 ballons qui se gonflent au fil des inscriptions, au-dessus du sud du Togo : collines, rivière, lagune, golfe de Guinée et Attikoumé balisé.</p></div>
   <div class="doc-cols doc-cols--2">
     <div class="doc-table-wrap"><table class="doc-table"><thead><tr><th>État</th><th>Public</th><th>Moi · responsables</th></tr></thead><tbody>
-      <tr><td><span class="gst-seat"><span>01</span></span></td><td>Libre — contour hairline</td><td>Libre</td></tr>
+      <tr><td><span class="gst-seat"><span>01</span></span></td><td>Libre — siège fantôme translucide</td><td>Libre</td></tr>
       <tr><td><span class="gst-seat gst-seat--reserved"><span>02</span></span></td><td>Occupé (teal plein)</td><td>Réservé — écru, nom estompé</td></tr>
       <tr><td><span class="gst-seat gst-seat--partial"><i class="gst-seat__fill"></i><span>03</span></span></td><td>Occupé (teal plein)</td><td>Partiel — jauge verticale à moitié</td></tr>
       <tr><td><span class="gst-seat gst-seat--guaranteed"><i class="gst-seat__fill"></i><span>04</span></span></td><td>Occupé (teal plein)</td><td>Garanti — teal plein, nom, ⚜</td></tr>
     </tbody></table></div>
     <div class="doc-table-wrap"><table class="doc-table"><thead><tr><th>Séquence</th><th>Durée</th><th>Détail</th></tr></thead><tbody>
-      <tr><td>Ralenti permanent</td><td class="m">6 s</td><td>Balancement ± 2°, hélices, nuages en parallaxe, la carte défile.</td></tr>
-      <tr><td>Inscription en direct</td><td class="m">≈ 1,2 s</td><td>Un pin tombe sur le siège (spring), le siège se remplit de bas en haut, le nom se décode (M2), le compteur roule (M4).</td></tr>
-      <tr><td>Paiement enregistré</td><td class="m">520 ms</td><td>Le siège passe à l'état suivant avec une onde hairline. Exigence M5.3 : dans la minute.</td></tr>
-      <tr><td><b>Décollage</b></td><td class="m">3,5 s</td><td>3 · 2 · 1 en Bebas géant, l'éclair frappe le mât, hélices à fond, le bus traverse les bandes du ciel, la caméra le suit puis le laisse partir, tampon BUS COMPLET · DÉCOLLAGE CONFIRMÉ. Puis retour au calme.</td></tr>
+      <tr><td>Ralenti permanent</td><td class="m">6 s</td><td>Balancement ± 2°, ballons qui flottent et s'entrechoquent, oiseaux, nuages en parallaxe, le paysage défile.</td></tr>
+      <tr><td>Inscription en direct</td><td class="m">≈ 1,2 s</td><td>Un petit ballon rouge descend sur le siège (spring), le siège se remplit de bas en haut, le nom se décode (M2), le compteur roule (M4) et un ballon de plus se gonfle.</td></tr>
+      <tr><td>Paiement enregistré</td><td class="m">520 ms</td><td>Le siège passe à l'état suivant avec une onde circulaire. Exigence M5.3 : dans la minute.</td></tr>
+      <tr><td><b>Décollage</b></td><td class="m">3,5 s</td><td>3 · 2 · 1 en Bebas géant, l'éclair frappe la grappe, les ballons se gonflent à bloc, le bus monte à travers les nuages, la caméra le suit puis le laisse partir, tampon BUS COMPLET · DÉCOLLAGE CONFIRMÉ. Puis retour au calme.</td></tr>
     </tbody></table></div>
   </div>
 </section>
@@ -180,6 +182,9 @@
 <script src="assets/js/gst-data.js"></script>
 <script src="assets/js/gst-shell.js"></script>
 <script src="assets/js/gst-3d.js"></script>
+<script src="assets/js/gst-world.js"></script>
+<script src="assets/js/gst-scenes.js"></script>
+<script src="assets/js/gst-bus3d.js"></script>
 <script>
 /* ── Modèle : sièges, vues, compteur, manifeste, 2D ─────────────────────── */
 window.BUS = (function () {
@@ -251,14 +256,14 @@ window.BUS = (function () {
     var cw = 30, ch = 26, gap = 6, aisle = 22, rows = 20;
     var W = 4 * cw + 3 * gap + aisle + 40, H = rows * (ch + gap) + 90;
     var s = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="Plan des 80 sièges"><g data-bus2d>' +
-      '<rect x="2" y="2" width="' + (W - 4) + '" height="' + (H - 4) + '" fill="var(--gst-teal-500)" stroke="var(--gst-teal-800)" stroke-width="2"/>' +
-      '<rect x="10" y="44" width="' + (W - 20) + '" height="' + (H - 60) + '" fill="var(--gst-cream)" stroke="var(--gst-teal-800)"/>' +
-      '<rect x="2" y="' + (H / 2 - 4) + '" width="8" height="8" fill="var(--gst-red-500)"/><rect x="' + (W - 10) + '" y="' + (H / 2 - 4) + '" width="8" height="8" fill="var(--gst-red-500)"/>' +
+      '<rect x="2" y="2" width="' + (W - 4) + '" height="' + (H - 4) + '" rx="34" fill="var(--gst-teal-500)"/>' +
+      '<rect x="10" y="44" width="' + (W - 20) + '" height="' + (H - 60) + '" rx="18" fill="var(--gst-cream)"/>' +
+      '<rect x="0" y="' + (H / 2 - 30) + '" width="6" height="60" rx="3" fill="var(--gst-red-500)"/><rect x="' + (W - 6) + '" y="' + (H / 2 - 30) + '" width="6" height="60" rx="3" fill="var(--gst-red-500)"/>' +
       '<text x="' + W / 2 + '" y="28" text-anchor="middle" style="font-family:var(--gst-font-mono);font-size:11px;letter-spacing:.2em;fill:var(--gst-cream)">AVANT · ⚜ GST</text>';
     seats.forEach(function (_, i) {
       var r = Math.floor(i / 4), c = i % 4, x = 20 + c * (cw + gap) + (c > 1 ? aisle - gap : 0), y = 54 + r * (ch + gap), st = api.shown(i);
       var cls = { free: "free", occ: "occ", res: "res", part: "part", gar: "gar" }[st];
-      s += '<g data-s2="' + i + '"><rect class="seat2d ' + cls + (i === ME && view !== "public" ? " me" : "") + '" x="' + x + '" y="' + y + '" width="' + cw + '" height="' + ch + '"/>' +
+      s += '<g data-s2="' + i + '"><rect class="seat2d ' + cls + (i === ME && view !== "public" ? " me" : "") + '" x="' + x + '" y="' + y + '" width="' + cw + '" height="' + ch + '" rx="7"/>' +
         (st === "part" ? '<rect x="' + (x + cw - 7) + '" y="' + (y + ch / 2) + '" width="5" height="' + ch / 2 + '" fill="var(--gst-teal-500)"/>' : "") +
         '<text x="' + (x + cw / 2) + '" y="' + (y + ch / 2 + 4) + '" text-anchor="middle" style="font-family:var(--gst-font-mono);font-size:9px;fill:' + (st === "occ" || st === "gar" ? "var(--gst-cream)" : "var(--gst-ink)") + '">' + (st === "gar" ? "⚜" : String(i + 1).padStart(2, "0")) + "</text></g>";
     });
@@ -267,7 +272,7 @@ window.BUS = (function () {
   api.dropPin2d = function (i) {
     var g = box.querySelector('[data-s2="' + i + '"]'); if (!g || GST.reduced()) return;
     var r = g.querySelector("rect"), x = +r.getAttribute("x") + 15, y = +r.getAttribute("y");
-    var pin = GST.svg("path", { d: "M" + (x - 6) + " " + (y - 18) + " h12 v8 l-6 10 l-6 -10 z", fill: "var(--gst-red-500)", stroke: "var(--gst-ink)" }, g.ownerSVGElement.querySelector("g"));
+    var pin = GST.svg("circle", { cx: x, cy: y - 10, r: 7, fill: "var(--gst-red-500)" }, g.ownerSVGElement.querySelector("g"));
     var sp = GST.springFrames(function (v) { return { transform: "translateY(" + ((1 - v) * -260).toFixed(1) + "px)" }; }, GST.SPRING_DROP);
     pin.animate(sp.frames, { duration: sp.duration * 1.6, easing: "linear" }).finished.then(function () { pin.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 400, fill: "forwards" }).finished.then(function () { pin.remove(); }); });
   };
@@ -351,275 +356,20 @@ window.BUS = (function () {
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
 <script type="module">
 const GST = window.GST, K = window.GST3D, BUS = window.BUS;
-const frame = BUS.frame, canvas = frame.querySelector("canvas");
-const tip = frame.querySelector(".bus-tip"), namesHost = frame.querySelector(".bus-names");
-
+const frame = BUS.frame, canvas = frame.querySelector("canvas"), flash = frame.querySelector("[data-flash]");
+const liftEl = frame.querySelector("[data-lift]"), liftV = frame.querySelector("[data-liftv]");
+function paintLift() { const p = Math.round(BUS.count() / BUS.seats.length * 100); liftEl.style.width = p + "%"; liftV.textContent = p + " %"; liftEl.classList.toggle("is-over", false); }
+paintLift(); BUS.on(paintLift);
 if (!K.webglOK() || K.lowEnd()) BUS.set2d(true, K.webglOK());
 else Promise.all([import("three"), import("three/addons/controls/OrbitControls.js")])
-  .then(([THREE, { OrbitControls }]) => build(THREE, OrbitControls))
-  .catch(err => { console.warn("3D indisponible :", err); BUS.set2d(true, true); });
-
-function build(THREE, OrbitControls) {
-  const api = K.setup(THREE, canvas, { fov: 30, ambient: 1.2 });
-  const { scene, camera } = api;
-  const skyMode = K.skyByHour();
-  frame.dataset.sky = skyMode;
-  const sky = K.sky(api, skyMode, [0.34, 0.56, 0.78]);
-  const stars = K.stars(api, 200); stars.visible = skyMode === "nuit";
-  const col = t => K.col(THREE, t);
-  let sd = 3; const rnd = () => (sd = (sd * 16807) % 2147483647, (sd - 1) / 2147483646);
-
-  /* Carte en plaques : Togo, Bénin, voisins, golfe de Guinée */
-  const map = new THREE.Group(); scene.add(map);
-  const S = 115; // échelle : 1 unité normalisée = S
-  const poly = (pts, depth, tok, y, eTok, eOp) => { const m = K.contourPlate(api, pts.map(p => [p[0] * S, p[1] * S]), depth, tok, { edgeToken: eTok || "--gst-teal-900", edgeOpacity: eOp ?? 0.35 }); m.position.y = y; map.add(m); return m; };
-  const OFF = [-0.22, -0.48];
-  const sh = pts => pts.map(p => [p[0] + OFF[0], p[1] + OFF[1]]);
-  poly(sh([[-0.9, -0.12], [1.2, -0.12], [1.2, -0.02], [-0.9, -0.02]]), 0.3, "--gst-teal-300", -0.6, "--gst-teal-500", 0.5); // golfe
-  poly(sh([[-0.9, -0.02], [0.0, -0.02], [-0.03, 0.22], [0.04, 0.62], [0.08, 1.02], [-0.9, 1.02]]), 0.5, "--gst-teal-100", -0.4); // Ghana
-  poly(sh([[0.30, -0.02], [1.2, -0.02], [1.2, 1.02], [0.55, 1.05], [0.6, 0.78], [0.46, 0.55], [0.32, 0.25]]), 0.5, "--gst-teal-100", -0.4); // Nigeria
-  poly(sh([[0.08, 1.02], [0.36, 1.06], [0.55, 1.05], [1.2, 1.02], [1.2, 1.4], [-0.9, 1.4], [-0.9, 1.02]]), 0.5, "--gst-teal-50", -0.4); // Burkina / Niger
-  const togo = poly(sh([[0.0, -0.02], [0.13, -0.02], [0.14, 0.16], [0.2, 0.36], [0.22, 0.6], [0.28, 0.82], [0.27, 1.02], [0.08, 1.02], [0.04, 0.62], [-0.03, 0.22]]), 1.2, "--gst-teal-500", -0.4, "--gst-teal-900", 0.6);
-  const benin = poly(sh([[0.13, -0.02], [0.30, -0.02], [0.32, 0.25], [0.46, 0.55], [0.6, 0.78], [0.55, 1.05], [0.36, 1.06], [0.27, 1.02], [0.28, 0.82], [0.22, 0.6], [0.2, 0.36], [0.14, 0.16]]), 0.9, "--gst-teal-300", -0.4, "--gst-teal-900", 0.6);
-  // Attikoumé (sud Togo) : réticule rouge
-  const campPos = new THREE.Vector3((0.07 + OFF[0]) * S, 0.85, -((0.03 + OFF[1]) * S));
-  const reticle = new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints([[-1, -1], [1, -1], [1, 1], [-1, 1]].map(p => new THREE.Vector3(p[0] * 2.2, 0, p[1] * 2.2))), new THREE.LineBasicMaterial({ color: col("--gst-red-500") }));
-  reticle.position.copy(campPos); map.add(reticle);
-  const campPin = new THREE.Mesh(new THREE.BoxGeometry(1.1, 1.1, 1.1), api.mat("--gst-red-500")); campPin.position.copy(campPos).add(new THREE.Vector3(0, 0.6, 0)); map.add(campPin);
-  // Toponymes posés à plat, en Bebas (texture canvas)
-  const label = (txt, x, z, size, tok, rot) => {
-    const c = document.createElement("canvas"); c.width = 512; c.height = 128; const tex = new THREE.CanvasTexture(c); tex.colorSpace = THREE.SRGBColorSpace;
-    const paint = () => { const g = c.getContext("2d"); g.clearRect(0, 0, 512, 128); g.fillStyle = GST.token(tok); g.font = "96px 'Bebas Neue', sans-serif"; g.textAlign = "center"; g.fillText(txt, 256, 100); tex.needsUpdate = true; };
-    paint(); if (document.fonts) document.fonts.ready.then(paint);
-    const m = new THREE.Mesh(new THREE.PlaneGeometry(size, size / 4), new THREE.MeshBasicMaterial({ map: tex, transparent: true, depthWrite: false }));
-    m.rotation.x = -Math.PI / 2; m.rotation.z = rot || 0; m.position.set(x, 1.0, z); map.add(m);
-  };
-  label("TOGO", (0.13 + OFF[0]) * S, -((0.5 + OFF[1]) * S), 15, "--gst-cream", -0.75);
-  label("BÉNIN", (0.38 + OFF[0]) * S, -((0.5 + OFF[1]) * S), 22, "--gst-teal-800", -0.75);
-  label("GOLFE DE GUINÉE", (0.2 + OFF[0]) * S, -((-0.07 + OFF[1]) * S), 46, "--gst-teal-700", -0.75);
-  label("ATTIKOUMÉ", (0.07 + OFF[0]) * S + 8, -((0.03 + OFF[1]) * S) - 4, 12, "--gst-red-700", -0.75);
-  // Petits arbres sur la carte
-  const tr = []; for (let i = 0; i < 160; i++) { const x = (rnd() - 0.5) * 180, z = (rnd() - 0.5) * 180; if (z > 40) continue; tr.push([x, 0.8, z, 1.1 + rnd()]); }
-  const forest = K.trees(api, tr, "--gst-teal-700"); map.add(forest);
-
-  /* Le bus : carrosserie teal, bande rouge, toit écru en coupe, ⚜ GST sur le flanc */
-  const rig = new THREE.Group(); scene.add(rig);
-  const BUS_Y = 26; rig.position.y = BUS_Y;
-  const bus = new THREE.Group(); rig.add(bus);
-  const L = 12.6, Wd = 4.4, Hw = 1.25;
-  const box = (w, h, d, tok, x, y, z, edges = true) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), api.mat(tok)); m.position.set(x, y, z); if (edges) K.edges(api, m, "--gst-teal-900", 0.55); bus.add(m); return m; };
-  box(Wd, 0.3, L, "--gst-cream", 0, -0.15, 0);                    // plancher
-  box(Wd, 0.9, L, "--gst-teal-500", 0, -0.75, 0);                 // caisse basse
-  box(0.16, Hw, L, "--gst-teal-500", -Wd / 2 + 0.08, Hw / 2, 0);   // flancs
-  box(0.16, Hw, L, "--gst-teal-500", Wd / 2 - 0.08, Hw / 2, 0);
-  box(Wd, Hw, 0.16, "--gst-teal-500", 0, Hw / 2, -L / 2 + 0.08);   // avant / arrière
-  box(Wd, Hw, 0.16, "--gst-teal-500", 0, Hw / 2, L / 2 - 0.08);
-  box(Wd + 0.04, 0.18, L + 0.04, "--gst-red-500", 0, -0.45, 0, false); // bande rouge
-  [-1, 1].forEach(sx => box(0.22, 0.12, L + 0.06, "--gst-cream", sx * (Wd / 2 - 0.08), Hw + 0.04, 0, false)); // coupe du toit écru
-  [-1, 1].forEach(sz => box(Wd + 0.06, 0.12, 0.22, "--gst-cream", 0, Hw + 0.04, sz * (L / 2 - 0.08), false));
-  box(Wd - 0.3, 0.7, 0.1, "--gst-teal-800", 0, 0.6, -L / 2 - 0.02, false); // pare-brise
-  [-1, 1].forEach(sx => [-4.2, 0, 4.2].forEach(z => { const w = new THREE.Mesh(new THREE.CylinderGeometry(0.62, 0.62, 0.42, 10), api.mat("--gst-ink")); w.rotation.z = Math.PI / 2; w.position.set(sx * (Wd / 2 - 0.1), -1.25, z); bus.add(w); }));
-  // Décor ⚜ GST sur les flancs
-  const cv = document.createElement("canvas"); cv.width = 512; cv.height = 96;
-  const decal = new THREE.CanvasTexture(cv); decal.colorSpace = THREE.SRGBColorSpace;
-  const draw = () => { const g = cv.getContext("2d"); g.fillStyle = GST.token("--gst-teal-500"); g.fillRect(0, 0, 512, 96); g.fillStyle = GST.token("--gst-cream"); g.font = "70px 'EB Garamond', serif"; g.fillText("⚜", 20, 76); g.font = "70px 'Bebas Neue', sans-serif"; g.fillText("GST · TONNERRE", 100, 76); decal.needsUpdate = true; };
-  draw(); if (document.fonts) document.fonts.ready.then(draw);
-  [-1, 1].forEach(sx => { const d = new THREE.Mesh(new THREE.PlaneGeometry(5.6, 1.05), new THREE.MeshBasicMaterial({ map: decal })); d.position.set(sx * (Wd / 2 + 0.03), -0.82, 1.4); d.rotation.y = sx * Math.PI / 2; bus.add(d); });
-
-  /* 80 sièges : 20 rangées × 4, allée centrale */
-  const N = BUS.seats.length, ROWS = 20;
-  const seatXY = i => { const r = Math.floor(i / 4), c = i % 4; return [[-1.55, -0.8, 0.8, 1.55][c], -L / 2 + 0.95 + r * ((L - 1.6) / (ROWS - 1))]; };
-  const baseGeo = new THREE.BoxGeometry(0.6, 0.32, 0.48); baseGeo.translate(0, 0.16, 0);
-  const backGeo = new THREE.BoxGeometry(0.6, 0.62, 0.12); backGeo.translate(0, 0.31, 0);
-  const gaugeGeo = new THREE.BoxGeometry(0.1, 0.62, 0.06); gaugeGeo.translate(0, 0.31, 0);
-  const seatMat = new THREE.MeshToonMaterial({ color: 0xffffff, gradientMap: api.toon });
-  const bases = new THREE.InstancedMesh(baseGeo, seatMat, N), backs = new THREE.InstancedMesh(backGeo, seatMat, N);
-  const gauges = new THREE.InstancedMesh(gaugeGeo, api.mat("--gst-teal-500"), N);
-  const fleurTex = (() => { const c = document.createElement("canvas"); c.width = c.height = 64; const g = c.getContext("2d"); g.fillStyle = GST.token("--gst-cream"); g.font = "54px 'EB Garamond', serif"; g.textAlign = "center"; g.fillText("⚜", 32, 50); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t; })();
-  const fleurs = new THREE.InstancedMesh(new THREE.PlaneGeometry(0.42, 0.42), new THREE.MeshBasicMaterial({ map: fleurTex, transparent: true, depthWrite: false }), N);
-  const hit = new THREE.InstancedMesh(new THREE.BoxGeometry(0.66, 0.9, 0.62), new THREE.MeshBasicMaterial({ visible: false }), N);
-  bus.add(bases, backs, gauges, fleurs, hit);
-  // Contours hairline de tous les sièges (toujours visibles : c'est l'état « libre »)
-  { const e1 = new THREE.EdgesGeometry(baseGeo), e2 = new THREE.EdgesGeometry(backGeo), arr = [];
-    for (let i = 0; i < N; i++) { const [x, z] = seatXY(i);
-      [[e1, 0, 0], [e2, 0, 0.18]].forEach(([e, dy, dz]) => { const p = e.attributes.position.array; for (let k = 0; k < p.length; k += 3) arr.push(p[k] + x, p[k + 1] + dy, p[k + 2] + z + dz); }); }
-    const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(arr, 3));
-    const lines = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color: col("--gst-teal-900"), transparent: true, opacity: 0.55 })); bus.add(lines); }
-  const fill = new Float32Array(N); // 0 → 1 : remplissage de bas en haut
-  const M4 = new THREE.Matrix4(), Q = new THREE.Quaternion(), V = new THREE.Vector3(), SC = new THREE.Vector3();
-  const qUp = new THREE.Quaternion().setFromEuler(new THREE.Euler(-Math.PI / 2, 0, 0));
-  function writeSeat(i) {
-    const [x, z] = seatXY(i), st = BUS.shown(i), f = fill[i];
-    const tok = { free: "--gst-cream", occ: "--gst-teal-500", res: "--gst-cream", part: "--gst-cream", gar: "--gst-teal-500" }[st];
-    const c = col(tok); if (i === BUS.ME && BUS.view !== "public") c.copy(col(st === "gar" ? "--gst-teal-500" : "--gst-cream"));
-    bases.setColorAt(i, c); backs.setColorAt(i, c);
-    const k = st === "free" ? 0.0001 : Math.max(0.0001, f);
-    M4.compose(V.set(x, 0, z), Q.identity(), SC.set(1, k, 1)); bases.setMatrixAt(i, M4);
-    M4.compose(V.set(x, 0, z + 0.18), Q.identity(), SC.set(1, k, 1)); backs.setMatrixAt(i, M4);
-    const gk = st === "part" ? 0.5 * f : 0.0001;
-    M4.compose(V.set(x + 0.36, 0, z + 0.18), Q.identity(), SC.set(1, Math.max(0.0001, gk), 1)); gauges.setMatrixAt(i, M4);
-    const fk = st === "gar" ? f : 0.0001;
-    M4.compose(V.set(x, 0.34, z - 0.04), qUp, SC.set(fk, fk, fk)); fleurs.setMatrixAt(i, M4);
-    M4.compose(V.set(x, 0.4, z + 0.05), Q.identity(), SC.set(1, 1, 1)); hit.setMatrixAt(i, M4);
-  }
-  function flush() { [bases, backs, gauges, fleurs, hit].forEach(m => { m.instanceMatrix.needsUpdate = true; if (m.instanceColor) m.instanceColor.needsUpdate = true; }); }
-  for (let i = 0; i < N; i++) { fill[i] = BUS.seats[i].etat ? 1 : 0; writeSeat(i); } flush();
-  const allSeats = () => { for (let i = 0; i < N; i++) writeSeat(i); flush(); };
-
-  /* Montgolfière à fuseaux, cordages, mât, hélices */
-  const env = new THREE.SphereGeometry(4.3, 12, 9).toNonIndexed();
-  { const pos = env.attributes.position, cols = [], a = col("--gst-teal-500"), b = col("--gst-cream"), r = col("--gst-red-500");
-    for (let k = 0; k < pos.count; k += 3) { let cx = 0, cz = 0, cy = 0; for (let q = 0; q < 3; q++) { cx += pos.getX(k + q); cy += pos.getY(k + q); cz += pos.getZ(k + q); }
-      const gore = Math.floor(((Math.atan2(cz, cx) + Math.PI) / (Math.PI * 2)) * 12) % 12, band = cy / 3 < -2.6;
-      const c = band ? r : gore % 2 ? a : b; for (let q = 0; q < 3; q++) cols.push(c.r, c.g, c.b); }
-    env.setAttribute("color", new THREE.Float32BufferAttribute(cols, 3)); env.computeVertexNormals(); }
-  const balloon = new THREE.Mesh(env, new THREE.MeshToonMaterial({ vertexColors: true, gradientMap: api.toon }));
-  balloon.scale.set(1, 1.16, 1); balloon.position.y = 12.6; K.edges(api, balloon, "--gst-teal-900", 0.35, 25); rig.add(balloon);
-  const mouthY = 12.6 - 4.3 * 1.16;
-  const ropePts = [];
-  [[-1, -1], [1, -1], [1, 1], [-1, 1]].forEach(([sx, sz]) => { ropePts.push(new THREE.Vector3(sx * (Wd / 2 - 0.1), Hw + 0.1, sz * (L / 2 - 0.4)), new THREE.Vector3(sx * 1.3, mouthY, sz * 1.3)); });
-  rig.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(ropePts), new THREE.LineBasicMaterial({ color: col("--gst-ink") })));
-  const mastTopY = 12.6 + 4.3 * 1.16 + 2.6;
-  const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 2.8, 5), api.mat("--gst-ink")); mast.position.y = mastTopY - 1.3; rig.add(mast);
-  const pennant = new THREE.Mesh(new THREE.PlaneGeometry(1.1, 0.6), api.mat("--gst-red-500", { side: THREE.DoubleSide })); pennant.position.set(0.55, mastTopY - 0.35, 0); rig.add(pennant);
-  const rotors = [];
-  [[-1, -1], [1, -1], [1, 1], [-1, 1]].forEach(([sx, sz]) => {
-    const arm = new THREE.Mesh(new THREE.BoxGeometry(1.4, 0.12, 0.12), api.mat("--gst-ink")); arm.position.set(sx * (Wd / 2 + 0.6), Hw + 0.1, sz * (L / 2 - 1.2)); bus.add(arm);
-    const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 0.9, 5), api.mat("--gst-ink")); shaft.position.set(sx * (Wd / 2 + 1.25), Hw + 0.55, sz * (L / 2 - 1.2)); bus.add(shaft);
-    const rot = new THREE.Group(); rot.position.set(sx * (Wd / 2 + 1.25), Hw + 1.0, sz * (L / 2 - 1.2));
-    const blade = new THREE.Mesh(new THREE.BoxGeometry(2.6, 0.05, 0.3), api.mat("--gst-cream")); K.edges(api, blade, "--gst-teal-900", 0.6);
-    const blade2 = blade.clone(); blade2.rotation.y = Math.PI / 2; rot.add(blade, blade2); bus.add(rot); rotors.push(rot);
-  });
-
-  /* Nuages en disques, sous et au-dessus du bus */
-  const clouds = [];
-  for (let i = 0; i < 12; i++) { const c = K.cloud(api, 1.4 + rnd() * 1.6, skyMode === "nuit" ? "--gst-teal-600" : "--gst-white"); c.position.set(-80 + rnd() * 160, i < 6 ? 10 + rnd() * 8 : 44 + rnd() * 30, -40 + rnd() * 70); c.userData.v = 1.2 + rnd() * 1.6; scene.add(c); clouds.push(c); }
-
-  /* Éclair & anneau sur le mât */
-  const bolt = K.bolt(api, 11); scene.add(bolt);
-  const ring = K.ring(api, "--gst-eclair"); scene.add(ring);
-
-  /* Caméra & orbite */
-  const target = new THREE.Vector3(0, BUS_Y + 4.2, 0);
-  const AZ0 = -0.75, EL0 = 0.56, R0 = () => (canvas.clientWidth < canvas.clientHeight ? 74 : 48);
-  camera.position.set(Math.sin(AZ0) * Math.cos(EL0) * R0(), target.y + Math.sin(EL0) * R0(), Math.cos(AZ0) * Math.cos(EL0) * R0());
-  const controls = new OrbitControls(camera, canvas);
-  controls.enableDamping = true; controls.enablePan = false; controls.target.copy(target);
-  controls.minPolarAngle = 0.55; controls.maxPolarAngle = 1.45; controls.minDistance = 30; controls.maxDistance = 120;
-  controls.update();
-  api.onResize((w, h) => camera.setViewOffset(w, h, w < h ? 0 : -w * 0.04, h * 0.04, w, h)); api.resize();
-
-  /* Survol / toucher d'un siège : info-bulle mono */
-  const ray = new THREE.Raycaster(), mouse = new THREE.Vector2();
-  let hov = -1;
-  const seatWorld = i => { const [x, z] = seatXY(i); return bus.localToWorld(new THREE.Vector3(x, 0.9, z)); };
-  function pick(e) { const r = canvas.getBoundingClientRect(); mouse.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1); ray.setFromCamera(mouse, camera); const h = ray.intersectObject(hit)[0]; return h ? h.instanceId : -1; }
-  function showTip(i) {
-    if (i < 0) { tip.classList.remove("is-on"); return; }
-    const p = K.project(api, seatWorld(i)); tip.textContent = BUS.label(i, BUS.view === "resp"); tip.style.left = p.x + "px"; tip.style.top = p.y + "px"; tip.classList.add("is-on");
-  }
-  canvas.addEventListener("pointermove", e => { const i = pick(e); if (i !== hov) { hov = i; canvas.style.cursor = i < 0 ? "grab" : "pointer"; } showTip(i); });
-  canvas.addEventListener("pointerleave", () => { hov = -1; showTip(-1); });
-  canvas.addEventListener("click", e => { const i = pick(e); hov = i; showTip(i); });
-
-  /* Nom qui s'écrit au-dessus du siège (M2) */
-  function nameTag(i, text) {
-    const el = document.createElement("div"); el.className = "bus-name"; namesHost.appendChild(el);
-    el._seat = i; GST.decode(el, text);
-    setTimeout(() => { el.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 400, fill: "forwards" }).finished.then(() => el.remove()); }, 2600);
-  }
-  /* Onde hairline horizontale autour d'un siège */
-  function wave(i) {
-    const [x, z] = seatXY(i);
-    const sq = new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints([[-1, -1], [1, -1], [1, 1], [-1, 1]].map(p => new THREE.Vector3(p[0] * 0.45, 0, p[1] * 0.45))), new THREE.LineBasicMaterial({ color: col("--gst-teal-500"), transparent: true }));
-    sq.position.set(x, 0.05, z); bus.add(sq);
-    K.tween(GST.reduced() ? 0 : 620, v => { sq.scale.setScalar(1 + v * 4); sq.material.opacity = 1 - v; }, "tonnerre").finished.then(() => bus.remove(sq));
-  }
-  /* Pin qui tombe du ciel → le siège se remplit de bas en haut */
-  const pinGeo = new THREE.ConeGeometry(0.28, 0.9, 6); pinGeo.rotateX(Math.PI); pinGeo.translate(0, 0.45, 0);
-  function dropPin(i) {
-    const [x, z] = seatXY(i);
-    fill[i] = 0; writeSeat(i); flush();
-    const pin = new THREE.Group(); const cone = new THREE.Mesh(pinGeo, api.mat("--gst-red-500")); const head = new THREE.Mesh(new THREE.BoxGeometry(0.42, 0.42, 0.42), api.mat("--gst-red-500")); head.position.y = 1.05; K.edges(api, head, "--gst-ink", 0.7);
-    pin.add(cone, head); pin.position.set(x, 12, z); bus.add(pin);
-    const sp = GST.SPRING_DROP.samples, dur = GST.reduced() ? 0 : GST.SPRING_DROP.duration * 1.7;
-    K.tween(dur, (v, raw) => { const k = sp[Math.min(sp.length - 1, Math.floor(raw * (sp.length - 1)))]; pin.position.y = 12 - k * 11.5; }, t => t).finished.then(() => {
-      K.tween(GST.reduced() ? 0 : 440, v => { fill[i] = v; writeSeat(i); flush(); pin.scale.setScalar(1 - v * 0.9); pin.position.y = 0.5 - v * 0.6; }, "tonnerre").finished.then(() => bus.remove(pin));
-      wave(i); nameTag(i, (BUS.seats[i].prenom + " " + BUS.seats[i].initiale).toUpperCase());
+  .then(([THREE, { OrbitControls }]) => {
+    window.BUS3D = K.scenes.bus(THREE, OrbitControls, {
+      canvas, BUS, tip: frame.querySelector(".bus-tip"), names: frame.querySelector(".bus-names"), campTag: frame.querySelector("[data-camp]"),
+      onFlash: k => { flash.style.opacity = k * .8; if (k > 0) setTimeout(() => { flash.style.transition = "opacity .3s"; flash.style.opacity = 0; setTimeout(() => flash.style.transition = "", 320); }, 40); },
+      onLowPerf: () => { BUS.set2d(true, true); }
     });
-  }
-  BUS.on((e, i) => {
-    if (e === "register" && !frame.classList.contains("is-2d")) dropPin(i);
-    if (e === "pay") { writeSeat(i); flush(); wave(i); if (BUS.view !== "public") nameTag(i, BUS.label(i).split(" · ").slice(2).join(" · ")); }
-    if (e === "view" || e === "reset") { for (let k = 0; k < N; k++) fill[k] = BUS.seats[k].etat ? 1 : 0; allSeats(); }
-    if (e === "full" && !frame.classList.contains("is-2d")) takeoff();
-    if (e === "2d" && !i) api.resize();
-  });
-
-  /* ══ Décollage : le moment Éclair de la plateforme ═══════════════════ */
-  let spin = 2.2, climbing = false, follow = true;
-  async function takeoff() {
-    if (climbing) return; climbing = true;
-    const reduced = GST.reduced();
-    controls.enabled = false;
-    // Pendant le 3 · 2 · 1, la caméra recule pour cadrer tout l'attelage et le ciel au-dessus du mât
-    const camFrom = camera.position.clone(), tgtFrom = controls.target.clone();
-    const dir = camFrom.clone().sub(tgtFrom).normalize();
-    const tgtWide = new THREE.Vector3(0, BUS_Y + 12, 0), posWide = tgtWide.clone().add(dir.multiplyScalar(canvas.clientWidth < canvas.clientHeight ? 120 : 92));
-    K.tween(reduced ? 0 : 1300, v => { controls.target.lerpVectors(tgtFrom, tgtWide, v); camera.position.lerpVectors(camFrom, posWide, v); camera.lookAt(controls.target); }, "trace");
-    await BUS.countdown();
-    // L'éclair frappe le mât
-    const top = rig.localToWorld(new THREE.Vector3(0, mastTopY, 0));
-    bolt.position.copy(top); ring.position.copy(top);
-    if (!reduced) {
-      [[0, 1], [60, 0], [110, 1], [200, 0], [250, 1], [480, 0]].forEach(([t, on]) => setTimeout(() => bolt.visible = !!on, t));
-      [0, 520].forEach(d => K.tween(520, v => { ring.visible = v < 1; ring.scale.setScalar(0.8 + v * 5); ring.material.opacity = 1 - v; }, "tonnerre", d));
-      const a0 = api.amb.intensity; [[0, 2.8], [70, a0], [130, 2.3], [240, a0]].forEach(([t, k]) => setTimeout(() => api.amb.intensity = k, t));
-      if (navigator.vibrate) try { navigator.vibrate([40, 60, 120]); } catch (e) {}
-    }
-    await GST.wait(reduced ? 0 : 380);
-    // Hélices à pleine vitesse, montée à travers les bandes du ciel ; la caméra suit puis laisse partir
-    K.tween(reduced ? 0 : 700, v => { spin = 2.2 + v * 38; }, "strike");
-    const y0 = rig.position.y, camY0 = controls.target.y, camP0 = camera.position.y;
-    follow = true;
-    await K.tween(reduced ? 0 : 2000, (v, raw) => {
-      rig.position.y = y0 + v * 110;
-      if (raw < 0.45) { const dy = rig.position.y - y0; controls.target.y = camY0 + dy * 0.85; camera.position.y = camP0 + dy * 0.85; }
-      sky.uniforms.shift.value = -Math.min(0.9, v * 1.1);
-      camera.lookAt(controls.target);
-    }, "strike").finished;
-    BUS.stampFull();
-    await GST.wait(reduced ? 0 : 1500);
-    // Retour au calme : le bus revient se placer, le ciel se rétablit, la caméra reprend son cadrage
-    const tNow = controls.target.clone(), pNow = camera.position.clone(), sh0 = sky.uniforms.shift.value;
-    rig.position.y = BUS_Y + 60;
-    await K.tween(reduced ? 0 : 1800, v => {
-      rig.position.y = BUS_Y + 60 * (1 - v);
-      controls.target.lerpVectors(tNow, tgtFrom, v); camera.position.lerpVectors(pNow, camFrom, v);
-      sky.uniforms.shift.value = sh0 * (1 - v); spin = 40.2 - v * 38; camera.lookAt(controls.target);
-    }, "tonnerre").finished;
-    controls.enabled = true; climbing = false;
-  }
-
-  /* Ralenti permanent */
-  api.onFrame((dt, t) => {
-    if (controls.enabled) controls.update();
-    if (!GST.reduced()) {
-      rig.rotation.z = Math.sin(t * Math.PI * 2 / 6) * 0.035; rig.rotation.x = Math.sin(t * Math.PI * 2 / 7.5) * 0.02;
-      if (!climbing) rig.position.y = BUS_Y + Math.sin(t * 0.9) * 0.35;
-      map.position.x = Math.sin(t * 0.045) * 14; map.position.z = Math.cos(t * 0.037) * 9;
-      clouds.forEach(c => { c.position.x += c.userData.v * dt * (climbing ? 3 : 1); if (c.position.x > 90) c.position.x = -90; });
-      pennant.rotation.y = Math.sin(t * 3) * 0.25;
-    }
-    rotors.forEach((r, k) => r.rotation.y += spin * dt * (k % 2 ? -1 : 1));
-    bolt.quaternion.copy(camera.quaternion); ring.quaternion.copy(camera.quaternion);
-    namesHost.querySelectorAll(".bus-name").forEach(el => { const p = K.project(api, seatWorld(el._seat)); el.style.transform = `translate(${p.x}px,${p.y - 14}px) translate(-50%,-100%)`; });
-    if (hov > -1) { const p = K.project(api, seatWorld(hov)); tip.style.left = p.x + "px"; tip.style.top = p.y + "px"; }
-  });
-  K.perf(api, () => { api.stop(); BUS.set2d(true, true); });
-  api.start();
-  window.BUS3D = { bolt, ring, rig, mastTopY, takeoff }; // poignées de démonstration / recette
-}
+  })
+  .catch(err => { console.warn("3D indisponible :", err); BUS.set2d(true, true); });
 </script>
 </body>
 </html>
