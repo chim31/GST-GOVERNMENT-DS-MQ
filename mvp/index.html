@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>GST Government</title>
+<meta name="description" content="GST Government — maquette cliquable de bout en bout : logistique, comptabilité, cuisine, roadmap, vitrine et bus volant du Groupe Scout Tonnerre.">
+<meta name="theme-color" content="#063F3E">
+<script>try{var t=localStorage.getItem("gst-theme");if(t&&t!=="jour")document.documentElement.setAttribute("data-theme",t);if(localStorage.getItem("gst-motion")==="reduce")document.documentElement.setAttribute("data-motion","reduce")}catch(e){}</script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+<link rel="stylesheet" href="../design-system/tokens/gst-tokens.css">
+<link rel="stylesheet" href="../design-system/assets/css/gst.css">
+<link rel="stylesheet" href="assets/mvp.css">
+</head>
+<body>
+<a class="gst-sr" href="#main">Aller au contenu</a>
+<div id="app" aria-live="polite"></div>
+<noscript><p style="padding:24px">GST Government a besoin de JavaScript pour fonctionner.</p></noscript>
+
+<script src="../design-system/assets/js/gst-icons.js"></script>
+<script src="../design-system/assets/js/gst-motion.js"></script>
+<script src="../design-system/assets/js/gst-components.js"></script>
+<script src="../design-system/assets/js/gst-data.js"></script>
+<script src="../design-system/assets/js/gst-3d.js"></script>
+<script src="../design-system/assets/js/gst-world.js"></script>
+<script src="../design-system/assets/js/gst-scenes.js"></script>
+<script src="../design-system/assets/js/gst-roadmap3d.js"></script>
+<script src="../design-system/assets/js/gst-bus3d.js"></script>
+<script src="assets/seed.js"></script>
+<script src="assets/core.js"></script>
+<script src="assets/shell.js"></script>
+<script src="assets/views-socle.js"></script>
+<script src="assets/views-logistique.js"></script>
+<script src="assets/views-compta.js"></script>
+<script src="assets/views-cuisine.js"></script>
+<script src="assets/views-programme.js"></script>
+<script src="assets/views-public.js"></script>
+<script src="assets/views-memoire.js"></script>
+<script>
+  APP.init();
+  addEventListener("hashchange", function () { APP.render(); });
+  APP.render();
+</script>
+</body>
+</html>
