@@ -10,60 +10,74 @@
 <link rel="stylesheet" href="assets/css/gst.css">
 <link rel="stylesheet" href="assets/css/doc.css">
 <style>
-.scale{display:grid;gap:0;border:var(--gst-hairline) solid var(--gst-line-hairline);grid-template-columns:repeat(2,1fr)}
+.scale{display:grid;gap:10px;grid-template-columns:repeat(2,1fr)}
 @media (min-width:640px){.scale{grid-template-columns:repeat(5,1fr)}}
 @media (min-width:1100px){.scale--10{grid-template-columns:repeat(10,1fr)}.scale--6{grid-template-columns:repeat(6,1fr)}}
-.sw{display:flex;flex-direction:column;min-height:170px;border-right:var(--gst-hairline) solid var(--gst-line-hairline);background:var(--gst-bg-panel)}
+.sw{display:flex;flex-direction:column;min-height:176px;border-radius:var(--gst-radius-lg);overflow:hidden;background:var(--gst-bg-panel);box-shadow:var(--gst-shadow-sm),inset 0 0 0 1px var(--gst-line-soft);min-width:0}
 .sw__chip{flex:1;min-height:92px;position:relative;display:flex;align-items:flex-end;justify-content:flex-end;padding:6px}
-.sw__body{padding:10px 10px 12px;display:flex;flex-direction:column;gap:3px;font-family:var(--gst-font-mono);font-size:10.5px;letter-spacing:.04em}
+.sw__body{padding:10px 10px 12px;display:flex;flex-direction:column;gap:3px;font-family:var(--gst-font-mono);font-size:10.5px;letter-spacing:.02em;min-width:0}
 .sw__body b{font-size:11.5px;font-weight:600}
-.sw__body span{color:var(--gst-text-secondary)}
+.sw__body span{color:var(--gst-text-secondary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .sw__ratio{display:flex;gap:4px;flex-wrap:wrap}
-.sw__ratio i{font-style:normal;font-size:9px;letter-spacing:.06em;padding:1px 4px;border:1px solid currentColor;border-radius:var(--gst-radius-sm)}
+.sw__ratio i{font-style:normal;font-size:9px;letter-spacing:.04em;padding:1px 6px;border-radius:var(--gst-radius-pill);background:var(--gst-bg-sunken)}
 .sw__ratio .ok{color:var(--gst-state-success-text)}.sw__ratio .ko{color:var(--gst-state-danger-text)}
-.sw__brand{position:absolute;top:6px;left:6px;font-family:var(--gst-font-mono);font-size:9px;letter-spacing:.14em;padding:2px 5px}
+.sw__brand{position:absolute;top:8px;left:8px;font-family:var(--gst-font-mono);font-size:8.5px;letter-spacing:.12em;padding:2px 7px;border-radius:var(--gst-radius-pill)}
 
 .sem td .chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--gst-font-mono);font-size:11px;white-space:nowrap}
-.sem td .chip i{width:22px;height:22px;border:1px solid var(--gst-line-strong);flex:none}
+.sem td .chip i{width:22px;height:22px;border-radius:7px;box-shadow:inset 0 0 0 1px var(--gst-line-hairline);flex:none}
 .sem td .badge-ratio{display:block;margin-top:4px;font-family:var(--gst-font-mono);font-size:10px;letter-spacing:.06em}
 .sem td .badge-ratio.ok{color:var(--gst-state-success-text)}.sem td .badge-ratio.ko{color:var(--gst-state-danger-text)}
 
-.modes{display:grid;gap:var(--gst-grid-gutter)}
+.modes{display:grid;gap:var(--gst-space-5)}
 @media (min-width:1024px){.modes{grid-template-columns:repeat(3,1fr)}}
-.mode{background:var(--gst-bg-canvas);color:var(--gst-text-primary);border:var(--gst-hairline) solid var(--gst-line-hairline);padding:var(--gst-space-5);display:flex;flex-direction:column;gap:var(--gst-space-4)}
-.mode__kpi{background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline);padding:var(--gst-space-4);display:flex;justify-content:space-between;align-items:end}
+.mode{background:var(--gst-bg-canvas);color:var(--gst-text-primary);border-radius:var(--gst-radius-xl);padding:var(--gst-space-5);display:flex;flex-direction:column;gap:var(--gst-space-4);box-shadow:var(--gst-shadow-sm),inset 0 0 0 1px var(--gst-line-soft);min-width:0}
+.mode__kpi{background:var(--gst-bg-panel);border-radius:var(--gst-radius-lg);padding:var(--gst-space-4);display:flex;justify-content:space-between;align-items:end;gap:8px;box-shadow:var(--gst-shadow-xs)}
 
-.type-trio{display:grid;gap:var(--gst-grid-gutter)}
+.type-trio{display:grid;gap:var(--gst-space-5)}
 @media (min-width:1024px){.type-trio{grid-template-columns:repeat(3,1fr)}}
-.trio{background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline);padding:var(--gst-space-5);display:flex;flex-direction:column;gap:var(--gst-space-3);min-height:340px}
+.trio{background:var(--gst-bg-panel);border-radius:var(--gst-radius-xl);padding:var(--gst-space-6) var(--gst-space-5);display:flex;flex-direction:column;gap:var(--gst-space-3);min-height:340px;box-shadow:var(--gst-shadow-sm),inset 0 0 0 1px var(--gst-line-soft);min-width:0}
 .trio__glyph{font-size:9rem;line-height:.8;margin:var(--gst-space-4) 0}
 .trio__chars{font-size:1.25rem;line-height:1.3;word-break:break-all;color:var(--gst-text-secondary)}
 .tscale td{vertical-align:middle}
 .tscale .spec{overflow:hidden;white-space:nowrap;text-overflow:clip;max-width:60vw}
 
-.gridviz{position:relative;height:260px;background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline);overflow:hidden}
-.gridviz__cols{position:absolute;top:44px;bottom:36px;display:grid;transition:all var(--gst-dur-base) var(--gst-ease-tonnerre)}
-.gridviz__cols i{background:var(--gst-state-danger-bg);border-left:1px solid var(--gst-state-danger);border-right:1px solid var(--gst-state-danger)}
-.gridviz__dim{position:absolute;font-family:var(--gst-font-mono);font-size:10px;letter-spacing:.12em;color:var(--gst-text-secondary)}
+/* Mise en page : des blocs qui respirent, aucune ligne */
+.layoutviz{position:relative;height:340px;border-radius:var(--gst-radius-2xl);background:var(--gst-bg-tint);overflow:hidden;display:grid;place-items:center;padding:56px 16px 44px}
+.layoutviz__page{background:var(--gst-bg-canvas);border-radius:22px;box-shadow:var(--gst-shadow-md);display:flex;flex-direction:column;transition:width var(--gst-dur-slow) var(--gst-ease-tonnerre),padding var(--gst-dur-slow) var(--gst-ease-tonnerre);max-width:100%;overflow:hidden}
+.lv-bar{height:14px;border-radius:999px;background:var(--gst-bg-panel);box-shadow:var(--gst-shadow-xs);flex:none}
+.lv-hero{height:64px;border-radius:14px;background:linear-gradient(120deg,var(--gst-teal-700),var(--gst-teal-400));flex:none}
+.lv-cards{display:grid;flex:none}
+.lv-card{height:58px;border-radius:12px;background:var(--gst-bg-panel);box-shadow:var(--gst-shadow-xs)}
+.lv-card:nth-child(3n+1){background:var(--gst-bg-panel)}
+.lv-card.is-acc{background:var(--gst-state-danger-bg)}
+.layoutviz__dim{position:absolute;font-family:var(--gst-font-mono);font-size:10px;letter-spacing:.12em;color:var(--gst-text-secondary)}
 
 .spacebars{display:flex;flex-direction:column;gap:10px}
 .spacebars div{display:grid;grid-template-columns:120px 60px 1fr;align-items:center;gap:var(--gst-space-4);font-family:var(--gst-font-mono);font-size:var(--gst-fs-label)}
-.spacebars i{height:14px;background:var(--gst-brand);transform-origin:left}
+.spacebars i{height:14px;border-radius:999px;background:var(--gst-brand);transform-origin:left}
 
-.icons{display:grid;grid-template-columns:repeat(3,1fr);border-top:var(--gst-hairline) solid var(--gst-line-hairline);border-left:var(--gst-hairline) solid var(--gst-line-hairline)}
+.icons{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 @media (min-width:640px){.icons{grid-template-columns:repeat(6,1fr)}}
 @media (min-width:1100px){.icons{grid-template-columns:repeat(12,1fr)}}
-.icons div{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 4px 10px;border-right:var(--gst-hairline) solid var(--gst-line-hairline);border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);background:var(--gst-bg-panel)}
-.icons div span{font-family:var(--gst-font-mono);font-size:9px;letter-spacing:.06em;color:var(--gst-text-secondary);text-align:center;word-break:break-all}
-.icons .gst-icon{width:24px;height:24px}
+.icons div{display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 4px 12px;border-radius:var(--gst-radius-md);background:var(--gst-bg-panel);box-shadow:inset 0 0 0 1px var(--gst-line-soft);min-width:0;transition:transform var(--gst-dur-fast) var(--gst-ease-tonnerre),box-shadow var(--gst-dur-fast)}
+.icons div:hover{transform:translateY(-2px);box-shadow:var(--gst-shadow-sm)}
+.icons div span{font-family:var(--gst-font-mono);font-size:9px;letter-spacing:.04em;color:var(--gst-text-secondary);text-align:center;word-break:break-all}
+.icons .gst-icon{width:24px;height:24px;color:var(--gst-text-brand)}
 
-.skies{display:grid;gap:var(--gst-grid-gutter)}
-@media (min-width:900px){.skies{grid-template-columns:repeat(3,1fr)}}
-.sky{display:flex;flex-direction:column-reverse;height:260px;border:var(--gst-hairline) solid var(--gst-line-strong);position:relative}
-.sky i{flex:1;display:flex;align-items:center;justify-content:flex-end;padding-right:10px;font-family:var(--gst-font-mono);font-size:10px;letter-spacing:.1em;font-style:normal}
-.sky b{position:absolute;left:12px;top:10px;font-family:var(--gst-font-mono);font-size:10px;letter-spacing:.18em;font-weight:500}
-.radii{display:grid;gap:var(--gst-grid-gutter);grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}
-.radii .doc-plate{min-height:170px;display:flex;flex-direction:column;justify-content:space-between;gap:12px}
+.skies{display:grid;gap:var(--gst-space-4)}
+@media (min-width:640px){.skies{grid-template-columns:repeat(2,1fr)}}
+@media (min-width:1100px){.skies{grid-template-columns:repeat(3,1fr)}}
+.sky{position:relative;height:220px;border-radius:var(--gst-radius-xl);overflow:hidden;box-shadow:var(--gst-shadow-sm)}
+.sky__sun{position:absolute;width:46px;height:46px;border-radius:50%;filter:blur(.5px)}
+.sky__hills{position:absolute;left:0;bottom:0;width:100%;height:70px}
+.sky b{position:absolute;left:16px;top:14px;font-family:var(--gst-font-mono);font-size:10px;letter-spacing:.18em;font-weight:500}
+.sky span{position:absolute;left:16px;bottom:12px;font-family:var(--gst-font-mono);font-size:9.5px;letter-spacing:.06em;color:#F4F4F2;z-index:1}
+
+.radii{display:grid;gap:var(--gst-space-4);grid-template-columns:repeat(auto-fill,minmax(190px,1fr))}
+.radii .doc-plate{min-height:190px;display:flex;flex-direction:column;justify-content:flex-end;gap:12px}
+.rad-demo{height:84px;background:linear-gradient(140deg,var(--gst-teal-400),var(--gst-teal-600))}
+.elev{display:grid;gap:var(--gst-space-5);grid-template-columns:repeat(auto-fill,minmax(220px,1fr));padding:var(--gst-space-7) var(--gst-space-5);border-radius:var(--gst-radius-2xl);background:var(--gst-bg-sunken)}
+.elev>div{height:130px;border-radius:var(--gst-radius-lg);background:var(--gst-bg-panel);display:flex;flex-direction:column;justify-content:space-between;padding:16px}
 </style>
 </head>
 <body>
@@ -123,7 +137,7 @@
 <section class="doc-sec" id="modes">
   <div class="doc-sec__head">
     <div><span class="gst-tag" data-decode>.03 / MODES D'AFFICHAGE</span><h2 class="doc-sec__title">Jour, nuit, soleil</h2></div>
-    <p class="doc-sec__intro">Le même écran, trois lectures. <em>Nuit de camp</em> est pensé pour la lampe frontale, pas pour le style : étoiles = réticules écru. <em>Plein soleil</em> double les hairlines, passe le texte en noir pur et vise AAA ; il se bascule en un tap depuis la barre supérieure. Les modes se posent aussi sur une seule zone : <code class="doc-code-i">data-theme="nuit"</code>.</p>
+    <p class="doc-sec__intro">Le même écran, trois lectures. <em>Nuit de camp</em> est pensé pour la lampe frontale, pas pour le style : étoiles rondes, lune et feux de camp. <em>Plein soleil</em> double les hairlines, passe le texte en noir pur et vise AAA ; il se bascule en un tap depuis la barre supérieure. Les modes se posent aussi sur une seule zone : <code class="doc-code-i">data-theme="nuit"</code>.</p>
   </div>
   <div class="modes">
     <div class="mode" data-theme="jour" data-mode-demo></div>
@@ -169,11 +183,11 @@
   </div>
 </section>
 
-<!-- .05 Grille -->
+<!-- .05 Mise en page -->
 <section class="doc-sec" id="grille">
   <div class="doc-sec__head">
-    <div><span class="gst-tag" data-decode>.05 / GRILLE & ESPACEMENTS</span><h2 class="doc-sec__title">La planche</h2></div>
-    <p class="doc-sec__intro">4 colonnes sur mobile (gouttière 16), 8 sur tablette (24), 12 sur desktop (24) ; marges 20 / 40 / 80. La grille peut être rendue visible en filigrane sur les écrans éditoriaux — c'est le cas de cette documentation.</p>
+    <div><span class="gst-tag" data-decode>.05 / MISE EN PAGE & ESPACEMENTS</span><h2 class="doc-sec__title">La respiration</h2></div>
+    <p class="doc-sec__intro">Plus aucun quadrillage n'est jamais dessiné. Les colonnes — 4 sur mobile, 8 sur tablette, 12 sur desktop ; gouttières 16 / 24 ; marges 20 / 40 / 80 — servent seulement à aligner : <em>on lit des blocs qui respirent, pas des lignes</em>. Les espacements suivent une base 4.</p>
   </div>
   <div class="doc-row" style="margin-bottom:var(--gst-space-4)">
     <div class="gst-seg" id="gridseg" role="group" aria-label="Gabarit">
@@ -182,13 +196,13 @@
       <button type="button" data-value="1440" aria-pressed="false">Desktop · 1440</button>
     </div>
   </div>
-  <div class="gridviz" id="gridviz" data-crosshair><div class="gridviz__cols" id="gridcols"></div>
-    <span class="gridviz__dim" id="gdim1" style="top:14px;left:16px"></span><span class="gridviz__dim" id="gdim2" style="bottom:12px;left:16px"></span></div>
+  <div class="layoutviz" id="gridviz"><div class="layoutviz__page" id="gridcols"></div>
+    <span class="layoutviz__dim" id="gdim1" style="top:18px;left:22px"></span><span class="layoutviz__dim" id="gdim2" style="bottom:16px;left:22px"></span></div>
 
   <div class="doc-cols doc-cols--2" style="margin-top:var(--gst-space-7)">
     <div><div class="doc-sub" style="margin-top:0">Espacement — base 4</div><div class="spacebars" id="spacebars"></div></div>
     <div><div class="doc-sub" style="margin-top:0">Cibles tactiles</div>
-      <div class="doc-plate doc-stack">
+      <div class="doc-plate doc-stack" style="padding-top:var(--gst-space-6)">
         <div class="doc-row"><button class="gst-btn gst-btn--secondary">Minimum · 44 px</button><span class="gst-field__help">Toute cible interactive.</span></div>
         <div class="doc-row"><button class="gst-btn gst-btn--primary gst-btn--lg">Action terrain · 56 px</button><span class="gst-field__help">Actions principales, mains sales.</span></div>
         <div class="gst-stepper" role="group" aria-label="Exemple"><button type="button" aria-label="Moins"><svg class="gst-icon gst-icon--lg"><use href="#i-minus"/></svg></button><span class="gst-stepper__val">12</span><button type="button" aria-label="Plus"><svg class="gst-icon gst-icon--lg"><use href="#i-plus"/></svg></button></div>
@@ -200,20 +214,30 @@
 <!-- .06 Rayons, contours, élévation -->
 <section class="doc-sec" id="formes">
   <div class="doc-sec__head">
-    <div><span class="gst-tag" data-decode>.06 / RAYONS · CONTOURS · ÉLÉVATION</span><h2 class="doc-sec__title">Angles vifs</h2></div>
-    <p class="doc-sec__intro">Rayon 0 partout. 3 px pour les puces et badges. 999 px uniquement pour l'indicateur de synchronisation et les avatars. <em>Pas d'ombre portée</em> : la hiérarchie passe par hairlines, contours 2 px et aplats — sauf <code class="doc-code-i">lift</code>, au-dessus d'une scène 3D.</p>
+    <div><span class="gst-tag" data-decode>.06 / RAYONS · ÉLÉVATION · CONTOURS</span><h2 class="doc-sec__title">La douceur</h2></div>
+    <p class="doc-sec__intro">v1.1 : les angles s'arrondissent et les surfaces se détachent par <em>l'ombre douce</em> plutôt que par le filet. Six rayons, de la puce (6 px) à la scène 3D (36 px), et la capsule pour tout ce qui se touche du pouce. Les contours restent fins et réservés aux états.</p>
   </div>
   <div class="radii">
-    <div class="doc-plate"><span class="gst-tag">--gst-radius-none · 0</span><div class="gst-cartouche" style="padding:14px;font-family:var(--gst-font-mono)">Cartouche</div></div>
-    <div class="doc-plate"><span class="gst-tag">--gst-radius-sm · 3 px</span><div class="doc-row"><span class="gst-badge gst-badge--brand">Validé</span><span class="gst-badge gst-badge--renforce">Renforcé</span></div></div>
-    <div class="doc-plate"><span class="gst-tag">--gst-radius-pill · 999 px</span><div class="doc-row"><span class="gst-sync is-pending"><span class="gst-sync__dot"></span><span class="gst-sync__label">3 en file</span></span><span class="gst-avatar">KA</span></div></div>
-    <div class="doc-plate"><span class="gst-tag">--gst-hairline · 1 px</span><div style="height:1px;background:var(--gst-line-strong)"></div></div>
-    <div class="doc-plate"><span class="gst-tag">--gst-border · 2 px</span><div style="height:44px;border:var(--gst-border) solid var(--gst-line-brand)"></div></div>
-    <div class="doc-plate"><span class="gst-tag">--gst-rule · 4 px</span><div class="gst-divider"><div class="gst-divider__rule"></div><span class="gst-tag">.03 / 3ᵉ ÉDITION</span></div></div>
-    <div class="doc-plate" style="background:var(--gst-sky-day-3);border-color:transparent;grid-column:1/-1;min-height:220px;align-items:center;justify-content:center">
-      <span class="gst-tag" style="align-self:flex-start">--gst-shadow-lift · LE SEUL CAS D'OMBRE : PANNEAU AU-DESSUS D'UNE SCÈNE 3D</span>
-      <div class="gst-card gst-lift" style="width:min(360px,100%)"><span class="gst-tag">J.05 / AUJOURD'HUI</span><div class="gst-display-md" style="margin-top:8px">Service communautaire</div><p class="gst-field__help" style="margin:6px 0 0">École primaire d'Attikoumé · 07:30</p></div>
-    </div>
+    <div class="doc-plate"><span class="gst-tag">XS · 6 PX</span><div class="rad-demo" style="border-radius:var(--gst-radius-xs)"></div><span class="gst-field__help"><code class="doc-code-i">--gst-radius-xs</code><br>Cases à cocher, code en ligne</span></div>
+    <div class="doc-plate"><span class="gst-tag">SM · 10 PX</span><div class="rad-demo" style="border-radius:var(--gst-radius-sm)"></div><span class="gst-field__help"><code class="doc-code-i">--gst-radius-sm</code><br>Puces, petites tuiles</span></div>
+    <div class="doc-plate"><span class="gst-tag">MD · 14 PX</span><div class="rad-demo" style="border-radius:var(--gst-radius-md)"></div><span class="gst-field__help"><code class="doc-code-i">--gst-radius-md</code><br>Champs, icônes de carte</span></div>
+    <div class="doc-plate"><span class="gst-tag">LG · 20 PX</span><div class="rad-demo" style="border-radius:var(--gst-radius-lg)"></div><span class="gst-field__help"><code class="doc-code-i">--gst-radius-lg</code><br>Cartes, alertes, tables</span></div>
+    <div class="doc-plate"><span class="gst-tag">XL · 28 PX</span><div class="rad-demo" style="border-radius:var(--gst-radius-xl)"></div><span class="gst-field__help"><code class="doc-code-i">--gst-radius-xl</code><br>Planches, tiroirs, modales</span></div>
+    <div class="doc-plate"><span class="gst-tag">2XL · 36 PX</span><div class="rad-demo" style="border-radius:var(--gst-radius-2xl)"></div><span class="gst-field__help"><code class="doc-code-i">--gst-radius-2xl</code><br>Scènes 3D, héros</span></div>
+    <div class="doc-plate"><span class="gst-tag">PILL · 999 PX</span><div class="doc-row"><button class="gst-btn gst-btn--primary gst-btn--sm">Bouton</button><span class="gst-badge gst-badge--success">Payé</span><span class="gst-avatar">KA</span></div><span class="gst-field__help">Boutons, badges, segments</span></div>
+    <div class="doc-plate"><span class="gst-tag">CADRE · 14 → 26 PX</span><div style="height:84px;border-radius:var(--gst-frame-radius);box-shadow:0 0 0 10px var(--gst-bg-frame) inset"></div><span class="gst-field__help">Coins intérieurs du cadre teal</span></div>
+  </div>
+  <div class="doc-sub">Élévation douce</div>
+  <div class="elev">
+    <div style="box-shadow:var(--gst-shadow-xs)"><span class="gst-tag">--gst-shadow-xs</span><span class="gst-field__help">Champs, puces, boutons ronds</span></div>
+    <div style="box-shadow:var(--gst-shadow-sm)"><span class="gst-tag">--gst-shadow-sm</span><span class="gst-field__help">Cartes, planches au repos</span></div>
+    <div style="box-shadow:var(--gst-shadow-md)"><span class="gst-tag">--gst-shadow-md</span><span class="gst-field__help">Survol, éléments actifs, verre</span></div>
+    <div style="box-shadow:var(--gst-shadow-lift)"><span class="gst-tag">--gst-shadow-lift</span><span class="gst-field__help">Tiroirs, modales, panneaux sur la 3D</span></div>
+  </div>
+  <div class="doc-cols doc-cols--3" style="margin-top:var(--gst-space-6)">
+    <div class="doc-plate"><span class="gst-tag">--gst-hairline · 1 px</span><div style="height:1px;background:var(--gst-line-hairline);margin-top:12px"></div><p class="gst-field__help" style="margin:12px 0 0">Séparateur discret dans une table ou une liste.</p></div>
+    <div class="doc-plate"><span class="gst-tag">--gst-border · 2 px · ÉTATS</span><div style="height:48px;border-radius:var(--gst-radius-md);box-shadow:inset 0 0 0 2px var(--gst-line-brand);margin-top:8px"></div><p class="gst-field__help" style="margin:12px 0 0">Sélection, focus, seuil critique (en rouge).</p></div>
+    <div class="doc-plate"><span class="gst-tag">--gst-rule · 4 px · FILET</span><div class="gst-divider" style="margin-top:12px"><div class="gst-divider__rule"></div><span class="gst-tag">.03 / 3ᵉ ÉDITION</span></div></div>
   </div>
 </section>
 
@@ -221,7 +245,7 @@
 <section class="doc-sec" id="icones">
   <div class="doc-sec__head">
     <div><span class="gst-tag" data-decode>.07 / ICONOGRAPHIE</span><h2 class="doc-sec__title">Un seul set</h2></div>
-    <p class="doc-sec__intro">Un sous-ensemble de Lucide (licence ISC), redessiné par la feuille de style en « plan technique » : trait 1,5, extrémités carrées, angles vifs. Aucun emoji. La fleur de lys n'existe qu'en glyphe <span class="gst-fleur" style="font-size:1.3em">⚜</span> U+269C, à plat. Les logos officiels ne sont jamais redessinés.</p>
+    <p class="doc-sec__intro">Un sous-ensemble de Lucide (licence ISC) : trait 1,6, extrémités et jonctions arrondies, en accord avec les nouvelles formes. Aucun emoji. La fleur de lys n'existe qu'en glyphe <span class="gst-fleur" style="font-size:1.3em">⚜</span> U+269C, à plat. Les logos officiels ne sont jamais redessinés.</p>
   </div>
   <div class="icons" id="icons"></div>
   <div class="doc-cols doc-cols--3" style="margin-top:var(--gst-space-7)">
@@ -234,8 +258,8 @@
 <!-- .08 Ciels -->
 <section class="doc-sec" id="ciels">
   <div class="doc-sec__head">
-    <div><span class="gst-tag" data-decode>.08 / CIELS 3D</span><h2 class="doc-sec__title">Aplats étagés</h2></div>
-    <p class="doc-sec__intro">La traduction du « zéro dégradé » en 3D : quatre bandes nettes, de l'horizon (1) au zénith (4), choisies selon l'heure réelle du camp. La bascule se fait bande par bande en 800 ms.</p>
+    <div><span class="gst-tag" data-decode>.08 / CIELS · REGISTRE CIEL</span><h2 class="doc-sec__title">Le temps qu'il fait</h2></div>
+    <p class="doc-sec__intro">v1.1 : les ciels des mondes 3D passent en dégradé (zénith → horizon) avec un soleil, et se composent en continu selon l'heure réelle et la météo. Six ambiances de référence, partagées par la vitrine, la carte du camp et le bus volant.</p>
   </div>
   <div class="skies" id="skies"></div>
 </section>
@@ -298,7 +322,7 @@
   var SCALES = {
     teal: ["50", "100", "200", "300", "400", "500", "600", "700", "800", "900"].map(function (k) { return ["--gst-teal-" + k, "Teal " + k, k === "500" ? "marque" : k === "600" ? "cadre" : k === "800" ? "encre teal" : ""]; }),
     red: ["50", "100", "300", "500", "700", "900"].map(function (k) { return ["--gst-red-" + k, "Rouge " + k, k === "500" ? "marque" : k === "700" ? "survol" : ""]; }),
-    neutral: [["--gst-white", "Blanc", "panneau"], ["--gst-paper", "Papier", ""], ["--gst-cream", "Écru", "fond"], ["--gst-stone", "Pierre", "hairline"], ["--gst-sand", "Sable", "réticule"],
+    neutral: [["--gst-white", "Blanc", "panneau"], ["--gst-paper", "Papier", ""], ["--gst-cream", "Écru", "fond"], ["--gst-stone", "Pierre", "hairline"], ["--gst-sand", "Sable", "point"],
       ["--gst-ink-40", "Encre 40", "≥ 18 px"], ["--gst-ink-70", "Encre 70", "texte 2"], ["--gst-ink", "Encre", "texte"], ["--gst-black", "Noir", "soleil"], ["--gst-teal-900", "Nuit", "fond nuit"]],
     signal: [["--gst-eclair-50", "Éclair 50", "fond alerte"], ["--gst-eclair", "Éclair", "signal"], ["--gst-eclair-deep", "Éclair profond", "aplat"], ["--gst-eclair-700", "Éclair 700", "texte"], ["--gst-eclair-800", "Éclair 800", "texte soleil"],
       ["--gst-forest", "Forêt", "succès"], ["--gst-forest-700", "Forêt 700", "succès soleil"], ["--gst-state-success-bg", "Succès fond", ""], ["--gst-red-50", "Danger fond", ""], ["--gst-teal-50", "Info fond", ""]]
@@ -310,7 +334,7 @@
       var hex = toHex(GST.token(s[0])) || "#000000";
       var rw = ratio(hex, W), ri = ratio(hex, INK);
       var on = rw > ri ? W : INK;
-      return '<div class="sw"><div class="sw__chip" style="background:var(' + s[0] + ')">' + (s[2] ? '<span class="sw__brand" style="color:' + on + ';border:1px solid ' + on + '">' + s[2].toUpperCase() + "</span>" : "") + '</div><div class="sw__body"><b>' + s[1] + "</b><span>" + s[0] + "</span><span>" + hex.toUpperCase() +
+      return '<div class="sw"><div class="sw__chip" style="background:var(' + s[0] + ')">' + (s[2] ? '<span class="sw__brand" style="color:' + on + ';background:' + (on === W ? "rgba(255,255,255,.18)" : "rgba(20,20,20,.08)") + '">' + s[2].toUpperCase() + "</span>" : "") + '</div><div class="sw__body"><b>' + s[1] + "</b><span>" + s[0] + "</span><span>" + hex.toUpperCase() +
         '</span><span class="sw__ratio"><i class="' + (rw >= 4.5 ? "ok" : "ko") + '">□ ' + fr(rw) + '</i><i class="' + (ri >= 4.5 ? "ok" : "ko") + '">■ ' + fr(ri) + "</i></span></div></div>";
     }).join("");
   });
@@ -324,7 +348,7 @@
   var SEM = [
     ["--gst-bg-canvas", null, "Fond de page"], ["--gst-bg-panel", null, "Panneaux, cartes, tables"], ["--gst-bg-invert", null, "Bloc teal plein"],
     ["--gst-text-primary", "--gst-bg-panel", "Texte principal, données"], ["--gst-text-secondary", "--gst-bg-panel", "Labels, légendes"],
-    ["--gst-line-hairline", null, "Grille, séparateurs"], ["--gst-node-reticle", null, "Réticules aux nœuds"],
+    ["--gst-line-hairline", null, "Séparateurs fins"], ["--gst-line-soft", null, "Contour de surface (ombre douce)"],
     ["--gst-accent", null, "Action primaire, filet rouge"], ["--gst-accent-text", "--gst-bg-panel", "Texte d'accent"],
     ["--gst-state-success", null, "Payé, validé (trait, icône)"], ["--gst-state-success-text", "--gst-bg-panel", "Texte de succès"],
     ["--gst-state-warning", null, "À vérifier (trait, icône)"], ["--gst-state-warning-text", "--gst-bg-panel", "Texte d'avertissement"],
@@ -372,22 +396,23 @@
   function nowSizes() { tb.querySelectorAll("[data-now]").forEach(function (td) { var s = td.parentNode.querySelector(".spec > span"); td.textContent = Math.round(parseFloat(getComputedStyle(s).fontSize)) + " px"; }); }
   nowSizes(); addEventListener("resize", nowSizes); if (document.fonts) document.fonts.ready.then(nowSizes);
 
-  /* ── Grille ───────────────────────────────────────────────────────── */
-  var GRIDS = { 390: [4, 16, 20], 768: [8, 24, 40], 1440: [12, 24, 80] };
-  var viz = document.getElementById("gridviz"), colsEl = document.getElementById("gridcols");
-  function drawGrid(w) {
-    var g = GRIDS[w], W = viz.clientWidth, scale = Math.min(1, (W - 32) / w);
-    var vw = w * scale, left = (W - vw) / 2;
-    colsEl.style.left = left + g[2] * scale + "px"; colsEl.style.width = vw - 2 * g[2] * scale + "px";
-    colsEl.style.gridTemplateColumns = "repeat(" + g[0] + ",1fr)"; colsEl.style.columnGap = g[1] * scale + "px";
-    colsEl.innerHTML = Array(g[0] + 1).join("<i></i>");
+  /* ── Mise en page : maquette de blocs (aucune colonne dessinée) ─────── */
+  var GRIDS = { 390: [4, 16, 20, 1], 768: [8, 24, 40, 2], 1440: [12, 24, 80, 3] };
+  var viz = document.getElementById("gridviz"), page = document.getElementById("gridcols");
+  function drawGrid(w, anim) {
+    var g = GRIDS[w], avail = viz.clientWidth - 40, scale = Math.min(1, avail / w, (viz.clientHeight - 100) / (w === 390 ? 520 : w === 768 ? 420 : 330));
+    page.style.width = Math.round(w * scale) + "px";
+    page.style.padding = Math.round(g[2] * scale) + "px"; page.style.gap = Math.round(g[1] * scale) + "px";
+    var n = g[3], cards = n * 2;
+    page.innerHTML = '<div class="lv-bar" style="width:' + (n === 1 ? 70 : 45) + '%"></div><div class="lv-hero"></div><div class="lv-cards" style="grid-template-columns:repeat(' + n + ',1fr);gap:' + Math.round(g[1] * scale) + 'px">' +
+      Array.apply(null, Array(cards)).map(function (_, i) { return '<div class="lv-card' + (i === 1 ? " is-acc" : "") + '"></div>'; }).join("") + "</div>";
     document.getElementById("gdim1").textContent = "GABARIT " + w + " PX · ÉCHELLE " + Math.round(scale * 100) + " %";
-    document.getElementById("gdim2").textContent = g[0] + " COLONNES · GOUTTIÈRE " + g[1] + " · MARGE " + g[2];
-    if (!GST.reduced()) colsEl.querySelectorAll("i").forEach(function (c, i) { c.animate([{ transform: "scaleY(0)" }, { transform: "scaleY(1)" }], { duration: 420, delay: i * 24, easing: GST.ease("tonnerre"), fill: "backwards" }); });
+    document.getElementById("gdim2").textContent = g[0] + " COLONNES INVISIBLES · GOUTTIÈRE " + g[1] + " · MARGE " + g[2];
+    if (anim && !GST.reduced()) page.querySelectorAll(".lv-bar,.lv-hero,.lv-card").forEach(function (c, i) { c.animate([{ opacity: 0, transform: "translateY(10px) scale(.97)" }, { opacity: 1, transform: "none" }], { duration: 520, delay: i * 50, easing: GST.ease("tonnerre"), fill: "backwards" }); });
   }
   var current = 390;
-  document.getElementById("gridseg").addEventListener("gst-change", function (e) { current = +e.detail.value; drawGrid(current); });
-  drawGrid(current); addEventListener("resize", function () { drawGrid(current); });
+  document.getElementById("gridseg").addEventListener("gst-change", function (e) { current = +e.detail.value; drawGrid(current, true); });
+  drawGrid(current, true); addEventListener("resize", function () { drawGrid(current); });
 
   /* ── Espacements ──────────────────────────────────────────────────── */
   document.getElementById("spacebars").innerHTML = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(function (k) {
@@ -400,15 +425,16 @@
     return '<div><svg class="gst-icon" aria-hidden="true"><use href="#i-' + n + '"/></svg><span>' + n + "</span></div>";
   }).join("");
 
-  /* ── Ciels ────────────────────────────────────────────────────────── */
-  document.getElementById("skies").innerHTML = [["day", "JOUR · 08 H – 17 H"], ["dusk", "AUBE & CRÉPUSCULE"], ["night", "NUIT DE CAMP"]].map(function (s) {
-    var bands = [1, 2, 3, 4].map(function (i) {
-      var tok = "--gst-sky-" + s[0] + "-" + i, hex = toHex(GST.token(tok)) || "#000";
-      var light = ratio(hex, INK) > ratio(hex, W);
-      return '<i style="background:var(' + tok + ");color:" + (light ? INK : W) + '">' + i + " · " + hex.toUpperCase() + "</i>";
-    }).join("");
-    var top = toHex(GST.token("--gst-sky-" + s[0] + "-4"));
-    return '<div class="sky">' + bands + '<b style="color:' + (ratio(top, INK) > ratio(top, W) ? INK : W) + '">' + s[1] + "</b></div>";
+  /* ── Ciels (mêmes valeurs que GST3D.world.SKIES) ───────────────────── */
+  var SK = [["JOUR", "#5FAAA5", "#C6E2E0", "#F4F4F2", "#FFF1C2", "70%", "18%", "#4E8A4C"], ["AUBE & CRÉPUSCULE", "#06605E", "#E0716D", "#FFD9A0", "#FFD23F", "62%", "62%", "#3B4A3A"],
+    ["NUIT DE CAMP", "#020F0F", "#063F3E", "#0C5552", "#E7F2F1", "76%", "16%", "#03201F"], ["ORAGE", "#121C1C", "#2E4442", "#5C6F6C", "#C9C9C6", "", "", "#1A2524"],
+    ["COUVERT", "#7E9C9A", "#B9CBC9", "#E4E4E1", "#FAFAF8", "", "", "#4A6A50"], ["HARMATTAN", "#C9B48A", "#E6D3AE", "#F2E6CF", "#FFF1C2", "58%", "30%", "#9C8A4A"]];
+  document.getElementById("skies").innerHTML = SK.map(function (s) {
+    var dark = ratio(s[1], W) > ratio(s[1], INK);
+    return '<div class="sky" style="background:linear-gradient(180deg,' + s[1] + " 0%," + s[2] + " 55%," + s[3] + ' 100%)">' +
+      (s[5] ? '<i class="sky__sun" style="left:' + s[5] + ";top:" + s[6] + ";background:radial-gradient(circle," + s[4] + " 0 40%,transparent 72%)" + '"></i>' : "") +
+      '<svg class="sky__hills" viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70 L0 40 C40 20 70 34 110 26 S180 6 220 28 S280 30 300 18 L300 70 Z" fill="' + s[7] + '" opacity=".75"/><path d="M0 70 L0 56 C60 44 120 58 170 50 S260 40 300 52 L300 70 Z" fill="' + s[7] + '"/></svg>' +
+      '<b style="color:' + (dark ? W : INK) + '">' + s[0] + "</b><span>" + s[1] + " → " + s[3] + "</span></div>";
   }).join("");
 
   window.addEventListener("gst-theme", function () { renderSem(); });

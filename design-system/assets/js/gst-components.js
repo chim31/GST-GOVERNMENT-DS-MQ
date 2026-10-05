@@ -1,7 +1,7 @@
 /* GST GOVERNMENT — Composants graphiques (Chart ligne, barres jumelles).
    Axes hairline, graduations en tags mono, aucune grille pleine.
-   Prévu = teal pointillé · Réel = rouge plein · points = réticules carrés 7 px.
-   Info-bulle = mini fiche technique. Barres à coins droits. Jamais de dégradé. */
+   Prévu = teal pointillé · Réel = rouge plein + voile léger · points = disques 9 px.
+   Info-bulle = mini fiche technique. Barres arrondies. Jamais de dégradé. */
 (function () {
   "use strict";
   var GST = window.GST;
@@ -37,10 +37,11 @@
     var unit = S("text", { x: L, y: 10, class: "tick-label" }, svg); unit.textContent = (o.unit || "").toUpperCase();
     var cursor = S("line", { x1: 0, y1: T, x2: 0, y2: H - B, class: "cursor", opacity: 0 }, svg);
     var path = function (arr) { return arr.map(function (v, i) { return (i ? "L" : "M") + x(i).toFixed(1) + " " + y(v).toFixed(1); }).join(" "); };
+    S("path", { d: path(o.actual) + " L" + x(n - 1).toFixed(1) + " " + (H - B) + " L" + x(0).toFixed(1) + " " + (H - B) + " Z", class: "area" }, svg);
     var pp = S("path", { d: path(o.planned), class: "planned" }, svg);
     var ap = S("path", { d: path(o.actual), class: "actual" }, svg);
     var pts = o.actual.map(function (v, i) {
-      var r = S("rect", { x: x(i) - 3.5, y: y(v) - 3.5, width: 7, height: 7, class: "pt", tabindex: 0, role: "button",
+      var r = S("circle", { cx: x(i), cy: y(v), r: 4.5, class: "pt", tabindex: 0, role: "button",
         "aria-label": o.labels[i] + " — réel " + GST.fmt(v) + ", prévu " + GST.fmt(o.planned[i]) }, svg);
       return r;
     });

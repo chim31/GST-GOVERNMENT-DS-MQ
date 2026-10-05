@@ -27,8 +27,8 @@
   GST.BOLT_D = "M80 -16 L68 1 L74 2 L62 10";
   GST.lockup = function (size) {
     return '<svg viewBox="0 -18 120 78" class="doc-crest" aria-hidden="true" style="width:' + (size || 40) + 'px;height:auto;overflow:visible">' +
-      '<path d="' + GST.CREST_D + '" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="miter" stroke-linecap="square"/>' +
-      '<path d="' + GST.BOLT_D + '" fill="none" stroke="var(--gst-eclair-deep)" stroke-width="5" stroke-linejoin="miter" stroke-linecap="square"/></svg>';
+      '<path d="' + GST.CREST_D + '" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>' +
+      '<path d="' + GST.BOLT_D + '" fill="none" stroke="var(--gst-eclair-deep)" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/></svg>';
   };
 
   function icon(id, cls) { return '<svg class="gst-icon ' + (cls || "") + '" aria-hidden="true"><use href="#i-' + id + '"/></svg>'; }
@@ -61,7 +61,6 @@
 
     var frame = document.createElement("div");
     frame.className = "doc-frame"; frame.setAttribute("aria-hidden", "true");
-    frame.innerHTML = '<i class="t"></i><i class="r"></i><i class="b"></i><i class="l"></i>';
     body.appendChild(frame);
 
     var skip = document.createElement("a");
@@ -73,7 +72,7 @@
     var t = GST.theme();
     top.innerHTML =
       '<a class="doc-brand" href="index.html" aria-label="GST Government — accueil du design system">' + GST.lockup(38) +
-      '<span><b>GST GOVERNMENT</b><span class="gst-tag">Design system · v1.0</span></span></a>' +
+      '<span><b>GST GOVERNMENT</b><span class="gst-tag">Design system · v1.1</span></span></a>' +
       '<nav class="doc-nav" aria-label="Chapitres">' + PAGES.map(function (p, i) {
         return '<a href="' + p.href + '"' + (i === current ? ' aria-current="page"' : "") + '><span class="doc-nav__i">' + p.idx + "</span>" + p.label + "</a>";
       }).join("") + "</nav>" +
@@ -158,8 +157,9 @@
   }
 
   /* ── Réticule-curseur (registre Ciel, pointeur fin uniquement) ────────── */
+  /* v1.1 : le réticule-curseur est retiré (plus de quadrillage). Fonction conservée, inerte. */
   GST.crosshair = function (host) {
-    if (!window.matchMedia("(pointer:fine)").matches) return;
+    return;
     var h = document.createElement("i"), v = document.createElement("i"), r = document.createElement("i"), lab = document.createElement("span");
     h.className = "doc-xh doc-xh--h"; v.className = "doc-xh doc-xh--v"; r.className = "doc-xh doc-xh--r"; lab.className = "doc-xh doc-xh--lab";
     [h, v, r, lab].forEach(function (n) { n.setAttribute("aria-hidden", "true"); host.appendChild(n); });
