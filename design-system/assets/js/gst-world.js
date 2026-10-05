@@ -694,6 +694,20 @@
       }
       geo.attributes.position.needsUpdate = true; geo.attributes.color.needsUpdate = true;
       geo.computeVertexNormals(); geo.computeBoundingSphere();
+      if (mesh.userData.onMorph) mesh.userData.onMorph(e);
+    };
+    /* Sonde : 3 sommets les plus proches + poids, pour draper un décor sur le relief */
+    mesh.probe = function (x, z) {
+      var n = [[1e9, 0], [1e9, 0], [1e9, 0]];
+      for (var vi = 0; vi < verts.length / 2; vi++) {
+        var d = (verts[vi * 2] - x) * (verts[vi * 2] - x) + (verts[vi * 2 + 1] - z) * (verts[vi * 2 + 1] - z);
+        if (d < n[2][0]) { n[2] = [d, vi]; n.sort(function (p, q) { return p[0] - q[0]; }); }
+      }
+      var w = n.map(function (p) { return 1 / (Math.sqrt(p[0]) + 1e-3); }), sw = w[0] + w[1] + w[2];
+      return { i: n.map(function (p) { return p[1]; }), w: w.map(function (v) { return v / sw; }) };
+    };
+    mesh.probeHeight = function (pr, e) {
+      var h = 0; for (var q = 0; q < 3; q++) { var vi = pr.i[q]; h += (hill[vi] + (crest[vi] - hill[vi]) * e) * pr.w[q]; } return h;
     };
     mesh.heightAt = function (x, z, k) {
       var best = 1e9, bi = 0;
@@ -709,12 +723,48 @@
     return mesh;
   };
 
+  /* Lettres blanches posées dans le gazon, drapées sur le relief (suivent le morph) */
+  W.lawnText = function (api, mountain, o) {
+    var THREE = api.THREE; o = o || {};
+    var cx = o.x || 0, cz = o.z || 9.75, w = o.width || 7.4, d = o.depth || 3.7, nx = 44, nz = 18;
+    var cv = document.createElement("canvas"); cv.width = 1024; cv.height = 512;
+    var tex = new THREE.CanvasTexture(cv); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8;
+    function draw() {
+      var x = cv.getContext("2d"); x.clearRect(0, 0, cv.width, cv.height);
+      x.fillStyle = "#FFFFFF"; x.textAlign = "center"; x.textBaseline = "middle";
+      x.font = '400 300px "Bebas Neue", "Arial Narrow", sans-serif';
+      if ("letterSpacing" in x) x.letterSpacing = "26px";
+      // Lettres étirées en profondeur : elles se lisent de face malgré l'angle rasant
+      x.save(); x.translate(cv.width / 2, cv.height / 2 + 12); x.scale(1.18, 1.62);
+      x.shadowColor = "rgba(20,60,40,.35)"; x.shadowBlur = 6; x.fillText(o.text || "GST", 0, 0); x.restore();
+      tex.needsUpdate = true;
+    }
+    draw();
+    if (document.fonts && document.fonts.load) document.fonts.load('400 300px "Bebas Neue"').then(draw, function () {});
+    var geo = new THREE.PlaneGeometry(w, d, nx, nz); geo.rotateX(-Math.PI / 2);
+    var P = geo.attributes.position, probes = [];
+    for (var i = 0; i < P.count; i++) probes.push(mountain.probe(P.getX(i) + cx, P.getZ(i) + cz));
+    var mat = new THREE.MeshStandardMaterial({ map: tex, transparent: true, roughness: 0.75, metalness: 0, depthWrite: false,
+      polygonOffset: true, polygonOffsetFactor: -4, polygonOffsetUnits: -4, emissive: new THREE.Color("#FFFFFF"), emissiveMap: tex, emissiveIntensity: 0.18 });
+    var mesh = new THREE.Mesh(geo, mat); mesh.position.set(cx, 0, cz); mesh.receiveShadow = true; mesh.renderOrder = 2;
+    function fit(e) {
+      for (var i = 0; i < P.count; i++) P.setY(i, mountain.probeHeight(probes[i], e) + 0.06);
+      P.needsUpdate = true; geo.computeVertexNormals(); geo.computeBoundingSphere();
+    }
+    var prev = mountain.userData.onMorph;
+    mountain.userData.onMorph = function (e) { if (prev) prev(e); fit(e); };
+    fit(1);
+    mesh.userData.redraw = draw;
+    return mesh;
+  };
+
   /* Médaillon complet : massif + cordelière + anneau rouge + éclair + fleurs latérales */
   W.crest = function (api, o) {
     var THREE = api.THREE; o = o || {};
     var g = new THREE.Group();
     var mountain = W.crestMountain(api, { morph: o.morph != null ? o.morph : 1, radius: 12 });
     g.add(mountain);
+    if (o.lawnText !== false) g.add(W.lawnText(api, mountain, { text: o.lawnText || "GST" }));
     var plinth = new THREE.Mesh(new THREE.CylinderGeometry(12.6, 13.4, 1.6, 64), W.std(api, "--gst-teal-700", { flatShading: false, roughness: 0.6 }));
     plinth.position.y = -0.86; plinth.receiveShadow = true; g.add(plinth);
     var lip = new THREE.Mesh(new THREE.TorusGeometry(12.75, 0.22, 8, 96), W.std(api, "--gst-red-500", { flatShading: false, roughness: 0.5 }));
