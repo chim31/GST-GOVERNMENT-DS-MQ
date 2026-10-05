@@ -10,6 +10,11 @@ Ouvrir [`design-system/index.html`](design-system/index.html) dans un navigateur
 cd design-system && python3 -m http.server 8080   # http://localhost:8080
 ```
 
+## Ouvrir la maquette MVP
+
+Ouvrir [`mvp/index.html`](mvp/index.html) : maquette cliquable de bout en bout (site public, neuf rôles,
+logistique, comptabilité, cuisine, roadmap 3D, bus volant). Scénarios de démo dans [`mvp/README.md`](mvp/README.md).
+
 ## Organisation du dépôt
 
 ```
@@ -18,6 +23,10 @@ design-system/        Le design system web (livrable) — voir design-system/REA
   tokens/             gst-tokens.css (source de vérité) + gst-tokens.json (DTCG, généré)
   assets/css, js, img Composants, moteur de motion, kit 3D, icônes, données factices
   tools/              build-tokens-json.py
+
+mvp/                  Maquette cliquable de bout en bout, construite avec le design system
+  index.html            Point d'entrée (site public + application interne)
+  assets/               seed, cœur de calcul, coquilles, écrans par module
 
 docs/
   projet/             Les 3 documents du projet : référence, roadmap, cahier des charges
