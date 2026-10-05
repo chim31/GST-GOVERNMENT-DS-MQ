@@ -10,21 +10,27 @@
 <link rel="stylesheet" href="assets/css/gst.css">
 <link rel="stylesheet" href="assets/css/doc.css">
 <style>
-.when{display:grid;gap:0;border-top:var(--gst-border) solid var(--gst-text-primary)}
-.when>div{display:grid;gap:8px var(--gst-space-6);padding:var(--gst-space-5) 0;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline)}
-@media (min-width:900px){.when>div{grid-template-columns:260px 1fr 1fr}}
-.when h3{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:1.9rem;line-height:.95}
-.when p{margin:0;font-size:1rem}
-.when .use{color:var(--gst-text-primary)}
-.when .avoid{color:var(--gst-text-secondary)}
+.when{display:grid;gap:12px}
+@media (min-width:900px){.when{grid-template-columns:1fr 1fr}}
+.when>div{display:flex;flex-direction:column;gap:10px;padding:var(--gst-space-5) var(--gst-space-6);border-radius:var(--gst-radius-xl);background:var(--gst-bg-panel);box-shadow:var(--gst-shadow-xs)}
+.when h3{margin:0 0 4px;font-family:var(--gst-font-display);font-weight:400;font-size:1.9rem;line-height:.95}
+.when p{margin:0;font-size:1rem;padding:10px 14px;border-radius:var(--gst-radius-md)}
+.when .use{color:var(--gst-text-primary);background:color-mix(in srgb,var(--gst-state-success) 9%,transparent)}
+.when .avoid{color:var(--gst-text-secondary);background:color-mix(in srgb,var(--gst-state-danger) 7%,transparent)}
 .when .use::before{content:"Utiliser · ";font-family:var(--gst-font-mono);font-size:var(--gst-fs-tag);letter-spacing:var(--gst-ls-tag);text-transform:uppercase;color:var(--gst-state-success-text)}
 .when .avoid::before{content:"Éviter · ";font-family:var(--gst-font-mono);font-size:var(--gst-fs-tag);letter-spacing:var(--gst-ls-tag);text-transform:uppercase;color:var(--gst-state-danger-text)}
-.bans{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));border-top:var(--gst-hairline) solid var(--gst-line-hairline);border-left:var(--gst-hairline) solid var(--gst-line-hairline)}
-.bans div{display:flex;gap:12px;align-items:flex-start;padding:16px;border-right:var(--gst-hairline) solid var(--gst-line-hairline);border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);background:var(--gst-bg-panel);font-size:.98rem}
+.bans{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.bans div{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:var(--gst-radius-lg);background:var(--gst-bg-panel);box-shadow:var(--gst-shadow-xs);font-size:.98rem}
 .bans svg{color:var(--gst-state-danger);flex:none;margin-top:3px}
-.checks{display:grid;gap:4px}
-@media (min-width:900px){.checks{grid-template-columns:1fr 1fr;column-gap:var(--gst-space-7)}}
-.checks label{border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);padding:4px 0}
+.v11{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(260px,1fr))}
+.v11 div{padding:var(--gst-space-5);border-radius:var(--gst-radius-xl);background:var(--gst-bg-tint);display:flex;flex-direction:column;gap:8px}
+.v11 b{font-family:var(--gst-font-display);font-weight:400;font-size:1.7rem;line-height:.95}
+.v11 p{margin:0;color:var(--gst-text-secondary);font-size:.98rem}
+.v11 .gst-chip{align-self:flex-start}
+.v11 .gst-chip:not([class*="--"]){background:var(--gst-bg-panel)}
+.checks{display:grid;gap:8px}
+@media (min-width:900px){.checks{grid-template-columns:1fr 1fr}}
+.checks label{padding:10px 14px;border-radius:var(--gst-radius-lg);background:var(--gst-bg-panel);box-shadow:var(--gst-shadow-xs)}
 .mini-ex{min-height:120px;display:flex;flex-direction:column;justify-content:center;gap:10px}
 .files{font-family:var(--gst-font-mono);font-size:12.5px;line-height:1.8}
 </style>
@@ -34,8 +40,21 @@
 <header class="doc-head">
   <span class="gst-tag gst-tag--accent" data-decode>.07 / GUIDE D'UTILISATION</span>
   <h1 class="doc-head__title" data-rise>Guide</h1>
-  <p class="doc-head__lead">Ce que l'on fait, ce que l'on ne fait jamais, et comment vérifier qu'un écran respecte le système avant de le livrer.</p>
+  <p class="doc-head__lead">Ce qui change en v1.1, ce que l'on fait, ce que l'on ne fait jamais, et comment vérifier qu'un écran respecte le système avant de le livrer.</p>
 </header>
+
+<section class="doc-sec">
+  <div class="doc-sec__head"><div><span class="gst-tag" data-decode>.00 / CE QUI CHANGE EN V1.1</span><h2 class="doc-sec__title">Plus doux, même trait</h2></div>
+    <p class="doc-sec__intro">L'identité GST ne bouge pas — teal, rouge, Éclair, Bebas, Garamond, Plex Mono. Ce qui change, c'est la façon dont l'information respire : plus de quadrillage, plus de boîtes à angles vifs.</p></div>
+  <div class="v11">
+    <div><span class="gst-chip gst-chip--accent">Retiré</span><b>Le quadrillage</b><p>Ni grille de fond, ni réticules carrés, ni cadres à angles. La structure se lit par les surfaces, l'espace et la typographie.</p></div>
+    <div><span class="gst-chip">Rayons</span><b>6 · 10 · 14 · 20 · 28 · 36 · pilule</b><p>Contrôles en pilule, cartes à 20 px, planches à 28 px, cadre de page à 26 px. Les coins suivent l'échelle, jamais une valeur au hasard.</p></div>
+    <div><span class="gst-chip">Élévation</span><b>Ombres douces</b><p>Quatre niveaux (xs, sm, md, lift), teintés teal le jour, noirs la nuit. Une carte flotte, elle n'est plus encadrée.</p></div>
+    <div><span class="gst-chip">Surfaces</span><b>Panneau · teinte · verre</b><p>Le verre dépoli est réservé aux contrôles posés sur une scène 3D ou un ciel ; la teinte groupe sans ombre.</p></div>
+    <div><span class="gst-chip gst-chip--ink">Motion</span><b>M1 devient « Éclosion »</b><p>Un halo s'ouvre et le contenu monte en sortant du flou, au lieu d'une grille qui se trace.</p></div>
+    <div><span class="gst-chip gst-chip--ink">Ciel</span><b>La 3D devient un monde</b><p>Relief, nuages, saisons, vent, pluie, orages : la vitrine, la Roadmap et le Bus partagent le même kit <code class="doc-code-i">gst-world.js</code>.</p></div>
+  </div>
+</section>
 
 <section class="doc-sec">
   <div class="doc-sec__head"><div><span class="gst-tag" data-decode>.01 / QUAND UTILISER QUOI</span><h2 class="doc-sec__title">Les choix courants</h2></div>
@@ -50,7 +69,8 @@
     <div><h3>Alerte critique (M6)</h3><p class="use">Un seuil franchi qui bloque un départ ou met en danger : santé, eau, sécurité, documents.</p><p class="avoid">Un dépassement de budget ordinaire : c'est un avertissement, pas une frappe.</p></div>
     <div><h3>Tampon (M8)</h3><p class="use">Un acte irréversible et tracé : arrêt de journée, gel d'une version, bus complet.</p><p class="avoid">Une simple sauvegarde : un toast suffit.</p></div>
     <div><h3>Drawer ou Modal</h3><p class="use">Drawer pour consulter un détail sans quitter le contexte (mouvements, fiche journée). Modal pour une interruption volontaire (double signature).</p><p class="avoid">Une modale pour un formulaire long : passer par un écran ou un assistant.</p></div>
-    <div><h3>Nuit & Plein soleil</h3><p class="use">Nuit à la lampe frontale, le soir au camp. Plein soleil dehors à midi : texte noir pur, hairlines doublées.</p><p class="avoid">Coder un écran « sombre » à la main : tout passe par data-theme et les tokens.</p></div>
+    <div><h3>Panneau, teinte ou verre</h3><p class="use">Panneau pour une information autonome (carte, KPI). Teinte pour regrouper des éléments liés. Verre uniquement au-dessus d'une scène 3D ou d'un ciel.</p><p class="avoid">Une carte dans une carte dans une carte : une seule élévation par niveau, la teinte suffit à l'intérieur.</p></div>
+    <div><h3>Nuit & Plein soleil</h3><p class="use">Nuit à la lampe frontale, le soir au camp. Plein soleil dehors à midi : texte noir pur, contours renforcés.</p><p class="avoid">Coder un écran « sombre » à la main : tout passe par data-theme et les tokens.</p></div>
   </div>
 </section>
 
@@ -81,13 +101,14 @@
   <div class="doc-sec__head"><div><span class="gst-tag" data-decode>.03 / INTERDITS</span><h2 class="doc-sec__title">Jamais</h2></div>
     <p class="doc-sec__intro">La liste du prompt de design, sans exception.</p></div>
   <div class="bans">
-    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Dégradés dans l'interface</div>
-    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Glow et flou décoratifs</div>
-    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Ombres portées partout (seule exception : lift au-dessus d'une scène 3D)</div>
-    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Glassmorphism</div>
-    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Coins arrondis généreux</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Quadrillage, grille de fond ou réticules carrés</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Dégradés décoratifs dans les écrans Terrain (permis : ciels, héros, bandeaux de famille)</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Glow néon autour des chiffres</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Ombres hors de l'échelle xs · sm · md · lift</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Verre dépoli sur fond uni (il n'a de sens que sur une scène)</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Rayon hors échelle, ou angles vifs sur une surface</div>
     <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Emoji</div>
-    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Illustrations 3D réalistes ou générées par IA</div>
+    <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Illustrations générées par IA ou images de banque</div>
     <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Icônes hétérogènes (un seul set)</div>
     <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Plus d'un élément Éclair par écran</div>
     <div><svg class="gst-icon" aria-hidden="true"><use href="#i-x"/></svg>Animation qui bloque une saisie</div>
@@ -109,8 +130,10 @@
     <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Lisible sur 360 px, cibles ≥ 44 px, actions terrain 56 px</label>
     <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Testé en Jour, Nuit et Plein soleil</label>
     <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>État hors ligne visible sur chaque écran de saisie</label>
-    <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Navigation clavier complète, focus visible (contour rouge + réticule)</label>
+    <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Navigation clavier complète, focus visible (halo rouge)</label>
     <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Aucune donnée sensible dans un écran public</label>
+    <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Aucun débordement horizontal, de 360 à 1 440 px</label>
+    <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Rayons et ombres pris dans l'échelle, aucune ligne de grille</label>
     <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Un seul élément Éclair visible</label>
     <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Poids initial &lt; 500 Ko hors 3D, écran &lt; 3 s en réseau lent</label>
     <label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>La version 2D ne perd aucune information</label>
@@ -127,7 +150,11 @@ assets/css/gst.css         <span class="c">52 composants · tokens sémantiques 
 assets/css/doc.css         <span class="c">mise en page de cette documentation</span>
 assets/js/gst-motion.js    <span class="c">moteur de motion M1 → M11 (WAAPI, 0 dépendance)</span>
 assets/js/gst-components.js<span class="c"> courbe prévu/réel, barres jumelles</span>
-assets/js/gst-3d.js        <span class="c">kit 3D « diorama papier technique » (Three.js à la demande)</span>
+assets/js/gst-3d.js        <span class="c">socle 3D : rendu, caméra, repli 2D, perf (Three.js à la demande)</span>
+assets/js/gst-world.js     <span class="c">monde : ciels, relief, eau, vent, végétation, nuages, pluie, éclairs, oiseaux, fleur de lys, crête</span>
+assets/js/gst-scenes.js    <span class="c">scénario vitrine (fleur → orage → frappe → crête) · médaillon de la Crête</span>
+assets/js/gst-roadmap3d.js <span class="c">carte vivante du camp : saisons, météo, train à vapeur</span>
+assets/js/gst-bus3d.js     <span class="c">bus volant : grappe de ballons, littoral, oiseaux, décollage</span>
 assets/js/gst-icons.js     <span class="c">sprite d'icônes (Lucide, ISC) · trait technique</span>
 assets/js/gst-data.js      <span class="c">données factices : Camp de Réjouissance 2026</span>
 assets/js/gst-shell.js     <span class="c">shell de la documentation</span></pre>

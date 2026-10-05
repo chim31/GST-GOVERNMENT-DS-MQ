@@ -136,7 +136,7 @@ a{color:inherit}
 .gst-icon-btn[aria-pressed="true"]{background:var(--gst-brand);color:var(--gst-on-brand)}
 
 /* SegmentedControl : rail en capsule, indicateur flottant */
-.gst-seg{position:relative;display:inline-flex;gap:2px;padding:4px;border-radius:var(--gst-radius-pill);background:var(--gst-bg-sunken);
+.gst-seg{position:relative;display:inline-flex;max-width:100%;overflow-x:auto;scrollbar-width:none;gap:2px;padding:4px;border-radius:var(--gst-radius-pill);background:var(--gst-bg-sunken);
   box-shadow:inset 0 0 0 1px var(--gst-line-soft);isolation:isolate}
 .gst-seg__ind{position:absolute;top:4px;bottom:4px;left:0;width:0;border-radius:var(--gst-radius-pill);background:var(--gst-brand);z-index:-1;box-shadow:0 4px 12px -4px color-mix(in srgb,var(--gst-brand) 70%,transparent);
   transition:transform var(--gst-dur-base) var(--gst-ease-tonnerre),width var(--gst-dur-base) var(--gst-ease-tonnerre)}

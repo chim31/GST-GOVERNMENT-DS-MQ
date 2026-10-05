@@ -20,8 +20,9 @@
 .scr__head p{margin:0;color:var(--gst-text-secondary);max-width:70ch}
 .scr__meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
 .phones{display:grid;gap:var(--gst-space-8) var(--gst-space-6);grid-template-columns:repeat(auto-fill,minmax(420px,1fr));justify-items:center}
-@media (max-width:520px){.phones{grid-template-columns:1fr}}
-.phone-cap{width:390px;max-width:100%;margin-top:30px;display:flex;flex-direction:column;gap:6px}
+@media (max-width:520px){.phones{grid-template-columns:minmax(0,1fr)}}
+.phones>div{min-width:0;max-width:100%}
+.phone-cap{width:min(390px,100%);margin-top:30px;display:flex;flex-direction:column;gap:6px}
 .phone-cap b{font-family:var(--gst-font-display);font-weight:400;font-size:1.6rem;line-height:1}
 .phone-cap p{margin:0;font-size:.95rem;color:var(--gst-text-secondary)}
 .filter{position:sticky;top:calc(64px + var(--gst-frame-viewport) + 10px);z-index:20;display:flex;justify-content:center;margin:0 0 var(--gst-space-4)}

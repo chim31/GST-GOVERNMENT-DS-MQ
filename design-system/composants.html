@@ -10,36 +10,39 @@
 <link rel="stylesheet" href="assets/css/gst.css">
 <link rel="stylesheet" href="assets/css/doc.css">
 <style>
-.lib{display:grid;gap:var(--gst-space-7)}
+.lib{display:grid;gap:var(--gst-space-7);grid-template-columns:minmax(0,1fr)}
 @media (min-width:1180px){.lib{grid-template-columns:220px minmax(0,1fr)}}
 .toc{display:none}
 @media (min-width:1180px){.toc{display:block;position:sticky;top:96px;align-self:start;max-height:calc(100vh - 120px);overflow:auto;scrollbar-width:thin;padding-right:8px}}
 .toc h4{margin:var(--gst-space-5) 0 6px;font-family:var(--gst-font-mono);font-size:var(--gst-fs-tag);letter-spacing:var(--gst-ls-tag);text-transform:uppercase;color:var(--gst-accent-text);font-weight:500}
 .toc h4:first-child{margin-top:0}
-.toc a{display:flex;gap:8px;padding:3px 0;font-family:var(--gst-font-mono);font-size:12px;text-decoration:none;color:var(--gst-text-secondary)}
+.toc a{display:flex;gap:8px;padding:5px 10px;border-radius:10px;font-family:var(--gst-font-mono);font-size:12px;text-decoration:none;color:var(--gst-text-secondary)}
 .toc a span{opacity:.55;min-width:2em}
-.toc a:hover,.toc a.is-on{color:var(--gst-text-primary)}
+.toc a:hover,.toc a.is-on{color:var(--gst-text-primary);background:var(--gst-bg-panel)}
 .toc a.is-on span{opacity:1;color:var(--gst-accent-text)}
 .fam{display:flex;flex-direction:column;gap:var(--gst-space-7)}
-.fam__head{padding:var(--gst-space-6) 0 0;border-top:var(--gst-border) solid var(--gst-text-primary);display:flex;justify-content:space-between;align-items:baseline;gap:var(--gst-space-4);flex-wrap:wrap}
+.fam__head{margin-top:var(--gst-space-6);padding:var(--gst-space-5) var(--gst-space-6);border-radius:var(--gst-radius-xl);background:linear-gradient(120deg,#063F3E,#0C7873);color:var(--gst-cream);display:flex;justify-content:space-between;align-items:baseline;gap:var(--gst-space-4);flex-wrap:wrap}
+.fam__head .gst-tag{color:rgba(244,244,242,.8);white-space:normal;min-width:0}
 .fam__head h2{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-lg);line-height:.9}
-.cmp{display:grid;gap:var(--gst-space-4);scroll-margin-top:90px}
+.cmp{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--gst-space-4);scroll-margin-top:90px}
 .cmp__head{display:flex;align-items:baseline;gap:var(--gst-space-3);flex-wrap:wrap}
 .cmp__head h3{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:.9}
 .cmp__head p{margin:0;flex:0 0 100%;color:var(--gst-text-secondary);padding-right:min(28%,320px)}
 .cmp__demo{display:flex;flex-direction:column;gap:var(--gst-space-5)}
 .cmp__row{display:flex;flex-wrap:wrap;align-items:center;gap:var(--gst-space-4)}
 .cmp__cap{font-family:var(--gst-font-mono);font-size:var(--gst-fs-tag);letter-spacing:var(--gst-ls-tag);text-transform:uppercase;color:var(--gst-text-secondary);margin-bottom:-8px}
-.cmp__grid{display:grid;gap:var(--gst-space-4);grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
-.cmp__body{display:grid;gap:var(--gst-space-4)}
+.cmp__grid{display:grid;gap:var(--gst-space-4);grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr))}
+.cmp__body{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--gst-space-4)}
 @media (min-width:900px){.cmp__body{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 .cmp__spec{grid-template-columns:96px 1fr!important}
 .cmp__spec dd{font-size:var(--gst-fs-label)!important;line-height:1.5;font-weight:400!important}
 .cmp .doc-code{font-size:12px}
-.mini-frame{position:relative;height:150px;border:var(--gst-frame-poster) solid var(--gst-bg-frame);background:var(--gst-bg-panel);display:grid;place-items:center}
-.app-shell-mini{display:flex;height:260px;border:var(--gst-hairline) solid var(--gst-line-strong);overflow:hidden;background:var(--gst-bg-canvas)}
+.mini-frame{position:relative;height:150px;border:var(--gst-frame-poster) solid var(--gst-bg-frame);border-radius:var(--gst-radius-xl);background:var(--gst-bg-panel);display:grid;place-items:center}
+.surf-demo{position:relative;height:170px;border-radius:var(--gst-radius-xl);overflow:hidden;background:linear-gradient(130deg,#06605E,#5FAAA5 55%,#FFD9A0);display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:18px;align-items:center}
+.surf-demo>div{height:100%;border-radius:var(--gst-radius-lg);display:grid;place-items:center;font-family:var(--gst-font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.app-shell-mini{display:flex;height:260px;border-radius:var(--gst-radius-xl);box-shadow:var(--gst-shadow-sm),inset 0 0 0 1px var(--gst-line-soft);overflow:hidden;background:var(--gst-bg-canvas)}
 .app-shell-mini .gst-rail{width:200px}
-.phone-mini{width:320px;max-width:100%;border:var(--gst-hairline) solid var(--gst-line-strong);background:var(--gst-bg-canvas);position:relative;overflow:hidden}
+.phone-mini{width:320px;max-width:100%;border-radius:var(--gst-radius-xl);box-shadow:var(--gst-shadow-md),inset 0 0 0 1px var(--gst-line-soft);background:var(--gst-bg-canvas);position:relative;overflow:hidden}
 </style>
 </head>
 <body>
@@ -48,11 +51,11 @@
 <header class="doc-head">
   <span class="gst-tag gst-tag--accent" data-decode>.03 / COMPOSANTS · BIBLIOTHÈQUE</span>
   <h1 class="doc-head__title" data-rise>Composants</h1>
-  <p class="doc-head__lead">52 composants, du réticule au tiroir. Chacun avec ses variantes, ses états — y compris hors ligne — sa motion, son accessibilité et un exemple.</p>
+  <p class="doc-head__lead">52 composants, du point au tiroir, tous adoucis en v1.1. Chacun avec ses variantes, ses états — y compris hors ligne — sa motion, son accessibilité et un exemple.</p>
   <dl class="doc-head__meta">
     <div><dt class="gst-label">Familles</dt><dd>7</dd></div>
     <div><dt class="gst-label">Composants</dt><dd>52</dd></div>
-    <div><dt class="gst-label">Hérités du DS d'affiches</dt><dd>Frame · GridOverlay · Divider · DataTag · SpecSheet · Countdown · Fleur</dd></div>
+    <div><dt class="gst-label">Hérités du DS d'affiches</dt><dd>Frame · Divider · DataTag · SpecSheet · Countdown · Fleur</dd></div>
     <div><dt class="gst-label">Nommage</dt><dd>.gst-x · --variante · __partie · .is-état</dd></div>
   </dl>
 </header>
@@ -66,7 +69,7 @@
   <div class="fam__head"><h2>Fondations</h2><span class="gst-tag">.01 / 6 COMPOSANTS</span></div>
 
   <article class="cmp" data-c="Frame">
-    <div class="cmp__head"><h3>Frame</h3><span class="gst-tag">PosterFrame → Frame</span><p>Le cadre teal des affiches, porté au web : 34 px autour d'une affiche, épaisseur fluide autour du viewport (registre Ciel), 2 px autour d'un panneau. Il porte aussi la transition M7.</p></div>
+    <div class="cmp__head"><h3>Frame</h3><span class="gst-tag">PosterFrame → Frame</span><p>Le cadre teal des affiches, porté au web : 34 px autour d'une affiche, épaisseur fluide autour du viewport avec coins intérieurs arrondis, 2 px autour d'un panneau. Il porte aussi la transition M7.</p></div>
     <div class="cmp__body">
       <div class="doc-plate cmp__demo"><span class="gst-tag">VARIANTES · POSTER · VIEWPORT · CARTOUCHE</span>
         <div class="cmp__grid"><div class="mini-frame"><span class="gst-tag">34 PX</span></div><div class="mini-frame" style="border-width:var(--gst-frame-viewport)"><span class="gst-tag">VIEWPORT</span></div><div class="gst-cartouche" style="display:grid;place-items:center;height:150px"><span class="gst-tag">2 PX</span></div></div></div>
@@ -77,21 +80,22 @@
     </div>
   </article>
 
-  <article class="cmp" data-c="GridOverlay">
-    <div class="cmp__head"><h3>GridOverlay</h3><span class="gst-tag">Animable · M1</span><p>Grille hairline et réticules aux nœuds, posée sous le contenu. Se trace (M1) au chargement d'un écran ou d'une section.</p></div>
+  <article class="cmp" data-c="Surface">
+    <div class="cmp__head"><h3>Surface</h3><span class="gst-tag">v1.1 · remplace GridOverlay</span><p>Le fond d'un bloc : panneau blanc à ombre douce, teinte teal légère pour grouper, verre dépoli au-dessus d'une scène 3D. Le quadrillage disparaît : la structure se lit par les surfaces et l'espace.</p></div>
     <div class="cmp__body">
-      <div class="doc-plate cmp__demo"><span class="gst-tag">4 × 3 · NŒUDS ACTIFS</span><div id="demo-grid" style="position:relative;height:170px;background:var(--gst-bg-canvas)"><div data-m1-content style="position:absolute;left:12px;bottom:10px"><span class="gst-display-md">.01 / PLANCHE</span></div></div><button class="gst-btn gst-btn--ghost gst-btn--sm" data-act="grid">Retracer</button></div>
-      <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Props</dt><dd>cols · rows · nodes (bool) · trace (bool)</dd><dt>Motion</dt><dd>M1 : 600 ms par trait, cascade 30 ms, nœuds spring-seat</dd><dt>A11y</dt><dd>aria-hidden="true" ; ne gêne jamais la lecture</dd><dt>Règle</dt><dd>Toujours discrète : ne concurrence jamais la typographie</dd></dl>
-      <script type="text/x-snippet">GST.traceGrid(section, { cols: 4, rows: 3 });
-<div data-m1-grid="4,3">… <p data-m1-content>…</p></div></script></div>
+      <div class="doc-plate cmp__demo"><span class="gst-tag">PANNEAU · TEINTE · VERRE</span><div class="surf-demo"><div class="gst-panel">Panneau</div><div style="background:var(--gst-bg-tint)">Teinte</div><div class="gst-glass" style="box-shadow:var(--gst-shadow-md)">Verre</div></div></div>
+      <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Variantes</dt><dd>panel (ombre sm) · tint (aucune ombre) · glass (flou 14 px, registre Ciel)</dd><dt>Rayon</dt><dd>lg 20 px · xl 28 px pour les planches</dd><dt>Motion</dt><dd>M1 · éclosion : le contenu monte depuis un halo teal</dd><dt>A11y</dt><dd>Le verre garde un contraste ≥ 4,5:1 (fond 72 % opaque)</dd></dl>
+      <script type="text/x-snippet"><div class="gst-panel">…</div>
+<div class="gst-card gst-card--tint">…</div>
+<div class="gst-glass">…</div></script></div>
     </div>
   </article>
 
-  <article class="cmp" data-c="Reticle">
-    <div class="cmp__head"><h3>Reticle</h3><span class="gst-tag">7 px</span><p>Le carré de 7 px aux nœuds. Il sert de point d'origine à toute animation (loi .02), de point de courbe, de marqueur de focus et de survol de ligne.</p></div>
+  <article class="cmp" data-c="Point">
+    <div class="cmp__head"><h3>Point</h3><span class="gst-tag">8 px · ex-Reticle</span><p>Le disque de 8 px. Il sert de point d'origine à toute animation (loi .02), de point de courbe, de marqueur de survol de ligne et de pastille d'état.</p></div>
     <div class="cmp__body">
       <div class="doc-plate cmp__demo"><span class="gst-tag">NEUTRE · MARQUE · ACCENT · GRAND</span><div class="cmp__row"><i class="gst-reticle"></i><i class="gst-reticle gst-reticle--brand"></i><i class="gst-reticle gst-reticle--accent"></i><i class="gst-reticle gst-reticle--lg gst-reticle--brand"></i></div></div>
-      <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Variantes</dt><dd>neutre · brand · accent (plein) · lg (11 px)</dd><dt>Motion</dt><dd>Pop d'échelle 0 → 1 en spring-seat</dd><dt>A11y</dt><dd>Décoratif (aria-hidden)</dd></dl>
+      <div><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Variantes</dt><dd>neutre (contour) · brand (plein) · accent (plein) · lg (12 px)</dd><dt>Motion</dt><dd>Pop d'échelle 0 → 1 en spring-seat</dd><dt>A11y</dt><dd>Décoratif (aria-hidden)</dd></dl>
       <script type="text/x-snippet"><i class="gst-reticle gst-reticle--brand" aria-hidden="true"></i></script></div>
     </div>
   </article>
@@ -138,7 +142,7 @@
       <span class="cmp__cap">États</span>
       <div class="cmp__row"><button class="gst-btn gst-btn--secondary">Repos</button><button class="gst-btn gst-btn--secondary" style="outline:var(--gst-focus-ring);outline-offset:4px">Focus</button><button class="gst-btn gst-btn--primary" disabled>Désactivé</button><button class="gst-btn gst-btn--primary is-loading" aria-busy="true">Envoi<span class="gst-btn__trace"></span></button><button class="gst-btn gst-btn--secondary is-offline">Enregistrer <span class="gst-btn__badge">EN FILE</span></button><button class="gst-btn gst-btn--primary" data-act="load">Cliquer → chargement</button></div>
     </div>
-    <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Variantes</dt><dd>primary · secondary · brand · ghost · danger · eclair (réservé)</dd><dt>États</dt><dd>repos · survol (contour qui se ferme) · focus (anneau rouge + réticule) · actif (−1 px) · désactivé · chargement (trait qui se trace) · hors ligne (tirets + EN FILE)</dd><dt>Motion</dt><dd>ease-snap · 80 ms appui · 160 ms survol</dd><dt>A11y</dt><dd>&lt;button&gt; natif · aria-busy en chargement · libellé verbe + objet</dd></dl>
+    <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Variantes</dt><dd>primary · secondary · brand · ghost · danger · eclair (réservé)</dd><dt>États</dt><dd>repos · survol (soulèvement 1 px + halo) · focus (double anneau) · actif (échelle 0,98) · désactivé · chargement (trait qui se trace) · hors ligne (tirets + EN FILE)</dd><dt>Motion</dt><dd>ease-snap · 80 ms appui · 160 ms survol</dd><dt>A11y</dt><dd>&lt;button&gt; natif · aria-busy en chargement · libellé verbe + objet</dd></dl>
     <script type="text/x-snippet"><button class="gst-btn gst-btn--primary gst-btn--lg">
   <svg class="gst-icon"><use href="#i-plus"/></svg>Saisir une dépense
 </button>
@@ -176,7 +180,7 @@
   <div class="fam__head"><h2>Saisie</h2><span class="gst-tag">.03 / 8 COMPOSANTS · 4 CHAMPS MAX PAR ÉCRAN TERRAIN</span></div>
 
   <article class="cmp" data-c="Field">
-    <div class="cmp__head"><h3>Field</h3><span class="gst-tag">Label mono au-dessus</span><p>Label mono en capitales au-dessus, valeur mono, unité en suffixe. Hauteur 52 px. Le focus pose un réticule rouge dans l'angle.</p></div>
+    <div class="cmp__head"><h3>Field</h3><span class="gst-tag">Label mono au-dessus</span><p>Label mono en capitales au-dessus, valeur mono, unité en suffixe. Hauteur 52 px. Le focus pose un halo teal doux autour du champ.</p></div>
     <div class="doc-plate cmp__demo"><div class="cmp__grid">
       <div class="gst-field"><label class="gst-field__label" for="f1"><span>Article</span><span class="gst-field__req">requis</span></label><div class="gst-control"><input id="f1" value="Riz local 50 kg"></div><span class="gst-field__help">Recherche dans la base de prix</span></div>
       <div class="gst-field"><label class="gst-field__label" for="f2"><span>Quantité</span></label><div class="gst-control"><input id="f2" value="6" inputmode="numeric"><span class="gst-control__affix">sacs</span></div><span class="gst-field__help">Par personne : ×0,075</span></div>
@@ -185,7 +189,7 @@
       <div class="gst-field is-offline"><label class="gst-field__label" for="f5"><span>Bénéficiaire</span><span class="gst-badge">En file</span></label><div class="gst-control"><input id="f5" value="Marché d'Adakpamé"></div><span class="gst-field__help">Enregistré sur l'appareil · sera synchronisé</span></div>
       <div class="gst-field is-suggest"><label class="gst-field__label" for="f6"><span>Prix unitaire</span><span class="gst-badge gst-badge--info">Suggestion</span></label><div class="gst-control gst-control--money"><input id="f6" value="34 560"><span class="gst-control__affix">F CFA</span></div><span class="gst-field__help">Hook · à confirmer par un responsable</span></div>
     </div></div>
-    <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>États</dt><dd>repos · focus (contour 2 px + réticule) · erreur · désactivé (tirets) · hors ligne (tirets + EN FILE) · suggestion (info)</dd><dt>A11y</dt><dd>&lt;label for&gt; · aria-invalid · aria-describedby vers l'aide</dd><dt>Règle</dt><dd>Jamais de placeholder à la place du label</dd></dl>
+    <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>États</dt><dd>repos · focus (contour 1,5 px + halo 4 px) · erreur · désactivé (tirets) · hors ligne (tirets + EN FILE) · suggestion (info)</dd><dt>A11y</dt><dd>&lt;label for&gt; · aria-invalid · aria-describedby vers l'aide</dd><dt>Règle</dt><dd>Jamais de placeholder à la place du label</dd></dl>
     <script type="text/x-snippet"><div class="gst-field is-error">
   <label class="gst-field__label" for="act"><span>Activité</span></label>
   <div class="gst-control"><input id="act" aria-invalid="true" aria-describedby="act-h"></div>
@@ -284,11 +288,11 @@ GST.odometer(el, 4775000, { tone: "good" }); // économie</script></div></div>
   </article>
 
   <article class="cmp" data-c="DataTable">
-    <div class="cmp__head"><h3>DataTable</h3><span class="gst-tag">Dense · en-têtes collants</span><p>200 lignes sans ralentir (critère M1.1). Montants alignés à droite, chiffres tabulaires, réticule au survol, ligne nouvelle surlignée une fois.</p></div>
+    <div class="cmp__head"><h3>DataTable</h3><span class="gst-tag">Dense · en-têtes collants</span><p>200 lignes sans ralentir (critère M1.1). Montants alignés à droite, chiffres tabulaires, point rouge au survol, ligne nouvelle surlignée une fois.</p></div>
     <div class="gst-table-wrap" style="max-height:300px"><table class="gst-table"><thead><tr><th>Article</th><th class="n">Qté</th><th>Unité</th><th class="n">Coût unit.</th><th class="n">Dispo.</th><th class="n">Manquant</th><th class="n">Total</th></tr></thead>
       <tbody><tr><td>Bâches 6 × 4 m</td><td class="n">8</td><td>pièce</td><td class="n">7 500</td><td class="n">5</td><td class="n">3</td><td class="n">22 500</td></tr><tr><td>Cordes 8 mm</td><td class="n">240</td><td>m</td><td class="n">350</td><td class="n">120</td><td class="n">120</td><td class="n">42 000</td></tr><tr class="is-critical"><td>Trousse de secours</td><td class="n">4</td><td>kit</td><td class="n">18 000</td><td class="n">2</td><td class="n">2</td><td class="n">36 000</td></tr><tr><td>Djembés</td><td class="n">6</td><td>pièce</td><td class="n">—</td><td class="n">6</td><td class="n">0</td><td class="n">0</td></tr><tr class="is-new"><td>Seaux 20 L <span class="gst-badge gst-badge--warning">Ajout terrain</span></td><td class="n">12</td><td>pièce</td><td class="n">2 500</td><td class="n">7</td><td class="n">5</td><td class="n">12 500</td></tr></tbody>
       <tfoot><tr><td>Total groupe A</td><td></td><td></td><td></td><td></td><td></td><td class="n">113 000</td></tr></tfoot></table></div>
-    <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Variantes</dt><dd>standard · compact · avec pied de total</dd><dt>États</dt><dd>survol (réticule) · actif · critique · nouvelle ligne · hors ligne (tirets)</dd><dt>A11y</dt><dd>&lt;table&gt; sémantique · &lt;th scope&gt; · légende masquée</dd></dl>
+    <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>Variantes</dt><dd>standard · compact · avec pied de total</dd><dt>États</dt><dd>survol (point) · actif · critique · nouvelle ligne · hors ligne (tirets)</dd><dt>A11y</dt><dd>&lt;table&gt; sémantique · &lt;th scope&gt; · légende masquée</dd></dl>
     <script type="text/x-snippet"><div class="gst-table-wrap"><table class="gst-table">
   <thead><tr><th>Article</th><th class="n">Total</th></tr></thead>…</table></div></script></div>
   </article>
@@ -301,7 +305,7 @@ GST.odometer(el, 4775000, { tone: "good" }); // économie</script></div></div>
   </article>
 
   <article class="cmp" data-c="Chart">
-    <div class="cmp__head"><h3>Chart</h3><span class="gst-tag">Ligne · barres jumelles · M9</span><p>Axes hairline, graduations mono, aucune grille pleine. Prévu teal pointillé, réel rouge plein ; points-réticules cliquables ouvrant une mini fiche technique. Jamais de camembert, jamais de dégradé.</p></div>
+    <div class="cmp__head"><h3>Chart</h3><span class="gst-tag">Ligne · barres jumelles · M9</span><p>Axe discret, graduations mono, aucune grille. Prévu teal pointillé, réel rouge plein avec voile léger ; points ronds cliquables ouvrant une mini fiche technique. Jamais de camembert.</p></div>
     <div class="cmp__body"><div class="doc-plate cmp__demo"><div class="gst-legend"><span><i class="l-planned"></i>Prévu</span><span><i class="l-actual"></i>Réel</span></div><div id="chart-line"></div></div>
       <div class="doc-plate cmp__demo"><div class="gst-legend"><span><i class="l-bar-a"></i>Proposition</span><span><i class="l-bar-b"></i>Sélection</span></div><div id="chart-bars" class="doc-stack" style="gap:12px"></div></div></div>
     <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>A11y</dt><dd>role="img" + aria-label ; points focusables (←/→, Entrée) ; tableau de données équivalent disponible</dd><dt>Lisibilité</dt><dd>Lisible à 360 px ; dérive &gt; 15 % évidente (M2.4)</dd></dl>
@@ -310,7 +314,7 @@ GST.odometer(el, 4775000, { tone: "good" }); // économie</script></div></div>
   </article>
 
   <article class="cmp" data-c="Timeline">
-    <div class="cmp__head"><h3>Timeline</h3><span class="gst-tag">Rétroplanning J-60 → J+10</span><p>Les jalons du type de camp sur une frise hairline : faits (teal), en cours (rouge), en retard (contour rouge).</p></div>
+    <div class="cmp__head"><h3>Timeline</h3><span class="gst-tag">Rétroplanning J-60 → J+10</span><p>Les jalons du type de camp sur une frise douce : faits (teal), en cours (rouge), en retard (contour rouge).</p></div>
     <div class="doc-plate"><div class="gst-timeline">
       <div class="gst-timeline__step is-done"><i class="gst-timeline__node"></i><span class="gst-timeline__j">J-60</span><span class="gst-timeline__txt">Ouverture du camp</span></div>
       <div class="gst-timeline__step is-done"><i class="gst-timeline__node"></i><span class="gst-timeline__j">J-45</span><span class="gst-timeline__txt">Menu proposé, inscriptions</span></div>
@@ -409,7 +413,7 @@ GST.odometer(el, 4775000, { tone: "good" }); // économie</script></div></div>
   </article>
 
   <article class="cmp" data-c="Card">
-    <div class="cmp__head"><h3>Card</h3><span class="gst-tag">Hairline + coins</span><p>Conteneur de base : hairline, réticules optionnels aux angles, contour 2 px quand sélectionné ou critique. Jamais d'ombre.</p></div>
+    <div class="cmp__head"><h3>Card</h3><span class="gst-tag">Rayon 20 · ombre douce</span><p>Conteneur de base : rayon 20 px, ombre douce, contour 2 px quand sélectionné ou critique, soulèvement au survol quand elle est interactive.</p></div>
     <div class="cmp__grid"><div class="gst-card" style="min-height:110px"><i class="gst-card__corner tl"></i><i class="gst-card__corner br"></i><span class="gst-tag">REPOS</span></div><div class="gst-card gst-card--interactive is-selected" style="min-height:110px"><span class="gst-tag gst-tag--brand">SÉLECTIONNÉE</span></div><div class="gst-card is-critical" style="min-height:110px"><span class="gst-tag gst-tag--accent">CRITIQUE</span></div></div>
   </article>
 
@@ -468,7 +472,7 @@ GST.odometer(el, 4775000, { tone: "good" }); // économie</script></div></div>
   </article>
 
   <article class="cmp" data-c="Skeleton">
-    <div class="cmp__head"><h3>Skeleton</h3><span class="gst-tag">Hairlines qui se tracent</span><p>Pas de shimmer : des hairlines qui se tracent, comme un plan qu'on dessine.</p></div>
+    <div class="cmp__head"><h3>Skeleton</h3><span class="gst-tag">Capsules en reflet</span><p>Des capsules arrondies parcourues d'un reflet lent, à la place du contenu attendu.</p></div>
     <div class="cmp__body"><div class="doc-plate cmp__demo"><div class="gst-skel" aria-busy="true" aria-label="Chargement"><i></i><i></i><i></i><i></i></div></div>
     <div><script type="text/x-snippet"><div class="gst-skel" aria-busy="true"><i></i><i></i><i></i></div></script></div></div>
   </article>
@@ -480,7 +484,7 @@ GST.odometer(el, 4775000, { tone: "good" }); // économie</script></div></div>
 
   <article class="cmp" data-c="TopBar">
     <div class="cmp__head"><h3>TopBar</h3><span class="gst-tag">Terrain</span><p>Sélecteur de camp et compte à rebours, synchronisation, bascule Plein soleil / Nuit, avatar et rôle.</p></div>
-    <div class="gst-topbar" style="border:var(--gst-hairline) solid var(--gst-line-hairline)"><div class="gst-topbar__camp"><span class="gst-topbar__count">J-21</span><div class="gst-topbar__name"><b>Réjouissance 2026</b><span class="gst-tag">Attikoumé · 80</span></div><svg class="gst-icon gst-icon--sm"><use href="#i-chevron-down"/></svg></div><span class="gst-topbar__sp"></span><span class="gst-sync is-pending"><span class="gst-sync__dot"></span>3 en file</span><button class="gst-icon-btn gst-icon-btn--ghost" aria-label="Plein soleil"><svg class="gst-icon"><use href="#i-sun-medium"/></svg></button><span class="gst-avatar">CA</span></div>
+    <div class="gst-topbar" style="border-radius:var(--gst-radius-xl);box-shadow:var(--gst-shadow-sm)"><div class="gst-topbar__camp"><span class="gst-topbar__count">J-21</span><div class="gst-topbar__name"><b>Réjouissance 2026</b><span class="gst-tag">Attikoumé · 80</span></div><svg class="gst-icon gst-icon--sm"><use href="#i-chevron-down"/></svg></div><span class="gst-topbar__sp"></span><span class="gst-sync is-pending"><span class="gst-sync__dot"></span>3 en file</span><button class="gst-icon-btn gst-icon-btn--ghost" aria-label="Plein soleil"><svg class="gst-icon"><use href="#i-sun-medium"/></svg></button><span class="gst-avatar">CA</span></div>
     <div class="cmp__body"><dl class="gst-spec gst-spec--rules cmp__spec"><dt>A11y</dt><dd>&lt;header&gt; landmark · ordre de tabulation logique</dd></dl><script type="text/x-snippet"><header class="gst-topbar">…</header></script></div>
   </article>
 
@@ -563,7 +567,6 @@ GST.odometer(el, 4775000, { tone: "good" }); // économie</script></div></div>
   var odo = document.querySelector("[data-odo-demo]"), odo2 = document.querySelector("[data-odo-demo2]"), v = 4850000;
   GST.odometer(odo, v, { instant: true }); GST.odometer(odo2, 23, { instant: true });
   var act = {
-    grid: function () { GST.traceGrid(document.getElementById("demo-grid"), { cols: 4, rows: 3 }); },
     dtag: function () { document.querySelectorAll("[data-dtag]").forEach(function (t, i) { GST.decode(t, null, { delay: i * 140 }); }); },
     load: function (b) { b.classList.add("is-loading"); b.setAttribute("aria-busy", "true"); if (!b.querySelector(".gst-btn__trace")) b.insertAdjacentHTML("beforeend", '<span class="gst-btn__trace"></span>'); setTimeout(function () { b.classList.remove("is-loading"); b.removeAttribute("aria-busy"); GST.toast("Enregistré", { tag: ".00 / OK", tone: "success" }); }, 1800); },
     "odo+": function () { v += 120000; GST.odometer(odo, v, { tone: "bad" }); },
@@ -573,7 +576,6 @@ GST.odometer(el, 4775000, { tone: "good" }); // économie</script></div></div>
     "hook-ok": function (b) { var h = document.getElementById("hook"); h.querySelector(".gst-hook__actions").innerHTML = '<span class="gst-badge gst-badge--success">Validé · entre dans les calculs</span>'; GST.toast("Prix validé · Riz local 50 kg", { tag: ".00 / BASE DE PRIX", tone: "success" }); }
   };
   document.querySelectorAll("[data-act]").forEach(function (b) { b.addEventListener("click", function () { act[b.dataset.act](b); }); });
-  act.grid();
   document.querySelectorAll("[data-toast]").forEach(function (b) {
     b.addEventListener("click", function () {
       var t = b.dataset.toast;

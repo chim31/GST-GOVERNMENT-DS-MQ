@@ -10,8 +10,9 @@
 <link rel="stylesheet" href="assets/css/gst.css">
 <link rel="stylesheet" href="assets/css/doc.css">
 <style>
-.laws{list-style:none;margin:0;padding:0;border-top:var(--gst-border) solid var(--gst-text-primary)}
-.laws li{display:grid;grid-template-columns:64px 1fr;gap:var(--gst-space-4);padding:var(--gst-space-5) 0;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);align-items:baseline}
+.laws{list-style:none;margin:0;padding:0}
+.laws{display:grid;gap:10px}
+.laws li{display:grid;grid-template-columns:64px 1fr;gap:var(--gst-space-4);padding:var(--gst-space-5) var(--gst-space-5);border-radius:var(--gst-radius-xl);background:var(--gst-bg-tint);align-items:baseline}
 @media (min-width:1024px){.laws li{grid-template-columns:96px 5fr 7fr}}
 .laws b{font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:1}
 .laws h3{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:.95}
@@ -30,19 +31,19 @@
 .ease svg{width:100%;height:auto;overflow:visible}
 .ease svg .ax{stroke:var(--gst-line-strong);stroke-width:1;fill:none;vector-effect:non-scaling-stroke}
 .ease svg .cv{stroke:var(--gst-accent);stroke-width:2;fill:none;vector-effect:non-scaling-stroke}
-.ease svg .ball{fill:var(--gst-brand)}
+.ease svg .ball{fill:var(--gst-brand);rx:3.5px}
 .ease svg .ghost{stroke:var(--gst-line-strong);stroke-dasharray:2 3;stroke-width:1;vector-effect:non-scaling-stroke}
-.ease__run{position:relative;height:14px;border-bottom:1px solid var(--gst-line-strong)}
-.ease__run i{position:absolute;left:0;bottom:-4px;width:7px;height:7px;background:var(--gst-accent)}
+.ease__run{position:relative;height:14px;border-bottom:2px solid var(--gst-line-soft);border-radius:2px}
+.ease__run i{position:absolute;left:0;bottom:-4px;width:8px;height:8px;border-radius:50%;background:var(--gst-accent)}
 .ease b{font-family:var(--gst-font-mono);font-size:var(--gst-fs-label);letter-spacing:.06em}
 .ease code{font-family:var(--gst-font-mono);font-size:10px;color:var(--gst-text-secondary)}
 .staggers{display:flex;flex-direction:column;gap:var(--gst-space-4)}
 .stg{display:grid;grid-template-columns:150px 1fr;gap:var(--gst-space-4);align-items:center}
 .stg__cells{display:flex;gap:6px;flex-wrap:wrap}
-.stg__cells i{width:22px;height:22px;background:var(--gst-brand)}
+.stg__cells i{width:22px;height:22px;border-radius:8px;background:var(--gst-brand)}
 
 .mx{display:grid;gap:var(--gst-space-7)}
-.m{display:grid;gap:var(--gst-space-5);padding-top:var(--gst-space-6);border-top:var(--gst-hairline) solid var(--gst-line-hairline)}
+.m{display:grid;gap:var(--gst-space-5);padding:var(--gst-space-6);border-radius:var(--gst-radius-2xl);background:var(--gst-bg-tint)}
 @media (min-width:1100px){.m{grid-template-columns:5fr 7fr;align-items:start}}
 .m__id{display:flex;align-items:center;gap:var(--gst-space-3);flex-wrap:wrap}
 .m__id b{font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-lg);line-height:.85;color:var(--gst-accent-text)}
@@ -50,8 +51,8 @@
 .m__desc{margin:var(--gst-space-3) 0 var(--gst-space-4);color:var(--gst-text-secondary);max-width:52ch}
 .m .gst-spec{grid-template-columns:120px 1fr}
 .m .gst-spec dd{font-size:var(--gst-fs-label);line-height:1.5}
-.stage{position:relative;min-height:300px;background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline);overflow:hidden;display:flex;flex-direction:column}
-.stage__bar{display:flex;justify-content:space-between;align-items:center;gap:var(--gst-space-3);padding:8px 8px 8px 14px;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline)}
+.stage{position:relative;min-height:300px;background:var(--gst-bg-panel);border-radius:var(--gst-radius-xl);box-shadow:var(--gst-shadow-sm);overflow:hidden;display:flex;flex-direction:column}
+.stage__bar{display:flex;justify-content:space-between;align-items:center;gap:var(--gst-space-3);padding:10px 10px 10px 18px;border-bottom:1px solid var(--gst-line-soft)}
 .stage__body{position:relative;flex:1;padding:var(--gst-space-5);display:flex;flex-direction:column;justify-content:center;gap:var(--gst-space-4)}
 .stage--canvas{background:var(--gst-bg-canvas)}
 
@@ -61,7 +62,7 @@
 /* M5 */
 .mini-chain{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 @media (min-width:640px){.mini-chain{grid-template-columns:repeat(4,1fr)}}
-.mini-chain .node{background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline);padding:10px;display:flex;flex-direction:column;gap:4px;min-height:92px}
+.mini-chain .node{background:var(--gst-bg-tint);border-radius:var(--gst-radius-lg);padding:12px;display:flex;flex-direction:column;gap:4px;min-height:92px}
 .mini-chain .node b{font-family:var(--gst-font-display);font-weight:400;font-size:1.7rem;line-height:1}
 .mini-chain .node>span:last-child{font-family:var(--gst-font-mono);font-size:9.5px;letter-spacing:.08em;color:var(--gst-text-secondary);text-transform:uppercase}
 /* M7 */
@@ -69,12 +70,21 @@
 .m7__page{position:absolute;inset:0;padding:22px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px}
 .m7__bars i{position:absolute;background:var(--gst-bg-frame);z-index:3}
 /* M10 */
-.splash{position:relative;flex:1;min-height:260px;display:grid;place-items:center;background:var(--gst-bg-invert);color:var(--gst-text-on-invert);text-align:center}
+.splash{position:relative;flex:1;min-height:240px;display:grid;place-items:center;border-radius:var(--gst-radius-lg);background:radial-gradient(120% 90% at 50% 100%,#0B5E5C,#063F3E 60%,#042C2B);color:var(--gst-text-on-invert);text-align:center}
 .splash svg{width:160px;height:auto;overflow:visible}
-.splash svg path{fill:none;stroke:currentColor;stroke-width:2;vector-effect:non-scaling-stroke;stroke-linejoin:miter}
+.splash svg path{fill:none;stroke:currentColor;stroke-width:2;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
 .splash svg [data-bolt]{stroke:var(--gst-eclair);stroke-width:3.5}
 .splash__w{font-family:var(--gst-font-display);font-size:3.6rem;line-height:.9;letter-spacing:.06em;margin-top:10px}
 .splash .gst-tag{color:var(--gst-text-on-invert);opacity:.8}
+.m10{display:flex;flex-direction:column;gap:12px}
+.m10__seg{align-self:flex-start}
+.m10__3d{position:relative;height:clamp(340px,42vw,460px);border-radius:var(--gst-radius-lg);overflow:hidden;background:#E9D6C2}
+.m10__3d canvas{position:absolute;inset:0;width:100%;height:100%;cursor:grab;touch-action:pan-y}
+.m10__3d canvas:active{cursor:grabbing}
+.m10__flash{position:absolute;inset:0;background:#FFFDF0;opacity:0;pointer-events:none;mix-blend-mode:screen}
+.m10__ui{position:absolute;left:14px;right:14px;bottom:14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.m10__ui .gst-chip{background:var(--gst-glass);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.m10 [hidden]{display:none!important}
 /* M11 */
 .queue{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;border-top:var(--gst-hairline) solid var(--gst-line-hairline)}
 .queue li{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);font-family:var(--gst-font-mono);font-size:var(--gst-fs-label)}
@@ -107,8 +117,8 @@
     <p class="doc-sec__intro">Elles s'appliquent à chaque pixel qui bouge, de la case cochée au bus qui décolle.</p>
   </div>
   <ol class="laws" data-stagger>
-    <li><b>.01</b><h3>Le trait d'abord</h3><p>Une structure se dessine — hairlines, cadres, axes — avant que son contenu n'apparaisse. Le contenu naît de la structure, jamais de nulle part.</p></li>
-    <li><b>.02</b><h3>Tout part d'un nœud</h3><p>Chaque animation a une origine visible : un réticule, un tag, le bouton touché. Les ondes, les tracés et les ouvertures partent de ce point.</p></li>
+    <li><b>.01</b><h3>L'éclosion d'abord</h3><p>Une surface éclot — un halo teal s'ouvre, puis le contenu monte en se précisant. Le contenu naît d'un lieu, jamais de nulle part ; aucun quadrillage n'est dessiné.</p></li>
+    <li><b>.02</b><h3>Tout part d'un nœud</h3><p>Chaque animation a une origine visible : un point, un tag, le bouton touché. Les ondes, les tracés et les ouvertures partent de ce point.</p></li>
     <li><b>.03</b><h3>Le chiffre se calcule</h3><p>Un nombre ne remplace jamais un autre : il roule, colonne par colonne, de l'ancienne à la nouvelle valeur. « Le calcul est continu », rendu visible.</p></li>
     <li><b>.04</b><h3>L'éclair est rare</h3><p>Une seule animation Éclair par écran, réservée aux moments décisifs : seuil critique, budget validé, décollage.</p></li>
     <li><b>.05</b><h3>La beauté ne bloque jamais</h3><p>Aucune animation ne retarde une saisie de terrain. Tout est interruptible. <code class="doc-code-i">prefers-reduced-motion</code> → fondus de 120 ms, 3D figée sur son état final.</p></li>
@@ -142,12 +152,12 @@
     <p class="doc-sec__intro">Toutes en <code class="doc-code-i">ease-snap</code>, 80 – 160 ms. Elles se sentent plus qu'elles ne se voient.</p>
   </div>
   <div class="micro">
-    <div class="doc-plate"><span class="gst-tag">BOUTON · TRANSLATION 1 PX + CONTOUR QUI SE FERME</span><div class="doc-row"><button class="gst-btn gst-btn--primary">Survoler</button><button class="gst-btn gst-btn--secondary">Appuyer</button></div></div>
+    <div class="doc-plate"><span class="gst-tag">BOUTON · LÉVITATION 1 PX + HALO</span><div class="doc-row"><button class="gst-btn gst-btn--primary">Survoler</button><button class="gst-btn gst-btn--secondary">Appuyer</button></div></div>
     <div class="doc-plate"><span class="gst-tag">CASE · COCHE TRACÉE</span><div class="doc-stack"><label class="gst-check"><input type="checkbox"><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Pharmacie vérifiée</label><label class="gst-check"><input type="checkbox" checked><span class="gst-check__box"><svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3"/></svg></span>Eau potable chargée</label></div></div>
     <div class="doc-plate"><span class="gst-tag">ONGLET · FILET ROUGE QUI GLISSE</span><div class="gst-tabs" role="tablist"><button aria-selected="true">Prévu</button><button aria-selected="false">Réel</button><button aria-selected="false">Écart</button></div></div>
-    <div class="doc-plate"><span class="gst-tag">LIGNE · RÉTICULE À GAUCHE AU SURVOL</span><div class="gst-table-wrap"><table class="gst-table gst-table--compact"><tbody><tr><td>Riz 50 kg</td><td class="n">6</td></tr><tr><td>Huile 20 L</td><td class="n">3</td></tr><tr><td>Sachets d'eau</td><td class="n">6 720</td></tr></tbody></table></div></div>
+    <div class="doc-plate"><span class="gst-tag">LIGNE · POINT ROUGE AU SURVOL</span><div class="gst-table-wrap"><table class="gst-table gst-table--compact"><tbody><tr><td>Riz 50 kg</td><td class="n">6</td></tr><tr><td>Huile 20 L</td><td class="n">3</td></tr><tr><td>Sachets d'eau</td><td class="n">6 720</td></tr></tbody></table></div></div>
     <div class="doc-plate"><span class="gst-tag">TOAST · ENTRE PAR LE BAS, TAG DÉCODÉ</span><button class="gst-btn gst-btn--secondary" id="toastBtn">Enregistrer</button></div>
-    <div class="doc-plate"><span class="gst-tag">TOGGLE · ANGLE VIF</span><label class="gst-toggle"><input type="checkbox" checked><span class="gst-toggle__track"></span><span class="gst-ui">Mode hors ligne</span></label></div>
+    <div class="doc-plate"><span class="gst-tag">TOGGLE · PASTILLE QUI GLISSE</span><label class="gst-toggle"><input type="checkbox" checked><span class="gst-toggle__track"></span><span class="gst-ui">Mode hors ligne</span></label></div>
   </div>
 </section>
 
@@ -159,7 +169,7 @@
   <div class="doc-table-wrap"><table class="doc-table api">
     <thead><tr><th>Appel</th><th>Animation</th><th>Équivalent production</th></tr></thead>
     <tbody>
-      <tr><td><code class="doc-code-i">GST.traceGrid(el, {cols, rows})</code></td><td>M1 · Tracé de grille</td><td>GSAP DrawSVG + stagger</td></tr>
+      <tr><td><code class="doc-code-i">GST.traceGrid(el, {cols, rows})</code></td><td>M1 · Éclosion</td><td>Motion (opacity, blur, y) + stagger</td></tr>
       <tr><td><code class="doc-code-i">GST.decode(el, texte)</code></td><td>M2 · Décodage de tag</td><td>GSAP ScrambleText / hook React</td></tr>
       <tr><td><code class="doc-code-i">GST.rise(el)</code></td><td>M3 · Levée Bebas</td><td>GSAP SplitText</td></tr>
       <tr><td><code class="doc-code-i">GST.odometer(el, valeur, {tone})</code></td><td>M4 · Odomètre</td><td>Composant React &lt;StatOdometer&gt; + Motion</td></tr>
@@ -168,7 +178,9 @@
       <tr><td><code class="doc-code-i">GST.wipe(href, libellé)</code></td><td>M7 · Volet de cadre</td><td>View Transitions API / AnimatePresence</td></tr>
       <tr><td><code class="doc-code-i">GST.stamp(hôte, {big, small})</code></td><td>M8 · Tampon</td><td>Motion keyframes</td></tr>
       <tr><td><code class="doc-code-i">GST.chartLine(hôte, données)</code></td><td>M9 · Courbe tracée</td><td>visx / D3 + DrawSVG</td></tr>
-      <tr><td><code class="doc-code-i">GST.crest({svg, word, sub, long})</code></td><td>M10 · Crête du Tonnerre</td><td>Timeline GSAP</td></tr>
+      <tr><td><code class="doc-code-i">GST.crest({svg, word, sub, long})</code></td><td>M10 · Crête du Tonnerre (splash)</td><td>Timeline GSAP</td></tr>
+      <tr><td><code class="doc-code-i">GST3D.scenes.crest(THREE, {canvas})</code></td><td>M10 · Crête en volume</td><td>React Three Fiber + drei</td></tr>
+      <tr><td><code class="doc-code-i">GST3D.scenes.vitrine(THREE, {…})</code></td><td>M10 · Scénario vitrine (fleur → orage → crête)</td><td>R3F + GSAP timeline</td></tr>
       <tr><td><code class="doc-code-i">GST.syncFlush(indicateur, file)</code></td><td>M11 · Synchronisation</td><td>Motion layout + Service Worker</td></tr>
     </tbody></table></div>
 </section>
@@ -179,6 +191,9 @@
 <script src="assets/js/gst-data.js"></script>
 <script src="assets/js/gst-components.js"></script>
 <script src="assets/js/gst-shell.js"></script>
+<script src="assets/js/gst-3d.js"></script>
+<script src="assets/js/gst-world.js"></script>
+<script src="assets/js/gst-scenes.js"></script>
 <script>
 (function () {
   var GST = window.GST, D = window.GST_DATA;
@@ -242,8 +257,8 @@
 
   /* ══ Catalogue ════════════════════════════════════════════════════ */
   var M = [
-    { id: "M1", nom: "Tracé de grille", proto: true, desc: "Les hairlines se dessinent depuis les réticules, les réticules apparaissent en pop d'échelle, puis le contenu se révèle.",
-      spec: [["Durée", "600 ms par trait · cascade 30 ms"], ["Courbe", "ease-trace · nœuds : spring-seat"], ["Déclencheur", "Chargement d'écran, entrée de section"], ["Réduit", "Fondu 120 ms du contenu, grille déjà posée"], ["Où", "Écrans, sections vitrine, Skeleton"]],
+    { id: "M1", nom: "Éclosion", proto: true, desc: "Un halo teal s'ouvre depuis le point d'origine, puis chaque bloc monte de 14 px en sortant du flou, en cascade. Aucune ligne de grille : la structure se lit par les surfaces.",
+      spec: [["Durée", "520 ms par bloc · cascade 60 ms"], ["Courbe", "ease-trace · halo : ease-tonnerre"], ["Déclencheur", "Chargement d'écran, entrée de section"], ["Réduit", "Fondu 120 ms du contenu"], ["Où", "Écrans, sections vitrine, Skeleton"]],
       stage: '<div class="m1box" id="m1"><div data-m1-content class="kpi" style="left:0;top:0"><span class="gst-tag">.01 / BUDGET PRÉVISIONNEL</span></div><div data-m1-content class="kpi" style="left:0;top:33%"><span class="gst-display-md">4 850 000</span></div><div data-m1-content class="kpi" style="left:50%;top:33%"><span class="gst-label">F CFA · 80 participants</span></div><div data-m1-content class="kpi" style="left:0;top:66%"><span class="gst-badge gst-badge--success">Validé</span></div></div>',
       play: function () { GST.traceGrid(document.getElementById("m1"), { cols: 4, rows: 3 }); } },
     { id: "M2", nom: "Décodage de tag", desc: "Les data tags se déchiffrent caractère par caractère : brouillage mono → texte final, 24 ms par caractère.",
@@ -290,7 +305,7 @@
         });
       },
       play: function () { document.querySelector("[data-riz-go]").click(); } },
-    { id: "M6", nom: "Frappe de l'Éclair", proto: true, desc: "Seuil critique franchi : un zigzag Éclair traverse la carte en 180 ms, le contour passe au rouge 2 px, un anneau net pulse deux fois autour du réticule d'origine, puis tout se stabilise. Vibration courte sur mobile.",
+    { id: "M6", nom: "Frappe de l'Éclair", proto: true, desc: "Seuil critique franchi : un zigzag Éclair traverse la carte en 180 ms, le contour passe au rouge 2 px, un anneau pulse deux fois autour du point d'origine, puis tout se stabilise. Vibration courte sur mobile.",
       spec: [["Durée", "180 ms (éclair) + 2 × 520 ms (anneau)"], ["Courbe", "ease-strike"], ["Déclencheur", "Franchissement d'un seuil critique"], ["Réduit", "Contour rouge + alerte, sans éclair"], ["Où", "Santé, eau, sécurité — 1 par écran"]],
       stage: '<div id="m6" class="gst-card" style="max-width:420px"><div style="display:flex;justify-content:space-between;align-items:center"><span class="gst-tag">B · ALIMENTAIRE / EAU POTABLE</span><i class="gst-reticle gst-reticle--brand gst-reticle--lg" data-o></i></div><div class="gst-stat" style="margin:12px 0"><span class="gst-label">Stock sur le terrain</span><span class="gst-stat__value"><span data-w>1 140</span><span class="gst-stat__unit">sachets</span></span></div><div class="gst-need"><div class="gst-need__bar"><i class="gst-need__have" data-wb style="width:68%"></i><i class="gst-need__seuil" style="left:57%"></i></div><div class="gst-need__legend"><span>Seuil : 960 · 2 jours</span><span>Besoin 1 680</span></div></div><div class="doc-row" style="margin-top:14px"><button class="gst-btn gst-btn--secondary gst-btn--sm" data-cons>Distribuer 120</button><button class="gst-btn gst-btn--ghost gst-btn--sm" data-reset>Réapprovisionner</button></div></div>',
       init: function () {
@@ -332,15 +347,15 @@
       spec: [["Durée", "520 ms"], ["Courbe", "ease-strike à l'impact, ressort court"], ["Déclencheur", "Arrêt de journée, budget gelé"], ["Réduit", "Tampon posé, sans impact"], ["Où", "Compta, Logistique, Bus complet"]],
       stage: '<div id="m8" class="gst-card" style="max-width:440px;min-height:190px"><span class="gst-tag">COMPTES DU JOUR / J.04 · 08.08</span><dl class="gst-spec" style="margin-top:12px"><dt>Dépensé</dt><dd>173 000 F CFA</dd><dt>Solde caisse</dt><dd>412 500 F CFA</dd><dt>Écart caisse</dt><dd>0</dd></dl></div>',
       play: function () { var h = document.getElementById("m8"); h.querySelectorAll(".gst-stamp").forEach(function (s) { s.remove(); }); GST.stamp(h, { big: "VALIDÉ", left: "64%", top: "58%" }); } },
-    { id: "M9", nom: "Courbe tracée", desc: "Les courbes se dessinent de gauche à droite ; le prévu en pointillé teal, le réel en rouge plein qui « rattrape » le prévu. Le point survolé devient un réticule qui s'agrandit et ouvre le détail.",
+    { id: "M9", nom: "Courbe tracée", desc: "Les courbes se dessinent de gauche à droite ; le prévu en pointillé teal, le réel en rouge plein qui « rattrape » le prévu. Le point survolé grossit et ouvre le détail.",
       spec: [["Durée", "700 ms (prévu) · 1 300 ms (réel)"], ["Courbe", "ease-trace"], ["Déclencheur", "Affichage du graphique"], ["Réduit", "Courbes posées"], ["Où", "Comptabilité, bilan"]],
       stage: '<div><div class="gst-legend" style="margin-bottom:8px"><span><i class="l-planned"></i>Prévu</span><span><i class="l-actual"></i>Réel</span></div><div id="m9"></div></div>',
       init: function () { this.chart = GST.chartLine(document.getElementById("m9"), { labels: D.COURBE.prevu.map(function (_, i) { return "J." + String(i + 1).padStart(2, "0"); }), planned: D.COURBE.prevu, actual: D.COURBE.reel, unit: "k F CFA · cumul", every: 2 }); },
       play: function () { this.chart && this.chart.play(); } },
-    { id: "M10", nom: "Crête du Tonnerre", proto: true, desc: "Loader et intro : la ligne de crête du logo se dessine d'un trait continu, un éclair la frappe, TONNERRE se lève en Bebas. Version courte 900 ms pour l'app, longue 2,4 s pour la vitrine (voir l'Ouverture).",
-      spec: [["Durée", "900 ms (app) · 2 400 ms (vitrine)"], ["Courbe", "trace → strike → tonnerre"], ["Déclencheur", "Chargement, splash PWA"], ["Réduit", "Logo posé"], ["Où", "Splash, connexion, vitrine"]],
-      stage: '<div class="splash" id="m10"><div><svg viewBox="0 -18 120 78" aria-hidden="true"><path data-crest d="M2 58 L20 41 L27 45 L40 27 L48 33 L61 9 L68 19 L75 15 L90 35 L98 31 L118 58"/><path data-bolt d="M80 -16 L68 1 L74 2 L62 10"/></svg><div class="splash__w" data-w>TONNERRE</div><span class="gst-tag" data-s>GST GOVERNMENT · CHARGEMENT</span></div></div>',
-      play: function () { var h = document.getElementById("m10"); GST.crest({ svg: h.querySelector("svg"), word: h.querySelector("[data-w]"), sub: h.querySelector("[data-s]"), long: false }); } },
+    { id: "M10", nom: "Crête du Tonnerre", proto: true, desc: "Deux registres. <b>Splash</b> (app) : la ligne de crête se dessine d'un trait, un éclair la frappe, TONNERRE se lève — 900 ms. <b>En volume</b> (vitrine) : la crête 3D, médaillon à deux fleurs de lys, éclair extrudé et halo de corde ; faites-la tourner, frappez-la. Le scénario complet — fleur, orage, frappe, émergence — ouvre l'Ouverture.",
+      spec: [["Durée", "900 ms (splash) · 2,6 s (émergence 3D) · 11 s (scénario)"], ["Courbe", "trace → strike → tonnerre · ressort en 3D"], ["Déclencheur", "Chargement, splash PWA, entrée de section"], ["Réduit", "Logo posé · 3D figée sur l'état final"], ["Où", "Splash, connexion, vitrine"]],
+      stage: '<div class="m10"><div class="m10__seg gst-seg gst-seg--sm" role="group" aria-label="Registre" data-m10seg><button aria-pressed="true" data-value="3d">En volume</button><button aria-pressed="false" data-value="2d">Splash</button></div><div class="m10__3d" id="m10-3d"><canvas aria-label="Crête du Tonnerre en 3D, faites glisser pour tourner"></canvas><div class="m10__flash" data-flash></div><div class="m10__ui"><span class="gst-chip">Glisser pour tourner</span><button class="gst-btn gst-btn--eclair gst-btn--sm" data-m10strike>Frapper</button></div></div><div class="splash" id="m10"><div><svg viewBox="0 -18 120 78" aria-hidden="true"><path data-crest d="M2 58 L20 41 L27 45 L40 27 L48 33 L61 9 L68 19 L75 15 L90 35 L98 31 L118 58"/><path data-bolt d="M80 -16 L68 1 L74 2 L62 10"/></svg><div class="splash__w" data-w>TONNERRE</div><span class="gst-tag" data-s>GST GOVERNMENT · CHARGEMENT</span></div></div></div>',
+      play: function () { var h = document.getElementById("m10"); if (h.hidden) { window.M10_3D && window.M10_3D.intro(); return; } GST.crest({ svg: h.querySelector("svg"), word: h.querySelector("[data-w]"), sub: h.querySelector("[data-s]"), long: false }); } },
     { id: "M11", nom: "Synchronisation", desc: "Hors ligne, la pastille « respire » en teal tant que des données attendent ; au retour du réseau, les lignes en file défilent vers le haut et se cochent une à une.",
       spec: [["Durée", "Respiration 1,6 s · 260 ms par ligne"], ["Courbe", "ease-trace · ease-tonnerre"], ["Déclencheur", "Perte / retour du réseau"], ["Réduit", "États sans respiration"], ["Où", "Barre supérieure terrain, écrans de saisie"]],
       stage: '<div class="doc-stack" id="m11"><div class="doc-row" style="justify-content:space-between"><span class="gst-sync is-offline" data-sync><span class="gst-sync__dot"></span><span class="gst-sync__label">HORS LIGNE · 3 EN FILE</span></span><div class="doc-row"><button class="gst-btn gst-btn--secondary gst-btn--sm" data-net><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-refresh-cw"/></svg>Retour du réseau</button></div></div><ul class="queue" data-q></ul></div>',
@@ -374,6 +389,33 @@
 
   document.getElementById("toastBtn").addEventListener("click", function () { GST.toast("Dépense enregistrée · 18 500 F CFA", { tag: ".02 / COMPTABILITÉ", tone: "success" }); });
 })();
+</script>
+<script type="module">
+/* M10 en volume : médaillon 3D de la Crête, chargé à l'approche */
+const K = window.GST3D, box = document.getElementById("m10-3d"), splash = document.getElementById("m10"), seg = document.querySelector("[data-m10seg]");
+function view(v) {
+  seg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.value === v)); seg._inkUpdate && seg._inkUpdate();
+  box.hidden = v !== "3d"; splash.hidden = v !== "2d";
+  if (v === "2d") GST.crest({ svg: splash.querySelector("svg"), word: splash.querySelector("[data-w]"), sub: splash.querySelector("[data-s]"), long: false });
+  else if (window.M10_3D) window.M10_3D.intro();
+}
+GST.wireTabs(seg); seg.addEventListener("gst-change", e => view(e.detail.value));
+if (!K || !K.webglOK() || K.lowEnd()) { view("2d"); seg.hidden = true; }
+else {
+  splash.hidden = true;
+  const io = new IntersectionObserver(async es => {
+    if (!es[0].isIntersecting) return; io.disconnect();
+    try {
+      const THREE = await import("https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js");
+      const fl = box.querySelector("[data-flash]");
+      const c = K.scenes.crest(THREE, { canvas: box.querySelector("canvas"), mode: "aube",
+        onFlash: k => { fl.style.opacity = k * .5; if (k > 0) setTimeout(() => { fl.style.transition = "opacity .3s"; fl.style.opacity = 0; setTimeout(() => fl.style.transition = "", 320); }, 40); } });
+      window.M10_3D = c; c.intro();
+      box.querySelector("[data-m10strike]").addEventListener("click", () => c.strike());
+    } catch (e) { view("2d"); seg.hidden = true; }
+  }, { rootMargin: "200px" });
+  io.observe(box);
+}
 </script>
 </body>
 </html>
