@@ -117,5 +117,26 @@
     reel: [610, 910, 1210, 1690, 1930, 2290, 2620, 2780, 3090, 3470, 3790, 4150, 4520, 4619]
   };
 
-  window.GST_DATA = { CAMP: CAMP, UNITES: UNITES, GROUPES: GROUPES, POSTES: POSTES, PARTICIPANTS: PARTICIPANTS, PROGRAMME: PROGRAMME, PLATS: PLATS, DEPENSES: DEPENSES, COURBE: COURBE, PRENOMS: PRENOMS, NOMS: NOMS };
+
+  /* Carte du camp (roadmap 3D et carte 2D) — repère en mètres-maquette :
+     x ∈ [-120, 120] ouest → est · z ∈ [-85, 85] nord → sud. */
+  var CARTE = {
+    w: 240, d: 170,
+    stations: [[-72, 42], [-46, 56], [-14, 42], [28, 44], [70, 16], [66, -18], [32, -40], [2, -22], [-30, -36], [-66, -30], [-96, -4], [-62, 14], [-32, 6], [6, 12]],
+    lieux: ["Camp principal", "Coins d'unité", "Forêt d'Attikoumé", "Togoville · lac Togo", "École d'Attikoumé", "Piste de Kpalimé", "Bivouac du Tonnerre",
+      "Prairie du camp", "Ateliers", "Grand terrain", "Stade scout", "Amphithéâtre", "Cercle du feu", "Gare de départ"],
+    riviere: [[34, -82], [40, -58], [44, -36], [50, -12], [50, 12], [54, 34], [58, 50]],
+    lac: { x: 62, z: 58, r: 17 },
+    sommet: { x: 14, z: -70, nom: "Mont Tonnerre" },
+    villages: [{ x: 82, z: 26, n: 7, nom: "Attikoumé" }, { x: 40, z: 62, n: 6, nom: "Togoville" }],
+    camps: [0, 1, 11, 12],
+    saisons: [
+      { id: "pluies", nom: "Saison des pluies", mois: "avril → juillet" },
+      { id: "petite-seche", nom: "Petite saison sèche", mois: "août" },
+      { id: "petite-pluies", nom: "Petite saison des pluies", mois: "septembre → octobre" },
+      { id: "harmattan", nom: "Saison sèche · harmattan", mois: "novembre → mars" }
+    ]
+  };
+
+  window.GST_DATA = { CAMP: CAMP, UNITES: UNITES, GROUPES: GROUPES, POSTES: POSTES, PARTICIPANTS: PARTICIPANTS, PROGRAMME: PROGRAMME, PLATS: PLATS, DEPENSES: DEPENSES, COURBE: COURBE, PRENOMS: PRENOMS, NOMS: NOMS, CARTE: CARTE };
 })();

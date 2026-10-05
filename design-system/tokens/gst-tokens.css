@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════════════
-   GST GOVERNMENT — Tokens web · v1.0
+   GST GOVERNMENT — Tokens web · v1.1 (identité adoucie : sans quadrillage, angles arrondis)
    Extension web du design system d'affiches « Groupe Scout Tonnerre ».
 
    Ce fichier est AUTONOME : il réunit
@@ -75,6 +75,7 @@
   --gst-space-6:32px; --gst-space-7:48px; --gst-space-8:64px; --gst-space-9:96px;  --gst-space-10:128px;
 
   /* ── 5 · Grille — 4 col · 8 col (≥ 640) · 12 col (≥ 1024) ─────────── */
+  /* Colonnes de mise en page (invisibles : aucun quadrillage n'est jamais dessiné) */
   --gst-grid-cols:4;  --gst-grid-gutter:16px; --gst-grid-margin:20px;
   --gst-container:1440px;
   --gst-node-size:7px;
@@ -82,12 +83,19 @@
   /* Cadre des affiches → cadre web */
   --gst-frame-poster:34px;                        /* épaisseur héritée de l'affiche */
   --gst-frame-viewport:clamp(6px, .9vw, 14px);    /* cadre permanent du registre Ciel */
+  --gst-frame-radius:clamp(14px, 1.6vw, 26px);    /* coins intérieurs arrondis du cadre */
 
-  /* ── Rayons ────────────────────────────────────────────────────────── */
-  --gst-radius-none:0; --gst-radius-sm:3px; --gst-radius-pill:999px;
+  /* ── Rayons — v1.1 : l'identité s'adoucit, les angles s'arrondissent ── */
+  --gst-radius-none:0; --gst-radius-xs:6px; --gst-radius-sm:10px; --gst-radius-md:14px;
+  --gst-radius-lg:20px; --gst-radius-xl:28px; --gst-radius-2xl:36px; --gst-radius-pill:999px;
 
-  /* ── Élévation : une seule ombre, au-dessus d'une scène 3D ─────────── */
-  --gst-shadow-lift:0 24px 48px -24px rgba(3,39,38,.45);
+  /* ── Élévation douce (remplace les filets et le quadrillage) ───────── */
+  --gst-shadow-color:3,39,38;
+  --gst-shadow-xs:0 1px 2px rgba(var(--gst-shadow-color),.06);
+  --gst-shadow-sm:0 1px 2px rgba(var(--gst-shadow-color),.05),0 6px 16px -6px rgba(var(--gst-shadow-color),.10);
+  --gst-shadow-md:0 2px 6px rgba(var(--gst-shadow-color),.05),0 16px 36px -12px rgba(var(--gst-shadow-color),.18);
+  --gst-shadow-lift:0 10px 24px -10px rgba(var(--gst-shadow-color),.22),0 36px 72px -28px rgba(var(--gst-shadow-color),.38);
+  --gst-glass:rgba(255,255,255,.72);
   --gst-scrim:rgba(3,39,38,.55);   /* voile sous tiroir / modale */
 
   /* ── Cibles tactiles ───────────────────────────────────────────────── */
@@ -130,7 +138,7 @@
   --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px;
   --space-6:32px; --space-7:48px; --space-8:64px; --space-9:96px; --space-10:128px;
   --hairline:1px; --node-size:7px; --rule-weight:4px; --border-weight:2px;
-  --radius-none:0; --radius-sm:3px; --radius-pill:999px;
+  --radius-none:0; --radius-sm:var(--gst-radius-sm); --radius-pill:999px;
 }
 
 @media (min-width:640px)  { :root { --gst-grid-cols:8;  --gst-grid-gutter:24px; --gst-grid-margin:40px; } }
@@ -152,6 +160,8 @@
   --gst-text-accent:var(--gst-red-500);
 
   --gst-line-hairline:var(--gst-stone);
+  --gst-line-soft:rgba(20,20,20,.07);
+  --gst-bg-tint:var(--gst-teal-50);
   --gst-line-strong:var(--gst-ink-40);
   --gst-line-brand:var(--gst-teal-500);
   --gst-node-reticle:var(--gst-sand);
@@ -201,6 +211,10 @@
   --gst-text-accent:var(--gst-red-100);
 
   --gst-line-hairline:rgba(255,255,255,.14);
+  --gst-line-soft:rgba(255,255,255,.08);
+  --gst-bg-tint:rgba(147,200,196,.10);
+  --gst-glass:rgba(6,63,62,.72);
+  --gst-shadow-color:0,0,0;
   --gst-line-strong:rgba(255,255,255,.34);
   --gst-line-brand:var(--gst-teal-300);
   --gst-node-reticle:rgba(255,255,255,.34);
@@ -239,6 +253,8 @@
   --gst-text-accent:var(--gst-red-700);
 
   --gst-line-hairline:var(--gst-ink-40);
+  --gst-line-soft:var(--gst-ink-40);
+  --gst-bg-tint:var(--gst-cream);
   --gst-line-strong:var(--gst-ink);
   --gst-line-brand:var(--gst-teal-700);
   --gst-node-reticle:var(--gst-ink);

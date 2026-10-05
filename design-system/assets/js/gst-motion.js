@@ -2,7 +2,7 @@
    GST GOVERNMENT — Moteur de motion « Le trait, le calcul, l'éclair »
    Vanilla JS + Web Animations API. Zéro dépendance. ~ 9 Ko minifié.
 
-   M1  GST.traceGrid / GST.traceBox   Tracé de grille
+   M1  GST.traceGrid / GST.traceBox   Éclosion · contour arrondi (v1.1 : sans grille)
    M2  GST.decode                     Décodage de tag
    M3  GST.rise                       Levée Bebas
    M4  GST.odometer                   Odomètre
@@ -197,9 +197,7 @@
     return Promise.all(anims.map(function (a) { return a.finished; }));
   };
 
-  /* ══ M1 · Tracé de grille ═════════════════════════════════════════════
-     Dessine des hairlines depuis les réticules, pop des nœuds en ressort,
-     puis révèle le contenu [data-m1-content].                            */
+  /* ══ M1 · Éclosion & contour ══════════════════════════════════════════ */
   GST.drawEl = function (el, opts) {
     opts = opts || {};
     el.setAttribute("pathLength", "1");
@@ -220,69 +218,57 @@
     return GST.anim(el, s.frames, { duration: s.duration, delay: delay || 0, easing: "linear" });
   };
 
+  /* M1 v1.1 · Éclosion — plus de quadrillage : le contenu monte en douceur,
+     précédé d'un halo teal qui s'ouvre depuis le point d'origine.        */
   GST.traceGrid = function (host, opts) {
     opts = opts || {};
-    var cols = opts.cols || 4, rows = opts.rows || 3;
-    var old = host.querySelector(":scope > .gst-grid-overlay");
+    var old = host.querySelector(":scope > .gst-bloom");
     if (old) old.remove();
-    var wrap = document.createElement("div");
-    wrap.className = "gst-grid-overlay";
-    wrap.setAttribute("aria-hidden", "true");
-    var svg = GST.svg("svg", { viewBox: "0 0 100 100", preserveAspectRatio: "none" }, wrap);
-    host.insertBefore(wrap, host.firstChild);
-    var lines = [], nodes = [], i, j;
-    for (i = 0; i <= cols; i++) { var x = (i / cols) * 100; lines.push(GST.svg("line", { x1: x, y1: 0, x2: x, y2: 100 }, svg)); }
-    for (j = 0; j <= rows; j++) { var y = (j / rows) * 100; lines.push(GST.svg("line", { x1: 0, y1: y, x2: 100, y2: y }, svg)); }
-    // Réticules : rendus en HTML pour rester carrés malgré preserveAspectRatio="none"
-    for (i = 0; i <= cols; i++) for (j = 0; j <= rows; j++) {
-      var r = document.createElement("i");
-      r.className = "gst-reticle";
-      r.style.cssText = "position:absolute;left:" + (i / cols) * 100 + "%;top:" + (j / rows) * 100 + "%;margin:-3.5px 0 0 -3.5px;background:var(--gst-bg-canvas)";
-      wrap.appendChild(r); nodes.push(r);
-    }
     var content = host.querySelectorAll("[data-m1-content]");
     if (GST.reduced()) { content.forEach(function (c) { c.style.opacity = 1; }); return Promise.resolve(); }
+    var cs = getComputedStyle(host);
+    if (cs.position === "static") host.style.position = "relative";
+    var bloom = document.createElement("i");
+    bloom.className = "gst-bloom"; bloom.setAttribute("aria-hidden", "true");
+    bloom.style.cssText = "position:absolute;left:" + (opts.x != null ? opts.x : 18) + "%;top:" + (opts.y != null ? opts.y : 82) + "%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;pointer-events:none;z-index:0;" +
+      "background:radial-gradient(circle,color-mix(in srgb,var(--gst-brand) 34%,transparent) 0%,transparent 70%)";
+    host.insertBefore(bloom, host.firstChild);
+    var big = Math.max(host.clientWidth, host.clientHeight) / 14;
+    GST.anim(bloom, [{ transform: "scale(.2)", opacity: 0 }, { transform: "scale(" + (big * .55).toFixed(2) + ")", opacity: 1, offset: .45 }, { transform: "scale(" + big.toFixed(2) + ")", opacity: 0 }],
+      { duration: 1300, easing: GST.ease("tonnerre"), fill: "both" }).finished.then(function () { bloom.remove(); });
     content.forEach(function (c) { c.style.opacity = 0; });
-    var dur = opts.duration || 600;
-    nodes.forEach(function (n, k) {
-      var s = GST.springFrames(function (v) { return { transform: "scale(" + v.toFixed(4) + ")" }; });
-      n.animate(s.frames, { duration: s.duration, delay: k * 12, fill: "both", easing: "linear" });
-    });
-    lines.forEach(function (l, k) { GST.drawEl(l, { duration: dur, delay: 80 + k * 30, reverse: k % 2 === 1 }); });
-    var t = 80 + lines.length * 30 + dur * 0.6;
     var stg = S("base", 56);
     content.forEach(function (c, k) {
-      GST.anim(c, [{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }],
-        { duration: D("slow", 420), delay: t + k * stg, easing: GST.ease("tonnerre") });
+      GST.anim(c, [{ opacity: 0, transform: "translateY(14px) scale(.98)", filter: "blur(4px)" }, { opacity: 1, transform: "none", filter: "blur(0)" }],
+        { duration: 640, delay: 260 + k * stg, easing: GST.ease("tonnerre") });
     });
-    return GST.wait(t + content.length * stg + 420);
+    return GST.wait(260 + content.length * stg + 640);
   };
 
-  /* Contour d'une carte qui se trace avant que le contenu n'apparaisse. */
+  /* Contour arrondi qui se trace avant que le contenu n'apparaisse
+     (le tracé épouse le border-radius réel de l'élément). */
   GST.traceBox = function (el, opts) {
     opts = opts || {};
     if (GST.reduced()) { el.style.opacity = 1; return Promise.resolve(); }
     var cs = getComputedStyle(el);
     if (cs.position === "static") el.style.position = "relative";
-    var svg = GST.svg("svg", { "aria-hidden": "true", preserveAspectRatio: "none", viewBox: "0 0 100 100" });
-    svg.style.cssText = "position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);pointer-events:none;overflow:visible;z-index:2";
+    var w = el.offsetWidth, h = el.offsetHeight, r = Math.min(parseFloat(cs.borderTopLeftRadius) || 0, w / 2, h / 2);
+    var svg = GST.svg("svg", { "aria-hidden": "true", viewBox: "0 0 " + w + " " + h });
+    svg.style.cssText = "position:absolute;left:0;top:0;width:" + w + "px;height:" + h + "px;pointer-events:none;overflow:visible;z-index:2";
     var color = opts.color || "var(--gst-line-brand)";
-    var p = GST.svg("path", { d: "M0 0 H100 V100 H0 Z", fill: "none", stroke: color, "stroke-width": 1.5, "vector-effect": "non-scaling-stroke" }, svg);
+    var p = GST.svg("rect", { x: .75, y: .75, width: w - 1.5, height: h - 1.5, rx: Math.max(0, r - .75), fill: "none", stroke: color, "stroke-width": 1.5 }, svg);
     el.appendChild(svg);
     var kids = Array.prototype.filter.call(el.children, function (c) { return c !== svg; });
-    var bc = el.style.borderColor;
-    el.style.borderColor = "transparent";
     kids.forEach(function (k) { k.style.opacity = 0; });
     var d = opts.delay || 0;
-    var a = GST.drawEl(p, { duration: opts.duration || 560, delay: d });
+    var a = GST.drawEl(p, { duration: opts.duration || 700, delay: d });
     var stg = S("base", 56);
     kids.forEach(function (k, i) {
-      GST.anim(k, [{ opacity: 0, transform: "translateY(8px)" }, { opacity: 1, transform: "none" }],
-        { duration: D("slow", 420), delay: d + 380 + i * stg * 0.6, easing: GST.ease("tonnerre") });
+      GST.anim(k, [{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }],
+        { duration: D("slow", 420), delay: d + 320 + i * stg * 0.6, easing: GST.ease("tonnerre") });
     });
     return a.finished.then(function () {
-      el.style.borderColor = bc;
-      GST.anim(svg, [{ opacity: 1 }, { opacity: 0 }], { duration: 300 }).finished.then(function () { svg.remove(); });
+      GST.anim(svg, [{ opacity: 1 }, { opacity: 0 }], { duration: 400 }).finished.then(function () { svg.remove(); });
     });
   };
 
@@ -380,7 +366,7 @@
     opts = opts || {};
     var L = layer();
     var size = opts.size || 10;
-    var r = GST.svg("rect", { x: x - size / 2, y: y - size / 2, width: size, height: size, fill: "none",
+    var r = GST.svg("circle", { cx: x, cy: y, r: size / 2, fill: "none",
       stroke: opts.color || GST.token("--gst-brand"), "stroke-width": opts.width || 1.5 }, L);
     r.style.transformBox = "fill-box"; r.style.transformOrigin = "center";
     var a = GST.anim(r, [{ transform: "scale(1)", opacity: 1 }, { transform: "scale(" + (opts.scale || 4) + ")", opacity: 0 }],
@@ -406,16 +392,16 @@
     nodes.forEach(function (n, i) {
       chain = chain.then(function () {
         var a = pts[i], b = pts[i + 1];
-        // Routage orthogonal façon plan technique : horizontal puis vertical
+        // Courbe douce (v1.1) : une arche de Bézier relie les deux nœuds
         var mx = a[0] + (b[0] - a[0]) / 2;
-        var d = "M" + a[0] + " " + a[1] + " H" + mx + " V" + b[1] + " H" + b[0];
-        var p = GST.svg("path", { d: d, stroke: color, "stroke-width": 1.5, fill: "none" }, L);
+        var d = "M" + a[0] + " " + a[1] + " C" + mx + " " + a[1] + " " + mx + " " + b[1] + " " + b[0] + " " + b[1];
+        var p = GST.svg("path", { d: d, stroke: color, "stroke-width": 2, fill: "none", "stroke-linecap": "round" }, L);
         paths.push(p);
-        var head = GST.svg("rect", { x: a[0] - 3.5, y: a[1] - 3.5, width: 7, height: 7, fill: color }, L);
+        var head = GST.svg("circle", { cx: a[0], cy: a[1], r: 5, fill: color }, L);
         var len = p.getTotalLength();
         GST.tween(seg, function (v) {
           var pt = p.getPointAtLength(len * v);
-          head.setAttribute("x", pt.x - 3.5); head.setAttribute("y", pt.y - 3.5);
+          head.setAttribute("cx", pt.x); head.setAttribute("cy", pt.y);
         }, "trace");
         return GST.drawEl(p, { duration: seg, easing: GST.ease("trace") }).finished.then(function () {
           head.remove();
@@ -450,8 +436,8 @@
       var nx = r.left + r.width * (0.18 + 0.64 * (i / steps)) + (i % 2 ? -1 : 1) * r.width * 0.12;
       d += " L" + nx.toFixed(1) + " " + ny.toFixed(1);
     }
-    var under = GST.svg("path", { d: d, stroke: GST.token("--gst-eclair-on") || "#141414", "stroke-width": 6, "stroke-linejoin": "miter", "stroke-linecap": "square" }, L);
-    var bolt = GST.svg("path", { d: d, stroke: GST.token("--gst-eclair"), "stroke-width": 3, "stroke-linejoin": "miter", "stroke-linecap": "square" }, L);
+    var under = GST.svg("path", { d: d, stroke: GST.token("--gst-eclair-on") || "#141414", "stroke-width": 6, "stroke-linejoin": "round", "stroke-linecap": "round" }, L);
+    var bolt = GST.svg("path", { d: d, stroke: GST.token("--gst-eclair"), "stroke-width": 3, "stroke-linejoin": "round", "stroke-linecap": "round" }, L);
     var dur = 180;
     GST.drawEl(under, { duration: dur, easing: GST.ease("strike") });
     return GST.drawEl(bolt, { duration: dur, easing: GST.ease("strike") }).finished.then(function () {

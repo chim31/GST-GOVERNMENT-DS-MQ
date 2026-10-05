@@ -10,289 +10,380 @@
 <link rel="stylesheet" href="assets/css/gst.css">
 <link rel="stylesheet" href="assets/css/doc.css">
 <style>
-/* ── HERO · La Montagne du Tonnerre (registre Ciel) ─────────────────────── */
-.hero{position:relative;height:190vh;margin-top:-1px}
-.hero__stage{position:sticky;top:calc(var(--gst-frame-viewport) + 60px);height:calc(100vh - 60px - 2 * var(--gst-frame-viewport));min-height:560px;overflow:hidden;
-  --hero-ink:var(--gst-ink);--hero-sub:var(--gst-ink-70);background:var(--gst-sky-day-1);color:var(--hero-ink)}
-.hero[data-sky="nuit"] .hero__stage{--hero-ink:var(--gst-cream);--hero-sub:var(--gst-teal-100);background:var(--gst-sky-night-1)}
-.hero[data-sky="aube"] .hero__stage{background:var(--gst-sky-dusk-1)}
+/* ── HERO · La Crête du Tonnerre (intro cinématique, registre Ciel) ─────── */
+.hero{position:relative;height:200vh}
+.hero__stage{position:sticky;top:var(--gst-frame-viewport);height:calc(100vh - 2 * var(--gst-frame-viewport));min-height:600px;overflow:hidden;
+  border-radius:var(--gst-frame-radius);background:#E9D6C2;color:var(--gst-cream);--hero-ink:var(--gst-cream);--hero-sub:rgba(244,244,242,.78)}
+.hero[data-sky="jour"] .hero__stage{--hero-ink:var(--gst-ink);--hero-sub:var(--gst-ink-70);background:#DCEEEC}
+.hero[data-sky="nuit"] .hero__stage{background:#063F3E}
 .hero__canvas{position:absolute;inset:0;width:100%;height:100%}
-.hero__bands{position:absolute;inset:0;display:none;flex-direction:column-reverse}
-.hero__bands i{flex:1}
-.hero.is-2d .hero__bands{display:flex}
-.hero__crest{position:absolute;left:50%;top:44%;width:min(64vw,760px);transform:translate(-50%,-50%);overflow:visible;pointer-events:none;color:var(--hero-ink)}
-.hero__crest path{fill:none;stroke:currentColor;stroke-width:1.1;vector-effect:non-scaling-stroke;stroke-linejoin:miter}
-.hero__crest [data-bolt]{stroke:var(--gst-eclair-deep);stroke-width:3}
+.hero__shade{position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:linear-gradient(180deg,rgba(3,39,38,.28) 0%,transparent 22%,transparent 52%,rgba(3,39,38,.55) 100%)}
+.hero[data-sky="jour"] .hero__shade{background:linear-gradient(180deg,rgba(255,255,255,.35) 0%,transparent 22%,transparent 55%,rgba(244,244,242,.7) 100%)}
+.hero__flash{position:absolute;inset:0;z-index:4;background:#FFFDF0;opacity:0;pointer-events:none;mix-blend-mode:screen}
+/* Repli 2D : la crête vectorielle */
+.hero__crest{position:absolute;left:50%;top:42%;width:min(64vw,720px);transform:translate(-50%,-50%);overflow:visible;pointer-events:none;color:var(--hero-ink);display:none}
+.hero.is-2d .hero__crest{display:block}
+.hero__crest path{fill:none;stroke:currentColor;stroke-width:2;vector-effect:non-scaling-stroke;stroke-linejoin:round;stroke-linecap:round}
+.hero__crest [data-bolt]{stroke:var(--gst-eclair);stroke-width:5}
 .hero__crest [data-crest-fill]{fill:var(--gst-teal-500);stroke:none}
-.hero:not(.is-2d) .hero__crest [data-crest-fill]{display:none}
-.hero__ui{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr auto;padding:var(--gst-space-4);pointer-events:none;z-index:2}
-@media (min-width:1024px){.hero__ui{padding:var(--gst-space-6) var(--gst-space-7)}}
-.hero__ui a,.hero__ui button{pointer-events:auto}
-.hero__row{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--gst-space-4)}
+.hero.is-2d .hero__stage{background:linear-gradient(180deg,#06605E 0%,#E0716D 62%,#FFD9A0 100%)}
+
+.hero__ui{position:absolute;inset:0;display:grid;grid-template-rows:auto 1fr auto;padding:calc(64px + var(--gst-space-4)) var(--gst-space-4) var(--gst-space-4);pointer-events:none;z-index:3}
+@media (min-width:1024px){.hero__ui{padding:calc(64px + var(--gst-space-5)) var(--gst-space-7) var(--gst-space-6)}}
+.hero__ui a,.hero__ui button,.hero__ui [role="group"]{pointer-events:auto}
+.hero__row{display:flex;justify-content:space-between;align-items:center;gap:var(--gst-space-3);flex-wrap:wrap}
 .hero .gst-tag{color:var(--hero-sub)}
-.hero__coords{display:flex;flex-direction:column;align-items:flex-end;gap:6px}
-.hero__coords .gst-seg{margin-top:6px}
-@media (max-width:719px){
-  .hero__coords{display:none}
-  .hero__card p,.hero__card h2{display:none}
-  .hero__card{padding:var(--gst-space-4);gap:var(--gst-space-3)}
-  .hero__eyebrow{margin-bottom:var(--gst-space-2)}
-}
+.hero__pill{display:inline-flex;align-items:center;gap:10px;height:36px;padding:0 16px;border-radius:var(--gst-radius-pill);background:rgba(3,39,38,.28);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.hero[data-sky="jour"] .hero__pill{background:rgba(255,255,255,.55)}
+.hero__pill .gst-tag{color:var(--hero-ink)}
+.hero__ctl{display:flex;align-items:center;gap:8px}
+.hero__ctl .gst-seg{background:rgba(3,39,38,.28);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:none}
+.hero__ctl .gst-seg button{color:var(--hero-ink)}
+.hero__ctl .gst-seg button[aria-pressed="true"]{color:var(--gst-on-brand)}
+.hero[data-sky="jour"] .hero__ctl .gst-seg{background:rgba(255,255,255,.55)}
+.hero__ctl .gst-icon-btn{background:rgba(3,39,38,.28);color:var(--hero-ink);box-shadow:none;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.hero[data-sky="jour"] .hero__ctl .gst-icon-btn{background:rgba(255,255,255,.55)}
+@media (max-width:719px){.hero__ctl .gst-seg{display:none}}
+
+/* Chapitres de l'intro */
+.hero__act{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none;text-align:center;color:var(--gst-cream);opacity:0}
+.hero__act b{font-family:var(--gst-font-display);font-weight:400;font-size:clamp(2.4rem,6vw,5rem);line-height:.9;letter-spacing:.04em;text-shadow:0 6px 30px rgba(3,39,38,.45)}
+.hero__act span{font-family:var(--gst-font-mono);font-size:var(--gst-fs-label);letter-spacing:.4em;text-transform:uppercase;opacity:.9}
+.hero__skip{position:absolute;right:var(--gst-space-5);bottom:var(--gst-space-5);z-index:5}
+.hero__skip .gst-btn{background:rgba(3,39,38,.4);color:var(--gst-cream);border-color:transparent;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.hero__progress{position:absolute;left:var(--gst-space-5);right:calc(var(--gst-space-5) + 190px);bottom:calc(var(--gst-space-5) + 20px);z-index:5;display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.hero__progress i{height:4px;border-radius:4px;background:rgba(244,244,242,.25);overflow:hidden;position:relative}
+.hero__progress i::after{content:"";position:absolute;inset:0;background:var(--gst-cream);transform:scaleX(var(--p,0));transform-origin:left;transition:transform .25s linear}
+.hero.is-ready .hero__skip,.hero.is-ready .hero__progress{opacity:0;pointer-events:none;transition:opacity .4s}
+
 .hero__foot{display:grid;gap:var(--gst-space-5);align-items:end}
-@media (min-width:1024px){.hero__foot{grid-template-columns:1fr minmax(320px,400px)}}
+@media (min-width:1024px){.hero__foot{grid-template-columns:1fr minmax(320px,420px)}}
 .hero__eyebrow{color:var(--hero-sub);margin:0 0 var(--gst-space-3)}
-.hero__title{margin:0;font-family:var(--gst-font-display);font-weight:400;text-transform:uppercase;line-height:.84;letter-spacing:.005em}
+.hero__title{margin:0;font-family:var(--gst-font-display);font-weight:400;text-transform:uppercase;line-height:.84;letter-spacing:.005em;color:var(--hero-ink);text-shadow:0 10px 40px rgba(3,39,38,.25)}
 .hero__title .l1{display:block;font-size:var(--gst-fs-display-lg);letter-spacing:.04em}
-.hero__title .l2{display:block;font-size:min(var(--gst-fs-display-hero),17.5vw);margin-left:-.04em}
+.hero__title .l2{display:block;font-size:min(var(--gst-fs-display-hero),17vw);margin-left:-.04em}
 .hero__sub{margin-top:var(--gst-space-4);display:flex;align-items:center;gap:var(--gst-space-3)}
-.hero__sub::before{content:"";width:var(--gst-space-7);height:var(--gst-rule);background:var(--gst-accent)}
-.hero__card{background:var(--gst-bg-panel);color:var(--gst-text-primary);border:var(--gst-border) solid var(--gst-line-brand);padding:var(--gst-space-5);box-shadow:var(--gst-shadow-lift);display:flex;flex-direction:column;gap:var(--gst-space-4)}
+.hero__sub::before{content:"";width:var(--gst-space-7);height:4px;border-radius:4px;background:var(--gst-eclair);transition:opacity .4s}
+.hero:not(.is-ready) .hero__sub::before{opacity:0}
+.hero__card{background:var(--gst-glass);-webkit-backdrop-filter:blur(20px) saturate(1.3);backdrop-filter:blur(20px) saturate(1.3);color:var(--gst-text-primary);border-radius:var(--gst-radius-xl);padding:var(--gst-space-6);
+  box-shadow:var(--gst-shadow-lift),inset 0 0 0 1px rgba(255,255,255,.35);display:flex;flex-direction:column;gap:var(--gst-space-4)}
 .hero__card .gst-tag{color:var(--gst-text-secondary)}
-.hero__card h2{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:.9}
-.hero__card p{margin:0;font-style:italic;font-size:1.08rem;color:var(--gst-text-secondary)}
+.hero__card h2{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:.92}
+.hero__card p{margin:0;font-style:italic;font-size:1.06rem;color:var(--gst-text-secondary)}
 .hero__actions{display:flex;flex-wrap:wrap;gap:var(--gst-space-3)}
-.hero__sky{position:absolute;right:var(--gst-space-4);top:50%;transform:translateY(-50%);z-index:3;display:none;flex-direction:column;gap:6px;align-items:flex-end}
-@media (min-width:1024px){.hero__sky{display:flex;right:var(--gst-space-7)}}
-.hero__sky .gst-seg{flex-direction:column}
-.hero__sky .gst-seg button+button{border-left:0;border-top:var(--gst-hairline) solid var(--gst-line-hairline)}
-.hero__cue{position:absolute;left:50%;bottom:var(--gst-space-4);transform:translateX(-50%);display:none;flex-direction:column;align-items:center;gap:8px;z-index:2}
-.hero__cue i{width:1px;height:42px;background:var(--hero-ink);transform-origin:top;animation:cue 2.2s var(--gst-ease-trace) infinite}
-@keyframes cue{0%{transform:scaleY(0)}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-@media (min-width:1024px){.hero__cue{display:flex}}
+@media (max-width:719px){.hero__card p,.hero__card h2{display:none}.hero__card{padding:var(--gst-space-4)}.hero__progress{right:var(--gst-space-5);bottom:calc(var(--gst-space-5) + 64px)}}
 .hero [data-hero-in]{opacity:0}
 .hero.is-ready [data-hero-in]{opacity:1}
-.hero__label{position:absolute;z-index:2;pointer-events:none;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;gap:4px;opacity:0;
-  transition:opacity var(--gst-dur-base) var(--gst-ease-snap)}
+.hero__label{position:absolute;z-index:2;pointer-events:none;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;
+  transition:opacity var(--gst-dur-slow) var(--gst-ease-snap)}
 .hero__label.is-on{opacity:1}
-.hero__label span{background:var(--gst-bg-panel);border:1px solid var(--gst-line-brand);padding:3px 7px;color:var(--gst-text-primary)!important}
-.hero__label i{width:1px;height:26px;background:var(--hero-ink)}
+.hero__label span{background:var(--gst-glass);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-radius:var(--gst-radius-pill);padding:6px 12px;color:var(--gst-text-primary)!important;box-shadow:var(--gst-shadow-sm)}
+.hero__label i{width:2px;height:30px;border-radius:2px;background:linear-gradient(var(--gst-eclair),transparent)}
 
-/* ── Manifeste ───────────────────────────────────────────────────────── */
-.manifesto{margin:0 0 var(--gst-space-8);font-family:var(--gst-font-serif);font-style:italic;font-size:var(--gst-fs-serif-xl);line-height:1.12;max-width:24ch;text-wrap:balance}
+/* ── Note d'intention ───────────────────────────────────────────────── */
+.manifesto{margin:0 0 var(--gst-space-8);font-family:var(--gst-font-serif);font-style:italic;font-size:var(--gst-fs-serif-xl);line-height:1.14;max-width:26ch;text-wrap:balance}
 .manifesto em{font-style:normal;font-family:var(--gst-font-display);letter-spacing:.02em;color:var(--gst-accent-text)}
-.meta3 .doc-plate{min-height:330px;display:flex;flex-direction:column;gap:var(--gst-space-4)}
-.meta3 h3{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:.9}
-.meta3 p{margin:0;font-size:1rem;color:var(--gst-text-secondary)}
-.meta3__demo{position:relative;flex:1;min-height:150px;border:var(--gst-hairline) solid var(--gst-line-hairline);background:var(--gst-bg-canvas);overflow:hidden}
+.pillars{display:grid;gap:var(--gst-space-5)}
+@media (min-width:900px){.pillars{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.pillar{display:flex;flex-direction:column;gap:var(--gst-space-4);min-height:380px;padding:var(--gst-space-5);border-radius:var(--gst-radius-xl);background:var(--gst-bg-panel);box-shadow:var(--gst-shadow-sm),inset 0 0 0 1px var(--gst-line-soft)}
+.pillar h3{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:.92}
+.pillar p{margin:0;font-size:1rem;color:var(--gst-text-secondary)}
+.pillar__demo{position:relative;flex:1;min-height:160px;border-radius:var(--gst-radius-lg);background:var(--gst-bg-tint);overflow:hidden}
+.pillar__foot{display:flex;justify-content:space-between;align-items:center;gap:8px}
 .trait-svg{position:absolute;inset:0;width:100%;height:100%}
-.trait-svg path,.trait-svg line{fill:none;stroke:var(--gst-text-primary);stroke-width:1.5;vector-effect:non-scaling-stroke}
-.trait-svg .route{stroke:var(--gst-accent);stroke-width:2.5}
-.trait-svg rect{fill:var(--gst-bg-panel);stroke:var(--gst-text-primary);stroke-width:1.2;vector-effect:non-scaling-stroke}
-.eclair-demo{position:absolute;inset:14px;display:flex;flex-direction:column;justify-content:space-between;padding:var(--gst-space-4);background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline)}
-.intent{display:grid;gap:var(--gst-space-6);margin-top:var(--gst-space-8)}
-@media (min-width:1024px){.intent{grid-template-columns:repeat(3,1fr)}}
-.intent h4{margin:0 0 var(--gst-space-3);font-family:var(--gst-font-mono);font-size:var(--gst-fs-label);letter-spacing:var(--gst-ls-label);text-transform:uppercase;font-weight:600;display:flex;gap:10px;align-items:center}
-.intent p{margin:0 0 var(--gst-space-3);font-size:1.02rem}
-.registers{display:grid;margin-top:var(--gst-space-8);border:var(--gst-hairline) solid var(--gst-line-strong)}
+.trait-svg path,.trait-svg line{fill:none;stroke:var(--gst-text-secondary);stroke-width:1.5;vector-effect:non-scaling-stroke;stroke-linecap:round}
+.trait-svg .route{stroke:var(--gst-accent);stroke-width:3}
+.trait-svg .area{fill:var(--gst-accent);opacity:.1;stroke:none}
+.trait-svg circle{fill:var(--gst-bg-panel);stroke:var(--gst-accent);stroke-width:2;vector-effect:non-scaling-stroke}
+.bloom-demo{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:var(--gst-space-4)}
+.bloom-demo__chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.eclair-demo{position:absolute;inset:16px;display:flex;flex-direction:column;justify-content:space-between;padding:var(--gst-space-4);background:var(--gst-bg-panel);border-radius:var(--gst-radius-md);box-shadow:var(--gst-shadow-sm)}
+
+.concept{display:grid;gap:var(--gst-space-6);margin-top:var(--gst-space-8)}
+@media (min-width:1024px){.concept{grid-template-columns:1.1fr 1fr;gap:var(--gst-space-8)}}
+.concept__text p{margin:0 0 var(--gst-space-4);font-size:1.08rem;max-width:58ch}
+.concept__text p:first-of-type::first-letter{font-family:var(--gst-font-display);font-size:4.2rem;float:left;line-height:.8;padding:6px 10px 0 0;color:var(--gst-accent-text)}
+.choices{display:grid;gap:var(--gst-space-3);margin-top:var(--gst-space-5)}
+@media (min-width:640px){.choices{grid-template-columns:repeat(3,1fr)}}
+.choice{padding:var(--gst-space-4);border-radius:var(--gst-radius-lg);background:var(--gst-bg-tint)}
+.choice b{display:flex;align-items:center;gap:8px;font-family:var(--gst-font-mono);font-size:var(--gst-fs-label);letter-spacing:.1em;text-transform:uppercase;color:var(--gst-text-brand);margin-bottom:8px}
+.choice p{margin:0;font-size:.95rem;color:var(--gst-text-secondary)}
+.ext{padding:var(--gst-space-6);border-radius:var(--gst-radius-xl);background:var(--gst-bg-panel);box-shadow:var(--gst-shadow-sm),inset 0 0 0 1px var(--gst-line-soft);align-self:start}
+.ext h4{margin:0 0 var(--gst-space-4);font-family:var(--gst-font-display);font-weight:400;font-size:2rem;line-height:.95}
+.ext p{margin:0 0 var(--gst-space-5);color:var(--gst-text-secondary);font-size:1rem}
+.ext .gst-spec{grid-template-columns:minmax(90px,auto) 1fr}
+.ext .gst-spec dd{font-size:var(--gst-fs-label)}
+
+.registers{display:grid;gap:var(--gst-space-5);margin-top:var(--gst-space-8)}
 @media (min-width:900px){.registers{grid-template-columns:1fr 1fr}}
-.reg{padding:var(--gst-space-6);display:flex;flex-direction:column;gap:var(--gst-space-4);min-height:420px;position:relative;overflow:hidden}
-.reg--terrain{background:var(--gst-bg-panel)}
-.reg--ciel{background:var(--gst-bg-panel);color:var(--gst-text-primary)}
-.reg h3{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-lg);line-height:.85}
+.reg{position:relative;padding:var(--gst-space-6);display:flex;flex-direction:column;gap:var(--gst-space-4);min-height:440px;border-radius:var(--gst-radius-2xl);overflow:hidden}
+.reg--terrain{background:var(--gst-bg-panel);box-shadow:var(--gst-shadow-sm),inset 0 0 0 1px var(--gst-line-soft)}
+.reg--ciel{background:linear-gradient(170deg,#032726 0%,#06605E 55%,#5FAAA5 100%);color:var(--gst-cream)}
+.reg--ciel .gst-tag,.reg--ciel dt{color:rgba(244,244,242,.7)!important}
+.reg--ciel .gst-spec--rules>dt,.reg--ciel .gst-spec--rules>dd{border-color:rgba(255,255,255,.12)}
+.reg h3{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-lg);line-height:.86}
 .reg .gst-spec dd{font-size:.9rem}
-.reg__sky{position:absolute;right:0;top:0;bottom:0;width:38%;display:flex;flex-direction:column-reverse}
-.reg__sky i{flex:1}
-.reg--ciel>*:not(.reg__sky){position:relative;z-index:1;max-width:62%}
+.reg__moon{position:absolute;right:-60px;top:-60px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#FFF1C2,#FFD23F 45%,rgba(255,210,63,0) 70%);opacity:.5;pointer-events:none}
+.reg__hills{position:absolute;left:0;right:0;bottom:0;height:120px;pointer-events:none;opacity:.5}
+.reg>*:not(.reg__moon):not(.reg__hills){position:relative;z-index:1}
 
 /* ── Chaîne de chiffrage ─────────────────────────────────────────────── */
 .chain-wrap{display:grid;gap:var(--gst-space-5)}
-@media (min-width:1100px){.chain-wrap{grid-template-columns:300px 1fr}}
-.chain-ctl{background:var(--gst-bg-panel);border:var(--gst-border) solid var(--gst-line-brand);padding:var(--gst-space-5);display:flex;flex-direction:column;gap:var(--gst-space-4);align-self:start}
-.chain-ctl h3{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:2rem;line-height:.9}
-.chain{display:grid;gap:var(--gst-space-4);counter-reset:n}
+@media (min-width:1100px){.chain-wrap{grid-template-columns:320px 1fr;gap:var(--gst-space-6)}}
+.chain-ctl{background:var(--gst-bg-panel);border-radius:var(--gst-radius-xl);padding:var(--gst-space-6) var(--gst-space-5);display:flex;flex-direction:column;gap:var(--gst-space-4);align-self:start;
+  box-shadow:var(--gst-shadow-md),inset 0 0 0 2px color-mix(in srgb,var(--gst-brand) 30%,transparent)}
+.chain-ctl h3{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:2.2rem;line-height:.9}
+.chain{display:grid;gap:var(--gst-space-4)}
 @media (min-width:640px){.chain{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (min-width:1100px){.chain{grid-template-columns:repeat(3,minmax(0,1fr))}}
-.node{position:relative;background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline);padding:var(--gst-space-4) var(--gst-space-4) var(--gst-space-5);display:flex;flex-direction:column;gap:var(--gst-space-2);min-height:178px}
-.node__v{font-family:var(--gst-font-display);font-size:var(--gst-fs-display-md);line-height:1}
+@media (min-width:1280px){.chain{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.node{position:relative;background:var(--gst-bg-panel);border-radius:var(--gst-radius-lg);padding:var(--gst-space-5);display:flex;flex-direction:column;gap:var(--gst-space-2);min-height:190px;min-width:0;
+  box-shadow:var(--gst-shadow-sm),inset 0 0 0 1px var(--gst-line-soft)}
+.node__head{display:flex;align-items:center;gap:10px;min-width:0}
+.node__head .gst-tag{overflow:hidden;text-overflow:ellipsis}
+.node__ico{display:grid;place-items:center;width:34px;height:34px;flex:none;border-radius:50%;background:var(--gst-bg-tint);color:var(--gst-text-brand)}
+.node__v{font-family:var(--gst-font-display);font-size:var(--gst-fs-display-md);line-height:1;margin-top:6px;white-space:nowrap}
 .node__u{font-family:var(--gst-font-mono);font-size:var(--gst-fs-label);letter-spacing:var(--gst-ls-label);text-transform:uppercase;color:var(--gst-text-secondary)}
-.node__f{margin-top:auto;font-family:var(--gst-font-mono);font-size:var(--gst-fs-tag);letter-spacing:.06em;color:var(--gst-text-secondary);padding-top:var(--gst-space-3);border-top:var(--gst-hairline) solid var(--gst-line-hairline)}
+.node__f{margin-top:auto;font-family:var(--gst-font-mono);font-size:var(--gst-fs-tag);letter-spacing:.04em;color:var(--gst-text-secondary);padding:8px 10px;border-radius:var(--gst-radius-sm);background:var(--gst-bg-sunken)}
 .node__sub{font-family:var(--gst-font-mono);font-size:var(--gst-fs-data);font-variant-numeric:tabular-nums}
-.node .gst-reticle{position:absolute;top:-4px;left:-4px;background:var(--gst-bg-canvas)}
 .chain-note{font-family:var(--gst-font-serif);font-style:italic;color:var(--gst-text-secondary);margin:var(--gst-space-4) 0 0}
 
-/* ── Chapitres ───────────────────────────────────────────────────────── */
-.chapters{display:grid;gap:var(--gst-grid-gutter)}
+/* ── La Crête 3D ─────────────────────────────────────────────────────── */
+.crest3d{position:relative;border-radius:var(--gst-radius-2xl);overflow:hidden;min-height:620px;background:#E9D6C2;box-shadow:var(--gst-shadow-lift)}
+.crest3d canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:pan-y;cursor:grab}
+.crest3d canvas:active{cursor:grabbing}
+.crest3d__ui{position:absolute;inset:0;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:var(--gst-space-5)}
+@media (min-width:900px){.crest3d__ui{padding:var(--gst-space-6)}}
+.crest3d__ui>*{pointer-events:auto}
+.crest3d__card{max-width:380px;padding:var(--gst-space-5);border-radius:var(--gst-radius-xl);background:var(--gst-glass);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);box-shadow:var(--gst-shadow-md)}
+.crest3d__card h3{margin:8px 0;font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:.92}
+.crest3d__card p{margin:0;font-size:.98rem;color:var(--gst-text-secondary)}
+.crest3d__bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.crest3d__bar .doc-row{gap:10px}
+.crest3d__flash{position:absolute;inset:0;background:#FFFDF0;opacity:0;pointer-events:none;mix-blend-mode:screen}
+
+/* ── Sommaire ────────────────────────────────────────────────────────── */
+.chapters{display:grid;gap:var(--gst-space-5)}
 @media (min-width:640px){.chapters{grid-template-columns:repeat(2,1fr)}}
 @media (min-width:1100px){.chapters{grid-template-columns:repeat(4,1fr)}}
-.chap{position:relative;display:flex;flex-direction:column;gap:var(--gst-space-3);min-height:300px;padding:var(--gst-space-5);background:var(--gst-bg-panel);border:var(--gst-hairline) solid var(--gst-line-hairline);
-  text-decoration:none;transition:border-color var(--gst-dur-fast) var(--gst-ease-snap)}
-.chap:hover{border-color:var(--gst-line-brand)}
-.chap::after{content:"";position:absolute;left:var(--gst-space-5);bottom:-1px;height:var(--gst-rule);width:0;background:var(--gst-accent);transition:width var(--gst-dur-base) var(--gst-ease-tonnerre)}
-.chap:hover::after{width:calc(100% - 2 * var(--gst-space-5))}
-.chap b{font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:.9}
+.chap{position:relative;display:flex;flex-direction:column;gap:var(--gst-space-3);min-height:320px;padding:var(--gst-space-5);background:var(--gst-bg-panel);border-radius:var(--gst-radius-xl);text-decoration:none;min-width:0;
+  box-shadow:var(--gst-shadow-sm),inset 0 0 0 1px var(--gst-line-soft);transition:transform var(--gst-dur-base) var(--gst-ease-tonnerre),box-shadow var(--gst-dur-base) var(--gst-ease-snap)}
+.chap:hover{transform:translateY(-4px);box-shadow:var(--gst-shadow-lift)}
+.chap__go{position:absolute;top:var(--gst-space-4);right:var(--gst-space-4);display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--gst-bg-tint);color:var(--gst-text-brand);
+  transition:transform var(--gst-dur-base) var(--gst-ease-tonnerre),background-color var(--gst-dur-fast) var(--gst-ease-snap)}
+.chap:hover .chap__go{transform:rotate(-45deg);background:var(--gst-accent);color:var(--gst-on-accent)}
+.chap b{font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-md);line-height:.9;padding-right:48px}
 .chap small{font-family:var(--gst-font-serif);font-style:italic;font-size:1rem;color:var(--gst-text-secondary)}
-.chap svg.ill{margin-top:auto;width:100%;height:96px;overflow:visible}
-.chap svg.ill *{fill:none;stroke:var(--gst-text-primary);stroke-width:1.4;vector-effect:non-scaling-stroke}
-.chap svg.ill .a{stroke:var(--gst-accent);stroke-width:2.2}
+.chap svg.ill{margin-top:auto;width:100%;height:100px;overflow:visible}
+.chap svg.ill *{fill:none;stroke:var(--gst-text-secondary);stroke-width:1.6;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}
+.chap svg.ill .a{stroke:var(--gst-accent);stroke-width:2.6}
 .chap svg.ill .b{stroke:var(--gst-brand)}
 .chap svg.ill .f{fill:var(--gst-brand);stroke:none}
+.chap svg.ill .fa{fill:var(--gst-accent);stroke:none}
+.chap svg.ill .fe{fill:var(--gst-eclair);stroke:none}
 .chap--wide{grid-column:1/-1}
 @media (min-width:1100px){.chap--wide{grid-column:span 2}}
+.chap--dark{background:linear-gradient(160deg,#032726,#06605E);color:var(--gst-cream)}
+.chap--dark small,.chap--dark .gst-tag{color:rgba(244,244,242,.75)}
+.chap--dark svg.ill *{stroke:rgba(244,244,242,.6)}
 
-.figures{display:grid;grid-template-columns:repeat(2,1fr);border-top:var(--gst-border) solid var(--gst-text-primary)}
+.figures{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--gst-space-4)}
 @media (min-width:900px){.figures{grid-template-columns:repeat(6,1fr)}}
-.figures>div{padding:var(--gst-space-5) var(--gst-space-4) var(--gst-space-5) 0;border-bottom:var(--gst-hairline) solid var(--gst-line-hairline);display:flex;flex-direction:column;gap:var(--gst-space-2)}
+.figures>div{padding:var(--gst-space-5);border-radius:var(--gst-radius-xl);background:var(--gst-bg-panel);box-shadow:var(--gst-shadow-sm),inset 0 0 0 1px var(--gst-line-soft);display:flex;flex-direction:column;gap:var(--gst-space-2);min-width:0}
 .figures b{font-family:var(--gst-font-display);font-weight:400;font-size:var(--gst-fs-display-lg);line-height:1}
+.figures>div:nth-child(4) b{color:var(--gst-accent-text)}
 </style>
 </head>
-<body>
+<body data-top-overlay>
 
 <!-- ═══ HERO ═══════════════════════════════════════════════════════════ -->
-<section class="hero" id="hero" aria-label="Groupe Scout Tonnerre — ouverture">
-  <div class="hero__stage" data-crosshair>
-    <div class="hero__bands" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<section class="hero" id="hero" data-sky="aube" aria-label="Groupe Scout Tonnerre — ouverture">
+  <div class="hero__stage">
     <canvas class="hero__canvas" aria-hidden="true"></canvas>
     <svg class="hero__crest" viewBox="0 -18 120 78" aria-hidden="true">
       <path data-crest-fill d="M2 58 L20 41 L27 45 L40 27 L48 33 L61 9 L68 19 L75 15 L90 35 L98 31 L118 58 Z"/>
       <path data-crest d="M2 58 L20 41 L27 45 L40 27 L48 33 L61 9 L68 19 L75 15 L90 35 L98 31 L118 58"/>
-      <path data-bolt d="M80 -16 L68 1 L74 2 L62 10"/>
+      <path data-bolt d="M70 -16 L60 1 L67 2 L58 12"/>
     </svg>
-    <div class="hero__label" data-summit><span class="gst-tag">SOMMET / 1 042 M · TONNERRE</span><i></i></div>
+    <div class="hero__shade" aria-hidden="true"></div>
+    <div class="hero__label" data-summit><span class="gst-tag">SOMMET · LA CRÊTE DU TONNERRE</span><i></i></div>
+    <div class="hero__act" data-act aria-live="polite"><span data-act-n>I</span><b data-act-t>La graine</b></div>
+    <div class="hero__flash" data-flash aria-hidden="true"></div>
 
     <div class="hero__ui">
       <div class="hero__row">
-        <span class="gst-tag" data-hero-tag>.00 / OUVERTURE · REGISTRE CIEL</span>
-        <div class="hero__coords" data-hero-in>
-          <span class="gst-tag">6°12′ N · 1°14′ E</span>
-          <span class="gst-tag" data-hero-clock>CIEL / —</span>
+        <span class="hero__pill"><span class="gst-tag" data-hero-tag>.00 / OUVERTURE · LA CRÊTE DU TONNERRE</span></span>
+        <div class="hero__ctl" data-hero-in>
           <div class="gst-seg gst-seg--sm" data-sky-seg role="group" aria-label="Ciel de la scène">
             <button type="button" data-value="jour" aria-pressed="false">Jour</button>
-            <button type="button" data-value="aube" aria-pressed="false">Aube</button>
+            <button type="button" data-value="aube" aria-pressed="true">Aube</button>
             <button type="button" data-value="nuit" aria-pressed="false">Nuit</button>
           </div>
+          <button type="button" class="gst-icon-btn" data-replay-intro aria-label="Rejouer l'intro" title="Rejouer l'intro"><svg class="gst-icon" aria-hidden="true"><use href="#i-rotate-ccw"/></svg></button>
         </div>
       </div>
       <div></div>
       <div class="hero__foot">
         <div>
-          <p class="gst-eyebrow hero__eyebrow" data-hero-in>Association Scoute du Togo</p>
+          <p class="gst-eyebrow hero__eyebrow" data-hero-in>Association Scoute du Togo · District Golfe</p>
           <h1 class="hero__title"><span class="l1" data-hero-in>Groupe Scout</span><span class="l2" data-word>Tonnerre</span></h1>
-          <div class="hero__sub"><span class="gst-tag" data-sub>DISTRICT GOLFE · DEPUIS 2013</span></div>
+          <div class="hero__sub" data-sub-wrap><span class="gst-tag" data-sub>DEPUIS 2013 · TOUJOURS PRÊTS</span></div>
         </div>
         <div class="hero__card" data-hero-in>
-          <span class="gst-tag">GST GOVERNMENT / DESIGN SYSTEM WEB · v1.0</span>
-          <h2>La plateforme de commandement, dessinée comme un plan.</h2>
-          <p>Le design system d'affiches du groupe, porté au web : tokens, motion, composants, écrans et deux expériences 3D signature.</p>
+          <span class="gst-tag">GST GOVERNMENT · DESIGN SYSTEM WEB · v1.1</span>
+          <h2>La plateforme de commandement du groupe.</h2>
+          <p>Le design system d'affiches du groupe, porté au web et adouci : tokens, motion, composants, écrans et trois expériences 3D signature.</p>
           <div class="hero__actions">
-            <a class="gst-btn gst-btn--primary" href="bus.html"><svg class="gst-icon" aria-hidden="true"><use href="#i-bus"/></svg>Le Bus volant</a>
-            <a class="gst-btn gst-btn--secondary" href="fondations.html">Fondations</a>
+            <a class="gst-btn gst-btn--primary" href="roadmap.html"><svg class="gst-icon" aria-hidden="true"><use href="#i-map-pin"/></svg>La carte du camp</a>
+            <a class="gst-btn gst-btn--secondary" href="bus.html"><svg class="gst-icon" aria-hidden="true"><use href="#i-bus"/></svg>Le bus volant</a>
           </div>
         </div>
       </div>
     </div>
-    <div class="hero__cue" data-hero-in aria-hidden="true"><span class="gst-tag">Défiler</span><i></i></div>
+    <div class="hero__progress" aria-hidden="true"><i data-pg></i><i data-pg></i><i data-pg></i><i data-pg></i></div>
+    <div class="hero__skip"><button type="button" class="gst-btn gst-btn--sm" data-skip><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-skip-forward"/></svg>Passer l'intro</button></div>
   </div>
 </section>
 
 <main id="main" class="doc-main">
 
 <!-- ═══ .01 NOTE D'INTENTION ═════════════════════════════════════════════ -->
-<section class="doc-sec" id="intention" style="border-top:0">
+<section class="doc-sec" id="intention">
   <div class="doc-sec__head">
-    <div><span class="gst-tag gst-tag--accent" data-decode>.01 / NOTE D'INTENTION</span>
-      <h2 class="doc-sec__title" data-rise>Le papier technique qui prend vie</h2></div>
-    <p class="doc-sec__intro">Le design system d'affiches est plat, éditorial, posé sur une grille hairline. Nous ne le trahissons pas : <em>nous l'animons</em>. Au repos, GST Government ressemble à une planche technique impeccable. Dès qu'un chef agit, le plan se trace, se calcule, s'élève en relief.</p>
+    <div><span class="gst-tag gst-tag--accent" data-decode>.01 / NOTE D'INTENTION · v1.1</span>
+      <h2 class="doc-sec__title" data-rise>L'affiche qui prend vie</h2></div>
+    <p class="doc-sec__intro">Le design system d'affiches est plat, éditorial, imprimé. Nous ne le trahissons pas : <em>nous l'animons et nous l'adoucissons</em>. Plus de quadrillage, plus d'angles vifs : des surfaces qui respirent, des courbes qui accompagnent la main, et la même identité — teal, rouge, écru, Bebas, Garamond, Plex Mono.</p>
   </div>
 
-  <blockquote class="manifesto" data-stagger><span>Tout part d'un camp. Le calcul est continu. La mémoire du groupe est une donnée.</span></blockquote>
+  <blockquote class="manifesto" data-stagger><span>Tout part d'un camp. Le calcul est continu. La mémoire du groupe est <em>une donnée</em>.</span></blockquote>
 
-  <div class="doc-cols doc-cols--3 meta3">
-    <article class="doc-plate">
-      <span class="gst-tag">.01 / LA PLANCHE</span>
-      <h3>Tout est aligné, tout est mesuré</h3>
-      <p>Grille hairline, réticules aux nœuds, data tags mono. C'est la structure : elle ne se voit pas, elle se sent.</p>
-      <div class="meta3__demo" id="demo-planche"><div data-m1-content style="position:absolute;left:14px;bottom:12px;right:14px;display:flex;justify-content:space-between;align-items:end"><span class="gst-tag">GRILLE 4 × 3</span><span class="gst-display-md" style="font-size:2.2rem">.01</span></div></div>
-      <button class="gst-btn gst-btn--ghost gst-btn--sm" data-replay="planche"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-rotate-ccw"/></svg>Retracer — M1</button>
+  <div class="pillars">
+    <article class="pillar">
+      <span class="gst-chip">.01 · L'éclosion</span>
+      <h3>Tout apparaît en douceur</h3>
+      <p>Les contenus montent depuis un point d'origine, dans un halo teal. Rien ne clignote, rien ne saute : l'écran se pose.</p>
+      <div class="pillar__demo" id="demo-planche"><div class="bloom-demo"><div class="bloom-demo__chips" data-m1-content><span class="gst-badge gst-badge--success">Validé</span><span class="gst-badge gst-badge--info">Synchronisé</span></div><div data-m1-content style="display:flex;justify-content:space-between;align-items:end"><span class="gst-label">Budget consolidé</span><span class="gst-display-md" style="font-size:2.2rem">4 850 000</span></div></div></div>
+      <div class="pillar__foot"><span class="gst-tag">M1 · 640 ms</span><button class="gst-btn gst-btn--ghost gst-btn--sm" data-replay="planche"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-rotate-ccw"/></svg>Rejouer</button></div>
     </article>
-    <article class="doc-plate">
-      <span class="gst-tag">.02 / LE TRAIT</span>
+    <article class="pillar">
+      <span class="gst-chip">.02 · Le trait</span>
       <h3>Le plan précède l'action</h3>
-      <p>Les lignes se dessinent avant que le contenu n'apparaisse. Un itinéraire se trace avant que le convoi ne parte.</p>
-      <div class="meta3__demo" id="demo-trait">
+      <p>Les courbes se dessinent avant que les chiffres n'apparaissent. Un itinéraire se trace avant que le convoi ne parte.</p>
+      <div class="pillar__demo" id="demo-trait">
         <svg class="trait-svg" viewBox="0 0 300 150" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-          <line x1="20" y1="120" x2="280" y2="120"/><line x1="20" y1="20" x2="20" y2="120"/>
-          <path class="route" d="M20 110 L70 96 L95 70 L150 78 L190 42 L240 50 L280 24"/>
-          <rect x="66" y="92" width="8" height="8"/><rect x="146" y="74" width="8" height="8"/><rect x="236" y="46" width="8" height="8"/>
+          <line x1="24" y1="122" x2="282" y2="122"/>
+          <path class="area" d="M24 112 C60 104 70 74 104 74 S150 84 170 66 S226 44 282 26 L282 122 L24 122 Z" data-nodraw/>
+          <path class="route" d="M24 112 C60 104 70 74 104 74 S150 84 170 66 S226 44 282 26"/>
+          <circle cx="104" cy="74" r="5"/><circle cx="170" cy="66" r="5"/><circle cx="246" cy="37" r="5"/>
         </svg>
       </div>
-      <button class="gst-btn gst-btn--ghost gst-btn--sm" data-replay="trait"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-rotate-ccw"/></svg>Retracer — M9</button>
+      <div class="pillar__foot"><span class="gst-tag">M9 · 900 ms</span><button class="gst-btn gst-btn--ghost gst-btn--sm" data-replay="trait"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-rotate-ccw"/></svg>Retracer</button></div>
     </article>
-    <article class="doc-plate">
-      <span class="gst-tag">.03 / L'ÉCLAIR</span>
+    <article class="pillar">
+      <span class="gst-chip gst-chip--accent">.03 · L'éclair</span>
       <h3>Rare, donc puissant</h3>
       <p>Un signal jaune, bref, réservé aux moments décisifs : seuil critique, budget validé, décollage du bus. Un seul par écran.</p>
-      <div class="meta3__demo">
+      <div class="pillar__demo">
         <div class="eclair-demo" id="demo-eclair">
           <div style="display:flex;justify-content:space-between;align-items:center"><span class="gst-tag">D · SANTÉ</span><i class="gst-reticle gst-reticle--brand" data-origin></i></div>
           <div><div class="gst-label">Pharmacie de camp</div><div style="font-family:var(--gst-font-display);font-size:2.4rem;line-height:1" data-ecl-val>102 / 120</div></div>
         </div>
       </div>
-      <button class="gst-btn gst-btn--ghost gst-btn--sm" data-replay="eclair"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-zap"/></svg>Franchir le seuil — M6</button>
+      <div class="pillar__foot"><span class="gst-tag">M6 · 180 ms</span><button class="gst-btn gst-btn--ghost gst-btn--sm" data-replay="eclair"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-zap"/></svg>Franchir le seuil</button></div>
     </article>
   </div>
 
-  <div class="intent">
-    <div>
-      <h4><i class="gst-reticle gst-reticle--accent"></i>Lecture du concept</h4>
-      <p>GST Government n'est pas « un logiciel de plus » : c'est le poste de commandement qu'on ouvre en décidant d'un camp et qu'on referme sur un bilan chiffré. Le design devait donc inspirer la même confiance qu'un plan d'ingénieur : mesuré, traçable, sans ornement inutile.</p>
-      <p>Nous partons de l'identité des affiches — teal, rouge, écru, trio Bebas / Garamond / Plex Mono, grille Longbow — et nous lui donnons un comportement.</p>
+  <div class="concept">
+    <div class="concept__text">
+      <span class="gst-tag gst-tag--accent">LECTURE DU CONCEPT</span>
+      <p style="margin-top:var(--gst-space-4)">GST Government n'est pas « un logiciel de plus » : c'est le poste de commandement qu'on ouvre en décidant d'un camp et qu'on referme sur un bilan chiffré. Le design devait inspirer la même confiance qu'un chef de groupe : précis, chaleureux, jamais froid.</p>
+      <p>Nous partons de l'identité des affiches — teal, rouge, écru, trio Bebas / Garamond / Plex Mono — et nous lui donnons un comportement, une profondeur et un paysage.</p>
+      <div class="choices">
+        <div class="choice"><b><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-calculator"/></svg>Le chiffre roule</b><p>Un montant ne remplace jamais un autre : il roule. L'onde de recalcul rend la chaîne visible.</p></div>
+        <div class="choice"><b><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-layers"/></svg>Deux registres</b><p>Terrain (dense, 80–240 ms) et Ciel (cinématique, 3D) partagent exactement les mêmes tokens.</p></div>
+        <div class="choice"><b><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-mountain"/></svg>Un monde vivant</b><p>La 3D est un paysage stylisé : facettes franches, saisons, météo, jamais « plastique ».</p></div>
+      </div>
     </div>
-    <div>
-      <h4><i class="gst-reticle gst-reticle--accent"></i>Les choix forts</h4>
-      <p><b>Le chiffre se calcule.</b> Un montant ne remplace jamais un autre : il roule. L'onde de recalcul rend visible la chaîne Cuisine → Alimentaire → Économique → Comptabilité, sans une ligne d'explication.</p>
-      <p><b>Deux registres, une main.</b> Terrain (dense, lisible au soleil, 80–240 ms) et Ciel (cinématique, 3D, 400–1 600 ms) partagent exactement les mêmes tokens.</p>
-      <p><b>La 3D est un diorama de papier.</b> Toon à trois bandes, arêtes hairline, ciel en aplats : jamais réaliste, jamais « plastique ».</p>
-    </div>
-    <div>
-      <h4><i class="gst-reticle gst-reticle--accent"></i>Extensions assumées</h4>
-      <p>Le DS d'affiches interdit l'animation, la 3D et les dégradés parce qu'il vise un média imprimé. Le web ouvre ces portes, de façon contrôlée :</p>
-      <dl class="gst-spec gst-spec--rules" style="grid-template-columns:auto 1fr">
+    <aside class="ext">
+      <span class="gst-tag">EXTENSIONS ASSUMÉES</span>
+      <h4>Ce que le web ajoute à l'affiche</h4>
+      <p>Le DS d'affiches vise l'imprimé. Le web ouvre des portes, de façon contrôlée :</p>
+      <dl class="gst-spec gst-spec--rules">
+        <dt>Formes</dt><dd>angles arrondis 6 → 36 px, capsules</dd>
+        <dt>Profondeur</dt><dd>ombres douces, verre dépoli sur la 3D</dd>
         <dt>Animation</dt><dd>centrale, 11 animations signature</dd>
-        <dt>3D</dt><dd>registre Ciel uniquement, 2 pages</dd>
-        <dt>Dégradés</dt><dd>interdits — ciel en 4 aplats</dd>
-        <dt>Glow</dt><dd>un seul : l'anneau net de l'Éclair</dd>
-        <dt>Éclair</dt><dd>5ᵉ couleur, fonctionnelle</dd>
+        <dt>3D</dt><dd>registre Ciel : vitrine, carte, bus</dd>
+        <dt>Dégradés</dt><dd>ciels et paysages uniquement</dd>
+        <dt>Éclair</dt><dd>5ᵉ couleur, fonctionnelle et rare</dd>
       </dl>
-    </div>
+    </aside>
   </div>
 
   <div class="registers">
     <div class="reg reg--terrain">
-      <span class="gst-tag">REGISTRE / TERRAIN · APP INTERNE</span>
+      <span class="gst-chip">REGISTRE · TERRAIN · APP INTERNE</span>
       <h3>Saisir, vérifier,<br>décider — vite</h3>
-      <dl class="gst-spec">
+      <dl class="gst-spec gst-spec--rules">
         <dt>Densité</dt><dd>Haute, lisible au soleil</dd>
-        <dt>Fond</dt><dd>Écru · blanc · panneaux teal</dd>
+        <dt>Fond</dt><dd>Écru · blanc · surfaces douces</dd>
         <dt>Motion</dt><dd>80 – 240 ms · jamais bloquante</dd>
         <dt>3D</dt><dd>Absente</dd>
       </dl>
       <div class="gst-alert gst-alert--warning" style="margin-top:auto"><svg class="gst-icon gst-alert__ico" aria-hidden="true"><use href="#i-triangle-alert"/></svg><div><div class="gst-alert__title">Prix périmé</div><div class="gst-alert__text">Riz local 50 kg — relevé du 12.01.26, plus de six mois.</div></div><span></span></div>
     </div>
-    <div class="reg reg--ciel" data-theme="nuit">
-      <div class="reg__sky" aria-hidden="true"><i style="background:var(--gst-sky-night-1)"></i><i style="background:var(--gst-sky-night-2)"></i><i style="background:var(--gst-sky-night-3)"></i><i style="background:var(--gst-sky-night-4)"></i></div>
-      <span class="gst-tag">REGISTRE / CIEL · VITRINE + 3D</span>
+    <div class="reg reg--ciel">
+      <i class="reg__moon" aria-hidden="true"></i>
+      <svg class="reg__hills" viewBox="0 0 600 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 120 L0 80 C80 40 140 70 210 52 S330 10 400 46 S520 60 600 30 L600 120 Z" fill="#032726"/><path d="M0 120 L0 100 C90 78 170 96 260 84 S420 64 600 88 L600 120 Z" fill="#06605E"/></svg>
+      <span class="gst-chip" style="background:rgba(255,255,255,.12);color:var(--gst-cream)">REGISTRE · CIEL · VITRINE + 3D</span>
       <h3>Émerveiller,<br>fédérer</h3>
-      <dl class="gst-spec">
+      <dl class="gst-spec gst-spec--rules">
         <dt>Densité</dt><dd>Aérée, cinématique</dd>
-        <dt>Fond</dt><dd>Teal profond, ciel étagé</dd>
+        <dt>Fond</dt><dd>Ciel en dégradé, paysage vivant</dd>
         <dt>Motion</dt><dd>400 – 1 600 ms · narrative</dd>
-        <dt>3D</dt><dd>Roadmap · Bus · Montagne</dd>
+        <dt>3D</dt><dd>Vitrine · Carte du camp · Bus</dd>
       </dl>
-      <span class="gst-tag" style="margin-top:auto">MÊMES TOKENS · MÊMES POLICES · MÊME GRILLE</span>
+      <span class="gst-tag" style="margin-top:auto">MÊMES TOKENS · MÊMES POLICES · MÊME MAIN</span>
     </div>
   </div>
 </section>
 
-<!-- ═══ .02 LA CHAÎNE DE CHIFFRAGE ═══════════════════════════════════════ -->
+<!-- ═══ .02 LA CRÊTE EN 3D ═══════════════════════════════════════════════ -->
+<section class="doc-sec" id="crete">
+  <div class="doc-sec__head">
+    <div><span class="gst-tag gst-tag--accent" data-decode>.02 / M10 · LA CRÊTE DU TONNERRE</span>
+      <h2 class="doc-sec__title" data-rise>Le blason, en relief</h2></div>
+    <p class="doc-sec__intro">Le massif du logo, modelé en facettes : le pic principal frappé par l'éclair, ses épaulements, la neige au sommet, la cordelière scoute et les deux fleurs de lys. <em>Faites-le tourner, frappez-le.</em></p>
+  </div>
+  <div class="crest3d" id="crest3d">
+    <canvas aria-label="Médaillon 3D de la Crête du Tonnerre. Glisser pour tourner."></canvas>
+    <div class="crest3d__flash" data-flash aria-hidden="true"></div>
+    <div class="crest3d__ui">
+      <div class="crest3d__card">
+        <span class="gst-tag">MÉDAILLON · TEMPS RÉEL</span>
+        <h3>La Crête</h3>
+        <p>Massif procédural fidèle au logo, éclair extrudé, cordelière à trois brins torsadés. Glisser pour tourner.</p>
+      </div>
+      <div class="crest3d__bar">
+        <div class="doc-row">
+          <button class="gst-btn gst-btn--eclair" data-crest-strike><svg class="gst-icon" aria-hidden="true"><use href="#i-zap"/></svg>Frapper</button>
+          <button class="gst-btn gst-btn--secondary" data-crest-intro><svg class="gst-icon" aria-hidden="true"><use href="#i-mountain"/></svg>Faire émerger</button>
+        </div>
+        <div class="gst-seg gst-seg--sm" role="group" aria-label="Ciel" data-crest-sky><button type="button" data-value="jour" aria-pressed="false">Jour</button><button type="button" data-value="aube" aria-pressed="true">Aube</button><button type="button" data-value="nuit" aria-pressed="false">Nuit</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ .03 LA CHAÎNE DE CHIFFRAGE ═══════════════════════════════════════ -->
 <section class="doc-sec" id="chaine">
   <div class="doc-sec__head">
-    <div><span class="gst-tag gst-tag--accent" data-decode>.02 / M5 · ONDE DE RECALCUL</span>
+    <div><span class="gst-tag gst-tag--accent" data-decode>.03 / M5 · ONDE DE RECALCUL</span>
       <h2 class="doc-sec__title" data-rise>La chaîne de chiffrage</h2></div>
-    <p class="doc-sec__intro">Un inscrit de plus, c'est trois portions de plus par jour, six sachets d'eau de plus, une place de plus dans le bus. Touchez l'effectif : <em>l'onde part du nœud touché et traverse la chaîne</em>, chaque chiffre dépendant roule dans l'ordre.</p>
+    <p class="doc-sec__intro">Un inscrit de plus, c'est trois portions de plus par jour, six sachets d'eau de plus, une place de plus dans le bus. Touchez l'effectif : <em>l'onde part du bouton touché et traverse la chaîne</em>, chaque chiffre dépendant roule dans l'ordre.</p>
   </div>
   <div class="chain-wrap">
     <div class="chain-ctl">
-      <span class="gst-tag">.00 / INSCRIPTIONS · BUS VOLANT</span>
+      <span class="gst-chip">INSCRIPTIONS · BUS VOLANT</span>
       <h3>Effectif du camp</h3>
       <div class="gst-stepper" role="group" aria-label="Effectif">
         <button type="button" data-n="-1" aria-label="Retirer un participant"><svg class="gst-icon gst-icon--lg" aria-hidden="true"><use href="#i-minus"/></svg></button>
@@ -304,46 +395,46 @@
     </div>
     <div>
       <div class="chain" id="chain">
-        <div class="node" data-node="cuisine"><i class="gst-reticle gst-reticle--brand"></i><span class="gst-tag">.01 / CUISINE</span><span class="node__v" data-v="portions">3 120</span><span class="node__u">portions servies</span><span class="node__f">effectif × 3 services × 13 jours</span></div>
-        <div class="node" data-node="alim"><i class="gst-reticle gst-reticle--brand"></i><span class="gst-tag">.02 / B · ALIMENTAIRE</span><span class="node__v" data-v="alim">1 940 000</span><span class="node__u">F CFA · vivres</span><span class="node__sub"><span data-v="eau">6 720</span> sachets d'eau</span><span class="node__f">effectif × 14 j × 6 sachets</span></div>
-        <div class="node" data-node="eco"><i class="gst-reticle gst-reticle--brand"></i><span class="gst-tag">.03 / F · ÉCONOMIQUE</span><span class="node__v" data-v="budget">4 850 000</span><span class="node__u">F CFA · budget consolidé</span><span class="node__f">fixe 2 630 000 + variable par personne</span></div>
-        <div class="node" data-node="compta"><i class="gst-reticle gst-reticle--brand"></i><span class="gst-tag">.04 / COMPTABILITÉ · VERSION A</span><span class="node__v" data-v="reste">1 200 000</span><span class="node__u">F CFA · reste à financer</span><span class="node__f">budget − inscriptions − subventions</span></div>
-        <div class="node" data-node="bilan"><i class="gst-reticle gst-reticle--brand"></i><span class="gst-tag">.05 / BILAN</span><span class="node__v" data-v="pp">60 625</span><span class="node__u">F CFA · coût par participant</span><span class="node__f">budget ÷ effectif</span></div>
-        <div class="node" data-node="ref"><i class="gst-reticle gst-reticle--brand"></i><span class="gst-tag">.06 / BASE DE RÉFÉRENCES</span><span class="node__v" data-v="ppj">4 330</span><span class="node__u">F CFA · par personne et par jour</span><span class="node__f">ratio versé pour le camp suivant</span></div>
+        <div class="node" data-node="cuisine"><div class="node__head"><span class="node__ico"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-chef-hat"/></svg></span><span class="gst-tag">.01 / CUISINE</span></div><span class="node__v" data-v="portions">3 120</span><span class="node__u">portions servies</span><span class="node__f">effectif × 3 services × 13 jours</span></div>
+        <div class="node" data-node="alim"><div class="node__head"><span class="node__ico"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-package"/></svg></span><span class="gst-tag">.02 / B · ALIMENTAIRE</span></div><span class="node__v" data-v="alim">1 940 000</span><span class="node__u">F CFA · vivres · <span data-v="eau">6 720</span> sachets d'eau</span><span class="node__f">effectif × 14 j × 6 sachets</span></div>
+        <div class="node" data-node="eco"><div class="node__head"><span class="node__ico"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-coins"/></svg></span><span class="gst-tag">.03 / F · ÉCONOMIQUE</span></div><span class="node__v" data-v="budget">4 850 000</span><span class="node__u">F CFA · budget consolidé</span><span class="node__f">fixe 2 630 000 + variable par personne</span></div>
+        <div class="node" data-node="compta"><div class="node__head"><span class="node__ico"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-wallet"/></svg></span><span class="gst-tag">.04 / COMPTABILITÉ · A</span></div><span class="node__v" data-v="reste">1 200 000</span><span class="node__u">F CFA · reste à financer</span><span class="node__f">budget − inscriptions − subventions</span></div>
+        <div class="node" data-node="bilan"><div class="node__head"><span class="node__ico"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-user"/></svg></span><span class="gst-tag">.05 / BILAN</span></div><span class="node__v" data-v="pp">60 625</span><span class="node__u">F CFA · coût par participant</span><span class="node__f">budget ÷ effectif</span></div>
+        <div class="node" data-node="ref"><div class="node__head"><span class="node__ico"><svg class="gst-icon gst-icon--sm" aria-hidden="true"><use href="#i-history"/></svg></span><span class="gst-tag">.06 / RÉFÉRENCES</span></div><span class="node__v" data-v="ppj">4 330</span><span class="node__u">F CFA · par personne et par jour</span><span class="node__f">ratio versé pour le camp suivant</span></div>
       </div>
       <p class="chain-note">Vert quand le chiffre devient favorable, rouge quand il se dégrade — 160 ms, puis la couleur rend la main.</p>
     </div>
   </div>
 </section>
 
-<!-- ═══ .03 CHAPITRES ════════════════════════════════════════════════════ -->
+<!-- ═══ .04 CHAPITRES ════════════════════════════════════════════════════ -->
 <section class="doc-sec" id="chapitres">
   <div class="doc-sec__head">
-    <div><span class="gst-tag gst-tag--accent" data-decode>.03 / SOMMAIRE</span>
-      <h2 class="doc-sec__title" data-rise>Sept planches</h2></div>
-    <p class="doc-sec__intro">Dans l'ordre des livrables : fondations, motion, composants, écrans, puis les deux expériences 3D et le guide d'usage.</p>
+    <div><span class="gst-tag gst-tag--accent" data-decode>.04 / SOMMAIRE</span>
+      <h2 class="doc-sec__title" data-rise>Sept chapitres</h2></div>
+    <p class="doc-sec__intro">Dans l'ordre des livrables : fondations, motion, composants, écrans, puis les deux mondes 3D et le guide d'usage.</p>
   </div>
   <div class="chapters">
-    <a class="chap" href="fondations.html" data-trace-box><span class="gst-tag">.01 / FONDATIONS</span><b>Fondations</b><small>Échelles, sémantique, trois modes, typographie fluide, grille, icônes.</small>
-      <svg class="ill" viewBox="0 0 200 90" data-draw aria-hidden="true"><rect x="0" y="10" width="40" height="70" class="f" data-nodraw/><rect x="44" y="10" width="40" height="70"/><rect x="88" y="10" width="40" height="70" class="a"/><rect x="132" y="10" width="30" height="70"/><rect x="166" y="10" width="34" height="70" class="b"/></svg></a>
-    <a class="chap" href="motion.html" data-trace-box><span class="gst-tag">.02 / MOTION</span><b>Motion</b><small>Le trait, le calcul, l'éclair. Onze animations signature.</small>
-      <svg class="ill" viewBox="0 0 200 90" data-draw aria-hidden="true"><line x1="0" y1="85" x2="200" y2="85"/><line x1="0" y1="5" x2="0" y2="85"/><path class="a" d="M0 85 C32 -10 60 5 200 5"/></svg></a>
-    <a class="chap" href="composants.html" data-trace-box><span class="gst-tag">.03 / COMPOSANTS</span><b>Composants</b><small>Fondations, actions, saisie, données, métier, retours, navigation.</small>
-      <svg class="ill" viewBox="0 0 200 90" data-draw aria-hidden="true"><rect x="0" y="12" width="120" height="30" class="a"/><rect x="0" y="54" width="200" height="30"/><rect x="132" y="12" width="68" height="30" class="b"/></svg></a>
-    <a class="chap" href="ecrans.html" data-trace-box><span class="gst-tag">.04 / ÉCRANS</span><b>Écrans</b><small>Haute fidélité, mobile 390 et desktop 1440, données réelles du camp.</small>
-      <svg class="ill" viewBox="0 0 200 90" data-draw aria-hidden="true"><rect x="0" y="0" width="140" height="90"/><line x1="30" y1="0" x2="30" y2="90"/><rect x="154" y="0" width="46" height="90" class="a"/></svg></a>
-    <a class="chap chap--wide" href="roadmap.html" data-trace-box><span class="gst-tag">.05 / 3D-1</span><b>Le Circuit du Camp</b><small>Roadmap 3D : un train scout avance d'une station par journée. Frise 2D sans perte d'information.</small>
-      <svg class="ill" viewBox="0 0 400 90" data-draw aria-hidden="true"><path d="M0 70 C60 70 70 20 130 20 S200 75 260 70 S330 15 400 25"/><rect x="40" y="62" width="10" height="10" class="b"/><rect x="125" y="15" width="10" height="10" class="b"/><rect x="195" y="44" width="10" height="10" class="a"/><rect x="255" y="64" width="10" height="10"/><rect x="335" y="20" width="10" height="10"/></svg></a>
-    <a class="chap chap--wide" href="bus.html" data-trace-box><span class="gst-tag">.06 / 3D-2</span><b>Le Bus du Tonnerre</b><small>Chaque siège est une inscription. Quand l'effectif est atteint, le bus décolle.</small>
-      <svg class="ill" viewBox="0 0 400 90" data-draw aria-hidden="true"><path d="M150 4 C110 4 110 50 150 50 C190 50 190 4 150 4"/><line x1="135" y1="50" x2="128" y2="62"/><line x1="165" y1="50" x2="172" y2="62"/><rect x="90" y="62" width="120" height="26" class="a"/><line x1="0" y1="80" x2="60" y2="80"/><line x1="240" y1="30" x2="400" y2="30"/></svg></a>
-    <a class="chap" href="guide.html" data-trace-box style="grid-column:1/-1"><span class="gst-tag">.07 / GUIDE</span><b>Guide d'utilisation</b><small>Quand utiliser quoi, et les erreurs à éviter.</small></a>
+    <a class="chap" href="fondations.html"><span class="chap__go" aria-hidden="true"><svg class="gst-icon gst-icon--sm"><use href="#i-arrow-right"/></svg></span><span class="gst-tag">.01 / FONDATIONS</span><b>Fondations</b><small>Échelles, sémantique, trois modes, typographie fluide, rayons, ombres, icônes.</small>
+      <svg class="ill" viewBox="0 0 200 90" data-draw aria-hidden="true"><circle cx="22" cy="45" r="20" class="f" data-nodraw/><circle cx="64" cy="45" r="20"/><circle cx="106" cy="45" r="20" class="fa" data-nodraw/><circle cx="148" cy="45" r="20"/><circle cx="182" cy="45" r="14" class="fe" data-nodraw/></svg></a>
+    <a class="chap" href="motion.html"><span class="chap__go" aria-hidden="true"><svg class="gst-icon gst-icon--sm"><use href="#i-arrow-right"/></svg></span><span class="gst-tag">.02 / MOTION</span><b>Motion</b><small>L'éclosion, le trait, le calcul, l'éclair. Onze animations signature.</small>
+      <svg class="ill" viewBox="0 0 200 90" data-draw aria-hidden="true"><line x1="0" y1="85" x2="200" y2="85"/><path class="a" d="M0 85 C40 -6 70 6 200 6"/><circle cx="56" cy="30" r="5"/></svg></a>
+    <a class="chap" href="composants.html"><span class="chap__go" aria-hidden="true"><svg class="gst-icon gst-icon--sm"><use href="#i-arrow-right"/></svg></span><span class="gst-tag">.03 / COMPOSANTS</span><b>Composants</b><small>Actions, saisie, données, métier, retours, navigation.</small>
+      <svg class="ill" viewBox="0 0 200 90" data-draw aria-hidden="true"><rect x="0" y="10" width="118" height="32" rx="16" class="a"/><rect x="0" y="54" width="200" height="32" rx="12"/><rect x="132" y="10" width="68" height="32" rx="16" class="b"/></svg></a>
+    <a class="chap" href="ecrans.html"><span class="chap__go" aria-hidden="true"><svg class="gst-icon gst-icon--sm"><use href="#i-arrow-right"/></svg></span><span class="gst-tag">.04 / ÉCRANS</span><b>Écrans</b><small>Haute fidélité, mobile 390 et desktop 1440, données réelles du camp.</small>
+      <svg class="ill" viewBox="0 0 200 90" data-draw aria-hidden="true"><rect x="0" y="0" width="140" height="90" rx="12"/><line x1="34" y1="0" x2="34" y2="90"/><rect x="154" y="0" width="46" height="90" rx="12" class="a"/></svg></a>
+    <a class="chap chap--wide chap--dark" href="roadmap.html"><span class="chap__go" aria-hidden="true"><svg class="gst-icon gst-icon--sm"><use href="#i-arrow-right"/></svg></span><span class="gst-tag">.05 / 3D · LA CARTE DU CAMP</span><b>Le Circuit du Camp</b><small>Une carte vivante : montagnes, lac, forêts, saisons et météo. Un train scout avance d'une station par journée.</small>
+      <svg class="ill" viewBox="0 0 400 90" data-draw aria-hidden="true"><path d="M0 84 L60 40 L90 58 L140 12 L190 60 L230 42 L290 84"/><path class="a" d="M0 70 C60 70 70 30 130 34 S200 75 260 70 S330 25 400 30"/><circle cx="130" cy="34" r="6" class="fe" data-nodraw/><circle cx="260" cy="70" r="6"/></svg></a>
+    <a class="chap chap--wide" href="bus.html"><span class="chap__go" aria-hidden="true"><svg class="gst-icon gst-icon--sm"><use href="#i-arrow-right"/></svg></span><span class="gst-tag">.06 / 3D · LE BUS VOLANT</span><b>Le Bus du Tonnerre</b><small>Chaque siège est une inscription. Quand l'effectif est atteint, les ballons gonflent et le bus décolle.</small>
+      <svg class="ill" viewBox="0 0 400 90" data-draw aria-hidden="true"><circle cx="150" cy="18" r="14" class="b"/><circle cx="178" cy="12" r="12" class="a"/><circle cx="204" cy="20" r="13"/><line x1="150" y1="32" x2="170" y2="60"/><line x1="178" y1="24" x2="176" y2="60"/><line x1="204" y1="33" x2="184" y2="60"/><rect x="120" y="60" width="120" height="26" rx="10" class="a"/><path d="M290 30 q8 -8 16 0 q8 -8 16 0"/></svg></a>
+    <a class="chap" href="guide.html" style="grid-column:1/-1;min-height:auto"><span class="chap__go" aria-hidden="true"><svg class="gst-icon gst-icon--sm"><use href="#i-arrow-right"/></svg></span><span class="gst-tag">.07 / GUIDE</span><b>Guide d'utilisation</b><small>Quand utiliser quoi, et les erreurs à éviter.</small></a>
   </div>
 </section>
 
-<!-- ═══ .04 EN CHIFFRES ══════════════════════════════════════════════════ -->
+<!-- ═══ .05 EN CHIFFRES ══════════════════════════════════════════════════ -->
 <section class="doc-sec" id="chiffres">
   <div class="doc-sec__head">
-    <div><span class="gst-tag gst-tag--accent" data-decode>.04 / FICHE TECHNIQUE</span>
+    <div><span class="gst-tag gst-tag--accent" data-decode>.05 / FICHE TECHNIQUE</span>
       <h2 class="doc-sec__title" data-rise>Le système en chiffres</h2></div>
     <p class="doc-sec__intro">Mesuré, comme tout le reste.</p>
   </div>
@@ -351,7 +442,7 @@
     <div><b data-odo="11">0</b><span class="gst-label">Animations signature</span></div>
     <div><b data-odo="52">0</b><span class="gst-label">Composants</span></div>
     <div><b data-odo="3">0</b><span class="gst-label">Modes d'affichage</span></div>
-    <div><b data-odo="0">0</b><span class="gst-label">Hex brut en composant</span></div>
+    <div><b data-odo="0">0</b><span class="gst-label">Quadrillage visible</span></div>
     <div><b data-odo="80">0</b><span class="gst-label">Sièges dans le bus</span></div>
     <div><b data-odo="14">0</b><span class="gst-label">Stations du circuit</span></div>
   </div>
@@ -363,14 +454,18 @@
 <script src="assets/js/gst-data.js"></script>
 <script src="assets/js/gst-shell.js"></script>
 <script src="assets/js/gst-3d.js"></script>
+<script src="assets/js/gst-world.js"></script>
+<script src="assets/js/gst-scenes.js"></script>
 <script>
 /* ── Démos de la note d'intention ─────────────────────────────────────── */
 (function () {
   var GST = window.GST;
-  function planche() { GST.traceGrid(document.getElementById("demo-planche"), { cols: 4, rows: 3 }); }
+  function planche() { GST.traceGrid(document.getElementById("demo-planche"), { x: 20, y: 80 }); }
   function trait() {
-    document.querySelectorAll("#demo-trait line, #demo-trait path").forEach(function (p, i) { GST.drawEl(p, { duration: i < 2 ? 500 : 1100, delay: i < 2 ? i * 80 : 420 }); });
-    document.querySelectorAll("#demo-trait rect").forEach(function (r, i) { GST.pop(r, 700 + i * 260); });
+    var host = document.getElementById("demo-trait");
+    host.querySelectorAll("line, path.route").forEach(function (p, i) { GST.drawEl(p, { duration: i < 1 ? 500 : 1100, delay: i < 1 ? 0 : 300 }); });
+    var area = host.querySelector(".area"); GST.anim(area, [{ opacity: 0 }, { opacity: .1 }], { duration: 700, delay: 900 });
+    host.querySelectorAll("circle").forEach(function (r, i) { GST.pop(r, 600 + i * 240); });
   }
   function eclair() {
     var card = document.getElementById("demo-eclair");
@@ -379,8 +474,9 @@
     v.textContent = "118 / 120";
     setTimeout(function () {
       v.textContent = "96 / 120"; v.style.color = "var(--gst-state-danger-text)";
+      card.style.boxShadow = "var(--gst-shadow-sm), inset 0 0 0 2px var(--gst-state-danger)";
       GST.strike(card, { origin: card.querySelector("[data-origin]") });
-      setTimeout(function () { v.style.color = ""; card.classList.remove("is-critical"); v.textContent = "102 / 120"; }, 3200);
+      setTimeout(function () { v.style.color = ""; card.style.boxShadow = ""; card.classList.remove("is-critical"); v.textContent = "102 / 120"; }, 3200);
     }, 300);
   }
   var demos = { planche: planche, trait: trait, eclair: eclair };
@@ -403,7 +499,6 @@
   var el = {}; document.querySelectorAll("#chain [data-v]").forEach(function (e) { el[e.dataset.v] = e; });
   var prev = calc();
   Object.keys(el).forEach(function (k) { GST.odometer(el[k], prev[k], { instant: true }); });
-  // Quelles valeurs vivent dans quel nœud, et leur sens « favorable »
   var MAP = [[["portions", null]], [["alim", "up-bad"], ["eau", null]], [["budget", "up-bad"]], [["reste", "up-bad"]], [["pp", "up-bad"]], [["ppj", "up-bad"]]];
   var busy = false;
   function run(origin) {
@@ -434,250 +529,113 @@
 })();
 </script>
 
-<!-- ── HERO 3D · chargé à la demande (Three.js r170) ─────────────────── -->
+<!-- ── 3D · chargée à la demande (Three.js r170) ─────────────────────── -->
 <script type="module">
 const GST = window.GST, K = window.GST3D;
 const hero = document.getElementById("hero");
 const stage = hero.querySelector(".hero__stage");
 const canvas = hero.querySelector(".hero__canvas");
-const crestSvg = hero.querySelector(".hero__crest");
 const word = hero.querySelector("[data-word]"), sub = hero.querySelector("[data-sub]");
-const clock = hero.querySelector("[data-hero-clock]");
 const summitLabel = hero.querySelector("[data-summit]");
 const skySeg = hero.querySelector("[data-sky-seg]");
+const flash = hero.querySelector("[data-flash]");
+const act = hero.querySelector("[data-act]"), actN = act.querySelector("[data-act-n]"), actT = act.querySelector("[data-act-t]");
+const pg = Array.from(hero.querySelectorAll("[data-pg]"));
 let mode = K.skyByHour();
-let api = null, scene3 = null;
+let scene3 = null, revealed = false;
 
-function paintBands(m) {
+function paintSky(m) {
   hero.dataset.sky = m;
-  hero.querySelectorAll(".hero__bands i").forEach((b, i) => b.style.background = `var(${K.SKY[m][i]})`);
   skySeg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.value === m));
   skySeg._inkUpdate && skySeg._inkUpdate();
-  clock.textContent = "CIEL / " + ({ jour: "JOUR", aube: "AUBE & CRÉPUSCULE", nuit: "NUIT DE CAMP" })[m];
 }
-paintBands(mode);
+paintSky(mode);
 skySeg.setAttribute("data-manual", "");
-skySeg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
-  mode = b.dataset.value; paintBands(mode);
-  if (scene3) scene3.setMode(mode);
-}));
+skySeg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => { mode = b.dataset.value; paintSky(mode); scene3 && scene3.setMode(mode); }));
 
 function revealUI() {
+  if (revealed) return; revealed = true;
   hero.classList.add("is-ready");
-  hero.querySelectorAll("[data-hero-in]").forEach((e, i) => GST.anim(e, [{ opacity: 0, transform: "translateY(12px)" }, { opacity: 1, transform: "none" }],
-    { duration: 600, delay: i * 70, easing: GST.ease("tonnerre") }));
+  word.style.opacity = 1; GST.rise(word, { duration: 760, stagger: 34 });
+  setTimeout(() => { sub.style.opacity = 1; GST.decode(sub, null, { per: 22 }); }, 420);
+  hero.querySelectorAll("[data-hero-in]").forEach((e, i) => GST.anim(e, [{ opacity: 0, transform: "translateY(14px)" }, { opacity: 1, transform: "none" }],
+    { duration: 700, delay: 300 + i * 90, easing: GST.ease("tonnerre") }));
 }
+function hideUI() {
+  revealed = false; hero.classList.remove("is-ready");
+  word.style.opacity = 0; sub.style.opacity = 0; summitLabel.classList.remove("is-on");
+  hero.querySelectorAll("[data-hero-in]").forEach(e => { e.getAnimations().forEach(a => a.cancel()); e.style.opacity = ""; });
+}
+const ACTS = ["", "I", "II", "III", "IV"];
+let actStart = 0, actIdx = 0;
+function showAct(i, label) {
+  if (label === "done") { act.animate([{ opacity: +getComputedStyle(act).opacity }, { opacity: 0 }], { duration: 400, fill: "forwards" }); pg.forEach(p => p.style.setProperty("--p", 1)); return; }
+  actIdx = i; actStart = performance.now();
+  pg.forEach((p, k) => p.style.setProperty("--p", k < i - 1 ? 1 : 0));
+  actN.textContent = ACTS[i] + " · " + ["", "Acte un", "Acte deux", "Acte trois", "Acte quatre"][i]; actT.textContent = label;
+  act.animate([{ opacity: 0, transform: "translate(-50%,-40%)", filter: "blur(8px)" }, { opacity: 1, transform: "translate(-50%,-50%)", filter: "blur(0)", offset: .25 }, { opacity: 1, offset: .7 }, { opacity: 0, transform: "translate(-50%,-56%)", filter: "blur(6px)" }],
+    { duration: i === 3 ? 1100 : 2600, fill: "forwards", easing: "ease-out" });
+}
+const DUR = [0, 3400, 3600, 300, 4100];
+(function tick() { if (actIdx && actIdx <= 4 && !revealed) { const v = Math.min(1, (performance.now() - actStart) / DUR[actIdx]); pg[actIdx - 1] && pg[actIdx - 1].style.setProperty("--p", v.toFixed(3)); } requestAnimationFrame(tick); })();
 
-/* ── Intro M10 (version longue, 2,4 s) ─────────────────────────────── */
-async function intro(has3D) {
-  const tag = hero.querySelector("[data-hero-tag]");
-  GST.decode(tag);
+function flashTo(k) { flash.style.opacity = Math.min(.8, k * .75); if (k > 0) setTimeout(() => { flash.style.transition = "opacity .35s ease-out"; flash.style.opacity = 0; setTimeout(() => flash.style.transition = "", 360); }, 40); }
+
+/* ── Repli 2D : la crête se trace, l'éclair la frappe ────────────────── */
+async function intro2d() {
+  GST.decode(hero.querySelector("[data-hero-tag]"));
+  hero.querySelector(".hero__skip").hidden = true; hero.querySelector(".hero__progress").hidden = true;
   word.style.opacity = 0; sub.style.opacity = 0;
-  if (GST.reduced()) {
-    word.style.opacity = 1; sub.style.opacity = 1;
-    if (has3D) crestSvg.style.opacity = 0;
-    revealUI(); return;
-  }
-  const crest = crestSvg.querySelector("[data-crest]");
-  const bolt = crestSvg.querySelector("[data-bolt]");
-  bolt.style.opacity = 0;
-  await GST.drawEl(crest, { duration: 1100, easing: GST.ease("trace") }).finished;
-  if (has3D) {
-    scene3.strike();
-    crestSvg.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 500, fill: "forwards", easing: GST.ease("snap") });
-  } else {
-    crestSvg.querySelector("[data-crest-fill]").animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: "both" });
-    bolt.style.opacity = 1;
-    await GST.drawEl(bolt, { duration: 180, easing: GST.ease("strike") }).finished;
-    bolt.animate([{ opacity: 1 }, { opacity: .15 }, { opacity: 1 }], { duration: 260, easing: "steps(3)" });
-  }
-  word.style.opacity = 1;
-  GST.rise(word, { duration: 760, stagger: 34 });
-  await GST.wait(520);
-  sub.style.opacity = 1;
-  await GST.decode(sub, null, { per: 22 });
+  if (GST.reduced()) { revealUI(); return; }
+  const svg = hero.querySelector(".hero__crest");
+  await GST.crest({ svg, long: true });
   revealUI();
 }
 
-/* ── Scène : la Montagne du Tonnerre ───────────────────────────────── */
-function buildScene(THREE) {
-  api = K.setup(THREE, canvas, { fov: 30 });
-  const { scene, camera } = api;
-  const sky = K.sky(api, mode);
-  const stars = K.stars(api, 240);
-  stars.visible = mode === "nuit";
-
-  // Générateur pseudo-aléatoire stable
-  let s = 11; const rnd = () => (s = (s * 16807) % 2147483647, (s - 1) / 2147483646);
-
-  const world = new THREE.Group(); scene.add(world);
-  const SIZE = 46;
-  world.add(K.socle(api, SIZE, { h: 1.6, frame: 1.4 }));
-
-  // Piles de courbes de niveau
-  const ramp = ["--gst-teal-800", "--gst-teal-700", "--gst-teal-600", "--gst-teal-500", "--gst-teal-400", "--gst-teal-300", "--gst-teal-200", "--gst-teal-100", "--gst-teal-50"];
-  const peaks = [
-    { c: [0, 0], R: 12.5, L: 17, lean: [2.6, -1.6], ph: 0.0 },
-    { c: [-9.5, 2.5], R: 7.4, L: 10, lean: [-0.8, 0.6], ph: 1.7 },
-    { c: [9.2, 4.2], R: 6.0, L: 8, lean: [0.7, 0.3], ph: 3.1 },
-    { c: [-3, -9], R: 5.2, L: 6, lean: [0, -0.4], ph: 4.4 }
-  ];
-  const step = 0.6, plates = [];
-  let summit = new THREE.Vector3();
-  peaks.forEach((p, k) => {
-    const g = K.contourStack(api, {
-      levels: p.L, step, segments: 44, tokens: ramp.slice(0, Math.max(4, Math.round(ramp.length * p.L / 17))),
-      edgeToken: "--gst-teal-900", edgeOpacity: 0.34,
-      rFn: (l, th) => {
-        const f = l / p.L;
-        const n = 1 + (0.17 * Math.sin(3 * th + 1.1 + p.ph) + 0.1 * Math.sin(5 * th + 2.3 + l * 0.19) + 0.05 * Math.sin(9 * th + p.ph)) * (1 - f * 0.55);
-        return (p.R * Math.pow(1 - f, 1.05) + 0.25) * n;
-      },
-      cFn: l => { const f = Math.pow(l / p.L, 1.7); return [p.c[0] + p.lean[0] * f, p.c[1] + p.lean[1] * f]; }
-    });
-    g.children.forEach(m => plates.push(m));
-    world.add(g);
-    if (k === 0) {
-      const top = p.L * step;
-      const tip = new THREE.Mesh(K.facet(new THREE.ConeGeometry(0.9, 2.4, 5)), api.mat("--gst-cream"));
-      tip.position.set(p.c[0] + p.lean[0], top + 1.2, p.c[1] + p.lean[1]);
-      K.edges(api, tip, "--gst-teal-900", 0.4);
-      world.add(tip); plates.push(tip); tip.userData.level = p.L; tip.userData.y = tip.position.y;
-      summit.set(tip.position.x, top + 2.4, tip.position.z);
-    }
-  });
-
-  // Rivière en aplat
-  const curve = new THREE.CatmullRomCurve3([[-23, 9], [-15, 13], [-6, 15.5], [3, 14], [11, 17.5], [23, 15]].map(p => new THREE.Vector3(p[0], 0, p[1])));
-  const left = [], right = [];
-  curve.getSpacedPoints(48).forEach((pt, i, arr) => {
-    const t = curve.getTangentAt(i / (arr.length - 1));
-    const nrm = new THREE.Vector3(-t.z, 0, t.x).multiplyScalar(0.9 + 0.3 * Math.sin(i * 0.5));
-    left.push([pt.x + nrm.x, -(pt.z + nrm.z)]); right.push([pt.x - nrm.x, -(pt.z - nrm.z)]);
-  });
-  const river = K.contourPlate(api, left.concat(right.reverse()), 0.08, "--gst-teal-300", { edgeToken: "--gst-teal-700", edgeOpacity: 0.5 });
-  river.position.y = 0.01; world.add(river);
-
-  // Camp : tentes, mât des couleurs, feu
-  const camp = new THREE.Group(); camp.position.set(12, 0, 9); world.add(camp);
-  [[0, 0], [2.4, 0.6], [4.6, -0.2], [1.2, 2.6], [3.6, 2.4]].forEach((t, i) => {
-    const tent = new THREE.Mesh(K.facet(new THREE.ConeGeometry(1.0, 1.25, 4)), api.mat(i === 2 ? "--gst-red-500" : "--gst-cream"));
-    tent.position.set(t[0], 0.62, t[1]); tent.rotation.y = Math.PI / 4 + i * 0.2;
-    K.edges(api, tent, "--gst-teal-900", 0.5); camp.add(tent);
-  });
-  const mast = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.06, 4.2, 5), api.mat("--gst-ink"));
-  mast.position.set(-1.6, 2.1, 1.4); camp.add(mast);
-  const flag = new THREE.Mesh(new THREE.PlaneGeometry(1.3, 0.8), api.mat("--gst-red-500", { side: THREE.DoubleSide }));
-  flag.position.set(-0.95, 3.75, 1.4); camp.add(flag);
-  const fire = new THREE.Mesh(new THREE.ConeGeometry(0.35, 0.7, 3), api.flat("--gst-red-500"));
-  fire.position.set(2.3, 0.35, 1.5); camp.add(fire);
-
-  // Arbres instanciés, hors montagnes / rivière / camp
-  const trees = [];
-  for (let i = 0; i < 400 && trees.length < 90; i++) {
-    const x = (rnd() - 0.5) * (SIZE - 3), z = (rnd() - 0.5) * (SIZE - 3);
-    const clear = peaks.every(p => Math.hypot(x - p.c[0], z - p.c[1]) > p.R + 1.2) && Math.hypot(x - 14, z - 10) > 5 &&
-      curve.getSpacedPoints(30).every(q => Math.hypot(q.x - x, q.z - z) > 2.2);
-    if (clear) trees.push([x, 0, z, 0.7 + rnd() * 0.7]);
-  }
-  const forest = K.trees(api, trees, "--gst-teal-600"); world.add(forest);
-
-  // Nuages en disques empilés
-  const clouds = [];
-  for (let i = 0; i < 7; i++) {
-    const c = K.cloud(api, 0.9 + rnd() * 0.8, "--gst-white"); c.position.set(-34 + rnd() * 68, 14 + rnd() * 6, -18 + rnd() * 30);
-    c.userData.v = 0.5 + rnd() * 0.7; scene.add(c); clouds.push(c);
-  }
-
-  // Éclair + anneau net au sommet
-  const bolt = K.bolt(api, 10); bolt.position.copy(summit); scene.add(bolt);
-  const ring = K.ring(api, "--gst-eclair"); ring.position.copy(summit); scene.add(ring);
-
-  // Arêtes : couleur selon le ciel
-  const edgeMats = []; scene.traverse(o => { if (o.isLineSegments) edgeMats.push(o.material); });
-  function tuneEdges(m) {
-    const night = m === "nuit";
-    edgeMats.forEach(mt => { mt.color.set(GST.token(night ? "--gst-cream" : "--gst-teal-900")); });
-    api.amb.intensity = night ? 0.85 : 1.15;
-    clouds.forEach(c => c.children.forEach(d => d.material.color.set(GST.token(night ? "--gst-teal-600" : "--gst-white"))));
-  }
-  tuneEdges(mode);
-
-  /* Caméra : orbite autour du sommet, pilotée par l'intro, le défilement et le pointeur */
-  const target = new THREE.Vector3(0, 5, 0);
-  const cam = { az: -0.35, el: 1.25, r: 150 };
-  const portrait = () => canvas.clientWidth < canvas.clientHeight * 1.1;
-  const final = () => ({ az: 0.62, el: 0.3, r: portrait() ? 150 : 104 });
-  /* Cadrage filmique : la montagne glisse à droite pour laisser respirer le titre */
-  api.onResize((w, h) => { camera.setViewOffset(w, h, portrait() ? 0 : w * 0.05, h * (portrait() ? 0.2 : 0.13), w, h); });
-  api.resize();
-  let scrollP = 0, px = 0, py = 0, pxS = 0, pyS = 0;
-  function place() {
-    const az = cam.az + scrollP * 1.5 + pxS * 0.08, el = cam.el - scrollP * 0.12 + pyS * 0.04, r = cam.r - scrollP * 14;
-    camera.position.set(target.x + r * Math.cos(el) * Math.sin(az), target.y + r * Math.sin(el), target.z + r * Math.cos(el) * Math.cos(az));
-    camera.lookAt(target);
-    sky.uniforms.shift.value = (el - 0.3) * 0.55;
-  }
-  addEventListener("scroll", () => {
-    if (GST.reduced()) { scrollP = 0; return; }
-    const r = hero.getBoundingClientRect();
-    scrollP = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight)));
-  }, { passive: true });
-  stage.addEventListener("pointermove", e => { const b = stage.getBoundingClientRect(); px = (e.clientX - b.left) / b.width - 0.5; py = (e.clientY - b.top) / b.height - 0.5; });
-
-  // Plaques : état initial à plat (montée à l'intro)
-  plates.forEach(m => { m.scale.y = 0.001; m.position.y = m.userData.y; });
-  forest.scale.y = 0.001;
-
-  api.onFrame((dt) => {
-    pxS += (px - pxS) * Math.min(1, dt * 3); pyS += (py - pyS) * Math.min(1, dt * 3);
-    clouds.forEach(c => { c.position.x += c.userData.v * dt; if (c.position.x > 36) c.position.x = -36; });
-    bolt.quaternion.copy(camera.quaternion); ring.quaternion.copy(camera.quaternion);
-    flag.rotation.y = Math.sin(api.t * 2.2) * 0.12;
-    place();
-    // Étiquette du sommet (HTML) projetée
-    const p = K.project(api, summit.clone().add(new THREE.Vector3(0, 0.4, 0)));
-    summitLabel.style.left = p.x + "px"; summitLabel.style.top = p.y + "px";
-  });
-
-  function rise() {
-    const reduced = GST.reduced();
-    const sorted = plates.slice().sort((a, b) => a.userData.level - b.userData.level);
-    sorted.forEach((m, i) => {
-      K.tween(reduced ? 0 : 620, v => { m.scale.y = Math.max(0.001, v); m.position.y = m.userData.y - (1 - v) * 1.2; }, "tonnerre", reduced ? 0 : 380 + m.userData.level * 70 + (i % 3) * 12);
-    });
-    K.tween(reduced ? 0 : 700, v => { forest.scale.y = Math.max(0.001, v); }, "tonnerre", reduced ? 0 : 1300);
-    const f = final(), from = { ...cam };
-    K.tween(reduced ? 0 : 1600, v => { cam.az = from.az + (f.az - from.az) * v; cam.el = from.el + (f.el - from.el) * v; cam.r = from.r + (f.r - from.r) * v; }, "trace");
-  }
-  addEventListener("resize", () => { if (!GST.reduced()) { const f = final(); cam.r = f.r; } });
-
-  function strike() {
-    if (GST.reduced()) return;
-    bolt.visible = true;
-    const seq = [[0, 1], [60, 0], [110, 1], [190, 0], [240, 1], [460, 0]];
-    seq.forEach(([t, on]) => setTimeout(() => { bolt.visible = !!on; }, t));
-    [0, 520].forEach(d => K.tween(520, v => { ring.visible = v < 1; ring.scale.setScalar(0.6 + v * 3.6); ring.material.opacity = 1 - v; }, "tonnerre", d));
-    const base = api.amb.intensity;
-    [[0, 2.6], [70, base], [120, 2.2], [220, base]].forEach(([t, k]) => setTimeout(() => { api.amb.intensity = k; }, t));
-    setTimeout(() => summitLabel.classList.add("is-on"), 700);
-    GST.decode(summitLabel.querySelector(".gst-tag"), null, { delay: 700 });
-  }
-  function setMode(m) {
-    sky.setMode(m); stars.visible = m === "nuit"; tuneEdges(m);
-  }
-  K.perf(api, () => { /* Appareil à la peine : on fige la scène sur son état final */ api.stop(); api.render(); });
-  place(); api.start();
-  rise();
-  return { strike, setMode };
-}
-
 const has3D = K.webglOK() && !K.lowEnd();
-if (!has3D) { hero.classList.add("is-2d"); intro(false); }
+word.style.opacity = 0; sub.style.opacity = 0;
+if (!has3D) { hero.classList.add("is-2d"); intro2d(); }
 else {
-  import("https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js")
-    .then(THREE => { scene3 = buildScene(THREE); intro(true); })
-    .catch(() => { hero.classList.add("is-2d"); intro(false); });
+  import("https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js").then(THREE => {
+    scene3 = K.scenes.vitrine(THREE, {
+      canvas, stage, hero, mode,
+      onAct: showAct,
+      onFlash: flashTo,
+      onReveal: () => { revealUI(); setTimeout(() => { summitLabel.classList.add("is-on"); GST.decode(summitLabel.querySelector(".gst-tag")); }, 1400); },
+      onDone: () => { revealUI(); },
+      onFrame: () => { if (!scene3) return; const p = scene3.summit(); summitLabel.style.left = p.x + "px"; summitLabel.style.top = p.y + "px"; },
+      onLowPerf: () => { scene3.skip(); }
+    });
+    window.GST_VITRINE = scene3;
+    GST.decode(hero.querySelector("[data-hero-tag]"));
+    scene3.play();
+  }).catch(() => { hero.classList.add("is-2d"); intro2d(); });
+}
+hero.querySelector("[data-skip]").addEventListener("click", () => { scene3 ? scene3.skip() : null; revealUI(); });
+hero.querySelector("[data-replay-intro]").addEventListener("click", () => {
+  if (!scene3) { intro2d(); return; }
+  hideUI(); scrollTo({ top: 0, behavior: "smooth" }); scene3.play();
+});
+
+/* ── Médaillon de la Crête (section .02) ─────────────────────────────── */
+const box = document.getElementById("crest3d");
+if (has3D) {
+  const io = new IntersectionObserver(async (es) => {
+    if (!es[0].isIntersecting) return; io.disconnect();
+    const THREE = await import("https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js");
+    const fl = box.querySelector("[data-flash]");
+    const c = K.scenes.crest(THREE, { canvas: box.querySelector("canvas"), mode: "aube",
+      onFlash: k => { fl.style.opacity = k * .5; if (k > 0) setTimeout(() => { fl.style.transition = "opacity .3s"; fl.style.opacity = 0; setTimeout(() => fl.style.transition = "", 320); }, 40); } });
+    c.intro();
+    box.querySelector("[data-crest-strike]").addEventListener("click", () => c.strike());
+    box.querySelector("[data-crest-intro]").addEventListener("click", () => c.intro());
+    const seg = box.querySelector("[data-crest-sky]");
+    seg.addEventListener("gst-change", e => { c.setMode(e.detail.value); box.style.background = { jour: "#DCEEEC", aube: "#E9D6C2", nuit: "#063F3E" }[e.detail.value]; });
+  }, { rootMargin: "200px" });
+  io.observe(box);
+} else {
+  box.querySelector("canvas").replaceWith(Object.assign(document.createElement("div"), { className: "gst-empty", style: "position:absolute;inset:0;border-radius:0", innerHTML: '<span class="gst-fleur">⚜</span><p class="gst-empty__title">Crête du Tonnerre</p><p class="gst-empty__text">La 3D n\'est pas disponible sur cet appareil : la crête reste visible dans le logo.</p>' }));
+  box.querySelector(".crest3d__bar").hidden = true;
 }
 </script>
 </body>
