@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": null,
+  "outputDirectory": ".",
+  "redirects": [
+    { "source": "/design-system", "destination": "/design-system/index.html", "permanent": false },
+    { "source": "/mvp", "destination": "/mvp/index.html", "permanent": false }
+  ]
+}

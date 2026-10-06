@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>GST Government — Design system & MVP</title>
+<meta name="description" content="Groupe Scout Tonnerre : le design system GST Government et la maquette cliquable MVP, côte à côte.">
+<meta name="theme-color" content="#063F3E">
+<script>try{var t=localStorage.getItem("gst-theme");if(t&&t!=="jour")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="stylesheet" href="design-system/tokens/gst-tokens.css">
+<link rel="stylesheet" href="design-system/assets/css/gst.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--gst-bg-canvas);color:var(--gst-text-primary);font-family:var(--gst-font-serif);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1320px;margin:0 auto;padding:clamp(16px,3vw,36px)}
+.top{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand svg{width:46px;color:var(--gst-teal-600)}
+.brand b{display:block;font-family:var(--gst-font-display);font-weight:400;font-size:1.35rem;letter-spacing:.05em;line-height:1}
+.brand small{font-family:var(--gst-font-mono);font-size:9.5px;letter-spacing:.16em;color:var(--gst-text-secondary)}
+.hero{margin:clamp(24px,5vw,56px) 0 clamp(20px,3vw,32px);display:grid;gap:16px}
+.hero h1{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:clamp(3rem,9vw,7rem);line-height:.86}
+.hero p{margin:0;max-width:62ch;font-size:clamp(1.05rem,1.5vw,1.25rem);color:var(--gst-text-secondary)}
+.grid{display:grid;gap:20px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:960px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.sec{position:relative;display:flex;flex-direction:column;border-radius:32px;overflow:hidden;text-decoration:none;color:var(--gst-cream);min-height:min(78vh,700px);box-shadow:var(--gst-shadow-lift);transition:transform .35s var(--gst-ease-tonnerre),box-shadow .35s}
+.sec:hover{transform:translateY(-4px)}
+.sec:focus-visible{outline:3px solid var(--gst-eclair);outline-offset:4px}
+.sec--ds{background:linear-gradient(160deg,#063F3E 0%,#0C7873 55%,#2E8F89 100%)}
+.sec--mvp{background:linear-gradient(160deg,#1d1d1b 0%,#3a1514 55%,#C42621 120%)}
+.sec__art{position:relative;flex:1;min-height:260px}
+.sec__art svg{position:absolute;inset:0;width:100%;height:100%}
+.sec__body{position:relative;padding:clamp(22px,3vw,34px);display:flex;flex-direction:column;gap:12px;background:linear-gradient(0deg,rgba(0,0,0,.35),transparent)}
+.sec .gst-tag{color:rgba(244,244,242,.75)}
+.sec h2{margin:0;font-family:var(--gst-font-display);font-weight:400;font-size:clamp(2.6rem,5vw,4.2rem);line-height:.9}
+.sec p{margin:0;font-size:1.08rem;max-width:52ch;opacity:.9}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-family:var(--gst-font-mono);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.12)}
+.cta{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;margin-top:6px;padding:14px 22px;border-radius:999px;background:var(--gst-eclair);color:#1d1d1b;font-family:var(--gst-font-mono);font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.sec--ds .cta{background:var(--gst-cream);color:#063F3E}
+.foot{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;font-family:var(--gst-font-mono);font-size:10.5px;letter-spacing:.1em;color:var(--gst-text-secondary)}
+@media (prefers-reduced-motion:reduce){.sec{transition:none}.sec:hover{transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="./"><svg viewBox="0 -18 120 78" aria-hidden="true"><path d="M2 58 L20 41 L27 45 L40 27 L48 33 L61 9 L68 19 L75 15 L90 35 L98 31 L118 58 Z" fill="currentColor" opacity=".18"/><path d="M2 58 L20 41 L27 45 L40 27 L48 33 L61 9 L68 19 L75 15 L90 35 L98 31 L118 58" fill="none" stroke="currentColor" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/><path d="M80 -16 L68 1 L74 2 L62 10" fill="none" stroke="#FFD23F" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/></svg><span><b>GST GOVERNMENT</b><small>GROUPE SCOUT TONNERRE · DISTRICT GOLFE · AST</small></span></a>
+    <span class="gst-chip">Présentation · 2 livrables</span>
+  </header>
+
+  <section class="hero">
+    <span class="gst-tag gst-tag--accent">.00 / LE POSTE DE COMMANDEMENT DU GST</span>
+    <h1>Deux livrables,<br>une seule identité.</h1>
+    <p>À gauche, le design system : fondations, composants, motion et mondes 3D. À droite, la maquette cliquable de bout en bout construite avec lui : logistique, comptabilité, cuisine, roadmap, site public et bus volant.</p>
+  </section>
+
+  <main class="grid">
+    <a class="sec sec--ds" href="design-system/index.html" aria-label="Ouvrir le design system">
+      <div class="sec__art" aria-hidden="true"><svg viewBox="0 0 600 340" preserveAspectRatio="xMidYMid slice"><defs><radialGradient id="g1" cx="70%" cy="20%" r="70%"><stop offset="0" stop-color="#F6C77A" stop-opacity=".55"/><stop offset="1" stop-color="#F6C77A" stop-opacity="0"/></radialGradient></defs><rect width="600" height="340" fill="url(#g1)"/><circle cx="300" cy="170" r="118" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="10" stroke-dasharray="3 6"/><circle cx="300" cy="170" r="104" fill="none" stroke="#C42621" stroke-width="4"/><path d="M200 250 L240 205 L258 214 L285 172 L300 186 L322 128 L338 152 L352 142 L382 196 L398 186 L420 250 Z" fill="rgba(255,255,255,.16)" stroke="rgba(255,255,255,.75)" stroke-width="3" stroke-linejoin="round"/><path d="M342 62 L318 104 L332 106 L308 132" fill="none" stroke="#FFD23F" stroke-width="7" stroke-linejoin="round" stroke-linecap="round"/><text x="300" y="242" text-anchor="middle" font-family="Bebas Neue, Arial Narrow, sans-serif" font-size="30" letter-spacing="6" fill="#fff">GST</text></svg></div>
+      <div class="sec__body">
+        <span class="gst-tag">SECTION 01 · DESIGN SYSTEM v1.1</span>
+        <h2>Le design system</h2>
+        <p>Fondations, 52 composants, moteur de motion M1 → M11, écrans, la Crête du Tonnerre en 3D, la roadmap vivante et le bus volant.</p>
+        <div class="chips"><span>Fondations</span><span>Composants</span><span>Motion</span><span>Écrans</span><span>Roadmap 3D</span><span>Bus volant</span></div>
+        <span class="cta">Ouvrir le design system →</span>
+      </div>
+    </a>
+    <a class="sec sec--mvp" href="mvp/index.html" aria-label="Ouvrir la maquette MVP">
+      <div class="sec__art" aria-hidden="true"><svg viewBox="0 0 600 340" preserveAspectRatio="xMidYMid slice"><g opacity=".9"><rect x="70" y="60" width="200" height="220" rx="22" fill="rgba(255,255,255,.08)"/><rect x="90" y="84" width="110" height="14" rx="7" fill="rgba(255,255,255,.5)"/><rect x="90" y="112" width="160" height="56" rx="14" fill="#0C7873"/><rect x="90" y="180" width="76" height="40" rx="12" fill="rgba(255,255,255,.14)"/><rect x="174" y="180" width="76" height="40" rx="12" fill="rgba(255,255,255,.14)"/><path d="M92 260 L130 240 L160 248 L200 226 L248 232" fill="none" stroke="#FFD23F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g><g transform="translate(330 70)"><path d="M70 0 C40 0 20 20 20 46 C20 72 46 84 70 120 C94 84 120 72 120 46 C120 20 100 0 70 0Z" fill="none"/><g fill="#C42621"><circle cx="70" cy="22" r="20"/><circle cx="104" cy="34" r="18" fill="#0C7873"/><circle cx="38" cy="36" r="17" fill="#FFD23F"/><circle cx="86" cy="2" r="15" fill="#F4F4F2"/></g><path d="M70 42 L70 118 M104 52 L80 118 M38 53 L60 118 M86 17 L74 118" stroke="rgba(255,255,255,.6)" stroke-width="1.5"/><rect x="20" y="118" width="110" height="46" rx="14" fill="#0C7873"/><g fill="rgba(255,255,255,.75)"><rect x="32" y="128" width="16" height="14" rx="4"/><rect x="54" y="128" width="16" height="14" rx="4"/><rect x="76" y="128" width="16" height="14" rx="4"/><rect x="98" y="128" width="16" height="14" rx="4"/></g><circle cx="44" cy="166" r="8" fill="#1d1d1b"/><circle cx="106" cy="166" r="8" fill="#1d1d1b"/></g></svg></div>
+      <div class="sec__body">
+        <span class="gst-tag">SECTION 02 · MAQUETTE CLIQUABLE</span>
+        <h2>La maquette MVP</h2>
+        <p>Le site public et la plateforme interne, cliquables de bout en bout avec neuf rôles de démonstration. Tout se recalcule : une inscription change l'eau, les vivres, le budget et le bus.</p>
+        <div class="chips"><span>Site public</span><span>Logistique</span><span>Comptabilité</span><span>Cuisine</span><span>Roadmap</span><span>9 rôles</span></div>
+        <span class="cta">Ouvrir la maquette →</span>
+      </div>
+    </a>
+  </main>
+
+  <footer class="foot"><span>GROUPE SCOUT TONNERRE · DISTRICT GOLFE · ASSOCIATION SCOUTE DU TOGO · DEPUIS 2013</span><span>DONNÉES DE DÉMONSTRATION · AUCUNE DONNÉE RÉELLE</span></footer>
+</div>
+</body>
+</html>
